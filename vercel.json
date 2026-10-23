@@ -1,0 +1,10 @@
+{
+  "functions": { "api/page.js": { "includeFiles": "private/**" } },
+  "rewrites": [
+    { "source": "/", "destination": "/api/page" },
+    { "source": "/login", "destination": "/login.html" }
+  ],
+  "headers": [
+    { "source": "/(.*)", "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }] }
+  ]
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Acesso restrito</title>
+<style>
+:root{--bg:#f6f5f1;--panel:#fff;--ink:#1d1d1b;--muted:#66655f;--line:#d9d7cf;--accent:#185fa5;--err:#b3261e}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--panel:#21211f;--ink:#ecebe6;--muted:#a3a29a;--line:#3a3a36;--accent:#85b7eb;--err:#f2b8b5}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:16px}
+form{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:26px}
+h1{font-size:18px;margin:0 0 4px}
+p{margin:0 0 18px;color:var(--muted);font-size:13px}
+label{display:block;font-size:13px;margin-bottom:6px}
+input{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{width:100%;margin-top:14px;font:inherit;font-weight:600;padding:10px 12px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer}
+@media (prefers-color-scheme:dark){button{color:#0d1b2a}}
+button:disabled{opacity:.6;cursor:default}
+#msg{min-height:20px;margin-top:12px;font-size:13px;color:var(--err)}
+</style>
+</head>
+<body>
+<form id="f">
+<h1>Mapa 3D dos bubble caps</h1>
+<p>Acesso restrito. Digite seu e-mail autorizado.</p>
+<label for="e">E-mail</label>
+<input id="e" type="email" autocomplete="email" required autofocus placeholder="voce@empresa.com">
+<button id="b" type="submit">Entrar</button>
+<div id="msg" role="alert"></div>
+</form>
+<script>
+var f=document.getElementById('f'),m=document.getElementById('msg'),b=document.getElementById('b');
+f.addEventListener('submit',function(ev){
+  ev.preventDefault();m.textContent='';b.disabled=true;
+  fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:document.getElementById('e').value})})
+  .then(function(r){if(r.ok){location.href='/';return}
+    m.textContent=r.status===401?'Este e-mail não tem acesso.':'Não foi possível entrar agora. Tente de novo.';b.disabled=false})
+  .catch(function(){m.textContent='Sem conexão. Tente de novo.';b.disabled=false});
+});
+</script>
+</body>
+</html>

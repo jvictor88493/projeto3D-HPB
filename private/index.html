@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa 3D bubble caps - materiais de teste</title>
+<style>
+:root{--bg:#f6f5f1;--panel:#ffffff;--ink:#1d1d1b;--muted:#66655f;--line:#d9d7cf;--accent:#185fa5;--accent-bg:#e6f1fb;--scene:#e9e7e0;--chip:#f0eee8}
+@media (prefers-color-scheme: dark){:root{--bg:#161614;--panel:#21211f;--ink:#ecebe6;--muted:#a3a29a;--line:#3a3a36;--accent:#85b7eb;--accent-bg:#1c2f44;--scene:#1d1d1b;--chip:#2a2a27}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.page{max-width:1280px;margin:0 auto;padding:12px 16px 20px}
+h1{font-size:18px;font-weight:600;margin:4px 0 2px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;user-select:none;font-size:13px}
+.chip input{margin:0;accent-color:var(--accent)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+button{font:inherit;font-size:13px;padding:5px 11px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+input[type=text]{font:inherit;font-size:13px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);min-width:200px;flex:1 1 200px}
+input[type=range]{accent-color:var(--accent);width:110px}
+#wrap{position:relative;width:100%;height:min(66vh,640px);min-height:380px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--scene);touch-action:none;cursor:grab}
+#wrap canvas{display:block;width:100%;height:100%}
+.lbl{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font-size:11px;padding:1px 6px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--ink);opacity:.92;will-change:transform}
+.lbl.tc{background:#d9423a;border-color:#d9423a;color:#fff;font-weight:600}
+.lbl.wall{color:var(--muted)}
+.lbl.big{font-size:12px;font-weight:600}
+#desenhos{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+#desenhos h2{font-size:15px;margin:0 0 8px}
+#desenhos ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}
+#hint{position:absolute;left:10px;bottom:8px;font-size:11px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 8px;pointer-events:none}
+#info{margin:8px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;min-height:54px}
+#info b{font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.grp{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+.small{font-size:12px;color:var(--muted)}
+details{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:8px 12px}
+summary{cursor:pointer;font-weight:600;font-size:13px}
+details ul{margin:8px 0 2px;padding-left:18px}
+details li{margin:3px 0;font-size:13px}
+
+.lbl.cam{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+table.res{border-collapse:collapse;font-size:12.5px;margin:8px 0;width:100%}
+table.res th,table.res td{border:1px solid var(--line);padding:4px 7px;text-align:right}
+table.res th:first-child,table.res td:first-child{text-align:left}
+table.res th{background:var(--chip);font-weight:600}
+.tw{overflow-x:auto}
+.warn{color:#b8651b}
+@media (prefers-color-scheme: dark){.warn{color:#e8a566}}
+select{font:inherit;font-size:13px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+#err{display:none;padding:14px;border:1px solid #d9423a;border-radius:10px;color:#d9423a;margin:10px 0}
+@media (max-width:640px){.page{padding:8px 10px 16px}#wrap{height:60vh}}
+</style>
+</head>
+<body>
+<div class="page">
+<h1>Mapa 3D dos bubble caps — materiais de teste sobre o padrão <a href="/api/logout" style="font-size:12px;font-weight:400;margin-left:10px;color:var(--muted)">Sair</a></h1>
+<p class="sub">Parede d'água traseira, módulo 6 · marcações da planilha “Lista de Bubble Caps – Teste – Mapa 19.10” lançadas sobre os 4.508 pontos do desenho. Caps cinza = padrão (sem marcação).</p>
+<div id="err"></div>
+
+<div class="grp" id="tipos">
+<label class="chip"><input type="checkbox" id="vM0" checked><span class="dot" style="background:#7b838c"></span>Padrão (sem marcação) <span class="small" id="nM0"></span></label>
+<label class="chip"><input type="checkbox" id="vMA" checked><span class="dot" style="background:#e0352b"></span>HK30 <span class="small" id="nMA"></span></label>
+<label class="chip"><input type="checkbox" id="vMB" checked><span class="dot" style="background:#1f78e0"></span>TP310H <span class="small" id="nMB"></span></label>
+<label class="chip"><input type="checkbox" id="vMC" checked><span class="dot" style="background:#1fa84f"></span>253MA <span class="small" id="nMC"></span></label>
+<label class="chip"><input type="checkbox" id="vSp" checked><span class="dot" style="background:#ffd400;border:1px solid #888"></span>Aspersão/especiais (D·E·F) <span class="small" id="nSp"></span></label>
+</div>
+<div class="grp">
+<label class="chip"><input type="checkbox" id="v16" checked>16 furos <span class="small" id="n16"></span></label>
+<label class="chip"><input type="checkbox" id="v9" checked>9 furos <span class="small" id="n9"></span></label>
+<label class="chip"><input type="checkbox" id="vT" checked><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></label>
+<label class="small" style="display:inline-flex;align-items:center;gap:6px">Câmara <select id="selCam"><option value="">Todas</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
+<button id="bCsv">Baixar lista (CSV)</button>
+</div>
+<div class="grp">
+<label class="chip"><input type="checkbox" id="vTub" checked>Tubos</label>
+<label class="chip"><input type="checkbox" id="vWall" checked>Paredes e divisórias</label>
+<label class="chip"><input type="checkbox" id="vJ" checked>Emendas de painel</label>
+<label class="chip"><input type="checkbox" id="vL" checked>Rótulos</label>
+<label class="chip"><input type="checkbox" id="vDiv" checked>Divisórias 3D (tubos)</label>
+<button id="bPersp" class="on">Perspectiva</button><button id="bPlan">Planta</button><button id="bFront">Frente</button><button id="bWalls">Divisórias</button>
+<label class="small" style="display:inline-flex;align-items:center;gap:6px">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="0.5"><span id="vhv">0,5 m</span></label>
+</div>
+<div class="grp">
+<input type="text" id="marc" placeholder="Marcar posições: linha,coluna; linha,coluna (ex.: 37,52; 40,11)">
+<button id="bMarc">Marcar</button><button id="bClr">Limpar marcas</button>
+<span class="small" id="marcMsg"></span>
+</div>
+
+<div id="wrap"><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div>
+<div id="info">Clique em um cap para ver linha, fileira, tipo, material e câmara. As divisórias aparecem cortadas a 0,5 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div>
+
+<details open>
+<summary>Resumo: o que o Excel marca de diferente do padrão</summary>
+<p class="small">Os 4.508 pontos do desenho seguem o padrão. A planilha marca 994 caps (864 de 16 furos e 130 de 9 furos) em 3 materiais de teste, nas 125 fileiras (colunas) do mapa, sempre a partir da frente da caldeira. Cada fileira é de um único material (letra A/B/C, igual à cor da linha desenhada).</p>
+<div class="tw"><table class="res"><tr><th>Material</th><th>16 furos</th><th>9 furos</th><th>Total</th></tr><tr><td>HK30</td><td>288</td><td>41</td><td>329</td></tr><tr><td>TP310H</td><td>288</td><td>42</td><td>330</td></tr><tr><td>253MA</td><td>288</td><td>47</td><td>335</td></tr><tr><th>Total</th><th>864</th><th>130</th><th>994</th></tr></table></div>
+<div class="tw"><table class="res"><tr><th>Câmara (16 furos / 9 furos)</th><th>HK30</th><th>TP310H</th><th>253MA</th></tr><tr><td>Câmara 1 (fil. 1–19)</td><td>48 / 12</td><td>48 / 2</td><td>48 / 10</td></tr><tr><td>Câmara 2 (fil. 20–40)</td><td>48 / 7</td><td>48 / 9</td><td>48 / 4</td></tr><tr><td>Câmara 3 (fil. 41–62)</td><td>48 / 4</td><td>48 / 9</td><td>48 / 8</td></tr><tr><td>Câmara 4 (fil. 63–86)</td><td>48 / 8</td><td>48 / 5</td><td>48 / 9</td></tr><tr><td>Câmara 5 (fil. 87–107)</td><td>48 / 8</td><td>48 / 9</td><td>48 / 3</td></tr><tr><td>Câmara 6 (fil. 108–125)</td><td>48 / 2</td><td>48 / 8</td><td>48 / 13</td></tr></table></div>
+<p class="small"><b>Materiais:</b> HK30 = ASTM A351 HK30 (vermelho, solda ER310) · TP310H = ASTM A479 S31009 (azul, ER310) · 253MA = ASTM A479 S30815 (verde, ERNiCrMo-3). Desenhos de fabricação: D2-3500-57-M-019 (HK30, 16f), M-016 (HK30, 9f), M-014 (TP310H, 16f), M-017 (TP310H, 9f), M-015 (253MA, 16f), M-018 (253MA, 9f).</p>
+<p><b>Divergências encontradas</b></p>
+<ul>
+<li class="warn"><b>9 furos acima da lista:</b> o mapa leva 41 (HK30), 42 (TP310H) e 47 (253MA) caps de 9 furos; a lista de aplicação prevê 39 de cada e a de compra 42 de cada. O 253MA passa da quantidade de compra em 5.</li>
+<li><b>16 furos:</b> 288 / 288 / 288, igual à lista de aplicação (288 de cada; compra 290). A tabela do Excel soma 289 em 253MA porque a fileira 19 pede 5 caps de 16 furos, mas o trecho da frente só tem 4 (mais 2 de 9 furos, 6 caps; entre as linhas 11 e 69 a fileira passa pela divisória 1 e não há caps). Aqui entram os 6 que existem.</li>
+<li><b>Legenda das câmaras 3 e 6:</b> as cores da legenda não batem com o resto da planilha (câmara 3: vermelho = C, azul = A, verde = B; câmara 6: vermelho = B, azul = A, verde = C). A tabela e as linhas desenhadas usam sempre vermelho = A (HK30), azul = B (TP310H), verde = C (253MA); foi isso que adotei.</li>
+<li><b>Posição dos caps especiais (D, E, F):</b> a tabela e o desenho não coincidem: Cr₂₃C₆ (D) na fileira 5 nos dois, mas na 85 pela tabela e na 65 pelo desenho; HK (E) na 30 pela tabela e na 29 pelo desenho (105 igual); SHS (F) na 41 pela tabela e na 43 pelo desenho, e na 115 pela tabela e na 124 pelo desenho. Também a legenda diz 2 Cr₂₃C₆ por câmara (1 e 4), a tabela 1. Usei a fileira e a quantidade da tabela, com a linha estimada pela altura do desenho (posição aproximada). Confirme em campo.</li>
+<li><b>Termopares:</b> nas fileiras 9, 97 e 117 há um termopar dentro do trecho marcado; ele não conta como cap, então o trecho segue um cap a mais.</li>
+</ul>
+</details>
+<details>
+<summary>Como o mapa do Excel foi lido</summary>
+<ul>
+<li>O desenho do Excel é o mesmo do HTML: frente da caldeira embaixo, fileira 1 à esquerda, 125 fileiras = as 125 colunas do modelo.</li>
+<li>Cada linha colorida cobre os caps do início da fileira (lado da frente) para o fundo. A quantidade vem da tabela (16 furos + 9 furos). Conferi que, pegando esses caps a partir da frente, a divisão 16/9 furos bate com o modelo em 124 das 125 fileiras (a exceção é a 19). A linha exata de cada cap vem dessa contagem, não do traço à mão.</li>
+<li>Caps especiais (D amarelo Cr₂₃C₆, E roxo HK, F preto SHS) aparecem com um pino da cor do tratamento sobre o cap, dentro do material da fileira.</li>
+</ul>
+</details>
+<details>
+<summary>Como ler e o que este modelo não mostra</summary>
+<ul>
+<li><b>Endereço:</b> Linha 1 é a mais próxima da frente da caldeira e Linha 79 a do fundo (numeração do desenho). Coluna 1 é a da esquerda, olhando da frente (numeração criada aqui; o desenho não numera colunas).</li>
+<li><b>Furos dos caps de 9 furos:</b> no desenho o símbolo é um círculo meio preenchido e a seta "FUROS NESTE LADO" aponta para o lado não preenchido. Os 9 furos ficam todos nesse lado (meia circunferência), como na planta do desenho do cap. Confira em campo, pois a direção depende dessa leitura da legenda.</li>
+<li><b>Bubble cap</b> (desenhos D2-3500-57-M-008 e M-009, R00): cabeça Ø48 × 63 mm sobre haste Ø33,4 × 62 mm (total 125 mm, furo interno Ø26). <b>16 furos:</b> duas fiadas de 8 furos Ø5, a 32 e a 46 mm do topo, defasadas de 22,5°. <b>9 furos:</b> 5 + 4 furos Ø5 nas mesmas alturas, só em meia circunferência. Todos os furos saem inclinados 25° para baixo. <b>Luva</b> Ø44 × Ø35 × 50 mm em volta da haste.</li>
+<li><b>Montagem:</b> pelo Detalhe D1 do desenho do piso, a ponta da haste fica rente à face inferior da aleta (aleta de 7 mm, centrada no eixo dos tubos) e a luva assenta sobre a aleta, sobre o furo Ø35. O topo do cap fica então a cerca de 121 mm do eixo dos tubos. Essa montagem é minha leitura dos dois desenhos: o desenho do piso (2007) cotava o topo a 184 mm com um cap de outro perfil.</li>
+<li><b>Furos:</b> aparecem como marcas escuras na superfície, com diâmetro, alturas e defasagem do desenho. O canal interno e a inclinação de 25° não são modelados em 3D.</li>
+<li><b>Paredes laterais</b> aparecem só pela pegada (círculos dos tubos). O desenho do piso não informa a altura delas.</li>
+<li><b>Divisórias 3D</b> (desenho D1-D5057-M-079): 5 painéis de 31 tubos Ø76,2 com passo de 102 mm, cabeçotes Ø219,1 × 3.148 mm, 4 bocais Ø114,3 e 2 orelhas no cabeçote superior, entre as elevações 16.370 e 49.750 mm, com emendas de campo em 17.862 e 33.545 mm. Posição no piso: centradas na profundidade do campo de caps (o vão sem caps no desenho do piso coincide com o centro delas).</li>
+<li><b>Premissas das divisórias:</b> (1) o desenho do piso não traz elevação, então o piso do modelo foi assumido na base do cabeçote inferior (elevação 16.260 mm); (2) a planta V1-V1 do desenho das paredes aparece espelhada em relação à planta do piso (Nº1 à direita ali, à esquerda aqui). Mantive a numeração do desenho do piso e a ordem isométrica; (3) a faixa de tubos afunilados no meio de cada painel, os grampos laterais e os detalhes dos cabeçotes inferiores não foram modelados.</li>
+<li><b>Tubos</b> do piso estão retos, sem as curvas das extremidades (Detalhe D4).</li>
+<li><b>Emendas de painel:</b> a posição da 3ª emenda foi inferida pelo texto do desenho (+102 mm da divisória 3); as outras quatro vêm das linhas de cota. Os caps no eixo das emendas são de instalação de campo (nota 4 do desenho).</li>
+<li><b>Posições:</b> todas as 4.508 coincidem com o DXF; só o cap da Linha 16, Coluna 12 está deslocado 5,1 mm no desenho (tolerância da nota 1: ±6 mm) e aqui fica na malha regular.</li>
+<li><b>Conferência:</b> 4.004 caps de 16 furos + 18 termopares = 4.022, e 486 de 9 furos, que é o que a lista de material do desenho informa (o termopar substitui um cap de 16 furos).</li>
+</ul>
+</details>
+
+<section id="desenhos">
+<h2>Desenhos utilizados como base</h2>
+<ul>
+<li><b>D0-D5057-M-119</b> (DXF) — Parede d'água traseira, módulo 6: instalação dos bubble caps. Fonte das 4.508 posições, tubos do piso, paredes laterais, divisórias, emendas de painel, termopares e lista de material.</li>
+<li><b>D1-D5057-M-079</b> (DXF) — Parede divisória da fornalha (conjunto, caldeira CFB): 5 divisórias, elevações 16.370 a 49.750 mm, emendas de campo, cabeçotes, bocais, orelhas e pesos.</li>
+<li><b>D2-3500-57-M-009 R00</b> (DXF) — Bubble cap de 16 furos e luva: cabeça Ø48 × 63, haste Ø33,4 × 62, 16 furos Ø5 em duas fiadas de 8, luva Ø44 × Ø35 × 50.</li>
+<li><b>D2-3500-57-M-008 R00</b> (DXF) — Bubble cap de 9 furos e luva: mesmas dimensões do anterior, com 9 furos Ø5 (5 + 4) em meia circunferência.</li>
+</ul>
+</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+var M={"x0":5656.44,"y0":10054.32,"px":102,"py":58.75,"nc":125,"nr":79,"grid":["..S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S.S..",".d.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.c.","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.N.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.N.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.N.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.N.o.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.o.N.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.T.o.o.o.E...W.o.o.o.T.o.o.o.o.....o.o.o.o.o.T.o.o.o.E...W.o.o.o.T.o.o.o.o.o.....o.o.o.o.T.o.o.o.E...W.o.o.o.T.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.T.o.o.o.o.....o.o.o.o.o.T.o.o.o.E...W.o.o.o.T.o.o.o.o.o.....o.o.o.o.T.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.T.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.T.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.E...W.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.S.o.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.o.o.o.S.o.o.o.o.o.o.o.o.o.....o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.S.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.S.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.S.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.T.o.o.o.o.o.o.o.o.o.T.o.o.o.o.o.o.o.o.o.o.o.T.o.o.o.o.o.o.o.o.o.T.o.o.o.o.o.o.o.o.o.o.o.T.o.o.o.o.o.o.o.o.o.T.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..","Wo.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.oE","..o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o..",".b.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.a.","..N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.N.."],"tags":{"14,8":"TE/TW-57D-036A","14,28":"TE/TW-57D-036B","14,52":"TE/TW-57D-036C","14,72":"TE/TW-57D-036D","14,96":"TE/TW-57D-036E","14,116":"TE/TW-57D-036F","43,7":"TE/TW-57D-036G","42,28":"TE/TW-57D-036H","42,52":"TE/TW-57D-036I","42,72":"TE/TW-57D-036J","42,96":"TE/TW-57D-036K","43,117":"TE/TW-57D-036L","72,8":"TE/TW-57D-036M","72,28":"TE/TW-57D-036N","72,52":"TE/TW-57D-036O","72,72":"TE/TW-57D-036P","72,96":"TE/TW-57D-036Q","72,116":"TE/TW-57D-036R"},"tubes":[[5605.4,9480,14840],[5707.4,9480,14840],[5809.4,9480,14840],[5911.4,9480,14840],[6013.4,9480,14840],[6115.4,9480,14840],[6217.4,9480,14840],[6319.4,9480,14840],[6421.4,9480,14840],[6523.4,9480,14840],[6625.4,9480,14840],[6727.4,9480,14840],[6829.4,9480,14840],[6931.4,9480,14840],[7033.4,9480,14840],[7135.4,9480,14840],[7237.4,9480,14840],[7339.4,9480,14840],[7441.4,9480,10669],[7543.4,9480,10669],[7645.4,9480,14840],[7747.4,9480,14840],[7849.4,9480,14840],[7951.4,9480,14840],[8053.4,9480,14840],[8155.4,9480,14840],[8257.4,9480,14840],[8359.4,9480,14840],[8461.4,9480,14840],[8563.4,9480,14833],[8665.4,9480,14840],[8767.4,9480,14840],[8869.4,9480,14840],[8971.4,9480,14840],[9073.4,9480,14840],[9175.4,9480,14840],[9277.4,9480,14840],[9379.4,9480,14840],[9481.4,9480,14840],[9583.4,9480,10669],[9685.4,9480,10669],[9787.4,9480,14840],[9889.4,9480,14840],[9991.4,9480,14840],[10093.4,9480,14840],[10195.4,9480,14840],[10297.4,9480,14840],[10399.4,9480,14840],[10501.4,9480,14840],[10603.4,9480,14840],[10705.4,9480,14840],[10807.4,9480,14840],[10909.4,9480,14840],[11011.4,9480,14840],[11113.4,9480,14840],[11215.4,9480,14840],[11317.4,9480,14840],[11419.4,9480,14840],[11521.4,9480,14840],[11623.4,9480,14840],[11725.4,9480,14840],[11827.4,9480,14840],[11929.4,9480,10669],[12031.4,9480,10669],[12133.4,9480,14840],[12235.4,9480,14840],[12337.4,9480,14840],[12439.4,9480,14840],[12541.4,9480,14840],[12643.4,9480,14840],[12745.4,9480,14840],[12847.4,9480,14840],[12949.4,9480,14840],[13051.4,9480,14840],[13153.4,9480,14840],[13255.4,9480,14840],[13357.4,9480,14840],[13459.4,9480,14840],[13561.4,9480,14840],[13663.4,9480,14840],[13765.4,9480,14840],[13867.4,9480,14840],[13969.4,9480,14840],[14071.4,9480,14840],[14173.4,9480,14840],[14275.4,9480,10669],[14377.4,9480,10669],[14479.4,9480,14840],[14581.4,9480,14840],[14683.4,9480,14840],[14785.4,9480,14840],[14887.4,9480,14840],[14989.4,9480,14840],[15091.4,9480,14840],[15193.4,9480,14840],[15295.4,9480,14840],[15397.4,9480,14840],[15499.4,9480,14840],[15601.4,9480,14840],[15703.4,9480,14840],[15805.4,9480,14840],[15907.4,9480,14840],[16009.4,9480,14840],[16111.4,9480,14840],[16213.4,9480,14840],[16315.4,9480,14840],[16417.4,9480,10669],[16519.4,9480,10669],[16621.4,9480,14840],[16723.4,9480,14840],[16825.4,9480,14840],[16927.4,9480,14840],[17029.4,9480,14840],[17131.4,9480,14840],[17233.4,9480,14840],[17335.4,9480,14840],[17437.4,9480,14840],[17539.4,9480,14840],[17641.4,9480,14840],[17743.4,9480,14840],[17845.4,9480,14840],[17947.4,9480,14840],[18049.4,9480,14840],[18151.4,9480,14840],[18253.4,9480,14840],[18355.4,9497,14840]],"walls38":[[5529.2,14742.6],[5529.2,14640.6],[5529.2,14538.6],[5529.2,14436.6],[5529.2,14334.6],[5529.2,14232.6],[5529.2,14130.6],[5529.2,14028.6],[5529.2,13926.6],[5529.2,13824.6],[5529.2,13722.6],[5529.2,13620.6],[5529.2,13518.6],[5529.2,13416.6],[5529.2,13314.6],[5529.2,13212.6],[5529.2,13110.6],[5529.2,13008.6],[5529.2,12906.6],[5529.2,12804.6],[5529.2,12702.6],[5529.2,12600.6],[5529.2,12498.6],[5529.2,12396.6],[5529.2,12294.6],[5529.2,12192.6],[5529.2,12090.6],[5529.2,11988.6],[5529.2,11886.6],[5529.2,11784.6],[5529.2,11682.6],[5529.2,11580.6],[5529.2,11478.6],[5529.2,11376.6],[5529.2,11274.6],[5529.2,11172.6],[5529.2,11070.6],[5529.2,10968.6],[5529.2,10866.6],[5529.2,10764.6],[5529.2,10662.6],[5529.2,10560.6],[18431.6,14742.6],[18431.6,14640.6],[18431.6,14538.6],[18431.6,14436.6],[18431.6,14334.6],[18431.6,14232.6],[18431.6,14130.6],[18431.6,14028.6],[18431.6,13926.6],[18431.6,13824.6],[18431.6,13722.6],[18431.6,13620.6],[18431.6,13518.6],[18431.6,13416.6],[18431.6,13314.6],[18431.6,13212.6],[18431.6,13110.6],[18431.6,13008.6],[18431.6,12906.6],[18431.6,12804.6],[18431.6,12702.6],[18431.6,12600.6],[18431.6,12498.6],[18431.6,12396.6],[18431.6,12294.6],[18431.6,12192.6],[18431.6,12090.6],[18431.6,11988.6],[18431.6,11886.6],[18431.6,11784.6],[18431.6,11682.6],[18431.6,11580.6],[18431.6,11478.6],[18431.6,11376.6],[18431.6,11274.6],[18431.6,11172.6],[18431.6,11070.6],[18431.6,10968.6],[18431.6,10866.6],[18431.6,10764.6],[18431.6,10662.6],[18431.6,10560.6],[16468.4,13824.6],[16468.4,13722.6],[16468.4,13620.6],[16468.4,13518.6],[16468.4,13416.6],[16468.4,13314.6],[16468.4,13212.6],[16468.4,13110.6],[16468.4,13008.6],[16468.4,12906.6],[16468.4,12804.6],[16468.4,12702.6],[16468.4,12600.6],[16468.4,12498.6],[16468.4,12396.6],[16468.4,12294.6],[16468.4,12192.6],[16468.4,12090.6],[16468.4,11988.6],[16468.4,11886.6],[16468.4,11784.6],[16468.4,11682.6],[16468.4,11580.6],[16468.4,11478.6],[16468.4,11376.6],[16468.4,11274.6],[16468.4,11172.6],[16468.4,11070.6],[16468.4,10968.6],[16468.4,10866.6],[14326.4,13824.6],[14326.4,13722.6],[14326.4,13620.6],[14326.4,13518.6],[14326.4,13416.6],[14326.4,13314.6],[14326.4,13212.6],[14326.4,13110.6],[14326.4,13008.6],[14326.4,12906.6],[14326.4,12804.6],[14326.4,12702.6],[14326.4,12600.6],[14326.4,12498.6],[14326.4,12396.6],[14326.4,12294.6],[14326.4,12192.6],[14326.4,12090.6],[14326.4,11988.6],[14326.4,11886.6],[14326.4,11784.6],[14326.4,11682.6],[14326.4,11580.6],[14326.4,11478.6],[14326.4,11376.6],[14326.4,11274.6],[14326.4,11172.6],[14326.4,11070.6],[14326.4,10968.6],[14326.4,10866.6],[11980.4,13824.6],[11980.4,13722.6],[11980.4,13620.6],[11980.4,13518.6],[11980.4,13416.6],[11980.4,13314.6],[11980.4,13212.6],[11980.4,13110.6],[11980.4,13008.6],[11980.4,12906.6],[11980.4,12804.6],[11980.4,12702.6],[11980.4,12600.6],[11980.4,12498.6],[11980.4,12396.6],[11980.4,12294.6],[11980.4,12192.6],[11980.4,12090.6],[11980.4,11988.6],[11980.4,11886.6],[11980.4,11784.6],[11980.4,11682.6],[11980.4,11580.6],[11980.4,11478.6],[11980.4,11376.6],[11980.4,11274.6],[11980.4,11172.6],[11980.4,11070.6],[11980.4,10968.6],[11980.4,10866.6],[7492.4,13824.6],[7492.4,13722.6],[7492.4,13620.6],[7492.4,13518.6],[7492.4,13416.6],[7492.4,13314.6],[7492.4,13212.6],[7492.4,13110.6],[7492.4,13008.6],[7492.4,12906.6],[7492.4,12804.6],[7492.4,12702.6],[7492.4,12600.6],[7492.4,12498.6],[7492.4,12396.6],[7492.4,12294.6],[7492.4,12192.6],[7492.4,12090.6],[7492.4,11988.6],[7492.4,11886.6],[7492.4,11784.6],[7492.4,11682.6],[7492.4,11580.6],[7492.4,11478.6],[7492.4,11376.6],[7492.4,11274.6],[7492.4,11172.6],[7492.4,11070.6],[7492.4,10968.6],[7492.4,10866.6],[9634.4,13824.6],[9634.4,13722.6],[9634.4,13620.6],[9634.4,13518.6],[9634.4,13416.6],[9634.4,13314.6],[9634.4,13212.6],[9634.4,13110.6],[9634.4,13008.6],[9634.4,12906.6],[9634.4,12804.6],[9634.4,12702.6],[9634.4,12600.6],[9634.4,12498.6],[9634.4,12396.6],[9634.4,12294.6],[9634.4,12192.6],[9634.4,12090.6],[9634.4,11988.6],[9634.4,11886.6],[9634.4,11784.6],[9634.4,11682.6],[9634.4,11580.6],[9634.4,11478.6],[9634.4,11376.6],[9634.4,11274.6],[9634.4,11172.6],[9634.4,11070.6],[9634.4,10968.6],[9634.4,10866.6]],"walls25":[[5605.4,14793.6],[5707.4,14793.6],[5809.4,14793.6],[5911.4,14793.6],[6013.4,14793.6],[6115.4,14793.6],[6217.4,14793.6],[6319.4,14793.6],[6421.4,14793.6],[6523.4,14793.6],[6625.4,14793.6],[6727.4,14793.6],[6829.4,14793.6],[6931.4,14793.6],[7033.4,14793.6],[7135.4,14793.6],[7237.4,14793.6],[7339.4,14793.6],[7441.4,14793.6],[7543.4,14793.6],[7645.4,14793.6],[7747.4,14793.6],[7849.4,14793.6],[7951.4,14793.6],[8053.4,14793.6],[8155.4,14793.6],[8257.4,14793.6],[8359.4,14793.6],[8461.4,14793.6],[8563.4,14793.6],[8665.4,14793.6],[8767.4,14793.6],[8869.4,14793.6],[8971.4,14793.6],[9073.4,14793.6],[9175.4,14793.6],[9277.4,14793.6],[9379.4,14793.6],[9481.4,14793.6],[9583.4,14793.6],[9685.4,14793.6],[9787.4,14793.6],[9889.4,14793.6],[9991.4,14793.6],[10093.4,14793.6],[10195.4,14793.6],[10297.4,14793.6],[10399.4,14793.6],[10501.4,14793.6],[10603.4,14793.6],[10705.4,14793.6],[10807.4,14793.6],[10909.4,14793.6],[11011.4,14793.6],[11113.4,14793.6],[11215.4,14793.6],[11317.4,14793.6],[11419.4,14793.6],[11521.4,14793.6],[11623.4,14793.6],[11725.4,14793.6],[11827.4,14793.6],[11929.4,14793.6],[12031.4,14793.6],[12133.4,14793.6],[12235.4,14793.6],[12337.4,14793.6],[12439.4,14793.6],[12541.4,14793.6],[12643.4,14793.6],[12745.4,14793.6],[12847.4,14793.6],[12949.4,14793.6],[13051.4,14793.6],[13153.4,14793.6],[13255.4,14793.6],[13357.4,14793.6],[13459.4,14793.6],[13561.4,14793.6],[13663.4,14793.6],[13765.4,14793.6],[13867.4,14793.6],[13969.4,14793.6],[14071.4,14793.6],[14173.4,14793.6],[14275.4,14793.6],[14377.4,14793.6],[14479.4,14793.6],[14581.4,14793.6],[14683.4,14793.6],[14785.4,14793.6],[14887.4,14793.6],[14989.4,14793.6],[15091.4,14793.6],[15193.4,14793.6],[15295.4,14793.6],[15397.4,14793.6],[15499.4,14793.6],[15601.4,14793.6],[15703.4,14793.6],[15805.4,14793.6],[15907.4,14793.6],[16009.4,14793.6],[16111.4,14793.6],[16213.4,14793.6],[16315.4,14793.6],[16417.4,14793.6],[16519.4,14793.6],[16621.4,14793.6],[16723.4,14793.6],[16825.4,14793.6],[16927.4,14793.6],[17029.4,14793.6],[17131.4,14793.6],[17233.4,14793.6],[17335.4,14793.6],[17437.4,14793.6],[17539.4,14793.6],[17641.4,14793.6],[17743.4,14793.6],[17845.4,14793.6],[17947.4,14793.6],[18049.4,14793.6],[18151.4,14793.6],[18253.4,14793.6],[18355.4,14793.6],[5605.4,9897.6],[5707.4,9897.6],[5809.4,9897.6],[5911.4,9897.6],[6013.4,9897.6],[6115.4,9897.6],[6217.4,9897.6],[6319.4,9897.6],[6421.4,9897.6],[6523.4,9897.6],[6625.4,9897.6],[6727.4,9897.6],[6829.4,9897.6],[6931.4,9897.6],[7033.4,9897.6],[7135.4,9897.6],[7237.4,9897.6],[7339.4,9897.6],[7441.4,9897.6],[7543.4,9897.6],[7645.4,9897.6],[7747.4,9897.6],[7849.4,9897.6],[7951.4,9897.6],[8053.4,9897.6],[8155.4,9897.6],[8257.4,9897.6],[8359.4,9897.6],[8461.4,9897.6],[8563.4,9897.6],[8665.4,9897.6],[8767.4,9897.6],[8869.4,9897.6],[8971.4,9897.6],[9073.4,9897.6],[9175.4,9897.6],[9277.4,9897.6],[9379.4,9897.6],[9481.4,9897.6],[9583.4,9897.6],[9685.4,9897.6],[9787.4,9897.6],[9889.4,9897.6],[9991.4,9897.6],[10093.4,9897.6],[10195.4,9897.6],[10297.4,9897.6],[10399.4,9897.6],[10501.4,9897.6],[10603.4,9897.6],[10705.4,9897.6],[10807.4,9897.6],[10909.4,9897.6],[11011.4,9897.6],[11113.4,9897.6],[11215.4,9897.6],[11317.4,9897.6],[11419.4,9897.6],[11521.4,9897.6],[11623.4,9897.6],[11725.4,9897.6],[11827.4,9897.6],[11929.4,9897.6],[12031.4,9897.6],[12133.4,9897.6],[12235.4,9897.6],[12337.4,9897.6],[12439.4,9897.6],[12541.4,9897.6],[12643.4,9897.6],[12745.4,9897.6],[12847.4,9897.6],[12949.4,9897.6],[13051.4,9897.6],[13153.4,9897.6],[13255.4,9897.6],[13357.4,9897.6],[13459.4,9897.6],[13561.4,9897.6],[13663.4,9897.6],[13765.4,9897.6],[13867.4,9897.6],[13969.4,9897.6],[14071.4,9897.6],[14173.4,9897.6],[14275.4,9897.6],[14377.4,9897.6],[14479.4,9897.6],[14581.4,9897.6],[14683.4,9897.6],[14785.4,9897.6],[14887.4,9897.6],[14989.4,9897.6],[15091.4,9897.6],[15193.4,9897.6],[15295.4,9897.6],[15397.4,9897.6],[15499.4,9897.6],[15601.4,9897.6],[15703.4,9897.6],[15805.4,9897.6],[15907.4,9897.6],[16009.4,9897.6],[16111.4,9897.6],[16213.4,9897.6],[16315.4,9897.6],[16417.4,9897.6],[16519.4,9897.6],[16621.4,9897.6],[16723.4,9897.6],[16825.4,9897.6],[16927.4,9897.6],[17029.4,9897.6],[17131.4,9897.6],[17233.4,9897.6],[17335.4,9897.6],[17437.4,9897.6],[17539.4,9897.6],[17641.4,9897.6],[17743.4,9897.6],[17845.4,9897.6],[17947.4,9897.6],[18049.4,9897.6],[18151.4,9897.6],[18253.4,9897.6],[18355.4,9897.6],[5529.2,9948.6],[5529.2,10050.6],[5529.2,10152.6],[5529.2,10254.6],[5529.2,10356.6],[5529.2,10458.6],[18431.6,9948.6],[18431.6,10050.6],[18431.6,10152.6],[18431.6,10254.6],[18431.6,10356.6],[18431.6,10458.6]],"div":[7492.4,9634.4,11980.4,14326.4,16468.4],"joints":[7696.4,9838.4,12082.4,14122.4,16264.4],"jcols":[20,41,63,83,104],"latL":5529.2,"latR":18431.6,"counts":{"o":4004,"T":18,"n9":486}};
+var P={
+ "cx_planta": [
+  10875.150000000001,
+  13017.150000000001,
+  15363.150000000001,
+  17709.15,
+  19851.15
+ ],
+ "esp": 219.1,
+ "prof": 3148.0,
+ "yc_planta": 8985.9,
+ "bocais": [
+  -1020.0,
+  -340.0,
+  340.0,
+  1020.0
+ ],
+ "orelhas": [
+  -802.7,
+  -771.2,
+  621.3,
+  652.8
+ ],
+ "elev": {
+  "base": 16370,
+  "emenda1": 17862,
+  "emenda2": 33545,
+  "topo": 49750
+ },
+ "d_tubo": 76.2,
+ "passo": 102,
+ "d_cab": 219.1,
+ "d_bocal": 114.3,
+ "itens": [
+  1,
+  2,
+  3,
+  2,
+  4
+ ],
+ "peso": [
+  11992,
+  11992,
+  12022,
+  11992,
+  12022
+ ],
+ "total": 60020,
+ "dist": [
+  2142.0,
+  2346.0,
+  2346.0,
+  2142.0
+ ]
+};
+var TD=[[0,2,"A",1,""],[0,4,"A",1,""],[0,6,"A",1,""],[0,8,"B",1,""],[0,10,"B",1,""],[0,12,"C",1,""],[0,14,"C",1,""],[0,16,"C",1,""],[0,18,"C",1,""],[0,20,"B",2,""],[0,22,"B",2,""],[0,24,"B",2,""],[0,26,"C",2,""],[0,28,"C",2,""],[0,30,"C",2,""],[0,32,"C",2,""],[0,34,"A",2,""],[0,36,"A",2,""],[0,38,"A",2,""],[0,40,"C",3,""],[0,42,"C",3,""],[0,44,"C",3,""],[0,46,"C",3,""],[0,48,"A",3,""],[0,50,"A",3,""],[0,52,"A",3,""],[0,54,"A",3,""],[0,56,"B",3,""],[0,58,"B",3,""],[0,60,"B",3,""],[0,62,"A",4,""],[0,64,"A",4,""],[0,66,"A",4,""],[0,68,"A",4,""],[0,70,"B",4,""],[0,72,"B",4,""],[0,74,"B",4,""],[0,76,"B",4,""],[0,78,"B",4,""],[0,80,"C",4,""],[0,82,"C",4,""],[0,84,"C",4,""],[0,86,"B",5,""],[0,88,"B",5,""],[0,90,"B",5,""],[0,92,"B",5,""],[0,94,"C",5,""],[0,96,"C",5,""],[0,98,"C",5,""],[0,100,"A",5,""],[0,102,"A",5,""],[0,104,"A",5,""],[0,106,"A",5,""],[0,108,"B",6,""],[0,110,"B",6,""],[0,112,"B",6,""],[0,114,"A",6,""],[0,116,"A",6,""],[0,118,"C",6,""],[0,120,"C",6,""],[0,122,"C",6,""],[1,1,"A",1,""],[1,3,"A",1,""],[1,5,"A",1,""],[1,7,"B",1,""],[1,9,"B",1,""],[1,11,"B",1,""],[1,13,"C",1,""],[1,15,"C",1,""],[1,17,"C",1,""],[1,19,"B",2,""],[1,21,"B",2,""],[1,23,"B",2,""],[1,25,"B",2,""],[1,27,"C",2,""],[1,29,"C",2,""],[1,31,"C",2,""],[1,33,"A",2,""],[1,35,"A",2,""],[1,37,"A",2,""],[1,39,"A",2,""],[1,41,"C",3,""],[1,43,"C",3,""],[1,45,"C",3,""],[1,47,"A",3,""],[1,49,"A",3,""],[1,51,"A",3,""],[1,53,"A",3,""],[1,55,"B",3,""],[1,57,"B",3,""],[1,59,"B",3,""],[1,61,"B",3,""],[1,63,"A",4,""],[1,65,"A",4,""],[1,67,"A",4,""],[1,69,"A",4,""],[1,71,"B",4,""],[1,73,"B",4,""],[1,75,"B",4,""],[1,77,"B",4,""],[1,79,"C",4,""],[1,81,"C",4,""],[1,83,"C",4,""],[1,85,"C",4,""],[1,87,"B",5,""],[1,89,"B",5,""],[1,91,"B",5,""],[1,93,"C",5,""],[1,95,"C",5,""],[1,97,"C",5,""],[1,99,"C",5,""],[1,101,"A",5,""],[1,103,"A",5,""],[1,105,"A",5,""],[1,107,"B",6,""],[1,109,"B",6,""],[1,111,"B",6,""],[1,113,"A",6,""],[1,115,"A",6,""],[1,117,"A",6,""],[1,119,"C",6,""],[1,121,"C",6,""],[1,123,"C",6,""],[2,2,"A",1,""],[2,4,"A",1,""],[2,6,"A",1,""],[2,8,"B",1,""],[2,10,"B",1,""],[2,12,"C",1,""],[2,14,"C",1,""],[2,16,"C",1,""],[2,18,"C",1,""],[2,20,"B",2,""],[2,22,"B",2,""],[2,24,"B",2,""],[2,26,"C",2,""],[2,28,"C",2,""],[2,30,"C",2,""],[2,32,"C",2,""],[2,34,"A",2,""],[2,36,"A",2,""],[2,38,"A",2,""],[2,40,"C",3,"F"],[2,42,"C",3,""],[2,44,"C",3,""],[2,46,"C",3,""],[2,48,"A",3,""],[2,50,"A",3,""],[2,52,"A",3,""],[2,54,"A",3,""],[2,56,"B",3,""],[2,58,"B",3,""],[2,60,"B",3,""],[2,62,"A",4,""],[2,64,"A",4,""],[2,66,"A",4,""],[2,68,"A",4,""],[2,70,"B",4,""],[2,72,"B",4,""],[2,74,"B",4,""],[2,76,"B",4,""],[2,78,"B",4,""],[2,80,"C",4,""],[2,82,"C",4,""],[2,84,"C",4,""],[2,86,"B",5,""],[2,88,"B",5,""],[2,90,"B",5,""],[2,92,"B",5,""],[2,94,"C",5,""],[2,96,"C",5,""],[2,98,"C",5,""],[2,100,"A",5,""],[2,102,"A",5,""],[2,104,"A",5,""],[2,106,"A",5,""],[2,108,"B",6,""],[2,110,"B",6,""],[2,112,"B",6,""],[2,114,"A",6,""],[2,116,"A",6,""],[2,118,"C",6,""],[2,120,"C",6,""],[2,122,"C",6,""],[3,0,"A",1,""],[3,1,"A",1,""],[3,3,"A",1,""],[3,5,"A",1,""],[3,7,"B",1,""],[3,9,"B",1,""],[3,11,"B",1,""],[3,13,"C",1,""],[3,15,"C",1,""],[3,17,"C",1,""],[3,19,"B",2,""],[3,21,"B",2,""],[3,23,"B",2,""],[3,25,"B",2,""],[3,27,"C",2,""],[3,29,"C",2,"E"],[3,31,"C",2,""],[3,33,"A",2,""],[3,35,"A",2,""],[3,37,"A",2,""],[3,39,"A",2,""],[3,41,"C",3,""],[3,43,"C",3,""],[3,45,"C",3,""],[3,47,"A",3,""],[3,49,"A",3,""],[3,51,"A",3,""],[3,53,"A",3,""],[3,55,"B",3,""],[3,57,"B",3,""],[3,59,"B",3,""],[3,61,"B",3,""],[3,63,"A",4,""],[3,65,"A",4,""],[3,67,"A",4,""],[3,69,"A",4,""],[3,71,"B",4,""],[3,73,"B",4,""],[3,75,"B",4,""],[3,77,"B",4,""],[3,79,"C",4,""],[3,81,"C",4,""],[3,83,"C",4,""],[3,85,"C",4,""],[3,87,"B",5,""],[3,89,"B",5,""],[3,91,"B",5,""],[3,93,"C",5,""],[3,95,"C",5,""],[3,97,"C",5,""],[3,99,"C",5,""],[3,101,"A",5,""],[3,103,"A",5,""],[3,105,"A",5,""],[3,107,"B",6,""],[3,109,"B",6,""],[3,111,"B",6,""],[3,113,"A",6,""],[3,115,"A",6,""],[3,117,"A",6,""],[3,119,"C",6,""],[3,121,"C",6,""],[3,123,"C",6,""],[3,124,"C",6,""],[4,2,"A",1,""],[4,4,"A",1,""],[4,6,"A",1,""],[4,8,"B",1,""],[4,10,"B",1,""],[4,12,"C",1,""],[4,14,"C",1,""],[4,16,"C",1,""],[4,18,"C",1,""],[4,20,"B",2,""],[4,22,"B",2,""],[4,24,"B",2,""],[4,26,"C",2,""],[4,28,"C",2,""],[4,30,"C",2,""],[4,32,"C",2,""],[4,34,"A",2,""],[4,36,"A",2,""],[4,38,"A",2,""],[4,40,"C",3,"F"],[4,42,"C",3,""],[4,44,"C",3,""],[4,46,"C",3,""],[4,48,"A",3,""],[4,50,"A",3,""],[4,52,"A",3,""],[4,54,"A",3,""],[4,56,"B",3,""],[4,58,"B",3,""],[4,60,"B",3,""],[4,62,"A",4,""],[4,64,"A",4,""],[4,66,"A",4,""],[4,68,"A",4,""],[4,70,"B",4,""],[4,72,"B",4,""],[4,74,"B",4,""],[4,76,"B",4,""],[4,78,"B",4,""],[4,80,"C",4,""],[4,82,"C",4,""],[4,84,"C",4,""],[4,86,"B",5,""],[4,88,"B",5,""],[4,90,"B",5,""],[4,92,"B",5,""],[4,94,"C",5,""],[4,96,"C",5,""],[4,98,"C",5,""],[4,100,"A",5,""],[4,102,"A",5,""],[4,104,"A",5,""],[4,106,"A",5,""],[4,108,"B",6,""],[4,110,"B",6,""],[4,112,"B",6,""],[4,114,"A",6,""],[4,116,"A",6,""],[4,118,"C",6,""],[4,120,"C",6,""],[4,122,"C",6,""],[5,0,"A",1,""],[5,1,"A",1,""],[5,3,"A",1,""],[5,5,"A",1,""],[5,7,"B",1,""],[5,9,"B",1,""],[5,11,"B",1,""],[5,13,"C",1,""],[5,15,"C",1,""],[5,17,"C",1,""],[5,19,"B",2,""],[5,21,"B",2,""],[5,23,"B",2,""],[5,25,"B",2,""],[5,27,"C",2,""],[5,29,"C",2,"E"],[5,31,"C",2,""],[5,33,"A",2,""],[5,35,"A",2,""],[5,37,"A",2,""],[5,39,"A",2,""],[5,41,"C",3,""],[5,43,"C",3,""],[5,45,"C",3,""],[5,47,"A",3,""],[5,49,"A",3,""],[5,51,"A",3,""],[5,53,"A",3,""],[5,55,"B",3,""],[5,57,"B",3,""],[5,59,"B",3,""],[5,61,"B",3,""],[5,63,"A",4,""],[5,65,"A",4,""],[5,67,"A",4,""],[5,69,"A",4,""],[5,71,"B",4,""],[5,73,"B",4,""],[5,75,"B",4,""],[5,77,"B",4,""],[5,79,"C",4,""],[5,81,"C",4,""],[5,83,"C",4,""],[5,85,"C",4,""],[5,87,"B",5,""],[5,89,"B",5,""],[5,91,"B",5,""],[5,93,"C",5,""],[5,95,"C",5,""],[5,97,"C",5,""],[5,99,"C",5,""],[5,101,"A",5,""],[5,103,"A",5,""],[5,105,"A",5,""],[5,107,"B",6,""],[5,109,"B",6,""],[5,111,"B",6,""],[5,113,"A",6,""],[5,115,"A",6,""],[5,117,"A",6,""],[5,119,"C",6,""],[5,121,"C",6,""],[5,123,"C",6,""],[5,124,"C",6,""],[6,2,"A",1,""],[6,4,"A",1,""],[6,6,"A",1,""],[6,8,"B",1,""],[6,10,"B",1,""],[6,12,"C",1,""],[6,14,"C",1,""],[6,16,"C",1,""],[6,18,"C",1,""],[6,20,"B",2,""],[6,22,"B",2,""],[6,24,"B",2,""],[6,26,"C",2,""],[6,28,"C",2,""],[6,30,"C",2,""],[6,32,"C",2,""],[6,34,"A",2,""],[6,36,"A",2,""],[6,38,"A",2,""],[6,40,"C",3,""],[6,42,"C",3,""],[6,44,"C",3,""],[6,46,"C",3,""],[6,48,"A",3,""],[6,50,"A",3,""],[6,52,"A",3,""],[6,54,"A",3,""],[6,56,"B",3,""],[6,58,"B",3,""],[6,60,"B",3,""],[6,62,"A",4,""],[6,64,"A",4,""],[6,66,"A",4,""],[6,68,"A",4,""],[6,70,"B",4,""],[6,72,"B",4,""],[6,74,"B",4,""],[6,76,"B",4,""],[6,78,"B",4,""],[6,80,"C",4,""],[6,82,"C",4,""],[6,84,"C",4,""],[6,86,"B",5,""],[6,88,"B",5,""],[6,90,"B",5,""],[6,92,"B",5,""],[6,94,"C",5,""],[6,96,"C",5,""],[6,98,"C",5,""],[6,100,"A",5,""],[6,102,"A",5,""],[6,104,"A",5,"E"],[6,106,"A",5,""],[6,108,"B",6,""],[6,110,"B",6,""],[6,112,"B",6,""],[6,114,"A",6,""],[6,116,"A",6,""],[6,118,"C",6,""],[6,120,"C",6,""],[6,122,"C",6,""],[7,0,"A",1,""],[7,1,"A",1,""],[7,3,"A",1,""],[7,5,"A",1,""],[7,7,"B",1,""],[7,9,"B",1,""],[7,11,"B",1,""],[7,13,"C",1,""],[7,15,"C",1,""],[7,17,"C",1,""],[7,19,"B",2,""],[7,21,"B",2,""],[7,23,"B",2,""],[7,25,"B",2,""],[7,27,"C",2,""],[7,29,"C",2,""],[7,31,"C",2,""],[7,33,"A",2,""],[7,35,"A",2,""],[7,37,"A",2,""],[7,39,"A",2,""],[7,41,"C",3,""],[7,43,"C",3,""],[7,45,"C",3,""],[7,47,"A",3,""],[7,49,"A",3,""],[7,51,"A",3,""],[7,53,"A",3,""],[7,55,"B",3,""],[7,57,"B",3,""],[7,59,"B",3,""],[7,61,"B",3,""],[7,63,"A",4,""],[7,65,"A",4,""],[7,67,"A",4,""],[7,69,"A",4,""],[7,71,"B",4,""],[7,73,"B",4,""],[7,75,"B",4,""],[7,77,"B",4,""],[7,79,"C",4,""],[7,81,"C",4,""],[7,83,"C",4,""],[7,85,"C",4,""],[7,87,"B",5,""],[7,89,"B",5,""],[7,91,"B",5,""],[7,93,"C",5,""],[7,95,"C",5,""],[7,97,"C",5,""],[7,99,"C",5,""],[7,101,"A",5,""],[7,103,"A",5,""],[7,105,"A",5,""],[7,107,"B",6,""],[7,109,"B",6,""],[7,111,"B",6,""],[7,113,"A",6,""],[7,115,"A",6,""],[7,117,"A",6,""],[7,119,"C",6,""],[7,121,"C",6,""],[7,123,"C",6,""],[7,124,"C",6,""],[8,2,"A",1,""],[8,4,"A",1,"D"],[8,6,"A",1,""],[8,8,"B",1,""],[8,10,"B",1,""],[8,12,"C",1,""],[8,14,"C",1,""],[8,16,"C",1,""],[8,18,"C",1,""],[8,20,"B",2,""],[8,22,"B",2,""],[8,24,"B",2,""],[8,26,"C",2,""],[8,28,"C",2,""],[8,30,"C",2,""],[8,32,"C",2,""],[8,34,"A",2,""],[8,36,"A",2,""],[8,38,"A",2,""],[8,40,"C",3,""],[8,42,"C",3,""],[8,44,"C",3,""],[8,46,"C",3,""],[8,48,"A",3,""],[8,50,"A",3,""],[8,52,"A",3,""],[8,54,"A",3,""],[8,56,"B",3,""],[8,58,"B",3,""],[8,60,"B",3,""],[8,62,"A",4,""],[8,64,"A",4,""],[8,66,"A",4,""],[8,68,"A",4,""],[8,70,"B",4,""],[8,72,"B",4,""],[8,74,"B",4,""],[8,76,"B",4,""],[8,78,"B",4,""],[8,80,"C",4,""],[8,82,"C",4,""],[8,84,"C",4,""],[8,86,"B",5,""],[8,88,"B",5,""],[8,90,"B",5,""],[8,92,"B",5,""],[8,94,"C",5,""],[8,96,"C",5,""],[8,98,"C",5,""],[8,100,"A",5,""],[8,102,"A",5,""],[8,104,"A",5,""],[8,106,"A",5,""],[8,108,"B",6,""],[8,110,"B",6,""],[8,112,"B",6,""],[8,114,"A",6,"F"],[8,116,"A",6,""],[8,118,"C",6,""],[8,120,"C",6,""],[8,122,"C",6,""],[9,0,"A",1,""],[9,1,"A",1,""],[9,3,"A",1,""],[9,5,"A",1,""],[9,7,"B",1,""],[9,9,"B",1,""],[9,11,"B",1,""],[9,13,"C",1,""],[9,15,"C",1,""],[9,17,"C",1,""],[9,19,"B",2,""],[9,21,"B",2,""],[9,23,"B",2,""],[9,25,"B",2,""],[9,27,"C",2,""],[9,29,"C",2,""],[9,31,"C",2,""],[9,33,"A",2,""],[9,35,"A",2,""],[9,37,"A",2,""],[9,39,"A",2,""],[9,41,"C",3,""],[9,43,"C",3,""],[9,45,"C",3,""],[9,47,"A",3,""],[9,49,"A",3,""],[9,51,"A",3,""],[9,53,"A",3,""],[9,55,"B",3,""],[9,57,"B",3,""],[9,59,"B",3,""],[9,61,"B",3,""],[9,63,"A",4,""],[9,65,"A",4,""],[9,67,"A",4,""],[9,69,"A",4,""],[9,71,"B",4,""],[9,73,"B",4,""],[9,75,"B",4,""],[9,77,"B",4,""],[9,79,"C",4,""],[9,81,"C",4,""],[9,83,"C",4,""],[9,85,"C",4,""],[9,87,"B",5,""],[9,89,"B",5,""],[9,91,"B",5,""],[9,93,"C",5,""],[9,95,"C",5,""],[9,97,"C",5,""],[9,99,"C",5,""],[9,101,"A",5,""],[9,103,"A",5,""],[9,105,"A",5,""],[9,107,"B",6,""],[9,109,"B",6,""],[9,111,"B",6,""],[9,113,"A",6,""],[9,115,"A",6,""],[9,117,"A",6,""],[9,119,"C",6,""],[9,121,"C",6,""],[9,123,"C",6,""],[9,124,"C",6,""],[10,2,"A",1,""],[10,4,"A",1,""],[10,6,"A",1,""],[10,8,"B",1,""],[10,10,"B",1,""],[10,12,"C",1,""],[10,14,"C",1,""],[10,16,"C",1,""],[10,18,"C",1,""],[10,20,"B",2,""],[10,22,"B",2,""],[10,24,"B",2,""],[10,26,"C",2,""],[10,28,"C",2,""],[10,30,"C",2,""],[10,32,"C",2,""],[10,34,"A",2,""],[10,36,"A",2,""],[10,38,"A",2,""],[10,40,"C",3,""],[10,42,"C",3,""],[10,44,"C",3,""],[10,46,"C",3,""],[10,48,"A",3,""],[10,50,"A",3,""],[10,52,"A",3,""],[10,54,"A",3,""],[10,56,"B",3,""],[10,58,"B",3,""],[10,60,"B",3,""],[10,62,"A",4,""],[10,64,"A",4,""],[10,66,"A",4,""],[10,68,"A",4,""],[10,70,"B",4,""],[10,72,"B",4,""],[10,74,"B",4,""],[10,76,"B",4,""],[10,78,"B",4,""],[10,80,"C",4,""],[10,82,"C",4,""],[10,84,"C",4,"D"],[10,86,"B",5,""],[10,88,"B",5,""],[10,90,"B",5,""],[10,92,"B",5,""],[10,94,"C",5,""],[10,96,"C",5,""],[10,98,"C",5,""],[10,100,"A",5,""],[10,102,"A",5,""],[10,104,"A",5,""],[10,106,"A",5,""],[10,108,"B",6,""],[10,110,"B",6,""],[10,112,"B",6,""],[10,114,"A",6,""],[10,116,"A",6,""],[10,118,"C",6,""],[10,120,"C",6,""],[10,122,"C",6,""],[11,0,"A",1,""],[11,1,"A",1,""],[11,3,"A",1,""],[11,5,"A",1,""],[11,7,"B",1,""],[11,9,"B",1,""],[11,11,"B",1,""],[11,13,"C",1,""],[11,15,"C",1,""],[11,21,"B",2,""],[11,23,"B",2,""],[11,25,"B",2,""],[11,27,"C",2,""],[11,29,"C",2,""],[11,31,"C",2,""],[11,33,"A",2,""],[11,35,"A",2,""],[11,37,"A",2,""],[11,39,"A",2,""],[11,41,"C",3,""],[11,43,"C",3,""],[11,45,"C",3,""],[11,47,"A",3,""],[11,49,"A",3,""],[11,51,"A",3,""],[11,53,"A",3,""],[11,55,"B",3,""],[11,57,"B",3,""],[11,59,"B",3,""],[11,65,"A",4,""],[11,67,"A",4,""],[11,69,"A",4,""],[11,79,"C",4,""],[11,81,"C",4,""],[11,83,"C",4,""],[11,85,"C",4,""],[11,87,"B",5,""],[11,89,"B",5,""],[11,91,"B",5,""],[11,93,"C",5,""],[11,95,"C",5,""],[11,97,"C",5,""],[11,99,"C",5,""],[11,101,"A",5,""],[11,103,"A",5,""],[11,109,"B",6,""],[11,111,"B",6,""],[11,113,"A",6,""],[11,115,"A",6,""],[11,117,"A",6,""],[11,119,"C",6,""],[11,121,"C",6,""],[11,123,"C",6,""],[11,124,"C",6,""],[12,2,"A",1,""],[12,4,"A",1,""],[12,6,"A",1,""],[12,8,"B",1,""],[12,10,"B",1,""],[12,12,"C",1,""],[12,14,"C",1,""],[12,16,"C",1,""],[12,20,"B",2,""],[12,22,"B",2,""],[12,24,"B",2,""],[12,26,"C",2,""],[12,28,"C",2,""],[12,30,"C",2,""],[12,32,"C",2,""],[12,34,"A",2,""],[12,36,"A",2,""],[12,42,"C",3,""],[12,44,"C",3,""],[12,46,"C",3,""],[12,48,"A",3,""],[12,50,"A",3,""],[12,54,"A",3,""],[12,56,"B",3,""],[12,58,"B",3,""],[12,60,"B",3,""],[12,64,"A",4,""],[12,66,"A",4,""],[12,68,"A",4,""],[12,70,"B",4,""],[12,74,"B",4,""],[12,78,"B",4,""],[12,80,"C",4,""],[12,82,"C",4,""],[12,88,"B",5,""],[12,90,"B",5,""],[12,92,"B",5,""],[12,94,"C",5,""],[12,96,"C",5,""],[12,98,"C",5,""],[12,100,"A",5,""],[12,102,"A",5,""],[12,104,"A",5,""],[12,108,"B",6,""],[12,110,"B",6,""],[12,112,"B",6,""],[12,114,"A",6,""],[12,116,"A",6,""],[12,118,"C",6,""],[12,120,"C",6,""],[12,122,"C",6,""],[13,0,"A",1,""],[13,1,"A",1,""],[13,3,"A",1,""],[13,5,"A",1,""],[13,7,"B",1,""],[13,9,"B",1,""],[13,11,"B",1,""],[13,13,"C",1,""],[13,15,"C",1,""],[13,21,"B",2,""],[13,23,"B",2,""],[13,25,"B",2,""],[13,27,"C",2,""],[13,29,"C",2,""],[13,31,"C",2,""],[13,33,"A",2,""],[13,35,"A",2,""],[13,37,"A",2,""],[13,41,"C",3,""],[13,43,"C",3,""],[13,45,"C",3,""],[13,51,"A",3,""],[13,55,"B",3,""],[13,57,"B",3,""],[13,59,"B",3,""],[13,65,"A",4,""],[13,67,"A",4,""],[13,79,"C",4,""],[13,81,"C",4,""],[13,83,"C",4,""],[13,87,"B",5,""],[13,89,"B",5,""],[13,91,"B",5,""],[13,93,"C",5,""],[13,97,"C",5,""],[13,99,"C",5,""],[13,101,"A",5,""],[13,103,"A",5,""],[13,109,"B",6,""],[13,111,"B",6,""],[13,113,"A",6,""],[13,115,"A",6,""],[13,117,"A",6,""],[13,119,"C",6,""],[13,121,"C",6,""],[13,123,"C",6,""],[13,124,"C",6,""],[14,2,"A",1,""],[14,4,"A",1,""],[14,6,"A",1,""],[14,10,"B",1,""],[14,12,"C",1,""],[14,14,"C",1,""],[14,16,"C",1,""],[14,20,"B",2,""],[14,22,"B",2,""],[14,24,"B",2,""],[14,26,"C",2,""],[14,30,"C",2,""],[14,32,"C",2,""],[14,34,"A",2,""],[14,36,"A",2,""],[14,42,"C",3,""],[14,44,"C",3,""],[14,46,"C",3,""],[14,56,"B",3,""],[14,58,"B",3,""],[14,60,"B",3,""],[14,64,"A",4,""],[14,66,"A",4,""],[14,68,"A",4,""],[14,80,"C",4,""],[14,82,"C",4,""],[14,88,"B",5,""],[14,90,"B",5,""],[14,92,"B",5,""],[14,94,"C",5,""],[14,98,"C",5,""],[14,100,"A",5,""],[14,102,"A",5,""],[14,104,"A",5,""],[14,108,"B",6,""],[14,110,"B",6,""],[14,112,"B",6,""],[14,114,"A",6,""],[14,118,"C",6,""],[14,120,"C",6,""],[14,122,"C",6,""],[15,0,"A",1,""],[15,1,"A",1,""],[15,3,"A",1,""],[15,5,"A",1,""],[15,7,"B",1,""],[15,9,"B",1,""],[15,11,"B",1,""],[15,13,"C",1,""],[15,15,"C",1,""],[15,23,"B",2,""],[15,25,"B",2,""],[15,33,"A",2,""],[15,35,"A",2,""],[15,37,"A",2,""],[15,41,"C",3,""],[15,43,"C",3,""],[15,45,"C",3,""],[15,57,"B",3,""],[15,79,"C",4,""],[15,81,"C",4,""],[15,83,"C",4,""],[15,87,"B",5,""],[15,91,"B",5,""],[15,101,"A",5,""],[15,103,"A",5,""],[15,109,"B",6,""],[15,111,"B",6,""],[15,113,"A",6,""],[15,115,"A",6,""],[15,117,"A",6,""],[15,119,"C",6,""],[15,121,"C",6,""],[15,123,"C",6,""],[15,124,"C",6,""],[16,2,"A",1,""],[16,4,"A",1,""],[16,6,"A",1,""],[16,8,"B",1,""],[16,10,"B",1,""],[16,12,"C",1,""],[16,14,"C",1,""],[16,16,"C",1,""],[16,20,"B",2,""],[16,24,"B",2,""],[16,34,"A",2,""],[16,36,"A",2,""],[16,56,"B",3,""],[16,58,"B",3,""],[16,60,"B",3,""],[16,64,"A",4,""],[16,80,"C",4,""],[16,90,"B",5,""],[16,96,"C",5,""],[16,100,"A",5,""],[16,102,"A",5,""],[16,104,"A",5,""],[16,108,"B",6,""],[16,110,"B",6,""],[16,112,"B",6,""],[16,114,"A",6,""],[16,116,"A",6,""],[16,118,"C",6,""],[16,120,"C",6,""],[16,122,"C",6,""],[17,0,"A",1,""],[17,1,"A",1,""],[17,7,"B",1,""],[17,9,"B",1,""],[17,11,"B",1,""],[17,13,"C",1,""],[17,37,"A",2,""],[17,41,"C",3,""],[17,79,"C",4,""],[17,83,"C",4,""],[17,87,"B",5,""],[17,101,"A",5,""],[17,109,"B",6,""],[17,111,"B",6,""],[17,113,"A",6,""],[17,115,"A",6,""],[17,117,"A",6,""],[17,123,"C",6,""],[17,124,"C",6,""],[18,8,"B",1,""],[18,10,"B",1,""],[18,12,"C",1,""],[18,16,"C",1,""],[18,20,"B",2,""],[18,60,"B",3,""],[18,100,"A",5,""],[18,108,"B",6,""],[18,110,"B",6,""],[18,112,"B",6,""],[18,114,"A",6,""],[18,116,"A",6,""],[19,9,"B",1,""],[19,11,"B",1,""],[19,41,"C",3,""],[19,83,"C",4,""],[19,87,"B",5,""],[19,111,"B",6,""],[19,115,"A",6,""],[19,117,"A",6,""],[19,124,"C",6,""],[20,8,"B",1,""],[20,10,"B",1,""],[20,16,"C",1,""],[20,20,"B",2,""],[20,60,"B",3,""],[20,108,"B",6,""],[20,112,"B",6,""],[20,114,"A",6,""],[20,116,"A",6,""],[21,83,"C",4,""],[21,87,"B",5,""],[22,20,"B",2,""],[22,60,"B",3,""]];var TDM={};TD.forEach(function(a){TDM[a[0]+","+a[1]]=[a[2],a[3],a[4]]});
+var CAMR=[[1, 19], [20, 40], [41, 62], [63, 86], [87, 107], [108, 125]];
+var MCOL={A:"#e0352b",B:"#1f78e0",C:"#1fa84f"},MNAME={A:"HK30 (ASTM A351 HK30, solda ER310)",B:"TP310H (ASTM A479 S31009, solda ER310)",C:"253MA (ASTM A479 S30815, solda ERNiCrMo-3)"},SPN={D:"Cr₂₃C₆ (carboneto de cromo)",E:"HK",F:"SHS"},SPC={D:0xffd400,E:0x8e3fd1,F:0x111111};
+var NC=M.nc,NR=M.nr;
+var CX=11980.4,CY=12345;
+function X(x){return (x-CX)/1000}
+function Z(y){return -(y-CY)/1000}
+function cellX(c){return M.x0+M.px*c}
+function cellY(r){return M.y0+M.py*r}
+/* bubble cap conforme D2-3500-57-M-008/009: cabeca O48 x 63, haste O33,4 x 62, luva O44/O35 x 50 (m, a partir do eixo do tubo) */
+var ST_BOT=-0.0035,ST_L=0.062,HD_L=0.063,LV_BOT=0.0035,LV_L=0.05,TOP=0.1215;
+var HOLE_DIR={E:[-1,0],W:[1,0],N:[0,-1],S:[0,1],a:[-1,-1],b:[1,-1],c:[-1,1],d:[1,1]};
+var DIR_NAME={"-1,0":"a esquerda (lado esquerdo)","1,0":"a direita (lado direito)","0,-1":"a frente da caldeira","0,1":"o fundo (parede traseira)","-1,-1":"a frente, lado esquerdo","1,-1":"a frente, lado direito","-1,1":"o fundo, lado esquerdo","1,1":"o fundo, lado direito"};
+function $(id){return document.getElementById(id)}
+function fmt(n){return n.toLocaleString("pt-BR")}
+
+var list16=[],list9=[],listT=[],byCell={};
+var jset={};M.jcols.forEach(function(c){jset[c]=1});
+var nField=0;
+for(var r=0;r<NR;r++){for(var c=0;c<NC;c++){
+  var ch=M.grid[r].charAt(c);if(ch===".")continue;
+  var it={r:r,c:c,ch:ch,x:cellX(c),y:cellY(r),field:!!jset[c]};
+  if(it.field)nField++;
+  if(ch==="o"){it.t="16";list16.push(it)}
+  else if(ch==="T"){it.t="T";it.tag=M.tags[r+","+c]||"";listT.push(it)}
+  else{it.t="9";it.dir=HOLE_DIR[ch];list9.push(it)}
+  var tdv=TDM[r+","+c];if(tdv){it.m=tdv[0];it.cam=tdv[1];it.sp=tdv[2]}
+  byCell[r+","+c]=it;
+}}
+$("n16").textContent="("+fmt(list16.length)+")";
+$("n9").textContent="("+fmt(list9.length)+")";
+$("nT").textContent="("+listT.length+")";
+var cM={A:0,B:0,C:0},nStd=0,specList=[];
+list16.concat(list9).forEach(function(p){if(p.m){cM[p.m]++;if(p.sp)specList.push(p)}else nStd++});
+$("nM0").textContent="("+fmt(nStd)+")";$("nMA").textContent="("+cM.A+")";$("nMB").textContent="("+cM.B+")";$("nMC").textContent="("+cM.C+")";$("nSp").textContent="("+specList.length+")";
+
+var wrap=$("wrap"),renderer,scene,cam;
+try{
+  renderer=new THREE.WebGLRenderer({antialias:true});
+}catch(e){
+  var er=$("err");er.style.display="block";er.textContent="Seu navegador não conseguiu iniciar o WebGL, necessário para o modelo 3D.";return;
+}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+wrap.insertBefore(renderer.domElement,wrap.firstChild);
+scene=new THREE.Scene();
+cam=new THREE.PerspectiveCamera(40,1,0.05,200);
+scene.add(new THREE.HemisphereLight(0xffffff,0x707070,0.95));
+var dl=new THREE.DirectionalLight(0xffffff,0.85);dl.position.set(-6,10,8);scene.add(dl);
+var dl2=new THREE.DirectionalLight(0xffffff,0.3);dl2.position.set(7,4,-6);scene.add(dl2);
+
+function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim()}
+function applyTheme(){scene.background=new THREE.Color(css("--scene"));floorMat.color.set(matchMedia("(prefers-color-scheme: dark)").matches?0x2a2a27:0xd2cfc6);dirty=true}
+
+var floorMat=new THREE.MeshBasicMaterial({color:0xd2cfc6});
+var floor=new THREE.Mesh(new THREE.PlaneGeometry((18560-5400)/1000,(14960-9380)/1000),floorMat);
+floor.rotation.x=-Math.PI/2;floor.position.set(X((18560+5400)/2),-0.05,Z((14960+9380)/2));scene.add(floor);
+
+var dummy=new THREE.Object3D();
+function inst(geo,mat,n){var m=new THREE.InstancedMesh(geo,mat,n);m.instanceMatrix.setUsage(THREE.DynamicDrawUsage);m.frustumCulled=false;return m}
+
+var matHead=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.5,metalness:0.35});
+var matLuva=new THREE.MeshStandardMaterial({color:0x7d8791,roughness:0.55,metalness:0.5,side:THREE.DoubleSide});
+/* textura com os furos O5: 16 furos = 2 fiadas de 8 (a 32 e 46 mm do topo, defasadas 22,5 graus); 9 furos = 5 + 4 em meia circunferencia */
+function holeTex(kind){
+  var W=1024,H=512,c=document.createElement("canvas");c.width=W;c.height=H;var g=c.getContext("2d");
+  g.fillStyle="#ffffff";g.fillRect(0,0,W,H);
+  var A=kind==="16"?[[0,45,90,135,180,225,270,315],[22.5,67.5,112.5,157.5,202.5,247.5,292.5,337.5]]:[[-90,-45,0,45,90],[-67.5,-22.5,22.5,67.5]];
+  [[32,A[0]],[46,A[1]]].forEach(function(r){
+    var y=r[0]/63*H;
+    r[1].forEach(function(a){
+      var u=(((a%360)+360)%360)/360*W;
+      [u-W,u,u+W].forEach(function(x){
+        g.beginPath();g.ellipse(x,y,17,22.5,0,0,Math.PI*2);
+        var gr=g.createLinearGradient(0,y-22,0,y+22);gr.addColorStop(0,"#050505");gr.addColorStop(1,"#2a2a2a");
+        g.fillStyle=gr;g.fill();g.lineWidth=2.5;g.strokeStyle="#6b6b6b";g.stroke();
+      });
+    });
+  });
+  var tx=new THREE.CanvasTexture(c);tx.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());return tx;
+}
+function headMats(kind){
+  var side=new THREE.MeshStandardMaterial({color:0xffffff,roughness:0.5,metalness:0.35,map:holeTex(kind)});
+  return [side,matHead,matHead];
+}
+var matStem=new THREE.MeshStandardMaterial({color:0x8d96a0,roughness:0.6,metalness:0.4});
+var matTC=new THREE.MeshStandardMaterial({color:0xd9423a,roughness:0.45,metalness:0.3});
+var matTube=new THREE.MeshStandardMaterial({color:0xb4bac2,roughness:0.55,metalness:0.45});
+var matW38=new THREE.MeshStandardMaterial({color:0x2f7f79,roughness:0.6,metalness:0.3});
+var matW25=new THREE.MeshStandardMaterial({color:0x58aca4,roughness:0.6,metalness:0.3});
+var matJ=new THREE.MeshBasicMaterial({color:0x8e5bd1,transparent:true,opacity:0.85});
+
+var gHead=new THREE.CylinderGeometry(0.024,0.024,1,64,1);
+var gStem=new THREE.CylinderGeometry(0.0167,0.0167,1,24);
+var gLuva=new THREE.LatheGeometry([new THREE.Vector2(0.0175,0),new THREE.Vector2(0.022,0),new THREE.Vector2(0.022,1),new THREE.Vector2(0.0175,1),new THREE.Vector2(0.0175,0)],40);
+var gTC=new THREE.CylinderGeometry(0.0167,0.0167,1,10);
+
+var head16=inst(gHead,headMats("16"),list16.length),stem16=inst(gStem,matStem,list16.length),luva16=inst(gLuva,matLuva,list16.length);
+var head9=inst(gHead,headMats("9"),list9.length),stem9=inst(gStem,matStem,list9.length),luva9=inst(gLuva,matLuva,list9.length);
+var tcm=inst(gTC,matTC,listT.length);
+[head16,stem16,luva16,head9,stem9,luva9,tcm].forEach(function(m){scene.add(m)});
+
+var vs=1;
+var ZERO=new THREE.Matrix4().makeScale(0,0,0);
+function capShown(p){
+  if(!p.m)return $("vM0").checked;
+  if(!$("vM"+p.m).checked)return false;
+  var cs=$("selCam").value;if(cs&&+cs!==p.cam)return false;
+  return true;
+}
+function layoutCaps(){
+  var i;
+  for(i=0;i<list16.length;i++){var p=list16[i],sh=capShown(p);
+    dummy.rotation.set(0,0,0);dummy.position.set(X(p.x),(ST_BOT+ST_L/2)*vs,Z(p.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem16.setMatrixAt(i,sh?dummy.matrix:ZERO);
+    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head16.setMatrixAt(i,sh?dummy.matrix:ZERO);
+    dummy.position.y=LV_BOT*vs;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva16.setMatrixAt(i,sh?dummy.matrix:ZERO);}
+  for(i=0;i<list9.length;i++){var q=list9[i],sh9=capShown(q);
+    dummy.rotation.set(0,0,0);dummy.position.set(X(q.x),(ST_BOT+ST_L/2)*vs,Z(q.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem9.setMatrixAt(i,sh9?dummy.matrix:ZERO);
+    dummy.position.y=LV_BOT*vs;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva9.setMatrixAt(i,sh9?dummy.matrix:ZERO);
+    var dx=q.dir[0],dz=-q.dir[1];dummy.rotation.set(0,Math.atan2(dx,dz),0);
+    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head9.setMatrixAt(i,sh9?dummy.matrix:ZERO);}
+  for(i=0;i<listT.length;i++){var t=listT[i];
+    dummy.rotation.set(0,0,0);dummy.position.set(X(t.x),0.181*vs,Z(t.y));dummy.scale.set(1,0.558*vs,1);dummy.updateMatrix();tcm.setMatrixAt(i,dummy.matrix);}
+  [head16,stem16,luva16,head9,stem9,luva9,tcm].forEach(function(m){m.instanceMatrix.needsUpdate=true;m.computeBoundingSphere&&m.computeBoundingSphere()});
+  dirty=true;
+}
+var CSTD=new THREE.Color(0x7b838c),CM={A:new THREE.Color(0xe0352b),B:new THREE.Color(0x1f78e0),C:new THREE.Color(0x1fa84f)};
+function capColor(p){return p.m?CM[p.m]:CSTD}
+function colorCaps(){
+  var i;
+  for(i=0;i<list16.length;i++)head16.setColorAt(i,capColor(list16[i]));
+  for(i=0;i<list9.length;i++)head9.setColorAt(i,capColor(list9[i]));
+  head16.instanceColor.needsUpdate=true;head9.instanceColor.needsUpdate=true;dirty=true;
+}
+
+var tubeGeo=new THREE.CylinderGeometry(0.0381,0.0381,1,16);tubeGeo.rotateX(Math.PI/2);
+var tubes=inst(tubeGeo,matTube,M.tubes.length);
+M.tubes.forEach(function(t,i){
+  dummy.rotation.set(0,0,0);dummy.position.set(X(t[0]),0,Z((t[1]+t[2])/2));dummy.scale.set(1,1,(t[2]-t[1])/1000);dummy.updateMatrix();tubes.setMatrixAt(i,dummy.matrix);
+});
+tubes.instanceMatrix.needsUpdate=true;scene.add(tubes);
+
+var wallGroup=new THREE.Group();scene.add(wallGroup);
+function discs(pts,r,mat,h){
+  var m=inst(new THREE.CylinderGeometry(r,r,h,20),mat,pts.length);
+  pts.forEach(function(p,i){dummy.rotation.set(0,0,0);dummy.position.set(X(p[0]),h/2,Z(p[1]));dummy.scale.set(1,1,1);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix)});
+  m.instanceMatrix.needsUpdate=true;wallGroup.add(m);
+}
+discs(M.walls38,0.0381,matW38,0.07);
+discs(M.walls25,0.0254,matW25,0.07);
+
+var jGroup=new THREE.Group();scene.add(jGroup);
+M.joints.forEach(function(jx){
+  var len=(14840-9480)/1000;
+  var b=new THREE.Mesh(new THREE.BoxGeometry(0.014,0.004,len),matJ);
+  b.position.set(X(jx),0.045,Z((14840+9480)/2));jGroup.add(b);
+});
+
+/* divisorias 3D (desenho D1-D5057-M-079) */
+renderer.localClippingEnabled=true;
+var clipPl=new THREE.Plane(new THREE.Vector3(0,-1,0),40);
+var divGroup=new THREE.Group();scene.add(divGroup);
+var divPick=[];
+var EL=P.elev,RH=P.d_cab/2000,ZB=RH,ZT=(EL.topo-EL.base)/1000+RH;
+function ezz(e){return (e-EL.base)/1000+RH}
+function cm(c,o){o=o||{};o.color=c;o.roughness=0.5;o.metalness=0.5;o.clippingPlanes=[clipPl];return new THREE.MeshStandardMaterial(o)}
+var mDT=cm(0xa9b6c4),mDH=cm(0x6f7f90),mDF=cm(0x8794a3,{side:THREE.DoubleSide}),mDL=cm(0xc29a3a);
+var mDS=new THREE.MeshBasicMaterial({color:0x8e5bd1,transparent:true,opacity:0.6,clippingPlanes:[clipPl]});
+var NT=31,PASSO=P.passo/1000,DEP=P.prof/1000,DH=ZT-ZB;
+var dTubes=inst(new THREE.CylinderGeometry(P.d_tubo/2000,P.d_tubo/2000,1,14),mDT,5*NT);
+dTubes.userData.perWall=NT;divGroup.add(dTubes);divPick.push(dTubes);
+var hg=new THREE.CylinderGeometry(RH,RH,DEP,24);hg.rotateX(Math.PI/2);
+var bg=new THREE.CylinderGeometry(P.d_bocal/2000,P.d_bocal/2000,0.14,14);
+for(var k=0;k<5;k++){
+  var wx=X(M.div[k]);
+  for(var i=0;i<NT;i++){
+    dummy.rotation.set(0,0,0);dummy.position.set(wx,(ZT+ZB)/2,(i-(NT-1)/2)*PASSO);dummy.scale.set(1,DH,1);dummy.updateMatrix();dTubes.setMatrixAt(k*NT+i,dummy.matrix);
+  }
+  var fin=new THREE.Mesh(new THREE.BoxGeometry(0.006,DH,(NT-1)*PASSO),mDF);fin.position.set(wx,(ZT+ZB)/2,0);fin.userData.k=k;divGroup.add(fin);divPick.push(fin);
+  [ZB,ZT].forEach(function(yy){var h=new THREE.Mesh(hg,mDH);h.position.set(wx,yy,0);h.userData.k=k;divGroup.add(h);divPick.push(h)});
+  P.bocais.forEach(function(o){var b=new THREE.Mesh(bg,mDH);b.position.set(wx,ZT+RH+0.07,-o/1000);b.userData.k=k;divGroup.add(b);divPick.push(b)});
+  [(P.orelhas[0]+P.orelhas[1])/2,(P.orelhas[2]+P.orelhas[3])/2].forEach(function(o){var l=new THREE.Mesh(new THREE.BoxGeometry(0.318,0.30,0.0315),mDL);l.position.set(wx,ZT+RH+0.12,-o/1000);l.userData.k=k;divGroup.add(l);divPick.push(l)});
+  [EL.emenda1,EL.emenda2].forEach(function(e){var s=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.02,DEP),mDS);s.position.set(wx,ezz(e),0);divGroup.add(s)});
+}
+dTubes.instanceMatrix.needsUpdate=true;
+function setClip(){var v=+$("vh").value,full=v>=34;clipPl.constant=full?1e3:v;$("vhv").textContent=full?"completa":v.toLocaleString("pt-BR")+" m";dirty=true}
+function divInfo(k){
+  var g=function(n){return n.toLocaleString("pt-BR")};
+  $("info").innerHTML="<b>Divisória Nº "+(k+1)+"</b> — item "+P.itens[k]+" do desenho D1-D5057-M-079, peso "+g(P.peso[k])+" kg<br><span class='small'>31 tubos Ø76,2 (passo 102 mm) · cabeçotes Ø219,1 × 3.148 mm · elevações: base "+g(EL.base)+", emendas "+g(EL.emenda1)+" e "+g(EL.emenda2)+", topo "+g(EL.topo)+" mm · eixo em x = "+M.div[k].toFixed(1).replace(".",",")+" mm no desenho do piso</span>";
+}
+
+var pinGeo=new THREE.ConeGeometry(0.03,0.14,10);pinGeo.rotateX(Math.PI);
+var matMark=new THREE.MeshBasicMaterial({color:0xe5322d}),matSel=new THREE.MeshBasicMaterial({color:0xffc400});
+var MAXM=800;
+var marks=inst(pinGeo,matMark,MAXM);marks.count=0;marks.frustumCulled=false;scene.add(marks);
+var sel=new THREE.Mesh(pinGeo,matSel);sel.visible=false;scene.add(sel);
+var markList=[],selItem=null;
+var spec=inst(pinGeo,new THREE.MeshBasicMaterial({color:0xffffff}),Math.max(1,specList.length));spec.frustumCulled=false;scene.add(spec);
+specList.forEach(function(p,i){spec.setColorAt(i,new THREE.Color(SPC[p.sp]))});if(spec.instanceColor)spec.instanceColor.needsUpdate=true;
+function pinScale(){return Math.max(1,sph.r*0.32)}
+function pinPos(p,pos){var ps=pinScale();var top=(p.t==="T"?0.46:TOP)*vs;pos.set(X(p.x),top+0.07*ps+0.02,Z(p.y));return ps}
+function layoutPins(){
+  var ps=pinScale(),i;
+  for(i=0;i<markList.length;i++){pinPos(markList[i],dummy.position);dummy.rotation.set(0,0,0);dummy.scale.set(ps,ps,ps);dummy.updateMatrix();marks.setMatrixAt(i,dummy.matrix)}
+  var on=$("vSp").checked;
+  for(i=0;i<specList.length;i++){var sp=specList[i],ok=on&&capShown(sp)&&(sp.t==="16"?$("v16").checked:$("v9").checked);
+    if(ok){pinPos(sp,dummy.position);dummy.position.y+=0.07*ps;dummy.rotation.set(0,0,0);dummy.scale.set(ps*0.8,ps*0.8,ps*0.8);dummy.updateMatrix();spec.setMatrixAt(i,dummy.matrix)}else spec.setMatrixAt(i,ZERO)}
+  spec.instanceMatrix.needsUpdate=true;
+  marks.count=markList.length;marks.instanceMatrix.needsUpdate=true;
+  if(selItem){pinPos(selItem,sel.position);sel.scale.set(ps,ps,ps);sel.visible=true}else sel.visible=false;
+  dirty=true;
+}
+
+/* rotulos */
+var labels=[];
+function addLabel(text,x,y,zz,cls,title,short){
+  var e=document.createElement("div");e.className="lbl "+(cls||"");e.textContent=text;if(title)e.title=title;wrap.appendChild(e);
+  labels.push({el:e,v:new THREE.Vector3(X(x),zz,Z(y)),cls:cls,full:text,short:short||text});
+}
+addLabel("FRENTE DA CALDEIRA",CX,8450,0,"big","","FRENTE");
+addLabel("FUNDO (parede traseira)",CX,15750,0,"big","","FUNDO");
+addLabel("lado esquerdo",5100,12345,0,"wall");
+addLabel("lado direito",18850,12345,0,"wall");
+CAMR.forEach(function(r,i){addLabel("CÂMARA "+(i+1),cellX((r[0]+r[1])/2-1),8900,0.02,"big cam","Fileiras "+r[0]+" a "+r[1],"C"+(i+1))});
+M.div.forEach(function(d,i){addLabel("Divisória "+(i+1),d,15050,0.07,"wall")});
+M.joints.forEach(function(j,i){addLabel("Emenda "+(i+1),j,9300,0.05,"wall")});
+listT.forEach(function(t){addLabel(t.tag?t.tag.slice(-1):"T",t.x,t.y,0.5,"tc",t.tag)});
+M.div.forEach(function(d,i){addLabel("Div. "+(i+1)+" · topo",d,CY,ZT+0.75,"dv","Divisória Nº "+(i+1)+" — elevação "+EL.topo.toLocaleString("pt-BR")+" mm","Div."+(i+1))});
+[[EL.base,"El. "],[EL.emenda1,"Emenda El. "],[EL.emenda2,"Emenda El. "],[EL.topo,"El. "]].forEach(function(p){addLabel(p[1]+p[0].toLocaleString("pt-BR"),M.div[0]-520,CY,ezz(p[0]),"dv","","")});
+function placeLabels(){
+  var w=wrap.clientWidth,h=wrap.clientHeight,show=$("vL").checked,v=new THREE.Vector3();
+  labels.forEach(function(L){
+    var vis=show&&(L.cls!=="wall"||$("vWall").checked||L.el.textContent.indexOf("Emenda")===0)&&(L.cls!=="tc"||$("vT").checked);
+    if(L.el.textContent.indexOf("Emenda")===0&&L.cls==="wall")vis=show&&$("vJ").checked;
+    if(L.cls==="dv")vis=show&&$("vDiv").checked&&sph.r>=25;
+    else if(sph.r>=25&&L.cls!=="big")vis=false;
+    if(w<600&&L.cls==="wall")vis=false;
+    if(!vis){L.el.style.display="none";return}
+    v.copy(L.v);v.y*=(L.cls==="tc"?vs:1);
+    if(L.cls==="dv"&&L.v.y>clipPl.constant){L.el.style.display="none";return}
+    v.project(cam);
+    if(v.z>1||v.z<-1){L.el.style.display="none";return}
+    var tx=w<600?L.short:L.full;if(L.el.textContent!==tx)L.el.textContent=tx;
+    L.el.style.display="block";
+    L.el.style.transform="translate("+((v.x*0.5+0.5)*w)+"px,"+((-v.y*0.5+0.5)*h)+"px) translate(-50%,-50%)";
+  });
+}
+
+/* camera */
+var tgt=new THREE.Vector3(0,0,0),sph={r:11.5,th:0,ph:1.0},dirty=true;
+function updCam(){
+  var sp=Math.sin(sph.ph);
+  cam.position.set(tgt.x+sph.r*sp*Math.sin(sph.th),tgt.y+sph.r*Math.cos(sph.ph),tgt.z+sph.r*sp*Math.cos(sph.th));
+  cam.lookAt(tgt);dirty=true;
+}
+var anim=null;
+function flyTo(t,r,ph,th){
+  anim={t0:performance.now(),d:650,a:{x:tgt.x,y:tgt.y,z:tgt.z,r:sph.r,ph:sph.ph,th:sph.th},b:{x:t.x,y:t.y,z:t.z,r:r,ph:ph,th:th}};
+}
+function stepAnim(now){
+  if(!anim)return;
+  var k=Math.min(1,(now-anim.t0)/anim.d),e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2,a=anim.a,b=anim.b;
+  tgt.set(a.x+(b.x-a.x)*e,a.y+(b.y-a.y)*e,a.z+(b.z-a.z)*e);
+  sph.r=a.r+(b.r-a.r)*e;sph.ph=a.ph+(b.ph-a.ph)*e;sph.th=a.th+(b.th-a.th)*e;
+  updCam();layoutPins();if(k>=1)anim=null;
+}
+function pose(name){
+  var k=Math.max(1,1.75/cam.aspect),pt=cam.aspect<1;
+  if(name==="plan")return pt?{r:19.5,ph:0.02,th:Math.PI/2}:{r:11.4*k,ph:0.02,th:0};
+  if(name==="front")return {r:13*k,ph:1.35,th:0};
+  if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
+  return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
+}
+function setView(name){
+  [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
+  var q=pose(name);
+  if(q.full&&+$("vh").value<34){$("vh").value=34;setClip()}
+  flyTo(new THREE.Vector3(0,q.y||0,0),q.r,q.ph,q.th);
+}
+function resize(){
+  var w=wrap.clientWidth,h=wrap.clientHeight;
+  renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();dirty=true;
+}
+new ResizeObserver(resize).observe(wrap);
+
+var ptrs={},downAt=null,lastPinch=0;
+var el=renderer.domElement;
+el.style.touchAction="none";
+el.addEventListener("contextmenu",function(e){e.preventDefault()});
+el.addEventListener("pointerdown",function(e){
+  el.setPointerCapture(e.pointerId);ptrs[e.pointerId]={x:e.clientX,y:e.clientY,b:e.button,sh:e.shiftKey||e.ctrlKey};
+  if(Object.keys(ptrs).length===1)downAt={x:e.clientX,y:e.clientY,moved:0};
+  lastPinch=0;wrap.style.cursor="grabbing";anim=null;
+});
+function pan(dx,dy){
+  var k=sph.r*0.0016,fx=Math.cos(sph.th),fz=-Math.sin(sph.th);
+  var rx=Math.cos(sph.th),rz=-Math.sin(sph.th);
+  var ux=-Math.sin(sph.th),uz=-Math.cos(sph.th);
+  tgt.x+=-dx*k*rx+dy*k*ux;tgt.z+=-dx*k*rz+dy*k*uz;
+  tgt.x=Math.max(-9,Math.min(9,tgt.x));tgt.z=Math.max(-5,Math.min(5,tgt.z));
+}
+el.addEventListener("pointermove",function(e){
+  var p=ptrs[e.pointerId];if(!p)return;
+  var ids=Object.keys(ptrs);
+  if(ids.length===1){
+    var dx=e.clientX-p.x,dy=e.clientY-p.y;
+    if(downAt)downAt.moved+=Math.abs(dx)+Math.abs(dy);
+    if(p.b===2||p.sh)pan(dx,dy);
+    else{sph.th-=dx*0.006;sph.ph=Math.max(0.02,Math.min(1.55,sph.ph-dy*0.006))}
+    p.x=e.clientX;p.y=e.clientY;updCam();layoutPins();
+  }else if(ids.length===2){
+    var o=ptrs[ids[0]===String(e.pointerId)?ids[1]:ids[0]];
+    var d0=Math.hypot(p.x-o.x,p.y-o.y);
+    var mx0=(p.x+o.x)/2,my0=(p.y+o.y)/2;
+    p.x=e.clientX;p.y=e.clientY;
+    var d1=Math.hypot(p.x-o.x,p.y-o.y),mx1=(p.x+o.x)/2,my1=(p.y+o.y)/2;
+    if(d0>0)sph.r=Math.max(0.25,Math.min(80,sph.r*d0/Math.max(d1,1)));
+    pan(mx1-mx0,my1-my0);
+    if(downAt)downAt.moved+=99;
+    updCam();layoutPins();
+  }
+});
+function endPtr(e){
+  var p=ptrs[e.pointerId];delete ptrs[e.pointerId];wrap.style.cursor="grab";
+  if(p&&downAt&&downAt.moved<6&&Object.keys(ptrs).length===0&&e.type==="pointerup")pick(e);
+  if(Object.keys(ptrs).length===0)downAt=null;
+}
+el.addEventListener("pointerup",endPtr);el.addEventListener("pointercancel",endPtr);
+el.addEventListener("wheel",function(e){e.preventDefault();anim=null;sph.r=Math.max(0.25,Math.min(80,sph.r*Math.exp(e.deltaY*0.0012)));updCam();layoutPins()},{passive:false});
+
+var ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+function pick(e){
+  var rc=el.getBoundingClientRect();
+  ndc.set(((e.clientX-rc.left)/rc.width)*2-1,-((e.clientY-rc.top)/rc.height)*2+1);
+  ray.setFromCamera(ndc,cam);
+  var best=null,bd=1e9;
+  [[head16,list16],[head9,list9],[tcm,listT]].forEach(function(pr){
+    if(!pr[0].visible)return;
+    var h=ray.intersectObject(pr[0],false);
+    if(h.length&&h[0].distance<bd){bd=h[0].distance;best=pr[1][h[0].instanceId]}
+  });
+  var hd=null;
+  if(divGroup.visible){
+    var hs=ray.intersectObjects(divPick,false);
+    for(var q=0;q<hs.length;q++){
+      var o=hs[q].object,kk=o.userData.perWall?Math.floor(hs[q].instanceId/o.userData.perWall):o.userData.k;
+      if(hs[q].point.y<=clipPl.constant){hd={d:hs[q].distance,k:kk};break}
+    }
+  }
+  if(hd&&(!best||hd.d<bd)){selItem=null;layoutPins();divInfo(hd.k)}
+  else if(best)select(best,false);
+}
+function dirText(d){return DIR_NAME[d[0]+","+d[1]]}
+function select(it,fly){
+  selItem=it;layoutPins();
+  var h="<b>Linha "+(it.r+1)+" · Coluna "+(it.c+1)+"</b> — ";
+  if(it.t==="16")h+="bubble cap de 16 furos (Ø48 × 125 mm, 16 furos Ø5 a 25°, luva Ø44 × 50)";
+  else if(it.t==="9")h+="bubble cap de 9 furos (Ø48 × 125 mm, 9 furos Ø5 a 25°, luva Ø44 × 50), furos voltados para "+dirText(it.dir);
+  else h+="termopar "+(it.tag||"")+" (o termowell substitui um bubble cap; tubo Ø33,4 × 558 mm)";
+  if(it.m){h+="<br><b style='color:"+MCOL[it.m]+"'>Material de teste: "+MNAME[it.m]+"</b> · câmara "+it.cam+" · fileira "+(it.c+1);if(it.sp)h+="<br><b>Marcação especial "+it.sp+": "+SPN[it.sp]+"</b> (posição aproximada)"}
+  else if(it.t!=="T")h+="<br><span class='small'>Material padrão (sem marcação no Excel). Fileira "+(it.c+1)+".</span>";
+  h+="<br><span class='small'>Posição no desenho: x = "+it.x.toFixed(1).replace(".",",")+" mm, y = "+it.y.toFixed(1).replace(".",",")+" mm</span>";
+  if(it.field)h+="<br><span class='small'>No eixo de uma emenda de painel: instalação de campo (nota 4 do desenho).</span>";
+  $("info").innerHTML=h;
+  if(fly)flyTo(new THREE.Vector3(X(it.x),0,Z(it.y)),0.9,0.95,sph.th);
+}
+
+function parseMarks(){
+  var s=$("marc").value,parts=s.split(/[;\n]+/),ok=[],bad=[],seen={};
+  parts.forEach(function(t){
+    t=t.trim();if(!t)return;
+    var m=/^(\d+)\D+(\d+)$/.exec(t);
+    if(!m){bad.push(t);return}
+    var L=+m[1],C=+m[2],it=(L>=1&&L<=NR&&C>=1&&C<=NC)?byCell[(L-1)+","+(C-1)]:null;
+    if(!it){bad.push("L"+L+" C"+C);return}
+    if(!seen[L+","+C]){seen[L+","+C]=1;ok.push(it)}
+  });
+  markList=ok.slice(0,MAXM);layoutPins();
+  var msg=ok.length+" marcada"+(ok.length===1?"":"s");
+  if(bad.length)msg+=" · sem cap nessa posição ou formato inválido: "+bad.slice(0,6).join(", ")+(bad.length>6?"…":"")+" (a malha é alternada: em cada coluna há cap só a cada duas linhas)";
+  $("marcMsg").textContent=msg;
+  if(ok.length){select(ok[0],true)}
+}
+$("bMarc").addEventListener("click",parseMarks);
+$("marc").addEventListener("keydown",function(e){if(e.key==="Enter")parseMarks()});
+$("bClr").addEventListener("click",function(){markList=[];$("marc").value="";$("marcMsg").textContent="";selItem=null;layoutPins();$("info").textContent="Clique em um cap para ver linha, coluna, tipo e posição no desenho."});
+
+function vis(){
+  head16.visible=stem16.visible=luva16.visible=$("v16").checked;
+  head9.visible=stem9.visible=luva9.visible=$("v9").checked;
+  tcm.visible=$("vT").checked;
+  tubes.visible=$("vTub").checked;
+  wallGroup.visible=$("vWall").checked;
+  jGroup.visible=$("vJ").checked;
+  divGroup.visible=$("vDiv").checked;
+  dirty=true;
+}
+["v16","v9","vT","vTub","vWall","vJ","vL","vDiv"].forEach(function(id){$(id).addEventListener("change",function(){vis();layoutPins()})});
+["vM0","vMA","vMB","vMC","vSp","selCam"].forEach(function(id){$(id).addEventListener("change",function(){layoutCaps();layoutPins();
+  if(id==="selCam"&&$("selCam").value){var r=CAMR[+$("selCam").value-1];flyTo(new THREE.Vector3(X(cellX((r[0]+r[1])/2-1)),0,Z(10600)),5.5,0.9,0)}})});
+$("bCsv").addEventListener("click",function(){
+  var n={A:"HK30",B:"TP310H",C:"253MA"},rows=["linha;coluna_fileira;camara;tipo;material;especial"];
+  list16.concat(list9).forEach(function(p){if(p.m)rows.push([p.r+1,p.c+1,p.cam,p.t+" furos",n[p.m],p.sp?SPN[p.sp]:""].join(";"))});
+  rows.sort(function(a,b){return 0});
+  var bl=new Blob(["\ufeff"+rows.join("\n")],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(bl);a.download="bubble_caps_marcados.csv";document.body.appendChild(a);a.click();a.remove();
+});
+$("bPersp").addEventListener("click",function(){setView("persp")});
+$("bPlan").addEventListener("click",function(){setView("plan")});
+$("bFront").addEventListener("click",function(){setView("front")});
+$("bWalls").addEventListener("click",function(){setView("walls")});
+$("vh").addEventListener("input",setClip);
+matchMedia("(prefers-color-scheme: dark)").addEventListener&&matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme);
+
+setClip();layoutCaps();colorCaps();vis();applyTheme();resize();(function(){var q=pose('persp');sph.r=q.r;sph.ph=q.ph;sph.th=q.th})();updCam();layoutPins();
+(function loop(now){
+  stepAnim(now||performance.now());
+  if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}
+  requestAnimationFrame(loop);
+})();
+window.__bc={tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
+})();
+</script>
+</body>
+</html>

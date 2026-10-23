@@ -1,0 +1,22 @@
+BUBBLE CAPS 3D - publicar na Vercel com login por e-mail
+
+1) Instalar a CLI e entrar (uma vez):
+   npm i -g vercel
+   vercel login
+
+2) Dentro desta pasta:
+   vercel link            (aceite criar o projeto "bubble-caps-3d")
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"   (copie o resultado)
+   vercel env add AUTH_SECRET production        (cole o resultado)
+   vercel env add ALLOWED_EMAILS production     (e-mails separados por virgula)
+
+3) Painel da Vercel > projeto > Settings > Deployment Protection:
+   desligue "Vercel Authentication" (senao a Vercel bloqueia a pagina de login).
+
+4) Publicar:
+   vercel --prod
+
+Para liberar mais um e-mail depois:
+   Vercel > projeto > Settings > Environment Variables > ALLOWED_EMAILS > editar e acrescentar
+   o e-mail depois de uma virgula > Deployments > ... > Redeploy.
+Para remover alguem, tire o e-mail da lista e faca o Redeploy: o acesso dessa pessoa cai na hora.
