@@ -6,92 +6,153 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mapa 3D bubble caps - materiais de teste</title>
 <style>
-:root{--bg:#f6f5f1;--panel:#ffffff;--ink:#1d1d1b;--muted:#66655f;--line:#d9d7cf;--accent:#185fa5;--accent-bg:#e6f1fb;--scene:#e9e7e0;--chip:#f0eee8}
-@media (prefers-color-scheme: dark){:root{--bg:#161614;--panel:#21211f;--ink:#ecebe6;--muted:#a3a29a;--line:#3a3a36;--accent:#85b7eb;--accent-bg:#1c2f44;--scene:#1d1d1b;--chip:#2a2a27}}
+:root{--bg:#f1f4f8;--panel:#ffffff;--ink:#14233b;--muted:#6b778a;--line:#e1e7ef;--accent:#0f2e57;--accent-bg:#e8eef8;--orange:#f26a1b;--orange-d:#d9570d;--toggle:#2f6fd6;--scene:#dde4ed;--chip:#f1f4f8;--shadow:0 1px 2px rgba(20,35,59,.06),0 4px 14px rgba(20,35,59,.05)}
+@media (prefers-color-scheme: dark){:root{--bg:#0e1524;--panel:#16203a;--ink:#e8edf6;--muted:#97a3b8;--line:#26334f;--accent:#9db9e8;--accent-bg:#1d2e50;--orange:#ff7d33;--orange-d:#ff9355;--toggle:#4d8be8;--scene:#101a2e;--chip:#1b2742;--shadow:none}}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.page{max-width:1280px;margin:0 auto;padding:12px 16px 20px}
-h1{font-size:18px;font-weight:600;margin:4px 0 2px}
-.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
-.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);cursor:pointer;user-select:none;font-size:13px}
-.chip input{margin:0;accent-color:var(--accent)}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
-button{font:inherit;font-size:13px;padding:5px 11px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
-button:hover{border-color:var(--accent)}
-button.on{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
-input[type=text]{font:inherit;font-size:13px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);min-width:200px;flex:1 1 200px}
-input[type=range]{accent-color:var(--accent);width:110px}
-#wrap{position:relative;width:100%;height:min(66vh,640px);min-height:380px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--scene);touch-action:none;cursor:grab}
+.app{max-width:1500px;margin:0 auto;padding:0 16px 24px}
+svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* topo */
+.top{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:14px 4px;border-bottom:1px solid var(--line);margin:0 -4px 12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:40px;height:40px;flex:none}
+.brand .gp{fill:var(--accent)}
+.bt{font-size:20px;font-weight:700;letter-spacing:-.01em;line-height:1.15;color:var(--ink)}
+.bs{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.crumb{padding-left:20px;border-left:1px solid var(--line)}
+.c1{font-weight:600;font-size:15px}.c1 span{color:var(--muted);margin:0 4px}
+.c2{font-size:12.5px;color:var(--muted)}
+.topr{margin-left:auto;display:flex;align-items:center;gap:14px}
+.count{display:flex;align-items:center;gap:8px;color:var(--muted)}.count b{font-size:17px;color:var(--ink);font-weight:600}
+.cta{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:600;font-size:14px;padding:10px 18px;border:0;border-radius:10px;background:var(--orange);color:#fff;cursor:pointer;box-shadow:0 2px 8px rgba(242,106,27,.3)}
+.cta:hover{background:var(--orange-d)}
+.out{font-size:12.5px;color:var(--muted);text-decoration:none;padding:6px 8px;border-radius:8px}.out:hover{background:var(--chip)}
+/* barra de ferramentas */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 12px}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;font-size:13px}
+.seg button,#bMarc,#bClr{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
+.seg button:hover,#bMarc:hover,#bClr:hover{border-color:var(--accent)}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.seg button.on{color:#0e1524}}
+.hs{margin-left:auto;display:inline-flex;align-items:center;gap:12px;font-size:12.5px;color:var(--muted)}
+input[type=range]{accent-color:var(--orange);width:170px}
+#vhv{min-width:44px;color:var(--ink);font-weight:500}
+/* grade */
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;align-items:start}
+#wrap{position:relative;width:100%;height:clamp(440px,66vh,720px);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--scene);touch-action:none;cursor:grab;box-shadow:var(--shadow)}
 #wrap canvas{display:block;width:100%;height:100%}
-.lbl{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font-size:11px;padding:1px 6px;border-radius:6px;background:var(--panel);border:1px solid var(--line);color:var(--ink);opacity:.92;will-change:transform}
-.lbl.tc{background:#d9423a;border-color:#d9423a;color:#fff;font-weight:600}
+#hint{position:absolute;left:12px;bottom:10px;font-size:11px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:3px 10px;pointer-events:none}
+.lbl{position:absolute;left:0;top:0;pointer-events:none;white-space:nowrap;font-size:11px;padding:2px 8px;border-radius:7px;background:var(--panel);border:1px solid var(--line);color:var(--ink);box-shadow:0 1px 4px rgba(20,35,59,.15);will-change:transform}
+.lbl.tc{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700;border-radius:8px 8px 8px 2px}
 .lbl.wall{color:var(--muted)}
 .lbl.big{font-size:12px;font-weight:600}
-#desenhos{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
-#desenhos h2{font-size:15px;margin:0 0 8px}
-#desenhos ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}
-#hint{position:absolute;left:10px;bottom:8px;font-size:11px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:2px 8px;pointer-events:none}
-#info{margin:8px 0 0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;min-height:54px}
-#info b{font-weight:600}
-.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.grp{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 8px}
+.lbl.cam{background:#e3edfb;border-color:#b6cdf0;color:#1c4f9f;font-weight:700}
+@media (prefers-color-scheme: dark){.lbl.cam{background:#1d3560;border-color:#2f5499;color:#bcd3f7}}
+/* cartoes */
+.stage{position:sticky;top:12px}
+.side{display:flex;flex-direction:column;gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 6px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px}
+.card h3 svg{color:var(--accent)}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13px;cursor:pointer;user-select:none}
+.sw:first-of-type{border-top:0}
+.sw input{appearance:none;-webkit-appearance:none;width:38px;height:22px;border-radius:99px;background:#c5cedb;position:relative;transition:.15s;flex:none;margin:0;cursor:pointer}
+.sw input::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.sw input:checked{background:var(--toggle)}.sw input:checked::after{left:18px}
+.mrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13px;cursor:pointer;user-select:none}
+.mrow:first-of-type{border-top:0}
+.mrow input{width:17px;height:17px;margin:0;accent-color:var(--accent);flex:none}
+.mrow .dot{width:20px;height:20px;border-radius:50%;flex:none;box-shadow:inset 0 -2px 3px rgba(0,0,0,.18)}
+.mrow .mc,.sw .mc{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--muted)}
+.sw .l{display:flex;align-items:center;gap:8px}
+.sw .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+select{font:inherit;font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink)}
+.sr{display:flex;gap:8px}
+input[type=text]{font:inherit;font-size:13px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);min-width:0;flex:1 1 auto;width:100%}
+input[type=text]:focus{outline:2px solid var(--toggle);outline-offset:1px}
+.mk{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+#bMarc{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){#bMarc{color:#0e1524}}
 .small{font-size:12px;color:var(--muted)}
-details{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:8px 12px}
-summary{cursor:pointer;font-weight:600;font-size:13px}
+#marcMsg{display:block;margin-top:6px}
+/* rodape */
+.bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:14px}
+#info{margin:6px 0 0;font-size:13px;min-height:54px;line-height:1.6}
+#info b{font-weight:600}
+.stats{display:flex;flex-wrap:wrap;gap:0}
+.stats h3{width:100%}
+.st{flex:1 1 90px;padding:6px 12px;border-left:1px solid var(--line)}
+.st:first-of-type{border-left:0;padding-left:0}
+.st b{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.st b i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.st span{font-size:11.5px;color:var(--muted)}
+details{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px 16px;box-shadow:var(--shadow)}
+summary{cursor:pointer;font-weight:600;font-size:13.5px}
 details ul{margin:8px 0 2px;padding-left:18px}
-details li{margin:3px 0;font-size:13px}
-
-.lbl.cam{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+details li{margin:4px 0;font-size:13px}
 table.res{border-collapse:collapse;font-size:12.5px;margin:8px 0;width:100%}
-table.res th,table.res td{border:1px solid var(--line);padding:4px 7px;text-align:right}
+table.res th,table.res td{border:1px solid var(--line);padding:5px 8px;text-align:right}
 table.res th:first-child,table.res td:first-child{text-align:left}
 table.res th{background:var(--chip);font-weight:600}
 .tw{overflow-x:auto}
 .warn{color:#b8651b}
 @media (prefers-color-scheme: dark){.warn{color:#e8a566}}
-select{font:inherit;font-size:13px;padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+#desenhos{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
+#desenhos h2{font-size:15px;margin:0 0 8px}
+#desenhos ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}
 #err{display:none;padding:14px;border:1px solid #d9423a;border-radius:10px;color:#d9423a;margin:10px 0}
-@media (max-width:640px){.page{padding:8px 10px 16px}#wrap{height:60vh}}
+@media (max-width:980px){.stage{position:static}.grid{grid-template-columns:1fr}.bottom{grid-template-columns:1fr}.hs{margin-left:0}.crumb{border-left:0;padding-left:0}.topr{margin-left:0}}
+@media (max-width:640px){.app{padding:0 10px 16px}#wrap{height:60vh}.bt{font-size:17px}}
 </style>
 </head>
 <body>
-<div class="page">
-<h1>Mapa 3D dos bubble caps — materiais de teste sobre o padrão <a href="/api/logout" style="font-size:12px;font-weight:400;margin-left:10px;color:var(--muted)">Sair</a></h1>
-<p class="sub">Parede d'água traseira, módulo 6 · marcações da planilha “Lista de Bubble Caps – Teste – Mapa 19.10” lançadas sobre os 4.508 pontos do desenho. Caps cinza = padrão (sem marcação).</p>
+<div class="app">
+<header class="top">
+<div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="gp" d="M20.5 3h7l1 5a16 16 0 0 1 4.2 2.4l4.8-1.8 3.5 6-3.9 3.3a16 16 0 0 1 0 4.8l3.9 3.3-3.5 6-4.8-1.8a16 16 0 0 1-4.2 2.4l-1 5h-7l-1-5a16 16 0 0 1-4.2-2.4l-4.8 1.8-3.5-6 3.9-3.3a16 16 0 0 1 0-4.8L7 14.6l3.5-6 4.8 1.8A16 16 0 0 1 19.5 8z"/><circle cx="24" cy="24" r="8.5" fill="#f26a1b"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg><div><div class="bt">Mapa 3D de Caldeiras</div><div class="bs">Planejamento e integridade</div></div></div>
+<div class="crumb"><div class="c1">Parede d'água traseira <span>›</span> Módulo 6</div><div class="c2">Lista de Bubble Caps - Teste · Mapa 19.10</div></div>
+<div class="topr"><div class="count"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span><b>4.508</b> posições</span></div><button id="bCsv" class="cta"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><a class="out" href="/api/logout">Sair</a></div>
+</header>
 <div id="err"></div>
 
-<div class="grp" id="tipos">
-<label class="chip"><input type="checkbox" id="vM0" checked><span class="dot" style="background:#7b838c"></span>Padrão (sem marcação) <span class="small" id="nM0"></span></label>
-<label class="chip"><input type="checkbox" id="vMA" checked><span class="dot" style="background:#e0352b"></span>HK30 <span class="small" id="nMA"></span></label>
-<label class="chip"><input type="checkbox" id="vMB" checked><span class="dot" style="background:#1f78e0"></span>TP310H <span class="small" id="nMB"></span></label>
-<label class="chip"><input type="checkbox" id="vMC" checked><span class="dot" style="background:#1fa84f"></span>253MA <span class="small" id="nMC"></span></label>
-<label class="chip"><input type="checkbox" id="vSp" checked><span class="dot" style="background:#ffd400;border:1px solid #888"></span>Aspersão/especiais (D·E·F) <span class="small" id="nSp"></span></label>
-</div>
-<div class="grp">
-<label class="chip"><input type="checkbox" id="v16" checked>16 furos <span class="small" id="n16"></span></label>
-<label class="chip"><input type="checkbox" id="v9" checked>9 furos <span class="small" id="n9"></span></label>
-<label class="chip"><input type="checkbox" id="vT" checked><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></label>
-<label class="small" style="display:inline-flex;align-items:center;gap:6px">Câmara <select id="selCam"><option value="">Todas</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></label>
-<button id="bCsv">Baixar lista (CSV)</button>
-</div>
-<div class="grp">
-<label class="chip"><input type="checkbox" id="vTub" checked>Tubos</label>
-<label class="chip"><input type="checkbox" id="vWall" checked>Paredes e divisórias</label>
-<label class="chip"><input type="checkbox" id="vJ" checked>Emendas de painel</label>
-<label class="chip"><input type="checkbox" id="vL" checked>Rótulos</label>
-<label class="chip"><input type="checkbox" id="vDiv" checked>Divisórias 3D (tubos)</label>
-<button id="bPersp" class="on">Perspectiva</button><button id="bPlan">Planta</button><button id="bFront">Frente</button><button id="bWalls">Divisórias</button>
-<label class="small" style="display:inline-flex;align-items:center;gap:6px">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="0.5"><span id="vhv">0,5 m</span></label>
-</div>
-<div class="grp">
-<input type="text" id="marc" placeholder="Marcar posições: linha,coluna; linha,coluna (ex.: 37,52; 40,11)">
-<button id="bMarc">Marcar</button><button id="bClr">Limpar marcas</button>
-<span class="small" id="marcMsg"></span>
+<div class="toolbar">
+<div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button></div>
+<label class="hs">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="0.5"><span id="vhv">0,5 m</span></label>
 </div>
 
-<div id="wrap"><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div>
-<div id="info">Clique em um cap para ver linha, fileira, tipo, material e câmara. As divisórias aparecem cortadas a 0,5 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div>
+<main class="grid">
+<div class="stage"><div id="wrap"><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div></div>
+<aside class="side">
+<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Camadas da visualização</h3>
+<label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL" checked></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label>
+</section>
+<section class="card" id="tipos"><h3><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Materiais</h3>
+<label class="mrow"><input type="checkbox" id="vM0" checked><span class="dot" style="background:#7b838c"></span><span>Padrão (sem marcação)</span><span class="mc small" id="nM0"></span></label><label class="mrow"><input type="checkbox" id="vMA" checked><span class="dot" style="background:#e0352b"></span><span>HK30</span><span class="mc small" id="nMA"></span></label><label class="mrow"><input type="checkbox" id="vMB" checked><span class="dot" style="background:#1f78e0"></span><span>TP310H</span><span class="mc small" id="nMB"></span></label><label class="mrow"><input type="checkbox" id="vMC" checked><span class="dot" style="background:#1fa84f"></span><span>253MA</span><span class="mc small" id="nMC"></span></label><label class="mrow"><input type="checkbox" id="vSp" checked><span class="dot" style="background:#ffd400;border:1px solid #b9a000"></span><span>Aspersão/especiais (D·E·F)</span><span class="mc small" id="nSp"></span></label>
+</section>
+<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>Tipo de cap e câmara</h3>
+<label class="sw"><span class="l">16 furos</span><input type="checkbox" id="v16" checked></label><label class="sw"><span class="l">9 furos</span><input type="checkbox" id="v9" checked></label><label class="sw"><span class="l">Termopares</span><input type="checkbox" id="vT" checked></label>
+<div class="sw" style="cursor:default"><span class="l">Câmara</span><select id="selCam"><option value="">Todas</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+<div class="small" style="margin-top:4px">Contagens: 16 furos <span id="n16"></span> · 9 furos <span id="n9"></span> · termopares <span id="nT"></span></div>
+</section>
+<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg>Marcar posições</h3>
+<input type="text" id="marc" placeholder="linha,coluna; linha,coluna (ex.: 37,52; 40,11)">
+<div class="mk"><button id="bMarc">Marcar</button><button id="bClr">Limpar marcas</button></div>
+<span class="small" id="marcMsg"></span>
+</section>
+</aside>
+</main>
+
+<section class="bottom">
+<div class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Detalhes da posição</h3>
+<div id="info">Clique em um cap para ver linha, fileira, tipo, material e câmara. As divisórias aparecem cortadas a 0,5 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div></div>
+<div class="card stats"><h3><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Estatísticas do mapa</h3>
+<div class="st"><b>4.508</b><span>Total de posições</span></div>
+<div class="st"><b><i style="background:#e0352b"></i>329</b><span>HK30</span></div>
+<div class="st"><b><i style="background:#1f78e0"></i>330</b><span>TP310H</span></div>
+<div class="st"><b><i style="background:#1fa84f"></i>335</b><span>253MA</span></div>
+<div class="st"><b><i style="background:#ffd400"></i>8</b><span>Especiais</span></div>
+</div>
+</section>
 
 <details open>
 <summary>Resumo: o que o Excel marca de diferente do padrão</summary>
@@ -471,7 +532,7 @@ function stepAnim(now){
   updCam();layoutPins();if(k>=1)anim=null;
 }
 function pose(name){
-  var k=Math.max(1,1.75/cam.aspect),pt=cam.aspect<1;
+  var k=Math.max(1,1.9/cam.aspect),pt=cam.aspect<1;
   if(name==="plan")return pt?{r:19.5,ph:0.02,th:Math.PI/2}:{r:11.4*k,ph:0.02,th:0};
   if(name==="front")return {r:13*k,ph:1.35,th:0};
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
