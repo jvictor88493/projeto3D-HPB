@@ -1,0 +1,45 @@
+<nav class="tabs"><button class="tab on" id="tViz">Visualização</button><button class="tab" id="tInfo">Informação</button></nav><!--SPLIT--><section id="infoPanel" hidden>
+<p class="small" style="margin:0 0 4px">Informações do projeto · acesso restrito</p>
+<details>
+<summary>Resumo: o que o Excel marca de diferente do padrão</summary>
+<p class="small">Os 4.508 pontos do desenho seguem o padrão. A planilha marca 994 caps (864 de 16 furos e 130 de 9 furos) em 3 materiais de teste, nas 125 fileiras (colunas) do mapa, sempre a partir da frente da caldeira. Cada fileira é de um único material (letra A/B/C, igual à cor da linha desenhada).</p>
+<div class="tw"><table class="res"><tr><th>Material</th><th>16 furos</th><th>9 furos</th><th>Total</th></tr><tr><td>HK30</td><td>288</td><td>41</td><td>329</td></tr><tr><td>TP310H</td><td>288</td><td>42</td><td>330</td></tr><tr><td>253MA</td><td>288</td><td>47</td><td>335</td></tr><tr><th>Total</th><th>864</th><th>130</th><th>994</th></tr></table></div>
+<div class="tw"><table class="res"><tr><th>Câmara (16 furos / 9 furos)</th><th>HK30</th><th>TP310H</th><th>253MA</th></tr><tr><td>Câmara 1 (fil. 1–19)</td><td>48 / 12</td><td>48 / 2</td><td>48 / 10</td></tr><tr><td>Câmara 2 (fil. 20–40)</td><td>48 / 7</td><td>48 / 9</td><td>48 / 4</td></tr><tr><td>Câmara 3 (fil. 41–62)</td><td>48 / 4</td><td>48 / 9</td><td>48 / 8</td></tr><tr><td>Câmara 4 (fil. 63–86)</td><td>48 / 8</td><td>48 / 5</td><td>48 / 9</td></tr><tr><td>Câmara 5 (fil. 87–107)</td><td>48 / 8</td><td>48 / 9</td><td>48 / 3</td></tr><tr><td>Câmara 6 (fil. 108–125)</td><td>48 / 2</td><td>48 / 8</td><td>48 / 13</td></tr></table></div>
+<p class="small"><b>Materiais:</b> HK30 = ASTM A351 HK30 (vermelho, solda ER310) · TP310H = ASTM A479 S31009 (azul, ER310) · 253MA = ASTM A479 S30815 (verde, ERNiCrMo-3). Desenhos de fabricação: D2-3500-57-M-019 (HK30, 16f), M-016 (HK30, 9f), M-014 (TP310H, 16f), M-017 (TP310H, 9f), M-015 (253MA, 16f), M-018 (253MA, 9f).</p>
+<p><b>Divergências encontradas</b></p>
+<ul>
+<li class="warn"><b>9 furos acima da lista:</b> o mapa leva 41 (HK30), 42 (TP310H) e 47 (253MA) caps de 9 furos; a lista de aplicação prevê 39 de cada e a de compra 42 de cada. O 253MA passa da quantidade de compra em 5.</li>
+<li><b>16 furos:</b> 288 / 288 / 288, igual à lista de aplicação (288 de cada; compra 290). A tabela do Excel soma 289 em 253MA porque a fileira 19 pede 5 caps de 16 furos, mas o trecho da frente só tem 4 (mais 2 de 9 furos, 6 caps; entre as linhas 11 e 69 a fileira passa pela divisória 1 e não há caps). Aqui entram os 6 que existem.</li>
+<li><b>Legenda das câmaras 3 e 6:</b> as cores da legenda não batem com o resto da planilha (câmara 3: vermelho = C, azul = A, verde = B; câmara 6: vermelho = B, azul = A, verde = C). A tabela e as linhas desenhadas usam sempre vermelho = A (HK30), azul = B (TP310H), verde = C (253MA); foi isso que adotei.</li>
+<li><b>Posição dos caps especiais (D, E, F):</b> a tabela e o desenho não coincidem: Cr₂₃C₆ (D) na fileira 5 nos dois, mas na 85 pela tabela e na 65 pelo desenho; HK (E) na 30 pela tabela e na 29 pelo desenho (105 igual); SHS (F) na 41 pela tabela e na 43 pelo desenho, e na 115 pela tabela e na 124 pelo desenho. Também a legenda diz 2 Cr₂₃C₆ por câmara (1 e 4), a tabela 1. Usei a fileira e a quantidade da tabela, com a linha estimada pela altura do desenho (posição aproximada). Confirme em campo.</li>
+<li><b>Termopares:</b> nas fileiras 9, 97 e 117 há um termopar dentro do trecho marcado; ele não conta como cap, então o trecho segue um cap a mais.</li>
+</ul>
+</details>
+<details>
+<summary>Como o mapa do Excel foi lido</summary>
+<ul>
+<li>O desenho do Excel é o mesmo do HTML: frente da caldeira embaixo, fileira 1 à esquerda, 125 fileiras = as 125 colunas do modelo.</li>
+<li>Cada linha colorida cobre os caps do início da fileira (lado da frente) para o fundo. A quantidade vem da tabela (16 furos + 9 furos). Conferi que, pegando esses caps a partir da frente, a divisão 16/9 furos bate com o modelo em 124 das 125 fileiras (a exceção é a 19). A linha exata de cada cap vem dessa contagem, não do traço à mão.</li>
+<li>Caps especiais (D amarelo Cr₂₃C₆, E roxo HK, F preto SHS) aparecem com um pino da cor do tratamento sobre o cap, dentro do material da fileira.</li>
+</ul>
+</details>
+<details>
+<summary>Como ler e o que este modelo não mostra</summary>
+<ul>
+<li><b>Endereço:</b> Linha 1 é a mais próxima da frente da caldeira e Linha 79 a do fundo (numeração do desenho). Coluna 1 é a da esquerda, olhando da frente (numeração criada aqui; o desenho não numera colunas).</li>
+<li><b>Furos dos caps de 9 furos:</b> no desenho o símbolo é um círculo meio preenchido e a seta "FUROS NESTE LADO" aponta para o lado não preenchido. Os 9 furos ficam todos nesse lado (meia circunferência), como na planta do desenho do cap. Confira em campo, pois a direção depende dessa leitura da legenda.</li>
+<li><b>Bubble cap</b> (desenhos D2-3500-57-M-008 e M-009, R00): cabeça Ø48 × 63 mm sobre haste Ø33,4 × 62 mm (total 125 mm, furo interno Ø26). <b>16 furos:</b> duas fiadas de 8 furos Ø5, a 32 e a 46 mm do topo, defasadas de 22,5°. <b>9 furos:</b> 5 + 4 furos Ø5 nas mesmas alturas, só em meia circunferência. Todos os furos saem inclinados 25° para baixo. <b>Luva</b> Ø44 × Ø35 × 50 mm em volta da haste.</li>
+<li><b>Montagem:</b> pelo Detalhe D1 do desenho do piso, a ponta da haste fica rente à face inferior da aleta (aleta de 7 mm, centrada no eixo dos tubos) e a luva assenta sobre a aleta, sobre o furo Ø35. O topo do cap fica então a cerca de 121 mm do eixo dos tubos. Essa montagem é minha leitura dos dois desenhos: o desenho do piso (2007) cotava o topo a 184 mm com um cap de outro perfil.</li>
+<li><b>Furos:</b> aparecem como marcas escuras na superfície, com diâmetro, alturas e defasagem do desenho. O canal interno e a inclinação de 25° não são modelados em 3D.</li>
+<li><b>Paredes laterais</b> aparecem só pela pegada (círculos dos tubos). O desenho do piso não informa a altura delas.</li>
+<li><b>Divisórias 3D</b> (desenho D1-D5057-M-079): 5 painéis de 31 tubos Ø76,2 com passo de 102 mm, cabeçotes Ø219,1 × 3.148 mm, 4 bocais Ø114,3 e 2 orelhas no cabeçote superior, entre as elevações 16.370 e 49.750 mm, com emendas de campo em 17.862 e 33.545 mm. Posição no piso: centradas na profundidade do campo de caps (o vão sem caps no desenho do piso coincide com o centro delas).</li>
+<li><b>Premissas das divisórias:</b> (1) o desenho do piso não traz elevação, então o piso do modelo foi assumido na base do cabeçote inferior (elevação 16.260 mm); (2) a planta V1-V1 do desenho das paredes aparece espelhada em relação à planta do piso (Nº1 à direita ali, à esquerda aqui). Mantive a numeração do desenho do piso e a ordem isométrica; (3) a faixa de tubos afunilados no meio de cada painel, os grampos laterais e os detalhes dos cabeçotes inferiores não foram modelados.</li>
+<li><b>Tubos</b> do piso estão retos, sem as curvas das extremidades (Detalhe D4).</li>
+<li><b>Emendas de painel:</b> a posição da 3ª emenda foi inferida pelo texto do desenho (+102 mm da divisória 3); as outras quatro vêm das linhas de cota. Os caps no eixo das emendas são de instalação de campo (nota 4 do desenho).</li>
+<li><b>Posições:</b> todas as 4.508 coincidem com o DXF; só o cap da Linha 16, Coluna 12 está deslocado 5,1 mm no desenho (tolerância da nota 1: ±6 mm) e aqui fica na malha regular.</li>
+<li><b>Conferência:</b> 4.004 caps de 16 furos + 18 termopares = 4.022, e 486 de 9 furos, que é o que a lista de material do desenho informa (o termopar substitui um cap de 16 furos).</li>
+</ul>
+</details>
+
+</section>
+<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),a=document.getElementById("tViz"),b=document.getElementById("tInfo");function show(i){v.hidden=i;p.hidden=!i;a.classList.toggle("on",!i);b.classList.toggle("on",i);window.scrollTo(0,0)}a.onclick=function(){show(false)};b.onclick=function(){show(true)};window.__showViz=function(){show(false)}})();</script>

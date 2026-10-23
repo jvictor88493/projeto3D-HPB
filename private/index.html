@@ -104,17 +104,23 @@ table.res th{background:var(--chip);font-weight:600}
 #err{display:none;padding:14px;border:1px solid #d9423a;border-radius:10px;color:#d9423a;margin:10px 0}
 @media (max-width:980px){.stage{position:static}.grid{grid-template-columns:1fr}.bottom{grid-template-columns:1fr}.hs{margin-left:0}.crumb{border-left:0;padding-left:0}.topr{margin-left:0}}
 @media (max-width:640px){.app{padding:0 10px 16px}#wrap{height:60vh}.bt{font-size:17px}}
+.tabs{display:flex;gap:6px;margin:0 0 12px}
+.tab{font:inherit;font-size:13.5px;padding:8px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.tab.on{color:#0e1524}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top">
 <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="gp" d="M20.5 3h7l1 5a16 16 0 0 1 4.2 2.4l4.8-1.8 3.5 6-3.9 3.3a16 16 0 0 1 0 4.8l3.9 3.3-3.5 6-4.8-1.8a16 16 0 0 1-4.2 2.4l-1 5h-7l-1-5a16 16 0 0 1-4.2-2.4l-4.8 1.8-3.5-6 3.9-3.3a16 16 0 0 1 0-4.8L7 14.6l3.5-6 4.8 1.8A16 16 0 0 1 19.5 8z"/><circle cx="24" cy="24" r="8.5" fill="#f26a1b"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg><div><div class="bt">Mapa 3D de Caldeiras</div><div class="bs">Planejamento e integridade</div></div></div>
-<div class="crumb"><div class="c1">Parede d'água traseira <span>›</span> Módulo 6</div><div class="c2">Lista de Bubble Caps - Teste · Mapa 19.10</div></div>
-<div class="topr"><div class="count"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span><b>4.508</b> posições</span></div><button id="bCsv" class="cta"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><a class="out" href="/api/logout">Sair</a></div>
+<div class="crumb"><div class="c2">Lista de Bubble Caps - Teste · Mapa 19.10</div></div>
+<div class="topr"><div class="count"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span><b>4.508</b> posições</span></div><button id="bCsv" class="cta" title="Exportar PDF da vista em perspectiva"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><a class="out" href="/api/logout">Sair</a></div>
 </header>
 <div id="err"></div>
 
+<!--INFO_NAV-->
+<div id="vizPane">
 <div class="toolbar">
 <div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button></div>
 <label class="hs">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="0.5"><span id="vhv">0,5 m</span></label>
@@ -134,11 +140,6 @@ table.res th{background:var(--chip);font-weight:600}
 <div class="sw" style="cursor:default"><span class="l">Câmara</span><select id="selCam"><option value="">Todas</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
 <div class="small" style="margin-top:4px">Contagens: 16 furos <span id="n16"></span> · 9 furos <span id="n9"></span> · termopares <span id="nT"></span></div>
 </section>
-<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg>Marcar posições</h3>
-<input type="text" id="marc" placeholder="linha,coluna; linha,coluna (ex.: 37,52; 40,11)">
-<div class="mk"><button id="bMarc">Marcar</button><button id="bClr">Limpar marcas</button></div>
-<span class="small" id="marcMsg"></span>
-</section>
 </aside>
 </main>
 
@@ -154,47 +155,6 @@ table.res th{background:var(--chip);font-weight:600}
 </div>
 </section>
 
-<details open>
-<summary>Resumo: o que o Excel marca de diferente do padrão</summary>
-<p class="small">Os 4.508 pontos do desenho seguem o padrão. A planilha marca 994 caps (864 de 16 furos e 130 de 9 furos) em 3 materiais de teste, nas 125 fileiras (colunas) do mapa, sempre a partir da frente da caldeira. Cada fileira é de um único material (letra A/B/C, igual à cor da linha desenhada).</p>
-<div class="tw"><table class="res"><tr><th>Material</th><th>16 furos</th><th>9 furos</th><th>Total</th></tr><tr><td>HK30</td><td>288</td><td>41</td><td>329</td></tr><tr><td>TP310H</td><td>288</td><td>42</td><td>330</td></tr><tr><td>253MA</td><td>288</td><td>47</td><td>335</td></tr><tr><th>Total</th><th>864</th><th>130</th><th>994</th></tr></table></div>
-<div class="tw"><table class="res"><tr><th>Câmara (16 furos / 9 furos)</th><th>HK30</th><th>TP310H</th><th>253MA</th></tr><tr><td>Câmara 1 (fil. 1–19)</td><td>48 / 12</td><td>48 / 2</td><td>48 / 10</td></tr><tr><td>Câmara 2 (fil. 20–40)</td><td>48 / 7</td><td>48 / 9</td><td>48 / 4</td></tr><tr><td>Câmara 3 (fil. 41–62)</td><td>48 / 4</td><td>48 / 9</td><td>48 / 8</td></tr><tr><td>Câmara 4 (fil. 63–86)</td><td>48 / 8</td><td>48 / 5</td><td>48 / 9</td></tr><tr><td>Câmara 5 (fil. 87–107)</td><td>48 / 8</td><td>48 / 9</td><td>48 / 3</td></tr><tr><td>Câmara 6 (fil. 108–125)</td><td>48 / 2</td><td>48 / 8</td><td>48 / 13</td></tr></table></div>
-<p class="small"><b>Materiais:</b> HK30 = ASTM A351 HK30 (vermelho, solda ER310) · TP310H = ASTM A479 S31009 (azul, ER310) · 253MA = ASTM A479 S30815 (verde, ERNiCrMo-3). Desenhos de fabricação: D2-3500-57-M-019 (HK30, 16f), M-016 (HK30, 9f), M-014 (TP310H, 16f), M-017 (TP310H, 9f), M-015 (253MA, 16f), M-018 (253MA, 9f).</p>
-<p><b>Divergências encontradas</b></p>
-<ul>
-<li class="warn"><b>9 furos acima da lista:</b> o mapa leva 41 (HK30), 42 (TP310H) e 47 (253MA) caps de 9 furos; a lista de aplicação prevê 39 de cada e a de compra 42 de cada. O 253MA passa da quantidade de compra em 5.</li>
-<li><b>16 furos:</b> 288 / 288 / 288, igual à lista de aplicação (288 de cada; compra 290). A tabela do Excel soma 289 em 253MA porque a fileira 19 pede 5 caps de 16 furos, mas o trecho da frente só tem 4 (mais 2 de 9 furos, 6 caps; entre as linhas 11 e 69 a fileira passa pela divisória 1 e não há caps). Aqui entram os 6 que existem.</li>
-<li><b>Legenda das câmaras 3 e 6:</b> as cores da legenda não batem com o resto da planilha (câmara 3: vermelho = C, azul = A, verde = B; câmara 6: vermelho = B, azul = A, verde = C). A tabela e as linhas desenhadas usam sempre vermelho = A (HK30), azul = B (TP310H), verde = C (253MA); foi isso que adotei.</li>
-<li><b>Posição dos caps especiais (D, E, F):</b> a tabela e o desenho não coincidem: Cr₂₃C₆ (D) na fileira 5 nos dois, mas na 85 pela tabela e na 65 pelo desenho; HK (E) na 30 pela tabela e na 29 pelo desenho (105 igual); SHS (F) na 41 pela tabela e na 43 pelo desenho, e na 115 pela tabela e na 124 pelo desenho. Também a legenda diz 2 Cr₂₃C₆ por câmara (1 e 4), a tabela 1. Usei a fileira e a quantidade da tabela, com a linha estimada pela altura do desenho (posição aproximada). Confirme em campo.</li>
-<li><b>Termopares:</b> nas fileiras 9, 97 e 117 há um termopar dentro do trecho marcado; ele não conta como cap, então o trecho segue um cap a mais.</li>
-</ul>
-</details>
-<details>
-<summary>Como o mapa do Excel foi lido</summary>
-<ul>
-<li>O desenho do Excel é o mesmo do HTML: frente da caldeira embaixo, fileira 1 à esquerda, 125 fileiras = as 125 colunas do modelo.</li>
-<li>Cada linha colorida cobre os caps do início da fileira (lado da frente) para o fundo. A quantidade vem da tabela (16 furos + 9 furos). Conferi que, pegando esses caps a partir da frente, a divisão 16/9 furos bate com o modelo em 124 das 125 fileiras (a exceção é a 19). A linha exata de cada cap vem dessa contagem, não do traço à mão.</li>
-<li>Caps especiais (D amarelo Cr₂₃C₆, E roxo HK, F preto SHS) aparecem com um pino da cor do tratamento sobre o cap, dentro do material da fileira.</li>
-</ul>
-</details>
-<details>
-<summary>Como ler e o que este modelo não mostra</summary>
-<ul>
-<li><b>Endereço:</b> Linha 1 é a mais próxima da frente da caldeira e Linha 79 a do fundo (numeração do desenho). Coluna 1 é a da esquerda, olhando da frente (numeração criada aqui; o desenho não numera colunas).</li>
-<li><b>Furos dos caps de 9 furos:</b> no desenho o símbolo é um círculo meio preenchido e a seta "FUROS NESTE LADO" aponta para o lado não preenchido. Os 9 furos ficam todos nesse lado (meia circunferência), como na planta do desenho do cap. Confira em campo, pois a direção depende dessa leitura da legenda.</li>
-<li><b>Bubble cap</b> (desenhos D2-3500-57-M-008 e M-009, R00): cabeça Ø48 × 63 mm sobre haste Ø33,4 × 62 mm (total 125 mm, furo interno Ø26). <b>16 furos:</b> duas fiadas de 8 furos Ø5, a 32 e a 46 mm do topo, defasadas de 22,5°. <b>9 furos:</b> 5 + 4 furos Ø5 nas mesmas alturas, só em meia circunferência. Todos os furos saem inclinados 25° para baixo. <b>Luva</b> Ø44 × Ø35 × 50 mm em volta da haste.</li>
-<li><b>Montagem:</b> pelo Detalhe D1 do desenho do piso, a ponta da haste fica rente à face inferior da aleta (aleta de 7 mm, centrada no eixo dos tubos) e a luva assenta sobre a aleta, sobre o furo Ø35. O topo do cap fica então a cerca de 121 mm do eixo dos tubos. Essa montagem é minha leitura dos dois desenhos: o desenho do piso (2007) cotava o topo a 184 mm com um cap de outro perfil.</li>
-<li><b>Furos:</b> aparecem como marcas escuras na superfície, com diâmetro, alturas e defasagem do desenho. O canal interno e a inclinação de 25° não são modelados em 3D.</li>
-<li><b>Paredes laterais</b> aparecem só pela pegada (círculos dos tubos). O desenho do piso não informa a altura delas.</li>
-<li><b>Divisórias 3D</b> (desenho D1-D5057-M-079): 5 painéis de 31 tubos Ø76,2 com passo de 102 mm, cabeçotes Ø219,1 × 3.148 mm, 4 bocais Ø114,3 e 2 orelhas no cabeçote superior, entre as elevações 16.370 e 49.750 mm, com emendas de campo em 17.862 e 33.545 mm. Posição no piso: centradas na profundidade do campo de caps (o vão sem caps no desenho do piso coincide com o centro delas).</li>
-<li><b>Premissas das divisórias:</b> (1) o desenho do piso não traz elevação, então o piso do modelo foi assumido na base do cabeçote inferior (elevação 16.260 mm); (2) a planta V1-V1 do desenho das paredes aparece espelhada em relação à planta do piso (Nº1 à direita ali, à esquerda aqui). Mantive a numeração do desenho do piso e a ordem isométrica; (3) a faixa de tubos afunilados no meio de cada painel, os grampos laterais e os detalhes dos cabeçotes inferiores não foram modelados.</li>
-<li><b>Tubos</b> do piso estão retos, sem as curvas das extremidades (Detalhe D4).</li>
-<li><b>Emendas de painel:</b> a posição da 3ª emenda foi inferida pelo texto do desenho (+102 mm da divisória 3); as outras quatro vêm das linhas de cota. Os caps no eixo das emendas são de instalação de campo (nota 4 do desenho).</li>
-<li><b>Posições:</b> todas as 4.508 coincidem com o DXF; só o cap da Linha 16, Coluna 12 está deslocado 5,1 mm no desenho (tolerância da nota 1: ±6 mm) e aqui fica na malha regular.</li>
-<li><b>Conferência:</b> 4.004 caps de 16 furos + 18 termopares = 4.022, e 486 de 9 furos, que é o que a lista de material do desenho informa (o termopar substitui um cap de 16 furos).</li>
-</ul>
-</details>
-
 <section id="desenhos">
 <h2>Desenhos utilizados como base</h2>
 <ul>
@@ -204,6 +164,8 @@ table.res th{background:var(--chip);font-weight:600}
 <li><b>D2-3500-57-M-008 R00</b> (DXF) — Bubble cap de 9 furos e luva: mesmas dimensões do anterior, com 9 furos Ø5 (5 + 4) em meia circunferência.</li>
 </ul>
 </section>
+</div>
+<!--INFO_PANEL-->
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -538,10 +500,12 @@ function pose(name){
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
   return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
 }
+var prevVh=null;
 function setView(name){
   [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
   var q=pose(name);
-  if(q.full&&+$("vh").value<34){$("vh").value=34;setClip()}
+  if(q.full){if(+$("vh").value<34){prevVh=+$("vh").value;$("vh").value=34;setClip()}}
+  else if(prevVh!==null){$("vh").value=prevVh;prevVh=null;setClip()}
   flyTo(new THREE.Vector3(0,q.y||0,0),q.r,q.ph,q.th);
 }
 function resize(){
@@ -648,9 +612,7 @@ function parseMarks(){
   $("marcMsg").textContent=msg;
   if(ok.length){select(ok[0],true)}
 }
-$("bMarc").addEventListener("click",parseMarks);
-$("marc").addEventListener("keydown",function(e){if(e.key==="Enter")parseMarks()});
-$("bClr").addEventListener("click",function(){markList=[];$("marc").value="";$("marcMsg").textContent="";selItem=null;layoutPins();$("info").textContent="Clique em um cap para ver linha, coluna, tipo e posição no desenho."});
+
 
 function vis(){
   head16.visible=stem16.visible=luva16.visible=$("v16").checked;
@@ -665,12 +627,62 @@ function vis(){
 ["v16","v9","vT","vTub","vWall","vJ","vL","vDiv"].forEach(function(id){$(id).addEventListener("change",function(){vis();layoutPins()})});
 ["vM0","vMA","vMB","vMC","vSp","selCam"].forEach(function(id){$(id).addEventListener("change",function(){layoutCaps();layoutPins();
   if(id==="selCam"&&$("selCam").value){var r=CAMR[+$("selCam").value-1];flyTo(new THREE.Vector3(X(cellX((r[0]+r[1])/2-1)),0,Z(10600)),5.5,0.9,0)}})});
+function toL(str){var o="",m={8212:151,8211:150,8220:147,8221:148};for(var i=0;i<str.length;i++){var c=str.charCodeAt(i);o+=String.fromCharCode(m[c]!==undefined?m[c]:(c<256?c:63))}return o}
+function pe(str){return toL(str).replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")}
+function makePdf(jpg,iw,ih,legend,title,sub,foot){
+  var W=842,H=595,M=28,top=64,bot=64,aw=W-2*M,ah=H-top-bot,sc=Math.min(aw/iw,ah/ih),dw=iw*sc,dh=ih*sc,dx=(W-dw)/2,dy=bot+(ah-dh)/2;
+  var c="q "+dw.toFixed(2)+" 0 0 "+dh.toFixed(2)+" "+dx.toFixed(2)+" "+dy.toFixed(2)+" cm /Im0 Do Q\n";
+  c+="BT /F2 16 Tf 0.06 0.18 0.34 rg "+M+" "+(H-34)+" Td ("+pe(title)+") Tj ET\n";
+  c+="BT /F1 10 Tf 0.4 0.45 0.52 rg "+M+" "+(H-50)+" Td ("+pe(sub)+") Tj ET\n";
+  var x=M;
+  legend.forEach(function(l){c+=l.c.join(" ")+" rg "+x+" 38 10 10 re f\n";c+="BT /F1 10 Tf 0.1 0.14 0.23 rg "+(x+15)+" 39 Td ("+pe(l.t)+") Tj ET\n";x+=15+l.t.length*5.2+22});
+  c+="BT /F1 8 Tf 0.45 0.5 0.56 rg "+M+" 18 Td ("+pe(foot)+") Tj ET\n";
+  var parts=[],off=0,xr=[];
+  function put(t){var b=new Uint8Array(t.length);for(var i=0;i<t.length;i++)b[i]=t.charCodeAt(i)&255;parts.push(b);off+=b.length}
+  function obj(n,body){xr[n]=off;put(n+" 0 obj\n"+body+"\nendobj\n")}
+  put("%PDF-1.4\n");
+  obj(1,"<< /Type /Catalog /Pages 2 0 R >>");
+  obj(2,"<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
+  obj(3,"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 "+W+" "+H+"] /Resources << /XObject << /Im0 5 0 R >> /Font << /F1 6 0 R /F2 7 0 R >> >> /Contents 4 0 R >>");
+  obj(4,"<< /Length "+c.length+" >>\nstream\n"+c+"endstream");
+  xr[5]=off;put("5 0 obj\n<< /Type /XObject /Subtype /Image /Width "+iw+" /Height "+ih+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+jpg.length+" >>\nstream\n");
+  parts.push(jpg);off+=jpg.length;put("\nendstream\nendobj\n");
+  obj(6,"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>");
+  obj(7,"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>");
+  var xo=off,t="xref\n0 8\n0000000000 65535 f \n";
+  for(var n=1;n<=7;n++)t+=("0000000000"+xr[n]).slice(-10)+" 00000 n \n";
+  put(t+"trailer\n<< /Size 8 /Root 1 0 R >>\nstartxref\n"+xo+"\n%%EOF");
+  return new Blob(parts,{type:"application/pdf"});
+}
+function capturePdf(){
+  var oldT=tgt.clone(),oldS={r:sph.r,ph:sph.ph,th:sph.th},oldVh=$("vh").value;
+  anim=null;
+  if(+oldVh>0.5){$("vh").value=0.5;setClip()}
+  tgt.set(0,0,0);var q=pose("persp");sph.r=q.r;sph.ph=q.ph;sph.th=q.th;updCam();layoutPins();
+  renderer.render(scene,cam);placeLabels();
+  var cv=renderer.domElement,k=cv.width/wrap.clientWidth,o=document.createElement("canvas");o.width=cv.width;o.height=cv.height;
+  var g=o.getContext("2d");g.drawImage(cv,0,0);
+  var wr=wrap.getBoundingClientRect();
+  [].forEach.call(wrap.querySelectorAll(".lbl"),function(e){
+    if(e.style.display==="none")return;
+    var r=e.getBoundingClientRect(),cs=getComputedStyle(e),x=(r.left-wr.left)*k,y=(r.top-wr.top)*k,w=r.width*k,h=r.height*k,rad=7*k;
+    g.beginPath();g.moveTo(x+rad,y);g.arcTo(x+w,y,x+w,y+h,rad);g.arcTo(x+w,y+h,x,y+h,rad);g.arcTo(x,y+h,x,y,rad);g.arcTo(x,y,x+w,y,rad);g.closePath();
+    g.fillStyle=cs.backgroundColor;g.fill();g.lineWidth=k;g.strokeStyle=cs.borderTopColor;g.stroke();
+    g.fillStyle=cs.color;g.font=cs.fontWeight+" "+(parseFloat(cs.fontSize)*k)+"px system-ui,sans-serif";g.textAlign="center";g.textBaseline="middle";g.fillText(e.textContent,x+w/2,y+h/2+k*0.5);
+  });
+  var b64=o.toDataURL("image/jpeg",0.92).split(",")[1],bin=atob(b64),jpg=new Uint8Array(bin.length);
+  for(var i=0;i<bin.length;i++)jpg[i]=bin.charCodeAt(i);
+  tgt.copy(oldT);sph.r=oldS.r;sph.ph=oldS.ph;sph.th=oldS.th;
+  if($("vh").value!==oldVh){$("vh").value=oldVh;setClip()}
+  updCam();layoutPins();dirty=true;
+  function n(id){return $(id).textContent.replace(/[()]/g,"")}
+  var leg=[{c:[0.48,0.51,0.55],t:"Padrão "+n("nM0")},{c:[0.88,0.21,0.17],t:"HK30 "+n("nMA")},{c:[0.12,0.47,0.88],t:"TP310H "+n("nMB")},{c:[0.12,0.66,0.31],t:"253MA "+n("nMC")},{c:[1,0.83,0],t:"Especiais (D·E·F) "+n("nSp")}];
+  var d=new Date(),p2=function(v){return(v<10?"0":"")+v};
+  var blob=makePdf(jpg,o.width,o.height,leg,"Mapa 3D dos bubble caps","Parede d'água traseira, módulo 6 · Lista de Bubble Caps - Teste · Mapa 19.10 · vista em perspectiva","Gerado em "+p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()+" "+p2(d.getHours())+":"+p2(d.getMinutes())+" · 4.508 posições");
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mapa3d_bubble_caps_perspectiva.pdf";document.body.appendChild(a);a.click();a.remove();
+}
 $("bCsv").addEventListener("click",function(){
-  var n={A:"HK30",B:"TP310H",C:"253MA"},rows=["linha;coluna_fileira;camara;tipo;material;especial"];
-  list16.concat(list9).forEach(function(p){if(p.m)rows.push([p.r+1,p.c+1,p.cam,p.t+" furos",n[p.m],p.sp?SPN[p.sp]:""].join(";"))});
-  rows.sort(function(a,b){return 0});
-  var bl=new Blob(["\ufeff"+rows.join("\n")],{type:"text/csv;charset=utf-8"}),a=document.createElement("a");
-  a.href=URL.createObjectURL(bl);a.download="bubble_caps_marcados.csv";document.body.appendChild(a);a.click();a.remove();
+  if(wrap.clientWidth===0&&window.__showViz){window.__showViz();setTimeout(capturePdf,500)}else capturePdf();
 });
 $("bPersp").addEventListener("click",function(){setView("persp")});
 $("bPlan").addEventListener("click",function(){setView("plan")});
