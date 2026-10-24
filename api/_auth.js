@@ -31,4 +31,8 @@ const FULL_DEFAULT = 'jvictor88493@gmail.com,thiago.morais@hydro.com,luana@luana
 function fullEmails() {
   return (process.env.FULL_EMAILS || FULL_DEFAULT).split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
 }
-module.exports = { NAME, allowed, makeToken, readEmail, fullEmails };
+// Quem ve a aba "Informacao" e as notas tecnicas do 3D completo (padrao: so o e-mail principal; variavel INFO_EMAILS).
+function infoEmails() {
+  return (process.env.INFO_EMAILS || 'jvictor88493@gmail.com').split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+}
+module.exports = { NAME, allowed, makeToken, readEmail, fullEmails, infoEmails };
