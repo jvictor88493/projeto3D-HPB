@@ -146,6 +146,7 @@ table.res th{background:var(--chip);font-weight:600}
 @media (max-width:980px){.stage{position:static}.grid{grid-template-columns:1fr}.bottom{grid-template-columns:1fr}.hs{margin-left:0}.crumb{border-left:0;padding-left:0}.topr{margin-left:0}}
 @media (max-width:640px){.app{padding:0 10px 16px}#wrap{height:60vh}.bt{font-size:17px}}
 .tabs{display:flex;gap:6px;margin:0 0 12px}
+.top .tabs{margin:0 0 0 18px}
 .tab{font:inherit;font-size:13.5px;padding:8px 18px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
 .tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
 @media (prefers-color-scheme: dark){.tab.on{color:#0e1524}}
@@ -156,7 +157,7 @@ table.res th{background:var(--chip);font-weight:600}
 .app{padding:0 0 16px}
 .top{padding:6px 10px;gap:8px;margin:0 0 6px}.brand svg{width:28px;height:28px}.bt{font-size:15px}.bs{display:none}.crumb,.count{display:none}
 .topr{margin-left:auto}.out{padding:4px 6px}
-.tabs{margin:0 10px 6px}
+.top .tabs{margin:0 0 0 6px}.tab{padding:6px 10px;font-size:12.5px}
 .toolbar{display:contents}
 .seg{position:fixed;right:8px;top:64px;z-index:30;flex-direction:column;flex-wrap:nowrap;gap:6px}
 .seg button,#bCsv.cta{flex-direction:column;justify-content:center;gap:2px;width:52px;height:50px;padding:2px;font-size:8.5px;line-height:1.1;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.22);text-align:center}
@@ -226,7 +227,7 @@ details{border-radius:14px}
 <main class="grid">
 <div class="stage"><div id="wrap"><div id="mInfo"></div><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div></div>
 <aside class="side"><button id="fclose" type="button">Fechar ✕</button>
-<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Camadas da visualização</h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL" checked></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l">Paredes laterais (M-080)</span><input type="checkbox" id="vSW" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#00b3a4"></span>Parede lateral esquerda (M-081)</span><input type="checkbox" id="vSWL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label></section>
+<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Camadas da visualização</h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL" checked></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l">Paredes laterais (M-080)</span><input type="checkbox" id="vSW" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#00b3a4"></span>Parede lateral esquerda (M-081)</span><input type="checkbox" id="vSWL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#14b8a6"></span>Reforços / buckstays (níveis)</span><input type="checkbox" id="vBK" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a100"></span>Câmara de ar (M-135/136/137)</span><input type="checkbox" id="vWB" checked></label></section>
 <section class="card" id="tipos"><h3><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>Tipo de cap</h3><label class="sw"><span class="l"><span class="dot" style="background:#4f7fa8"></span>16 furos <span class="small" id="n16"></span></span><input type="checkbox" id="v16" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a030"></span>9 furos <span class="small" id="n9"></span></span><input type="checkbox" id="v9" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></span><input type="checkbox" id="vT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8e5bd1"></span>Instalação de campo <span class="small" id="nF"></span></span><input type="checkbox" id="vF"></label></section>
 </aside>
 </main>
@@ -260,18 +261,20 @@ details{border-radius:14px}
 <li><span class="t-ok">Bate.</span> <b>Referências:</b> M-080 = item 5 do arranjo (10-1-6829, 26.747 kg); M-079 = item 14 (10-1-6800, 60.020 kg). Elevações do painel M-080 (buckstays 47.930 a 27.610, coletores 21.145 e 16.675, topo 49.750 e 50.080) iguais às do arranjo de pressão e do arranjo geral.</li>
 <li><span class="t-ok">Bate.</span> <b>Câmara de ar (M-135, 10-0-2059, folha 1/3):</b> largura interna de 12.902 mm, igual à largura entre paredes laterais (12.902,4 mm). Os dois cabeçotes Ø219,1 do desenho estão em 16.736 e 17.031 mm, as mesmas cotas dos &ldquo;coletores traseiro&rdquo; e &ldquo;coletores frontais&rdquo; do arranjo de pressão, e a referência 16.675 mm é a dos coletores laterais inferiores.</li>
 <li><span class="t-ok">Bate.</span> <b>Emendas das divisórias:</b> são três, em 17.862, 25.449 e 33.545 mm. O detalhe D17 do arranjo de pressão (folha 2, 10-0-1936) mostra as três ao longo dos 33.380 mm entre os cabeçotes (16.370 e 49.750), e a vista V2-V2 do mesmo desenho e o arranjo de pressão conjunto dão 25.449 como &ldquo;parte intermediária/inferior&rdquo;. A M-079 mostra só duas na vista isométrica. A de 25.449 mm entrou no mapa (laranja nos níveis e laje nas divisórias).</li>
-<li><span class="t-dv">Diverge.</span> <b>Tubos por divisória:</b> a M-079 e o mapa têm 31 tubos (30 × 102 = 3.060 mm); o arranjo de pressão e a GA M-019 cotam &ldquo;29 x 102 = 2.958&rdquo; (30 tubos). Não alterei.</li>
-<li><span class="t-dv">Diverge.</span> <b>Buckstays 8 e 9:</b> 24.545 e 20.795 mm na M-080 e no arranjo de pressão; 24.115 e 20.662 mm no arranjo geral (diferença de 430 e 133 mm). Os outros sete níveis coincidem nos três desenhos. O painel está no mapa com as cotas da M-080.</li>
-<li><span class="t-dv">Teste v5.</span> <b>Piso:</b> eixo dos tubos do piso colocado 1,0 m acima da base das divisórias (17.260 mm, no lugar de 16.260). Duas fontes independentes apontam para 17.330 a 17.380 mm (folha M-087 e camada Bubble Caps da elevação do arranjo geral). As divisórias descem 1 m abaixo do piso até os coletores (16.370). Ainda a confirmar.</li>
 <li><span class="t-ok">Bate.</span> <b>Curva de 18° da parte inferior:</b> M-086, M-087, M-080 e M-081 dão a mesma posição (21.457 a 24.190 mm). A GA M-019 está 0,43 a 0,46 m abaixo e não foi usada. Teto e tremonha do passe batem com o arranjo de pressão.</li>
 <li><span class="t-ok">Bate.</span> <b>Parede lateral esquerda (M-081):</b> ~88% dos segmentos coincidem com a direita (M-080); o restante é diferença do desenho.</li>
-<li><span class="t-pe">Não montado.</span> Trecho inferior dos wingwalls (cotas da M-060 não batem com o desenhado), laterais do passe com tubos (faltam 2.652 mm de painel), piso com largura a confirmar, tubulão, tubos do teto, serpentinas e U-beams. Frente e traseira: tubos retos, sem aberturas.</li>
+<li><span class="t-ok">Bate.</span> <b>Folha 2 do arranjo de pressão</b> = D0-D-50-57-M-00096 (10-0-1936, rev. 2): detalhes D30 e D31 (fechamento do módulo 6 da parede traseira), D17 (emendas das divisórias) e vista V2-V2 com as elevações. Tem 125 × 102 = 12.750 mm de largura de parede frontal e traseira.</li>
+<li><span class="t-dv">Diverge.</span> <b>Tubos por divisória:</b> a M-079 e o mapa têm 31 tubos (30 × 102 = 3.060 mm); o arranjo de pressão e a GA M-019 cotam &ldquo;29 x 102 = 2.958&rdquo; (30 tubos). Não alterei.</li>
+<li><span class="t-dv">Diverge.</span> <b>Buckstays 8 e 9:</b> 24.545 e 20.795 mm na M-080 e no arranjo de pressão; 24.115 e 20.662 mm no arranjo geral (diferença de 430 e 133 mm). Os outros sete níveis coincidem nos três desenhos. O painel está no mapa com as cotas da M-080.</li>
+<li><span class="t-dv">Piso (v6).</span> Eixo dos tubos do piso em <b>17.337 mm</b> (16.260 + 1,077 m): linha de centro do trecho reto de 4412 mm na câmara de ar M-135, referida ao nível 16.675; confere com a M-087 (≈17.330) e com a camada Bubble Caps da elevação do arranjo geral (≈17.380). Incerteza de ±0,06 m na referência do nível 16.675 da M-135.</li>
+<li><span class="t-dv">Correção (v8).</span> Frente e traseira passam a ter 126 tubos (125 passos × 102 = 12.750; folga de 76,2 mm até cada parede lateral = 12.902,4). A versão anterior desenhava 125 tubos. Conferido nas M-086/087 e nas fichas de fabricação (painéis de 32 + 31 + 32 + 31 tubos).</li><li><span class="t-dv">Reforços (v8).</span> Nove níveis de buckstay desenhados como contorno na parede da fornalha: 20.795, 24.545, 27.610, 31.105, 34.600, 37.280, 40.980, 44.580 e 47.930. Fonte: folha dos reforços (10-1-6871 no conjunto de suportes), M-080/081, M-086/087 e arranjo de pressão. A vista de elevação do arranjo geral (10-0-1533) traz 20.662 e 24.115 nos dois níveis inferiores e deve ser corrigida. Perfil (VS) e dimensões não estão nos desenhos disponíveis, então só o nível é mostrado.</li><li><span class="t-dv">Wingwalls (v7).</span> Painéis de 18 tubos (passo 63,5, largura 1.079,5) prolongados até o início das curvas inferiores. A linha de início das curvas é oblíqua (~30°, 36,5 mm a cada tubo): em 34.350 (frente) a 33.730 (traseira) nos WW-2, 4, 5 e 7, e 540 mm mais alta nos WW-1, 3, 6 e 8. A M-060 tem quebra de escala de 2.497 mm nas duas vistas, então as cotas escritas valem (16.408 e 15.868 de comprimento total, topo em 49.445) e batem com o M-125 (fundo dos tubos horizontais em 33.037). A região das curvas e o trecho horizontal até o coletor frontal não foram montados.</li>
+<li><span class="t-dv">Câmara de ar (v6).</span> Montada pelos desenhos 10-0-2059/2060/2061: fundo interno em 13.362, topo em 16.675 (3.313 mm internos); perfil com fundo plano de 1.992, rampa de 25° (avanço 2.871), parede traseira em 4.863 e ressalto a 25° até 5.163 mm de profundidade interna; largura 12.394 mm até 14.536 e 12.902 mm acima; duas entradas de ar de Ø1.762 (ext.) a ±3.225 mm da linha de centro, eixo em 14.290. A face frontal está a 666 mm da parede frontal superior (M-125). Não incluídos: portas, vigas, chapa traseira e demais detalhes. O fundo de 13,36 m que aparece no refratário M-125 é o fundo desta câmara, não o piso da fornalha.</li>
 <li><span class="t-dv">Observação.</span> A GA M-019 (corte lateral) usa as cotas 0,300 m abaixo dos demais desenhos (ex.: 47.630 no lugar de 47.930), então não foi usada para elevação.</li>
 <li><span class="t-dv">A confirmar.</span> <b>Tubos do piso:</b> vão de 9.480 a 14.840 mm (5.360 mm), enquanto as paredes frontal e traseira (9.897,6 e 14.793,6) ficam a 4.896 mm. Os tubos passam 417,6 mm da frente e 46,4 mm do fundo. Não tenho o detalhe que explique isso.</li>
-<li><span class="t-pe">Pendente.</span> <b>Elevação do piso (eixo dos tubos dos bubble caps):</b> o mapa continua assumindo 16.260 mm (base do cabeçote das divisórias). Na câmara de ar (D0-D5057-M-135) a cota de referência é 16.675 mm e existe uma linha de centro horizontal nessa cota (5.021 mm de comprimento), mas o desenho não diz que ela é o eixo dos tubos dos bubble caps. A diferença para o valor assumido é de 415 mm. Preciso que você confirme qual é a cota do eixo dos tubos do piso, ou as folhas 2/3 e 3/3 da câmara de ar (10-0-2060 e 10-0-2061, citadas na nota 1 da M-135) e o conjunto da parede traseira (10-1-6806).</li>
-<li><span class="t-ok">Bate.</span> <b>Folha 2 do arranjo de pressão</b> = D0-D-50-57-M-00096 (10-0-1936, rev. 2): detalhes D30 e D31 (fechamento do módulo 6 da parede traseira), D17 (emendas das divisórias) e vista V2-V2 com as elevações. Tem 125 × 102 = 12.750 mm de largura de parede frontal e traseira.</li>
-<li><span class="t-pe">Pendente.</span> <b>Parede lateral esquerda</b> (10-1-6828, 26.752 kg) e <b>paredes frontal e traseira</b> (10-1-6805 e 10-1-6806): não fornecidas. A esquerda está espelhada, e o casco da fornalha (frontal, traseira e afunilamento) não foi modelado.</li>
 <li><span class="t-dv">Diverge.</span> <b>Numeração das divisórias:</b> o desenho do piso e a planta H-H da GA (D1-D-50-57-M-00023) põem a Nº 1 junto à parede esquerda (frente embaixo). A M-079 e o arranjo de pressão (planta C2-C2 do M-00094 e vista V1-V1 do M-00011) põem a Nº 1 junto à direita. O mapa segue o piso e a GA, mas os desenhos do fabricante se contradizem: confirme em campo qual divisória é a 1.</li>
+<li><span class="t-pe">Não montado.</span> Trecho inferior dos wingwalls (cotas da M-060 não batem com o desenhado), laterais do passe com tubos (faltam 2.652 mm de painel), piso com largura a confirmar, tubulão, tubos do teto, serpentinas e U-beams. Frente e traseira: tubos retos, sem aberturas.</li>
+<li><span class="t-pe">Pendente.</span> <b>Elevação do piso (eixo dos tubos dos bubble caps):</b> o mapa continua assumindo 16.260 mm (base do cabeçote das divisórias). Na câmara de ar (D0-D5057-M-135) a cota de referência é 16.675 mm e existe uma linha de centro horizontal nessa cota (5.021 mm de comprimento), mas o desenho não diz que ela é o eixo dos tubos dos bubble caps. A diferença para o valor assumido é de 415 mm. Preciso que você confirme qual é a cota do eixo dos tubos do piso, ou as folhas 2/3 e 3/3 da câmara de ar (10-0-2060 e 10-0-2061, citadas na nota 1 da M-135) e o conjunto da parede traseira (10-1-6806).</li>
+<li><span class="t-pe">Pendente.</span> <b>Parede lateral esquerda</b> (10-1-6828, 26.752 kg) e <b>paredes frontal e traseira</b> (10-1-6805 e 10-1-6806): não fornecidas. A esquerda está espelhada, e o casco da fornalha (frontal, traseira e afunilamento) não foi modelado.</li>
 </ul>
 </details>
 
@@ -285,7 +288,15 @@ details{border-radius:14px}
 <li><b>D1-D5057-M-080</b> (DXF) — Parede d'água lateral direita, conjunto (10-1-6829): contorno e tubos do painel, passo 102 mm, elevações 16.675 a 50.080 mm.</li>
 <li><b>D0-D-50-57-M-00096, M-00095, M-00094, M-00011, M-00023, M-00001 e M-00002</b> (PDF) — folha 2 e folha 1 de detalhes, cortes C1-C1/C2-C2, conjunto, plantas H-H/J-J/K-K e arranjo geral (elevação e planta): usados para conferir as divisórias, as emendas e a numeração.</li>
 <li><b>Arranjo das partes de pressão — conjunto</b> (DXF, folha 1): largura de 12.902,4 mm entre paredes laterais, posições das divisórias, elevações de emendas e coletores, lista de conjuntos.</li>
-<li><b>Arranjo geral — vista elevação</b> (DXF): cotas dos níveis dos buckstays e dos coletores (usado só para conferir elevações).</li>
+<li><b>Arranjo geral — vista elevação</b> (DXF): cotas dos níveis dos buckstays e dos coletores (10-0-1533; usado para conferir elevações e a posição da fornalha nas colunas; traz 22.900, 4.600 e os buckstays inferiores divergentes, ver conferência).</li>
+<li><b>Suporte e reforços — conjunto</b> (DXF, 10-1-6871 e correlatos): níveis dos nove reforços da fornalha (20.795 a 47.930), eixos de colunas B–F e posição da fornalha (3.756 mm do eixo B).</li>
+<li><b>Arranjo geral — vista em planta e lay-out</b> (DXF): cadeias longitudinais e posições em planta; conferidos, mas sem montagem por divergência com a elevação.</li>
+<li><b>D1-D5057-M-081, M-082 a M-087</b> (DXF) — parede lateral esquerda, cinco divisórias e paredes frontal e traseira (126 tubos, 125 × 102 = 12.750 mm; curva de 18°).</li>
+<li><b>D1-D5057-M-060, M-147, D2-D5057-M-032 e M-092</b> (DXF) — wingwalls: 18 tubos Ø50,8, passo 63,5, comprimentos 15.868 e 16.408, tubo com sobremetal e tubos de interligação.</li>
+<li><b>D0-D5057-M-125</b> (DXF, 10-0-2030) e M-126 a M-129, M-131, M-132 — refratário e isolamento: calibração da elevação pelo tubulão, quantidades e espessuras (não montado no 3D).</li>
+<li><b>D0-D5057-M-130, M-136 e M-137</b> (DXF) — arranjo geral com cotas (solo 11,850; tubulão 52,620) e câmara de ar (folhas 2 e 3).</li>
+<li><b>Fichas de fabricação das paredes</b> (DXF) — frontal, frontal-traseira, laterais, traseira e três partes da divisória: tubo Ø76,2 × 5,59, passo 102, comprimentos e pesos; confirmam 126 tubos e 30 tubos por divisória (2.958 mm).</li>
+<li><b>Fluid bed coolers, estrutura da caldeira, base de fundação, cobertura, penthouse, U-beams, M-158 e M-162 a M-169, E-57D-108/110</b> (DXF) — lidos; sem montagem por falta de posição confiável em planta.</li>
 <li><b>D0-D5057-M-135</b> (DXF) — Sistema de ar e gases, câmara de ar, folha 1/3 (10-0-2059): largura de 12.902 mm, cabeçotes e cota 16.675 mm (usado só para conferir).</li>
 <li><b>D0-D5057-M-140</b> (DXF) — Duto de ar primário, tubulação de ar de selagem da reinjeção de cinzas do multiciclone (10-1-7243) e <b>D1-D5057-M-152</b> (DXF) — chaves de nível para sólidos na câmara de ar (10-1-7338): lidos, sem medidas que entrem neste modelo.</li>
 <li><b>D1-D5057-M-019</b> (DXF, GA em corte lateral): conferida, mas não usada no modelo (cotas 0,300 m abaixo dos outros desenhos).</li>
@@ -519,7 +530,7 @@ renderer.localClippingEnabled=true;
 var clipPl=new THREE.Plane(new THREE.Vector3(0,-1,0),40);
 var divGroup=new THREE.Group();scene.add(divGroup);
 var divPick=[];
-var FUP=1.0; /* teste v5: eixo dos tubos do piso 1,0 m acima da base das divisorias */
+var FUP=1.077; /* v6: eixo dos tubos do piso em 17.337 (M-135, camara de ar): 16.260 + 1,077 m */
 var EL=P.elev,RH=P.d_cab/2000,ZB=RH-FUP,ZT=(EL.topo-EL.base)/1000+RH-FUP;
 function ezz(e){return (e-EL.base)/1000+RH-FUP}
 function cm(c,o){o=o||{};o.color=c;o.roughness=0.5;o.metalness=0.5;o.clippingPlanes=[clipPl];return new THREE.MeshStandardMaterial(o)}
@@ -652,13 +663,31 @@ function qOutline(poly,u,col,op,grp){var v=[];for(var i=0;i<poly.length;i++){var
 /* casco: frente, traseira (125 tubos x 102) e teto */
 (function(){var prof=FWp.concat(RWp.slice().reverse());
   qStrip(FWp,0,WF,0xe5484d,0.14,gFT);qStrip(RWp,0,WF,0x3b82f6,0.14,gFT);qStrip([[0,roofE(0)],[DF,roofE(DF)]],0,WF,0x9aa4b6,0.16,gFT);
-  [FWp,RWp].forEach(function(poly,pi){var v=[];for(var i=0;i<125;i++){var u=WF/2+(i-62)*102;for(var k=0;k<poly.length-1;k++)v.push(PM(u,poly[k][0],poly[k][1]),PM(u,poly[k+1][0],poly[k+1][1]))}
+  [FWp,RWp].forEach(function(poly,pi){var v=[];for(var i=0;i<126;i++){var u=WF/2+(i-62.5)*102;for(var k=0;k<poly.length-1;k++)v.push(PM(u,poly[k][0],poly[k][1]),PM(u,poly[k+1][0],poly[k+1][1]))}
     qLines(v,pi?0x3b82f6:0xe5484d,0.5,gFT)});
   qOutline(prof,0,0xe5484d,0.9,gFT);qOutline(prof,WF,0xe5484d,0.9,gFT)})();
 /* wingwalls: trecho vertical (abaixo de 36.156 nao montado: desenho M-060 com cotas que nao batem) */
 WWu.forEach(function(u){var t0=WWtop(WWd0),t1=WWtop(WWd1);
   qMesh(PM(u,WWd0,WWlo),PM(u,WWd1,WWlo),PM(u,WWd1,t1),PM(u,WWd0,t0),0xb04ad8,0.32,gWW);
   qOutline([[WWd0,WWlo],[WWd1,WWlo],[WWd1,t1],[WWd0,t0]],u,0xb04ad8,0.95,gWW)});
+/* v7: wingwalls, trecho inferior ate o inicio das curvas (M-060/M-147 + M-125). Quebra de escala de 2.497 mm nas vistas da M-060 explica as cotas. */
+(function(){var k=Math.tan(Math.atan2(36.5,63.5)),T1=[0,2,5,7];
+  WWu.forEach(function(u,i){var E0=T1.indexOf(i)>=0?34890:34350;
+    function bot(d){return E0-(d-WWd0)*36.5/63.5}
+    var b0=bot(WWd0),b1=bot(WWd1);
+    qMesh(PM(u,WWd0,b0),PM(u,WWd1,b1),PM(u,WWd1,WWlo),PM(u,WWd0,WWlo),0xb04ad8,0.32,gWW);
+    qOutline([[WWd0,b0],[WWd1,b1],[WWd1,WWlo],[WWd0,WWlo]],u,0xb04ad8,0.95,gWW);
+    var v=[];for(var j=0;j<18;j++){var d=WWd0+j*63.5;v.push(PM(u,d,bot(d)),PM(u,d,WWlo))}
+    qLines(v,0xb04ad8,0.55,gWW)})})();
+/* v8: niveis dos 9 reforcos da fornalha (10-1-6871 conjunto + M-080/081/086/087 + arranjo de pressao). Apenas o nivel (contorno na parede); perfil VS e dimensoes do reforco nao estao nos desenhos disponiveis. */
+var gBK=new THREE.Group();scene.add(gBK);
+(function(){var LV=[20795,24545,27610,31105,34600,37280,40980,44580,47930];
+  function fd(E){if(E<=BRK0)return 918;if(E>=BRK1)return 0;return 918*(BRK1-E)/(BRK1-BRK0)}
+  function rd(E){return DF-fd(E)}
+  LV.forEach(function(E){var a=fd(E),b=rd(E);
+    var p=[PM(0,a,E),PM(WF,a,E),PM(WF,b,E),PM(0,b,E)],v=[];
+    for(var i=0;i<4;i++){v.push(p[i],p[(i+1)%4])}
+    qLines(v,0x14b8a6,0.95,gBK)})})();
 /* passe de conveccao, tremonha e envelope dos feixes do superaquecedor */
 (function(){var u0=-9.5,u1=WP-9.5;
   [u0,u1].forEach(function(u){qOutline(PASSp,u,0x18a999,0.95,gPass)});
@@ -667,6 +696,33 @@ WWu.forEach(function(u){var t0=WWtop(WWd0),t1=WWtop(WWd1);
     qMesh(PM(SHu0,c[0][0],c[0][1]),PM(SHu1,c[0][0],c[0][1]),PM(SHu1,c[1][0],c[1][1]),PM(SHu0,c[1][0],c[1][1]),0x7a8ca8,0.0,gPass);
     qOutline(c,SHu0,0x7a8ca8,0.95,gPass);qOutline(c,SHu1,0x7a8ca8,0.95,gPass);
     qLines([PM(SHu0,d0,shBot(d0)),PM(SHu1,d0,shBot(d0)),PM(SHu0,d1,shBot(d1)),PM(SHu1,d1,shBot(d1)),PM(SHu0,d0,shTop(d0)),PM(SHu1,d0,shTop(d0)),PM(SHu0,d1,shTop(d1)),PM(SHu1,d1,shTop(d1))],0x7a8ca8,0.7,gPass)});
+})();
+
+/* v6: camara de ar (windbox), desenhos 10-0-2059/2060/2061 (M-135/136/137), conferida com o refratario M-125 */
+var gWB=new THREE.Group();scene.add(gWB);
+(function(){
+  var D0=666,EF=13362,E1=14536,
+  P=[[D0,EF],[D0+1992,EF],[D0+4863,EF+1339],[D0+4863,15531],[D0+5163,16174],[D0+5163,16675],[D0,16675]];
+  var dm=D0+1992+(E1-EF)/t25;
+  var A=[[D0,EF],[D0+1992,EF],[dm,E1],[D0,E1]];
+  var B=[[D0,E1],[dm,E1],P[2],P[3],P[4],P[5],P[6]];
+  function prism(poly,u0,u1,col,op){
+    var c2=poly.map(function(p){return new THREE.Vector2(p[0],p[1])});
+    var tri=THREE.ShapeUtils.triangulateShape(c2,[]);
+    [u0,u1].forEach(function(u){
+      tri.forEach(function(f){qMesh(PM(u,poly[f[0]][0],poly[f[0]][1]),PM(u,poly[f[1]][0],poly[f[1]][1]),PM(u,poly[f[2]][0],poly[f[2]][1]),PM(u,poly[f[2]][0],poly[f[2]][1]),col,op,gWB)});
+      qOutline(poly,u,col,0.95,gWB)});
+    for(var i=0;i<poly.length;i++){var a=poly[i],b=poly[(i+1)%poly.length];
+      qMesh(PM(u0,a[0],a[1]),PM(u1,a[0],a[1]),PM(u1,b[0],b[1]),PM(u0,b[0],b[1]),col,op*0.7,gWB);
+      qLines([PM(u0,a[0],a[1]),PM(u1,a[0],a[1])],col,0.55,gWB)}
+  }
+  prism(A,WF/2-6197,WF/2+6197,0xe0a100,0.16);
+  prism(B,WF/2-6451,WF/2+6451,0xe0a100,0.16);
+  /* entradas de ar primario: 2 aberturas na face frontal, 3225 mm da linha de centro, eixo em 14.290 */
+  [-3225,3225].forEach(function(o){var v=[],n=48,cu=WF/2+o,cE=14290;
+    [881,805].forEach(function(r){for(var i=0;i<n;i++){var a0=2*Math.PI*i/n,a1=2*Math.PI*(i+1)/n;
+      v.push(new THREE.Vector3((cu+r*Math.cos(a0)-WF/2)/1000,ezz(cE+r*Math.sin(a0)),(3365.4-D0)/1000),new THREE.Vector3((cu+r*Math.cos(a1)-WF/2)/1000,ezz(cE+r*Math.sin(a1)),(3365.4-D0)/1000))}});
+    qLines(v,0xe0a100,0.95,gWB)});
 })();
 
 /* camera */
@@ -693,7 +749,7 @@ function pose(name){
   if(name==="whole")return {r:pt?80:62,ph:1.15,th:0.75,y:ezz(33000),z:-4.5,full:1};
   if(name==="front")return {r:13*k,ph:1.35,th:0};
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
-  return pt?{r:23,ph:0.75,th:-Math.PI/2}:{r:11.5*k,ph:1.0,th:Math.PI};
+  return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
 }
 function setView(name){
   [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"],["bAll","whole"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
@@ -787,25 +843,6 @@ function select(it,fly){
   if(fly)flyTo(new THREE.Vector3(X(it.x),0,Z(it.y)),0.9,0.95,sph.th);
 }
 
-function parseMarks(){
-  var s=$("marc").value,parts=s.split(/[;\n]+/),ok=[],bad=[],seen={};
-  parts.forEach(function(t){
-    t=t.trim();if(!t)return;
-    var m=/^(\d+)\D+(\d+)$/.exec(t);
-    if(!m){bad.push(t);return}
-    var L=+m[1],C=+m[2],it=(L>=1&&L<=NR&&C>=1&&C<=NC)?byCell[(L-1)+","+(C-1)]:null;
-    if(!it){bad.push("L"+L+" C"+C);return}
-    if(!seen[L+","+C]){seen[L+","+C]=1;ok.push(it)}
-  });
-  markList=ok.slice(0,MAXM);layoutPins();
-  var msg=ok.length+" marcada"+(ok.length===1?"":"s");
-  if(bad.length)msg+=" · sem cap nessa posição ou formato inválido: "+bad.slice(0,6).join(", ")+(bad.length>6?"…":"")+" (a malha é alternada: em cada coluna há cap só a cada duas linhas)";
-  $("marcMsg").textContent=msg;
-  if(ok.length){select(ok[0],true)}
-}
-$("bMarc").addEventListener("click",parseMarks);
-$("marc").addEventListener("keydown",function(e){if(e.key==="Enter")parseMarks()});
-$("bClr").addEventListener("click",function(){markList=[];$("marc").value="";$("marcMsg").textContent="";selItem=null;layoutPins();$("info").textContent="Clique em um cap para ver linha, coluna, tipo e posição no desenho."});
 
 function vis(){
   head16.visible=stem16.visible=luva16.visible=$("v16").checked;
@@ -815,10 +852,10 @@ function vis(){
   wallGroup.visible=$("vWall").checked;
   jGroup.visible=$("vJ").checked;
   divGroup.visible=$("vDiv").checked;
-  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;
+  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;gWB.visible=$("vWB").checked;gBK.visible=$("vBK").checked;
   dirty=true;
 }
-["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass"].forEach(function(id){$(id).addEventListener("change",vis)});
+["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass","vWB","vBK"].forEach(function(id){$(id).addEventListener("change",vis)});
 $("vF").addEventListener("change",colorCaps);
 $("bPersp").addEventListener("click",function(){setView("persp")});
 $("bPlan").addEventListener("click",function(){setView("plan")});
