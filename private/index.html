@@ -262,6 +262,7 @@ var P={
   "base": 16370,
   "emenda1": 17862,
   "emenda2": 33545,
+  "emenda3": 25449,
   "topo": 49750
  },
  "d_tubo": 76.2,
@@ -452,8 +453,9 @@ renderer.localClippingEnabled=true;
 var clipPl=new THREE.Plane(new THREE.Vector3(0,-1,0),40);
 var divGroup=new THREE.Group();scene.add(divGroup);
 var divPick=[];
-var EL=P.elev,RH=P.d_cab/2000,ZB=RH,ZT=(EL.topo-EL.base)/1000+RH;
-function ezz(e){return (e-EL.base)/1000+RH}
+var FUP=1.0; /* eixo dos tubos do piso 1,0 m acima da base das divisorias (desenho v5) */
+var EL=P.elev,RH=P.d_cab/2000,ZB=RH-FUP,ZT=(EL.topo-EL.base)/1000+RH-FUP;
+function ezz(e){return (e-EL.base)/1000+RH-FUP}
 function cm(c,o){o=o||{};o.color=c;o.roughness=0.5;o.metalness=0.5;o.clippingPlanes=[clipPl];return new THREE.MeshStandardMaterial(o)}
 var mDT=cm(0xa9b6c4),mDH=cm(0x6f7f90),mDF=cm(0x8794a3,{side:THREE.DoubleSide}),mDL=cm(0xc29a3a);
 var mDS=new THREE.MeshBasicMaterial({color:0x8e5bd1,transparent:true,opacity:0.6,clippingPlanes:[clipPl]});
@@ -471,13 +473,13 @@ for(var k=0;k<5;k++){
   [ZB,ZT].forEach(function(yy){var h=new THREE.Mesh(hg,mDH);h.position.set(wx,yy,0);h.userData.k=k;divGroup.add(h);divPick.push(h)});
   P.bocais.forEach(function(o){var b=new THREE.Mesh(bg,mDH);b.position.set(wx,ZT+RH+0.07,-o/1000);b.userData.k=k;divGroup.add(b);divPick.push(b)});
   [(P.orelhas[0]+P.orelhas[1])/2,(P.orelhas[2]+P.orelhas[3])/2].forEach(function(o){var l=new THREE.Mesh(new THREE.BoxGeometry(0.318,0.30,0.0315),mDL);l.position.set(wx,ZT+RH+0.12,-o/1000);l.userData.k=k;divGroup.add(l);divPick.push(l)});
-  [EL.emenda1,EL.emenda2].forEach(function(e){var s=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.02,DEP),mDS);s.position.set(wx,ezz(e),0);divGroup.add(s)});
+  [EL.emenda1,EL.emenda3,EL.emenda2].forEach(function(e){var s=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.02,DEP),mDS);s.position.set(wx,ezz(e),0);divGroup.add(s)});
 }
 dTubes.instanceMatrix.needsUpdate=true;
 function setClip(){var v=+$("vh").value,full=v>=34;clipPl.constant=full?1e3:v;$("vhv").textContent=full?"completa":v.toLocaleString("pt-BR")+" m";dirty=true}
 function divInfo(k){
   var g=function(n){return n.toLocaleString("pt-BR")};
-  $("info").innerHTML="<b>Divisória Nº "+(k+1)+"</b> — item "+P.itens[k]+" do desenho D1-D5057-M-079, peso "+g(P.peso[k])+" kg<br><span class='small'>31 tubos Ø76,2 (passo 102 mm) · cabeçotes Ø219,1 × 3.148 mm · elevações: base "+g(EL.base)+", emendas "+g(EL.emenda1)+" e "+g(EL.emenda2)+", topo "+g(EL.topo)+" mm · eixo em x = "+M.div[k].toFixed(1).replace(".",",")+" mm no desenho do piso</span>";
+  $("info").innerHTML="<b>Divisória Nº "+(k+1)+"</b> — item "+P.itens[k]+" do desenho D1-D5057-M-079, peso "+g(P.peso[k])+" kg<br><span class='small'>31 tubos Ø76,2 (passo 102 mm) · cabeçotes Ø219,1 × 3.148 mm · elevações: base "+g(EL.base)+", emendas "+g(EL.emenda1)+", "+g(EL.emenda3)+" e "+g(EL.emenda2)+", topo "+g(EL.topo)+" mm · eixo em x = "+M.div[k].toFixed(1).replace(".",",")+" mm no desenho do piso</span>";
 }
 
 var pinGeo=new THREE.ConeGeometry(0.03,0.14,10);pinGeo.rotateX(Math.PI);
@@ -517,7 +519,7 @@ M.div.forEach(function(d,i){addLabel("Divisória "+(i+1),d,15050,0.07,"wall")});
 M.joints.forEach(function(j,i){addLabel("Emenda "+(i+1),j,9300,0.05,"wall")});
 listT.forEach(function(t){addLabel(t.tag?t.tag.slice(-1):"T",t.x,t.y,0.5,"tc",t.tag)});
 M.div.forEach(function(d,i){addLabel("Div. "+(i+1)+" · topo",d,CY,ZT+0.75,"dv","Divisória Nº "+(i+1)+" — elevação "+EL.topo.toLocaleString("pt-BR")+" mm","Div."+(i+1))});
-[[EL.base,"El. "],[EL.emenda1,"Emenda El. "],[EL.emenda2,"Emenda El. "],[EL.topo,"El. "]].forEach(function(p){addLabel(p[1]+p[0].toLocaleString("pt-BR"),M.div[0]-520,CY,ezz(p[0]),"dv","","")});
+[[EL.base,"El. "],[EL.emenda1,"Emenda El. "],[EL.emenda3,"Emenda El. "],[EL.emenda2,"Emenda El. "],[EL.topo,"El. "]].forEach(function(p){addLabel(p[1]+p[0].toLocaleString("pt-BR"),M.div[0]-520,CY,ezz(p[0]),"dv","","")});
 function placeLabels(){
   var w=wrap.clientWidth,h=wrap.clientHeight,show=$("vL").checked,v=new THREE.Vector3();
   labels.forEach(function(L){
