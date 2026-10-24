@@ -174,7 +174,7 @@ body:has(#bFull) .seg{top:112px}
 <!--INFO_NAV-->
 <div id="vizPane">
 <div class="toolbar">
-<div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
+<div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Traseira</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
 <label class="hs">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="0.5"><span id="vhv">0,5 m</span></label>
 </div>
 
@@ -562,7 +562,7 @@ function pose(name){
   if(name==="plan")return pt?{r:19.5,ph:0.02,th:Math.PI/2}:{r:11.4*k,ph:0.02,th:0};
   if(name==="front")return {r:13*k,ph:1.35,th:0};
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
-  return pt?{r:23,ph:0.75,th:-Math.PI/2}:{r:11.5*k,ph:1.0,th:Math.PI};
+  return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
 }
 var prevVh=null;
 function setView(name){
