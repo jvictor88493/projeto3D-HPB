@@ -1,5 +1,5 @@
 {
-  "functions": { "api/page.js": { "includeFiles": "private/**" } },
+  "functions": { "api/page.js": { "includeFiles": "private/**" }, "api/full.js": { "includeFiles": "private/**" } },
   "rewrites": [
     { "source": "/", "destination": "/api/page" },
     { "source": "/login", "destination": "/login.html" }

@@ -26,4 +26,9 @@ function readEmail(req) {
     return allowed().includes(d.e) ? d.e : null;
   } catch (e) { return null; }
 }
-module.exports = { NAME, allowed, makeToken, readEmail };
+// Quem ve o botao "3D HPB Completa" (padrao abaixo; pode ser sobrescrito pela variavel FULL_EMAILS).
+const FULL_DEFAULT = 'jvictor88493@gmail.com,thiago.morais@hydro.com,luana@luanaandrade.com,emanuel.rosario@hydro.com,maviano.silva@hydro.com,mario.mendes.neto@hydro.com,nerio.pereira@hydro.com';
+function fullEmails() {
+  return (process.env.FULL_EMAILS || FULL_DEFAULT).split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+}
+module.exports = { NAME, allowed, makeToken, readEmail, fullEmails };

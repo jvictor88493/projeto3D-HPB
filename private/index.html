@@ -138,10 +138,27 @@ body.fopen .side{transform:none}
 }
 @media (max-height:500px) and (orientation:landscape){
 #wrap{height:calc(100dvh - 52px)}
-.seg{top:8px;flex-direction:row;flex-wrap:wrap;width:auto;right:8px;max-width:calc(100vw - 80px);justify-content:flex-end}
+.seg{top:54px;flex-direction:row;flex-wrap:wrap;width:auto;right:8px;max-width:calc(100vw - 80px);justify-content:flex-end}
 .hs{bottom:8px}
 #bCsv.cta{bottom:8px}
 }
+
+/* ===== botao 3D HPB Completa + overlay ===== */
+.cta.alt{background:var(--accent);box-shadow:var(--shadow)}
+.cta.alt:hover{background:var(--accent);filter:brightness(1.15)}
+@media (prefers-color-scheme: dark){.cta.alt{color:#0e1524}}
+#fullOv{position:fixed;inset:0;z-index:200;background:var(--bg);display:flex;flex-direction:column}
+#fullOv[hidden]{display:none}
+#fullOv .fbar{display:flex;align-items:center;gap:12px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--panel)}
+#fullOv .fbar button{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:var(--shadow);font:inherit;font-size:13px}
+#fullOv .fbar b{font-size:15px}
+#fullFr{flex:1;width:100%;border:0;background:var(--bg)}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){
+#bFull.cta{padding:6px 10px;font-size:12px;gap:6px;border-radius:10px}
+#bFull svg.i{width:16px;height:16px}
+body:has(#bFull) .seg{top:112px}
+}
+@media (max-height:500px) and (orientation:landscape){body:has(#bFull) .seg{top:54px}}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -150,7 +167,7 @@ body.fopen .side{transform:none}
 <header class="top">
 <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="gp" d="M20.5 3h7l1 5a16 16 0 0 1 4.2 2.4l4.8-1.8 3.5 6-3.9 3.3a16 16 0 0 1 0 4.8l3.9 3.3-3.5 6-4.8-1.8a16 16 0 0 1-4.2 2.4l-1 5h-7l-1-5a16 16 0 0 1-4.2-2.4l-4.8 1.8-3.5-6 3.9-3.3a16 16 0 0 1 0-4.8L7 14.6l3.5-6 4.8 1.8A16 16 0 0 1 19.5 8z"/><circle cx="24" cy="24" r="8.5" fill="#f26a1b"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg><div><div class="bt">Mapa 3D de Caldeiras</div><div class="bs">Planejamento e integridade</div></div></div>
 <div class="crumb"><div class="c2">Lista de Bubble Caps - Teste · Mapa 19.10</div></div>
-<div class="topr"><div class="count"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span><b>4.508</b> posições</span></div><button id="bCsv" class="cta" title="Exportar PDF da vista em perspectiva"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><a class="out" href="/api/logout">Sair</a></div>
+<div class="topr"><div class="count"><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg><span><b>4.508</b> posições</span></div><button id="bCsv" class="cta" title="Exportar PDF da vista em perspectiva"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><!--FULL_BTN--><a class="out" href="/api/logout">Sair</a></div>
 </header>
 <div id="err"></div>
 
@@ -212,6 +229,7 @@ document.addEventListener('pointerdown',function(e){if(document.body.classList.c
 var inf=document.getElementById('info'),mi=document.getElementById('mInfo'),first=true;
 if(inf&&mi)new MutationObserver(function(){if(first){first=false;}mi.innerHTML=inf.innerHTML;mi.classList.add('show')}).observe(inf,{childList:true,subtree:true,characterData:true});
 })();</script>
+<!--FULL_OVERLAY-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
