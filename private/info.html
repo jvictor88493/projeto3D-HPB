@@ -1,4 +1,4 @@
-<nav class="tabs"><button class="tab on" id="tViz">Visualização</button><button class="tab" id="tInfo">Informação</button></nav><!--SPLIT--><section id="infoPanel" hidden>
+<nav class="tabs"><button class="tab on" id="tViz" aria-current="page">Visualização</button><button class="tab" id="tInfo">Informação</button></nav><!--SPLIT--><section id="infoPanel" hidden>
 <p class="small" style="margin:0 0 4px">Informações do projeto · acesso restrito</p>
 <details>
 <summary>Resumo: o que o Excel marca de diferente do padrão</summary>
@@ -42,4 +42,4 @@
 </details>
 
 </section>
-<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),a=document.getElementById("tViz"),b=document.getElementById("tInfo");function show(i){v.hidden=i;p.hidden=!i;a.classList.toggle("on",!i);b.classList.toggle("on",i);window.scrollTo(0,0)}a.onclick=function(){show(false)};b.onclick=function(){show(true)};window.__showViz=function(){show(false)}})();</script>
+<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),a=document.getElementById("tViz"),b=document.getElementById("tInfo");function show(i){v.hidden=i;p.hidden=!i;a.classList.toggle("on",!i);a.setAttribute("aria-current",!i?"page":"false");b.setAttribute("aria-current",i?"page":"false");b.classList.toggle("on",i);window.scrollTo(0,0)}a.onclick=function(){show(false)};b.onclick=function(){show(true)};window.__showViz=function(){show(false)}})();</script>

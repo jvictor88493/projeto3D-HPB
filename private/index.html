@@ -160,6 +160,21 @@ body.fopen .side{transform:none}
 body:has(#bFull) .seg{top:112px}
 }
 @media (max-height:500px) and (orientation:landscape){body:has(#bFull) .seg{top:54px}}
+
+/* refinamentos 24.10 */
+.lbl.big{box-shadow:0 2px 8px rgba(20,35,59,.28)}
+.top .tabs{order:2;margin:0 0 0 28px}.crumb{order:3;margin-left:auto;padding-right:18px;border-left:0}.topr{order:4;margin-left:0}.brand{order:1}
+.tab.on{box-shadow:inset 0 -4px 0 var(--orange);font-weight:700}
+.tab:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.side>.card>h3{cursor:pointer;display:flex;align-items:center;gap:8px}
+.side>.card>h3 .tg{margin-left:auto;font-size:11px;font-weight:500;color:var(--muted)}
+.side>.card.shut>*:not(h3){display:none!important}
+@media (prefers-color-scheme: dark){.lbl{background:#16233c;border-color:#5a7099;color:#eaf0fb}.lbl.wall{color:#cfd9ec}.lbl.big{color:#fff}.lbl.cam{background:#24467f;border-color:#6f94d6;color:#e6efff}.lbl.tc{background:var(--orange);border-color:var(--orange);color:#fff}}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){
+.lbl.big{font-size:11px;padding:2px 6px}.crumb{display:none}.brand>div{display:none}.brand svg{width:24px;height:24px}
+.top{gap:4px;padding:6px 8px}.top .tabs{margin:0;gap:4px}.top .tab{padding:6px 7px;font-size:11px;border-radius:8px}
+.topr{gap:2px;margin-left:auto}#bFull{padding:6px 8px;font-size:11px;gap:4px;border-radius:8px}#bFull svg{width:14px;height:14px}.out{padding:4px;font-size:11px}
+}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -510,13 +525,14 @@ function addLabel(text,x,y,zz,cls,title,short){
   var e=document.createElement("div");e.className="lbl "+(cls||"");e.textContent=text;if(title)e.title=title;wrap.appendChild(e);
   labels.push({el:e,v:new THREE.Vector3(X(x),zz,Z(y)),cls:cls,full:text,short:short||text});
 }
-addLabel("TRASEIRA DA CALDEIRA",CX,8450,0,"big","","TRASEIRA");
-addLabel("PAREDE DE ÁGUA - FRONTAL",CX,15750,0,"big","","FRONTAL");
+var PTL=Math.min(innerWidth,innerHeight)<=600||innerWidth<=820;
+addLabel("TRASEIRA DA CALDEIRA",CX,PTL?8450:7700,0,"big","","TRASEIRA");
+addLabel("PAREDE DE ÁGUA - FRONTAL",CX,PTL?15750:17700,0,"big","","FRONTAL");
 addLabel("lado direito",5100,12345,0,"wall");
 addLabel("lado esquerdo",18850,12345,0,"wall");
-CAMR.forEach(function(r,i){addLabel("CÂMARA "+(i+1),cellX((r[0]+r[1])/2-1),8900,0.02,"big cam","Fileiras "+r[0]+" a "+r[1],"C"+(i+1))});
-M.div.forEach(function(d,i){addLabel("Divisória "+(i+1),d,15050,0.07,"wall")});
-M.joints.forEach(function(j,i){addLabel("Emenda "+(i+1),j,9300,0.05,"wall")});
+CAMR.forEach(function(r,i){addLabel("CÂMARA "+(i+1),cellX((r[0]+r[1])/2-1),PTL?8900:8500,0.02,"big cam","Fileiras "+r[0]+" a "+r[1],"C"+(i+1))});
+M.div.forEach(function(d,i){addLabel("Divisória "+(i+1),d,PTL?15050:16500,0.07,"wall")});
+M.joints.forEach(function(j,i){addLabel("Emenda "+(i+1),j,PTL?9300:9500,0.05,"wall")});
 listT.forEach(function(t){addLabel(t.tag?t.tag.slice(-1):"T",t.x,t.y,0.5,"tc",t.tag)});
 M.div.forEach(function(d,i){addLabel("Div. "+(i+1)+" · topo",d,CY,ZT+0.75,"dv","Divisória Nº "+(i+1)+" — elevação "+EL.topo.toLocaleString("pt-BR")+" mm","Div."+(i+1))});
 [[EL.base,"El. "],[EL.emenda1,"Emenda El. "],[EL.emenda3,"Emenda El. "],[EL.emenda2,"Emenda El. "],[EL.topo,"El. "]].forEach(function(p){addLabel(p[1]+p[0].toLocaleString("pt-BR"),M.div[0]-520,CY,ezz(p[0]),"dv","","")});
@@ -763,6 +779,12 @@ setClip();layoutCaps();colorCaps();vis();applyTheme();resize();(function(){var q
 })();
 window.__bc={tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
 })();
+
+(function(){[].forEach.call(document.querySelectorAll(".side>.card"),function(c){var h=c.querySelector("h3");if(!h)return;var t=document.createElement("span");t.className="tg";h.appendChild(t);
+  function set(o){c.classList.toggle("shut",!o);t.textContent=o?"recolher":"abrir";h.setAttribute("aria-expanded",o)}
+  h.tabIndex=0;set(/Camadas|Materiais/.test(h.textContent));
+  h.addEventListener("click",function(){set(c.classList.contains("shut"))});
+  h.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();set(c.classList.contains("shut"))}})})})();
 </script>
 </body>
 </html>
