@@ -4,7 +4,7 @@ const { neon } = require('@neondatabase/serverless');
 const { readEmail } = require('./_auth');
 
 function markEmails() {
-  return (process.env.MARK_EMAILS || 'hpb@timitecnologia.com').split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+  return (process.env.MARK_EMAILS || 'hpb@timitecnologia.com,jvictor88493@gmail.com').split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
 }
 function send(res, code, obj) {
   res.statusCode = code;
