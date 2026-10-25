@@ -212,7 +212,8 @@ details{border-radius:14px}
 @media (max-width:820px),(max-height:500px) and (orientation:landscape){
 .page{padding:0}
 .seg{top:10px}
-#wrap{height:calc(100dvh - 8px)}
+.past .seg,.past .hs{opacity:0;pointer-events:none}.seg,.hs{transition:opacity .15s}
+#wrap{height:64dvh;min-height:380px}
 }
 @media (max-height:500px) and (orientation:landscape){.seg{top:8px}#wrap{height:calc(100dvh - 8px)}}
 </style>
@@ -310,6 +311,7 @@ function o(v){document.body.classList.toggle('fopen',v)}
 if(b)b.addEventListener('click',function(e){e.stopPropagation();o(!document.body.classList.contains('fopen'))});
 if(c)c.addEventListener('click',function(){o(false)});
 document.addEventListener('pointerdown',function(e){if(document.body.classList.contains('fopen')&&side&&!side.contains(e.target)&&e.target!==b&&!b.contains(e.target))o(false)},true);
+var wr=document.getElementById('wrap');function pastW(){document.body.classList.toggle('past',wr&&window.scrollY>wr.offsetHeight-140)}window.addEventListener('scroll',pastW,{passive:true});pastW();
 var inf=document.getElementById('info'),mi=document.getElementById('mInfo');
 if(inf&&mi)new MutationObserver(function(){mi.innerHTML=inf.innerHTML;mi.classList.add('show')}).observe(inf,{childList:true,subtree:true,characterData:true});
 })();</script>
