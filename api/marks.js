@@ -1,7 +1,7 @@
 // Marcacoes de bubble caps (retirado / montado), gravadas no Neon.
 // GET: lotes ativos (todos os usuarios logados veem). POST: novo lote ou desfazer (so MARK_EMAILS; desfazer so o autor).
 const { neon } = require('@neondatabase/serverless');
-const { readEmail } = require('./_auth');
+const { readEmail, fullEmails } = require('./_auth');
 
 function markEmails() {
   return (process.env.MARK_EMAILS || 'hpb@timitecnologia.com,jvictor88493@gmail.com').split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
@@ -22,6 +22,7 @@ const CELL = /^(\d{1,2}),(\d{1,3})$/;
 module.exports = async (req, res) => {
   const email = readEmail(req);
   if (!email) return send(res, 401, { erro: 'Sessão expirada. Entre de novo.' });
+  if (!fullEmails().includes(email)) return send(res, 403, { erro: 'Acesso restrito.' });
   if (!process.env.DATABASE_URL) return send(res, 500, { erro: 'Banco de dados não configurado.' });
   const sql = neon(process.env.DATABASE_URL);
   const canMark = markEmails().includes(email);

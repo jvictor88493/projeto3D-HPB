@@ -11,6 +11,10 @@ const FULL_OVERLAY = `<div id="fullOv" hidden><div class="fbar"><button id="full
 function open(){if(!f.getAttribute('src'))f.setAttribute('src','/api/full');o.hidden=false;document.documentElement.style.overflow='hidden'}
 function close(){o.hidden=true;document.documentElement.style.overflow=''}
 b.addEventListener('click',open);k.addEventListener('click',close);document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!o.hidden)close()})})();</script>`;
+const TAB_JS = `<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),T={viz:document.getElementById("tViz"),acomp:document.getElementById("tAcomp"),info:document.getElementById("tInfo")};
+function show(n){if(v)v.hidden=n==="info";if(p)p.hidden=n!=="info";Object.keys(T).forEach(function(k){var b=T[k];if(!b)return;b.classList.toggle("on",k===n);b.setAttribute("aria-current",k===n?"page":"false")});
+if(window.__acompMode)window.__acompMode(n==="acomp");window.scrollTo(0,0)}
+Object.keys(T).forEach(function(k){if(T[k])T[k].onclick=function(){show(k)}});window.__showViz=function(){show("viz")}})();</script>`;
 module.exports = (req, res) => {
   res.setHeader('Cache-Control', 'private, no-store');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow');
@@ -18,13 +22,16 @@ module.exports = (req, res) => {
   if (!email) { res.statusCode = 302; res.setHeader('Location', '/login'); return res.end(); }
   const dir = path.join(process.cwd(), 'private');
   let html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
-  let nav = '', panel = '';
-  if (infoEmails().includes(email)) {
-    const parts = fs.readFileSync(path.join(dir, 'info.html'), 'utf8').split('<!--SPLIT-->');
-    nav = parts[0] || ''; panel = parts[1] || '';
-  }
+  const info = infoEmails().includes(email);
   const full = fullEmails().includes(email);
-  html = html.replace('<!--INFO_NAV-->', () => nav).replace('<!--INFO_PANEL-->', () => panel)
+  const panel = info ? fs.readFileSync(path.join(dir, 'info.html'), 'utf8') : '';
+  let nav = '';
+  if (info || full) {
+    nav = '<nav class="tabs"><button class="tab on" id="tViz" aria-current="page" type="button">Visualização</button>' +
+      (full ? '<button class="tab" id="tAcomp" type="button">Acompanhamento</button>' : '') +
+      (info ? '<button class="tab" id="tInfo" type="button">Informação</button>' : '') + '</nav>';
+  }
+  html = html.replace('<!--INFO_NAV-->', () => nav).replace('<!--INFO_PANEL-->', () => panel + TAB_JS)
     .replace('<!--FULL_BTN-->', () => full ? FULL_UI : '').replace('<!--FULL_OVERLAY-->', () => full ? FULL_OVERLAY : '');
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.end(html);
