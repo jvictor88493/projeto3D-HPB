@@ -277,7 +277,7 @@ details{border-radius:14px}
 <body>
 <div class="page">
 <div id="err"></div>
-<div class="toolbar"><div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bAll"><svg class="i" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>Caldeira</button><button id="bSite"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V11h5v10M10 21V6h5v15M17 21V3h2v18"/></svg>Conjunto</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
+<div class="toolbar"><div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Traseira</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bAll"><svg class="i" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>Caldeira</button><button id="bSite"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V11h5v10M10 21V6h5v15M17 21V3h2v18"/></svg>Conjunto</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
 <label class="hs" style="display:none" aria-hidden="true">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="34"><span id="vhv">completa</span></label>
 </div>
 <div style="display:none"><input type="text" id="marc"><button id="bMarc"></button><button id="bClr"></button><span id="marcMsg"></span></div>
@@ -1274,12 +1274,12 @@ function stepAnim(now){
 }
 function pose(name){
   var k=Math.max(1,1.75/cam.aspect),pt=cam.aspect<1;
-  if(name==="plan")return pt?{r:19.5,ph:0.02,th:Math.PI/2}:{r:11.4*k,ph:0.02,th:0};
+  if(name==="plan")return pt?{r:19.5,ph:0.02,th:-Math.PI/2}:{r:11.4*k,ph:0.02,th:Math.PI};
   if(name==="whole")return {r:pt?80:62,ph:1.15,th:0.75,y:ezz(33000),z:-4.5,full:1};
-  if(name==="front")return {r:13*k,ph:1.35,th:0};
+  if(name==="front")return {r:13*k,ph:1.35,th:Math.PI};
   if(name==="site")return {r:pt?190:150,ph:1.12,th:0.85,y:ezz(42000),z:-20,full:1};
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
-  return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
+  return pt?{r:23,ph:0.75,th:-Math.PI/2}:{r:11.5*k,ph:1.0,th:Math.PI};
 }
 function setView(name){
   [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"],["bAll","whole"],["bSite","site"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
