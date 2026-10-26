@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mapa 3D dos bubble caps</title>
+<title>Mapa 3D caldeira HPB</title>
 <style>
 :root{--bg:#f6f5f1;--panel:#ffffff;--ink:#1d1d1b;--muted:#66655f;--line:#d9d7cf;--accent:#185fa5;--accent-bg:#e6f1fb;--scene:#e9e7e0;--chip:#f0eee8}
 @media (prefers-color-scheme: dark){:root{--bg:#161614;--panel:#21211f;--ink:#ecebe6;--muted:#a3a29a;--line:#3a3a36;--accent:#85b7eb;--accent-bg:#1c2f44;--scene:#1d1d1b;--chip:#2a2a27}}
@@ -27,7 +27,7 @@ input[type=range]{accent-color:var(--accent);width:110px}
 .lbl.tc{background:#d9423a;border-color:#d9423a;color:#fff;font-weight:600}
 .lbl.wall{color:var(--muted)}
 .lbl.big{font-size:12px;font-weight:600}
-.lbl.lv{border-color:#5a7fa8}.lbl.lvd{border-color:#e0782a;color:#e0782a}
+.lbl.far{font-size:11px;border-color:#8a8a80}.lbl.far.ch{border-color:#c2410c;color:#c2410c;font-weight:600}.lbl.lv{border-color:#5a7fa8}.lbl.lvd{border-color:#e0782a;color:#e0782a}
 #desenhos{margin-top:18px;padding-top:12px;border-top:1px solid var(--line)}
 #desenhos h2{font-size:15px;margin:0 0 8px}
 #desenhos ul{margin:0;padding-left:18px;font-size:13px;line-height:1.5}
@@ -202,6 +202,58 @@ body:has(#bFull) .seg{top:112px}
 }
 @media (max-height:500px) and (orientation:landscape){body:has(#bFull) .seg{top:54px}}
 
+/* refinamentos 24.10 */
+.lbl.big{box-shadow:0 2px 8px rgba(20,35,59,.28)}
+.top .tabs{order:2;margin:0 0 0 28px}.crumb{order:3;margin-left:auto;padding-right:18px;border-left:0}.topr{order:4;margin-left:0}.brand{order:1}
+.tab.on{box-shadow:inset 0 -4px 0 var(--orange);font-weight:700}
+.tab:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.side>.card>h3{cursor:pointer;display:flex;align-items:center;gap:8px}
+.side>.card>h3 .tg{margin-left:auto;font-size:11px;font-weight:500;color:var(--muted)}
+.side>.card.shut>*:not(h3){display:none!important}
+@media (prefers-color-scheme: dark){.lbl{background:#16233c;border-color:#5a7099;color:#eaf0fb}.lbl.wall{color:#cfd9ec}.lbl.big{color:#fff}.lbl.cam{background:#24467f;border-color:#6f94d6;color:#e6efff}.lbl.tc{background:var(--orange);border-color:var(--orange);color:#fff}}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){
+.lbl.big{font-size:11px;padding:2px 6px}.crumb{display:none}.brand>div{display:none}.brand svg{width:24px;height:24px}
+.top{gap:4px;padding:6px 8px}.top .tabs{margin:0;gap:4px}.top .tab{padding:6px 7px;font-size:11px;border-radius:8px}
+.topr{gap:2px;margin-left:auto}#bFull{padding:6px 8px;font-size:11px;gap:4px;border-radius:8px}#bFull svg{width:14px;height:14px}.out{padding:4px;font-size:11px}
+}
+
+/* acompanhamento (retirados / montados) */
+.mseg{display:flex;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2px 0 10px}
+.mseg button{flex:1;font:inherit;font-size:13px;padding:8px 6px;border:0;border-right:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.mseg button:last-child{border-right:0}
+.mseg button.on{background:var(--accent);color:#fff;font-weight:700;box-shadow:inset 0 -3px 0 var(--orange)}
+@media (prefers-color-scheme: dark){.mseg button.on{color:#0e1524}}
+.mseg button:focus-visible,.mbtn:focus-visible,.sb:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.mcnt{font-size:13px;color:var(--ink);display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.mcnt .k{display:flex;justify-content:space-between;gap:8px}.mcnt .k b{font-variant-numeric:tabular-nums}
+.mcnt .sub{font-size:11.5px;color:var(--muted)}
+.mbtn{width:100%;font:inherit;font-weight:600;font-size:13.5px;padding:9px 12px;border-radius:10px;border:1px solid var(--accent);background:var(--accent-bg);color:var(--ink);cursor:pointer;margin-bottom:10px}
+.mbtn.on{background:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){.mbtn.on{color:#0e1524}}
+#mHist{display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto}
+.hl{display:flex;align-items:center;gap:8px;font-size:12px;border-top:1px solid var(--line);padding-top:6px}
+.hl .tg2{font-weight:700;padding:1px 7px;border-radius:6px;color:#fff;font-size:11px}
+.hl .tg2.rem{background:#c2410c}.hl .tg2.mon{background:#15803d}
+.hl .who{color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hl button{font:inherit;font-size:11.5px;padding:3px 8px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--ink);cursor:pointer}
+#selRect[hidden],#selBar[hidden],#mToast[hidden]{display:none!important}
+@media (max-width:1500px) and (min-width:821px){.top:has(#tAcomp) .crumb{display:none}}
+.side>#acomp{display:none}
+body.acomp .side>.card{display:none}
+body.acomp .side>#acomp{display:block}
+body.acomp #acomp>h3 .tg{display:none}
+body.acomp .bottom>.card:not(:first-child),body.acomp #desenhos{display:none}
+#selRect{position:absolute;z-index:6;border:2px solid #00c2ff;background:rgba(0,194,255,.14);pointer-events:none;border-radius:2px}
+#selBar{position:absolute;z-index:7;left:50%;bottom:12px;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;padding:8px 10px;border-radius:12px;background:var(--panel);border:1px solid var(--line);box-shadow:0 4px 16px rgba(0,0,0,.22);max-width:calc(100% - 24px)}
+#selN{font-size:13px;font-weight:600;padding:0 4px;font-variant-numeric:tabular-nums}
+.sb{font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+.sb.rem{background:#c2410c;border-color:#c2410c;color:#fff}.sb.mon{background:#15803d;border-color:#15803d;color:#fff}
+.sb:disabled{opacity:.45;cursor:default}
+#mToast{position:absolute;z-index:8;left:50%;top:12px;transform:translateX(-50%);padding:8px 12px;border-radius:10px;background:var(--accent);color:#fff;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.25);max-width:calc(100% - 24px)}
+@media (prefers-color-scheme: dark){#mToast{color:#0e1524}}
+body.selmode #wrap{cursor:crosshair}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){#selBar{bottom:70px}.sb{padding:7px 9px;font-size:12px}}
+
 /* ===== ajustes para a pagina do 3D completo (dentro do overlay) ===== */
 .page{max-width:1500px;margin:0 auto;padding:12px 16px 24px}
 #info{margin:6px 0 0;padding:0;border:0;background:none;border-radius:0;min-height:54px}
@@ -221,15 +273,15 @@ details{border-radius:14px}
 <body>
 <div class="page">
 <div id="err"></div>
-<div class="toolbar"><div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bAll"><svg class="i" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>Caldeira</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
+<div class="toolbar"><div class="seg"><button id="bPersp" class="on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/></svg>Perspectiva</button><button id="bPlan"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 9h16M9 4v16"/></svg>Planta</button><button id="bFront"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>Frente</button><button id="bWalls"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M15 4v16"/></svg>Divisórias</button><button id="bAll"><svg class="i" viewBox="0 0 24 24"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6M4 21h16"/></svg>Caldeira</button><button id="bSite"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V11h5v10M10 21V6h5v15M17 21V3h2v18"/></svg>Conjunto</button><button id="bFilt"><svg class="i" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filtros</button></div>
 <label class="hs">Altura das divisórias <input type="range" id="vh" min="0.5" max="34" step="0.5" value="34"><span id="vhv">completa</span></label>
 </div>
 <div style="display:none"><input type="text" id="marc"><button id="bMarc"></button><button id="bClr"></button><span id="marcMsg"></span></div>
 <main class="grid">
 <div class="stage"><div id="wrap"><div id="mInfo"></div><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div></div>
 <aside class="side"><button id="fclose" type="button">Fechar ✕</button>
-<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg>Camadas da visualização</h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL" checked></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l">Paredes laterais (M-080)</span><input type="checkbox" id="vSW" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#00b3a4"></span>Parede lateral esquerda (M-081)</span><input type="checkbox" id="vSWL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#14b8a6"></span>Reforços / buckstays (níveis)</span><input type="checkbox" id="vBK" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a100"></span>Câmara de ar (M-135/136/137)</span><input type="checkbox" id="vWB" checked></label></section>
-<section class="card" id="tipos"><h3><svg class="i" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg>Tipo de cap</h3><label class="sw"><span class="l"><span class="dot" style="background:#4f7fa8"></span>16 furos <span class="small" id="n16"></span></span><input type="checkbox" id="v16" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a030"></span>9 furos <span class="small" id="n9"></span></span><input type="checkbox" id="v9" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></span><input type="checkbox" id="vT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8e5bd1"></span>Instalação de campo <span class="small" id="nF"></span></span><input type="checkbox" id="vF"></label></section>
+<section class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Camadas da visualização</h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL" checked></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l">Paredes laterais (M-080)</span><input type="checkbox" id="vSW" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#00b3a4"></span>Parede lateral esquerda (M-081)</span><input type="checkbox" id="vSWL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#6b7fd7"></span>Tubulão de vapor</span><input type="checkbox" id="vDR" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#14b8a6"></span>Reforços / buckstays (níveis)</span><input type="checkbox" id="vBK" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a100"></span>Câmara de ar (M-135/136/137)</span><input type="checkbox" id="vWB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8a8a80"></span>Eixos e colunas (10-0-1840)</span><input type="checkbox" id="vST" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#c2410c"></span>Chaminé (M-015)</span><input type="checkbox" id="vCH" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0ea5e9"></span>Tubos de alimentação U-beam (M-058)</span><input type="checkbox" id="vUB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#64748b"></span>Fechamento do topo (M-169)</span><input type="checkbox" id="vCL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c6f9b"></span>Silo de calcário (posição)</span><input type="checkbox" id="vSL" checked></label></section>
+<section class="card" id="tipos"><h3><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Tipo de cap</h3><label class="sw"><span class="l"><span class="dot" style="background:#4f7fa8"></span>16 furos <span class="small" id="n16"></span></span><input type="checkbox" id="v16" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a030"></span>9 furos <span class="small" id="n9"></span></span><input type="checkbox" id="v9" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></span><input type="checkbox" id="vT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8e5bd1"></span>Instalação de campo <span class="small" id="nF"></span></span><input type="checkbox" id="vF"></label></section>
 </aside>
 </main>
 <section class="bottom"><div class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Detalhes da posição</h3><div id="info">Clique em um cap para ver linha, coluna, tipo e posição no desenho. As divisórias aparecem cortadas a 3 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div></div></section>
@@ -242,10 +294,10 @@ details{border-radius:14px}
 <li><b>Bubble cap</b> (desenhos D2-3500-57-M-008 e M-009, R00): cabeça Ø48 × 63 mm sobre haste Ø33,4 × 62 mm (total 125 mm, furo interno Ø26). <b>16 furos:</b> duas fiadas de 8 furos Ø5, a 32 e a 46 mm do topo, defasadas de 22,5°. <b>9 furos:</b> 5 + 4 furos Ø5 nas mesmas alturas, só em meia circunferência. Todos os furos saem inclinados 25° para baixo. <b>Luva</b> Ø44 × Ø35 × 50 mm em volta da haste.</li>
 <li><b>Montagem:</b> pelo Detalhe D1 do desenho do piso, a ponta da haste fica rente à face inferior da aleta (aleta de 7 mm, centrada no eixo dos tubos) e a luva assenta sobre a aleta, sobre o furo Ø35. O topo do cap fica então a cerca de 121 mm do eixo dos tubos. Essa montagem é minha leitura dos dois desenhos: o desenho do piso (2007) cotava o topo a 184 mm com um cap de outro perfil.</li>
 <li><b>Furos:</b> aparecem como marcas escuras na superfície, com diâmetro, alturas e defasagem do desenho. O canal interno e a inclinação de 25° não são modelados em 3D.</li>
-<li><b>Paredes laterais:</b> no piso aparecem pela pegada (círculos dos tubos, desenho do piso). Em altura, a parede direita vem do desenho D1-D5057-M-080 (tubos e contorno do painel, sem coletores nem detalhes) e a esquerda é a mesma, espelhada, porque o desenho da parede esquerda (10-1-6828) não foi fornecido. Elas respeitam o corte de altura das divisórias.</li>
-<li><b>Divisórias 3D</b> (desenho D1-D5057-M-079): 5 painéis de 31 tubos Ø76,2 com passo de 102 mm, cabeçotes Ø219,1 × 3.148 mm, 4 bocais Ø114,3 e 2 orelhas no cabeçote superior, entre as elevações 16.370 e 49.750 mm, com emendas de campo em 17.862 e 33.545 mm. Posição no piso: centradas na profundidade do campo de caps (o vão sem caps no desenho do piso coincide com o centro delas).</li>
+<li><b>Paredes laterais:</b> no piso aparecem pela pegada (círculos dos tubos, desenho do piso). Em altura, a parede direita vem do desenho D1-D5057-M-080 e a esquerda do D1-D5057-M-081 (tubos e contorno do painel, sem coletores nem detalhes). Elas respeitam o corte de altura das divisórias.</li>
+<li><b>Divisórias 3D</b> (desenho D1-D5057-M-079): 5 painéis de 30 tubos Ø76,2 com passo de 102 mm (29 × 102 = 2.958; até o v9 eram 31), cabeçotes Ø219,1 × 3.148 mm, 4 bocais Ø114,3 e 2 orelhas no cabeçote superior, entre as elevações 16.370 e 49.750 mm, com emendas de campo em 17.862 e 33.545 mm. Posição no piso: centradas na profundidade do campo de caps (o vão sem caps no desenho do piso coincide com o centro delas).</li>
 <li><b>Premissas das divisórias:</b> (1) o desenho do piso não traz elevação, então o piso do modelo foi assumido na base do cabeçote inferior (elevação 16.260 mm); (2) a planta V1-V1 do desenho das paredes aparece espelhada em relação à planta do piso (Nº1 à direita ali, à esquerda aqui). Mantive a numeração do desenho do piso e a ordem isométrica; (3) a faixa de tubos afunilados no meio de cada painel, os grampos laterais e os detalhes dos cabeçotes inferiores não foram modelados.</li>
-<li><b>Tubos</b> do piso estão retos, sem as curvas das extremidades (Detalhe D4).</li>
+<li><b>Tubos</b> do piso: Ø50,8 × 4,57 (126 tubos, passo 102; corrigido no v12, antes Ø76,2). Com as curvas da vista V1-V1 desde o v13: coletor na frente e curva para a parede traseira no fundo.</li>
 <li><b>Emendas de painel:</b> a posição da 3ª emenda foi inferida pelo texto do desenho (+102 mm da divisória 3); as outras quatro vêm das linhas de cota. Os caps no eixo das emendas são de instalação de campo (nota 4 do desenho).</li>
 <li><b>Posições:</b> todas as 4.508 coincidem com o DXF; só o cap da Linha 16, Coluna 12 está deslocado 5,1 mm no desenho (tolerância da nota 1: ±6 mm) e aqui fica na malha regular.</li>
 <li><b>Conferência:</b> 4.004 caps de 16 furos + 18 termopares = 4.022, e 486 de 9 furos, que é o que a lista de material do desenho informa (o termopar substitui um cap de 16 furos).</li>
@@ -253,8 +305,34 @@ details{border-radius:14px}
 </details>
 
 <details open>
-<summary>Conferência entre desenhos e pendências (versão com M-080, arranjo de pressão, arranjo geral e PDFs de apoio)</summary>
+<summary>Conferência entre desenhos e pendências (v10: itens novos no topo)</summary>
 <ul>
+
+<li><span class="t-ok">Montado (v14).</span> <b>Bocais do tubulão (D1-D5057-M-006, 10-1-6151):</b> pela planificação do casco (5.893,6 pelo diâmetro externo): <b>A</b> = 14 downcomers 6" a 1.064,1 da linha frontal (65°, ou seja 25° da vertical, igual à M-058; transversal ±460 + 920·k), <b>B</b> = 134 risers 4" em 7 linhas do fundo à traseira a cada 15°, <b>R</b> = 16 saídas de vapor 4" no topo (±353 + 700·k). Os tubos da M-058 saem exatamente dos bocais A (raio 1.198 nas duas folhas). Bocais desenhados como marcas curtas; bocais dos tampos (M, N, D, E, K, Q) não montados.</li>
+<li><span class="t-ok">Montado (v14).</span> <b>Tubos de alimentação dos U-beams (D1-D5057-M-058, 10-1-6245):</b> 14 tubos Ø168,3 (7 de cada lado, 1 a 7), raio de curvatura 685,8. Saem do tubulão a 25° e descem 735 mm à frente do eixo dele; em 46.920 a 45.540 (um nível por tubo, a cada 230) vão para fora até 9.300 da CL, seguem para trás até 3.805–5.185 mm, descem até ~38,1 m, abrem para 9.300 / 10.220 / 10.450 da CL (diagonais a 55°), seguem para trás e voltam para dentro até o <b>coletor Ø219,1 a 9.708 atrás do tubulão (El. 37.880)</b>. O tubo 1 termina em El. 38.555, a mesma cota dos coletores laterais inferiores dos U-beams no arranjo geral. As três vistas do desenho fecham entre si.</li>
+<li><span class="t-dv">Observação (v14).</span> Tubos 2, 5 e 7 correm no fundo em 38.110 e entram no coletor em 37.880: o desnível de 230 mm aparece na vista frontal, mas a posição da curva não é cotada (desenhado como trecho final inclinado). Comprimento do coletor tirado da planta (±6.270), sem cota escrita.</li>
+<li><span class="t-ok">Montado (v13).</span> <b>Ligação do piso com as paredes (M-119, vista V1-V1 e detalhe D4):</b> os 126 tubos do piso (Ø50,8) saem de um coletor Ø219,1 na frente, em El. 16.736 (600,8 abaixo do eixo do piso e 253 à frente da CL da parede frontal), sobem a 70°, fazem curva de R304,8, seguem retos 4.412 mm (y 10.076,8 a 14.488,8) e no fundo fazem curva de 90° (R304,8) e viram a <b>parede traseira</b> (CL em y 14.793,6). A parede traseira no mapa passa a começar no fim dessa curva (El. 17.641,8), não mais em 16.736.</li>
+<li><span class="t-ok">Fechado (v13).</span> <b>Coletor "inferior traseiro" de 16.736:</b> fica na frente, sob o piso (665 mm de profundidade no mapa), porque é a entrada do circuito da parede traseira: o piso é a continuação da parede traseira (TAB 1). O nome se refere ao circuito, não à posição. Comprimento do coletor não cotado: desenhado só na largura dos tubos.</li>
+<li><span class="t-ok">Montado (v13).</span> <b>Caps das linhas 78 e 79:</b> ficam sobre o início da curva do fundo e sobem 17 e 42 mm (detalhes D2, D3 e D4). Linhas 1 a 77: no trecho reto.</li>
+<li><span class="t-dv">Observação (v13).</span> <b>Parede frontal inferior:</b> a mesma vista mostra os tubos da parede frontal descendo na CL frontal até ~159 mm acima do eixo do piso e curvando para a frente (R304,8, até 15°). O destino (coletor de 17.031) não aparece nessa vista; o mapa mantém a parede frontal começando em 17.031.</li>
+<li><span class="t-dv">Corrigido (v12).</span> <b>Diâmetro dos tubos do piso:</b> o mapa desenhava Ø76,2. Três fontes dão Ø50,8 × 4,57: os detalhes D1 a D3 da M-119 (círculos Ø508/416,6 na escala 10:1 = 50,8 × 4,57), a TAB 1 – caracterização técnica ("Fundo, continuação da parede traseira: Ø50,8 × 4,57, 126 tubos") e a faixa do tubo na elevação 10-0-1533 (17.311,3 a 17.362,1). Posição e topo dos caps não mudam (a luva assenta na aleta).</li>
+<li><span class="t-ok">Bate (v12).</span> <b>TAB 1 – caracterização técnica (OS-767 R.0):</b> tubulão Ø1.876 × 100, 15.000 entre soldas, tampos 89; fornalha 12.902 de largura, 4.896 (inferior) e 6.732 (superior) de profundidade; frente e traseira com 126 tubos; laterais com 66 tubos em cima e 48 na zona primária; divisórias com 30 tubos; wingwalls 8 painéis × 18 tubos Ø50,8; superaquecedores com 124 serpentinas; economizador 15.175 m². Tudo igual ao mapa.</li>
+<li><span class="t-dv">Reforça (v12).</span> <b>Coletor do superaquecedor primário (item F):</b> a TAB 1 dá entrada Ø273,0 e saída "335,6" (provável erro de digitação de 355,6, que é bitola de tubo). Junto com a M-007 são 2 fontes contra o Ø300 do arranjo de pressão. O coletor em 11.624 seria a <b>saída</b> do primário, não a entrada.</li>
+<li><span class="t-ok">Montado (v11).</span> <b>Fechamento do topo (M-169, 10-1-7340, e folhas M-157 a M-168):</b> paredes em telha entre B−878 e E+878 na frente e no fundo, eixos 2a/2c a 8 nas laterais, base em 48.700 (frontal em 46.500) e mostradas até 58.350. Eixos B, B1, C, D, E, 2a, 2c, 3, 4, 5, 7a e 8 da M-169 conferem com os calços (10-0-1840). <b>Não montado:</b> telhado (cumeeira e beirais sem cota; inclinação de ~10° na M-160) e o trecho da lateral esquerda que desce a 36.850 (o desenho não deixa claro qual painel).</li>
+<li><span class="t-ok">Confirmado (v11).</span> <b>Eixo do piso dos bubble caps:</b> a elevação 10-0-1533 (DWG) tem a linha de centro do piso em 17.336,7, igual ao mapa (17.337). O rótulo 17.362 do PDF "piso dos bubble caps" marca o topo do tubo.</li>
+<li><span class="t-ok">Bate (v11).</span> <b>D0-D5057-M-119 em PDF (10-0-1864, rev. 1, 27/11/07):</b> mesma revisão do desenho do piso usado no mapa: 486 caps de 9 furos, 4.022 de 16 furos (inclui os termopares) e 18 termopares. Cita os desenhos originais dos caps 10-2-4943 (9 furos) e 10-2-4944 (16 furos), que não estão na pasta.</li>
+<li><span class="t-ok">Fechado (v10).</span> <b>Item B – multiciclone/filtro e chaminé:</b> 5.200 (F–G) e 4.260 (I–J) na base de fundação – calços (10-0-1840), na planta do arranjo geral, na M-130 e na base de fundação – chumbadores. Só a vista de elevação (10-0-1533) traz 4.600 e 4.860. <b>Corrigir a elevação.</b></li>
+<li><span class="t-ok">Fechado (v10).</span> <b>Item E – cadeia de 68.400 da M-130:</b> não é divergência. A M-130 coincide com a grade até o eixo I e depois soma 760 + 7.000: o vão de 7.000 está centrado no eixo J da chaminé (760 + 3.500 = 4.260). Então 68.400 = 64.900 + 3.500 (meia largura).</li>
+<li><span class="t-dv">Invertido (v10).</span> <b>Item D – topo da chaminé:</b> a própria M-015 (10-1-6320) escreve "TOPO DA CHAMINÉ EL. 82.152" e "70.000 da chapa de base ao topo", com fundo em 12.150 (12.150 + 70.000 = 82.150). A M-130 também dá 82.152. Quem destoa é a elevação do arranjo geral (81.850 = solo + 70.000). <b>Corrigir a elevação, não a M-130.</b> O relatório v8 tinha lido isso ao contrário.</li>
+<li><span class="t-ok">Bate (v10).</span> <b>Tampos do tubulão (D2-D5057-M-025, 10-2-4662):</b> raio interno 838, espessura 89 nominal (78,3 mínimo após conformação), raio externo 927, igual ao 3D. Corpo (M-026, 10-2-4637): virolas 7 × 1.666 + 2 × 1.669 = 15.000, chapa 100 mm (Ø1876/1676). A M-006 dá 15.004 entre tangentes: 4 mm de folga de solda, sem efeito no 3D.</li>
+<li><span class="t-ok">Montado (v10).</span> <b>Chaminé:</b> Ø ext. 3.429, fundo em 12.150 e topo em 82.152 (M-015), centro no eixo J e a 11.500 mm da linha de centro da caldeira, no eixo transversal 2b (calços 10-0-1840: círculo Ø3.429 em J × 2b; planta e M-130: cota 11.500). Lado: direito, olhando da frente, pela convenção das plantas B&amp;W (M-170 marca o lado direito nesse sentido). <b>Confirme em campo o lado.</b> Mostra a entrada de gases (eixo em 20.442) e as juntas de campo.</li>
+<li><span class="t-ok">Montado (v10).</span> <b>Eixos e colunas:</b> grade A–J e 1–8 no solo e linhas das colunas B, C, D e E nos eixos 3 e 5 (±8.500) até o topo da estrutura em 58.350 (M-170, M-160). Perfil das colunas não modelado. Bases F-3, F-5 e B-4 só como marca no solo (altura não confirmada).</li>
+<li><span class="t-dv">Posição (v10).</span> <b>Silo de calcário:</b> o bloqueio era a cadeia B–C (7.950 contra 8.250), agora fechada. Os calços mostram o círculo Ø3.000 a 3.820 do eixo A e 3.800 para fora do eixo 5 (lado esquerdo), como a M-154. Só a pegada entrou neste mapa; o corpo continua no HTML separado do silo.</li>
+<li><span class="t-dv">Diverge.</span> <b>Economizador (eixo E à linha de centro):</b> 5.500 nos calços (10-0-1840), na base de fundação – chumbadores e na elevação do arranjo geral; 5.400 na M-010/M-068 (fabricante); 4.570 na M-154 e na M-130. Não montado até você decidir.</li>
+<li><span class="t-dv">Diverge.</span> <b>Bubble caps D2-3500-57-M-014 a M-019 (R00, 17/03/26):</b> mesma geometria das M-008/009 (Ø48 × 125, haste Ø33,4, furos Ø5, luva Ø44 × Ø35 × 50), em três materiais: TP310H, 253MA e HK30. A M-014 escreve "tarugo ASTM A-479" com observação "fundida", e A-479 é especificação de barra, não de fundido. A M-017 (9 furos, TP310H) é "usinado". Confirmar a M-014.</li>
+<li><span class="t-ok">Bate.</span> <b>Superaquecedores primário e secundário (M-007 e M-008):</b> os dois bancos têm 124 serpentinas (123 espaços de 102 = 12.546 mm, mais 187,5 mm de cada parede lateral do passe até a primeira serpentina; parede a parede 12.921), passo longitudinal das pernas de 108 mm no primário (102 mm no secundário) e 2.052 mm de largura entre os eixos dos coletores de cada banco. Isso confere com o envelope do mapa (largura de 2.103 mm com o tubo de Ø50,8 e faixas em 8.936–11.039 e 11.598–13.701 mm de profundidade). O fundo inclinado de 25° e o topo de 4° também batem: a perna mais comprida do secundário chega em 41.686,5 (51.225 − 9.538,5), igual ao fundo do envelope (41.687).</li>
+<li><span class="t-ok">Bate.</span> <b>Coletores dos superaquecedores em 51.225:</b> os diâmetros e a distância de 2.052 mm entre entrada e saída de cada banco são iguais no arranjo das partes de pressão (Ø406,4 em 8.962 e Ø355,6 em 11.014, secundário; Ø273 em 13.674, primário) e nas M-007/M-008.</li>
+<li><span class="t-ok">Bate.</span> <b>Tubulão de vapor (M-006 e arranjo das partes de pressão):</b> Ø1876 externo e Ø1676 interno, 15.004 mm entre tangentes (as duas linhas de centro dos tampos, na ficha do tubulão e na vista V1 do arranjo), tampos hemisféricos de raio 927 mm, eixo em 52.620 mm (igual ao arranjo geral, M-130 e M-125) e centrado na linha de centro da caldeira (±7.502 mm). Posição em profundidade: 1.956 mm à frente do eixo da parede frontal superior (M-125: 1.967, diferença de 11 mm). Montado no mapa como casco com tampos; os bocais (posições na M-006) e a espessura não foram modelados.</li>
 <li><span class="t-ok">Bate.</span> <b>Largura entre paredes laterais:</b> 12.902,4 mm entre centros (arranjo das partes de pressão) = paredes do piso (5.529,2 a 18.431,6 mm).</li>
 <li><span class="t-ok">Bate.</span> <b>Divisórias no vão:</b> 1.963,2 / 2.142 / 2.346 / 2.346 / 2.142 / 1.963,2 mm (arranjo de pressão) = posições do piso e da M-079. Elevações 16.370 (cabeçotes inferiores), 33.545 (emenda superior) e 49.750 (topo) iguais na M-079 e no arranjo de pressão.</li>
 <li><span class="t-ok">Bate.</span> <b>Parede lateral no piso x painel M-080:</b> o piso tem 6 tubos Ø50,8 (y 9.948,6 a 10.458,6) e 42 tubos Ø76,2 (y 10.560,6 a 14.742,6), passo 102 mm: 48 tubos, 4.794 mm entre centros e 4.896 mm entre as paredes frontal e traseira. O painel inferior da M-080 tem 48 tubos e 4.794 mm, e o arranjo de pressão dá 4.896 mm. Por isso o painel entrou no mapa só deslocando o desenho, sem ajuste de posição.</li>
@@ -265,17 +343,25 @@ details{border-radius:14px}
 <li><span class="t-ok">Bate.</span> <b>Curva de 18° da parte inferior:</b> M-086, M-087, M-080 e M-081 dão a mesma posição (21.457 a 24.190 mm). A GA M-019 está 0,43 a 0,46 m abaixo e não foi usada. Teto e tremonha do passe batem com o arranjo de pressão.</li>
 <li><span class="t-ok">Bate.</span> <b>Parede lateral esquerda (M-081):</b> ~88% dos segmentos coincidem com a direita (M-080); o restante é diferença do desenho.</li>
 <li><span class="t-ok">Bate.</span> <b>Folha 2 do arranjo de pressão</b> = D0-D-50-57-M-00096 (10-0-1936, rev. 2): detalhes D30 e D31 (fechamento do módulo 6 da parede traseira), D17 (emendas das divisórias) e vista V2-V2 com as elevações. Tem 125 × 102 = 12.750 mm de largura de parede frontal e traseira.</li>
-<li><span class="t-dv">Diverge.</span> <b>Tubos por divisória:</b> a M-079 e o mapa têm 31 tubos (30 × 102 = 3.060 mm); o arranjo de pressão e a GA M-019 cotam &ldquo;29 x 102 = 2.958&rdquo; (30 tubos). Não alterei.</li>
-<li><span class="t-dv">Diverge.</span> <b>Buckstays 8 e 9:</b> 24.545 e 20.795 mm na M-080 e no arranjo de pressão; 24.115 e 20.662 mm no arranjo geral (diferença de 430 e 133 mm). Os outros sete níveis coincidem nos três desenhos. O painel está no mapa com as cotas da M-080.</li>
+<li><span class="t-ok">Bate.</span> <b>Elevação frontal (M-00020, 10-1-5814):</b> buckstays em 47.930, 44.580, 40.980, 37.280, 34.600, 31.105, 27.610, <b>24.545 e 20.795</b>, iguais ao arranjo de pressão e às folhas M-080/081/086/087. Os intervalos escritos (1.820, 3.350, 3.600, 3.700, 2.680, 3.495, 3.495, 3.065, 3.750, 4.120 e 4.825) fecham de 11.850 a 58.350. Posições das divisórias (1.963,2 / 2.142 / 2.346 / 2.346 / 2.142 / 1.963,2) e dos wingwalls (2.575,2 / 918 / 1.224 / 1.122 / 612) iguais às do 3D.</li>
+<li><span class="t-ok">Bate.</span> <b>Planta D-D e E-E (M-00021, 10-1-5815):</b> "76,2 + (125 × 102) + 76,2 = 12.902,4", ou seja, 126 tubos na frente e na traseira. Laterais da fornalha com 33 + 33 tubos (3.264 cada; 51 + 3.264 + 102 + 3.264 + 51 = 6.732). Passe: 7.752 = 51 + 2.346 + 102 + 2.550 + 102 + 2.550 + 51 (painéis do U-beam M-033, M-034 e M-035).</li>
+<li><span class="t-ok">Bate.</span> <b>Cortes F-F e G-G (M-00022, 10-1-5816):</b> divisórias de 2.958 (29 × 102 = 30 tubos), wingwalls de 1.079,5, distâncias 535 / 1.079,5 / 2.958 / 1.377 e profundidade da fornalha 6.732 e do passe 7.752.</li>
+<li><span class="t-ok">Corrigido (v10).</span> <b>Tubos por divisória:</b> agora 30 tubos (29 × 102 = 2.958 mm), como no arranjo de pressão, na GA M-019, na M-00022 e nas três fichas de fabricação da divisória. A M-079 (31 tubos, 3.060) é a única que destoa. O v9 ainda desenhava 31.</li>
+<li><span class="t-ok">Fechado.</span> <b>Buckstays 8 e 9:</b> 24.545 e 20.795 mm na M-080/081, M-086/087, M-00020, folha dos reforços e arranjo de pressão; só a vista de elevação do arranjo geral (10-0-1533) traz 24.115 e 20.662. Corrigir a elevação.</li>
 <li><span class="t-dv">Piso (v6).</span> Eixo dos tubos do piso em <b>17.337 mm</b> (16.260 + 1,077 m): linha de centro do trecho reto de 4412 mm na câmara de ar M-135, referida ao nível 16.675; confere com a M-087 (≈17.330) e com a camada Bubble Caps da elevação do arranjo geral (≈17.380). Incerteza de ±0,06 m na referência do nível 16.675 da M-135.</li>
 <li><span class="t-dv">Correção (v8).</span> Frente e traseira passam a ter 126 tubos (125 passos × 102 = 12.750; folga de 76,2 mm até cada parede lateral = 12.902,4). A versão anterior desenhava 125 tubos. Conferido nas M-086/087 e nas fichas de fabricação (painéis de 32 + 31 + 32 + 31 tubos).</li><li><span class="t-dv">Reforços (v8).</span> Nove níveis de buckstay desenhados como contorno na parede da fornalha: 20.795, 24.545, 27.610, 31.105, 34.600, 37.280, 40.980, 44.580 e 47.930. Fonte: folha dos reforços (10-1-6871 no conjunto de suportes), M-080/081, M-086/087 e arranjo de pressão. A vista de elevação do arranjo geral (10-0-1533) traz 20.662 e 24.115 nos dois níveis inferiores e deve ser corrigida. Perfil (VS) e dimensões não estão nos desenhos disponíveis, então só o nível é mostrado.</li><li><span class="t-dv">Wingwalls (v7).</span> Painéis de 18 tubos (passo 63,5, largura 1.079,5) prolongados até o início das curvas inferiores. A linha de início das curvas é oblíqua (~30°, 36,5 mm a cada tubo): em 34.350 (frente) a 33.730 (traseira) nos WW-2, 4, 5 e 7, e 540 mm mais alta nos WW-1, 3, 6 e 8. A M-060 tem quebra de escala de 2.497 mm nas duas vistas, então as cotas escritas valem (16.408 e 15.868 de comprimento total, topo em 49.445) e batem com o M-125 (fundo dos tubos horizontais em 33.037). A região das curvas e o trecho horizontal até o coletor frontal não foram montados.</li>
 <li><span class="t-dv">Câmara de ar (v6).</span> Montada pelos desenhos 10-0-2059/2060/2061: fundo interno em 13.362, topo em 16.675 (3.313 mm internos); perfil com fundo plano de 1.992, rampa de 25° (avanço 2.871), parede traseira em 4.863 e ressalto a 25° até 5.163 mm de profundidade interna; largura 12.394 mm até 14.536 e 12.902 mm acima; duas entradas de ar de Ø1.762 (ext.) a ±3.225 mm da linha de centro, eixo em 14.290. A face frontal está a 666 mm da parede frontal superior (M-125). Não incluídos: portas, vigas, chapa traseira e demais detalhes. O fundo de 13,36 m que aparece no refratário M-125 é o fundo desta câmara, não o piso da fornalha.</li>
 <li><span class="t-dv">Observação.</span> A GA M-019 (corte lateral) usa as cotas 0,300 m abaixo dos demais desenhos (ex.: 47.630 no lugar de 47.930), então não foi usada para elevação.</li>
 <li><span class="t-dv">A confirmar.</span> <b>Tubos do piso:</b> vão de 9.480 a 14.840 mm (5.360 mm), enquanto as paredes frontal e traseira (9.897,6 e 14.793,6) ficam a 4.896 mm. Os tubos passam 417,6 mm da frente e 46,4 mm do fundo. Não tenho o detalhe que explique isso.</li>
 <li><span class="t-dv">Diverge.</span> <b>Numeração das divisórias:</b> o desenho do piso e a planta H-H da GA (D1-D-50-57-M-00023) põem a Nº 1 junto à parede esquerda (frente embaixo). A M-079 e o arranjo de pressão (planta C2-C2 do M-00094 e vista V1-V1 do M-00011) põem a Nº 1 junto à direita. O mapa segue o piso e a GA, mas os desenhos do fabricante se contradizem: confirme em campo qual divisória é a 1.</li>
-<li><span class="t-pe">Não montado.</span> Trecho inferior dos wingwalls (cotas da M-060 não batem com o desenhado), laterais do passe com tubos (faltam 2.652 mm de painel), piso com largura a confirmar, tubulão, tubos do teto, serpentinas e U-beams. Frente e traseira: tubos retos, sem aberturas.</li>
-<li><span class="t-pe">Pendente.</span> <b>Elevação do piso (eixo dos tubos dos bubble caps):</b> o mapa continua assumindo 16.260 mm (base do cabeçote das divisórias). Na câmara de ar (D0-D5057-M-135) a cota de referência é 16.675 mm e existe uma linha de centro horizontal nessa cota (5.021 mm de comprimento), mas o desenho não diz que ela é o eixo dos tubos dos bubble caps. A diferença para o valor assumido é de 415 mm. Preciso que você confirme qual é a cota do eixo dos tubos do piso, ou as folhas 2/3 e 3/3 da câmara de ar (10-0-2060 e 10-0-2061, citadas na nota 1 da M-135) e o conjunto da parede traseira (10-1-6806).</li>
-<li><span class="t-pe">Pendente.</span> <b>Parede lateral esquerda</b> (10-1-6828, 26.752 kg) e <b>paredes frontal e traseira</b> (10-1-6805 e 10-1-6806): não fornecidas. A esquerda está espelhada, e o casco da fornalha (frontal, traseira e afunilamento) não foi modelado.</li>
+<li><span class="t-ok">Fechado (v10).</span> <b>Eixos de coluna:</b> a base de fundação – calços metálicos (10-0-1840) desenha a grade completa: A–B 7.640, B–C 8.250, C–D 5.800, D–E 9.150, E–F 10.200, F–G 5.200, G–H 7.200, H–I 7.200, I–J 4.260 (A–J = 64.900) e os eixos transversais 1–8 (5.000, 1.700, 5.100, 8.500, 8.500, 2.000, 3.600, 2.800), com a linha de centro da caldeira no eixo 4 e o tubulão a 1.800 do eixo B. Bate com a M-130, a M-170 (8.250 / 5.800 / 9.150 e 17.000 entre colunas) e a planta do arranjo geral. As M-00019/21/22 rev. 1 (7.950, nível base 11.550) e o "22.900" da elevação é que estão deslocados 300 mm.</li>
+<li><span class="t-dv">Observação.</span> O arquivo "D1-D-50-57-M-00012.pdf" tem na legenda o código D1-D-50-57-M-00019 R01 (10-1-5813, corte lateral S-S). O nome do arquivo e o código do desenho não coincidem.</li>
+<li><span class="t-dv">Diverge.</span> <b>Coletor de entrada do superaquecedor primário (M-007 contra arranjo das partes de pressão):</b> a M-007 desenha o coletor de entrada com Ø355,6 (raio 177,8), a 610 mm do coletor de saída do secundário; o arranjo das partes de pressão desenha, na mesma posição (11.624 mm de profundidade), um coletor de Ø300. <b>Corrigir o arranjo das partes de pressão ou a M-007</b>; não tenho um terceiro desenho que decida. Também: o fundo da perna mais comprida do primário está em 42.929,5 na M-007 e em 42.890 no envelope (39 mm de diferença, dentro do raio de curva).</li>
+<li><span class="t-pe">Não montado.</span> Região das curvas inferiores dos wingwalls, laterais do passe com tubos (faltam 2.652 mm de painel), tubos do teto, serpentinas e U-beams. Frente e traseira: tubos retos, sem aberturas.</li>
+<li><span class="t-dv">Assumido (v6).</span> <b>Elevação do piso:</b> eixo dos tubos dos bubble caps em 17.337 mm (ver "Piso (v6)" acima). Confirmado no v11 pela linha de centro da elevação 10-0-1533 (17.336,7).</li>
+<li><span class="t-ok">Fechado.</span> <b>Parede lateral esquerda e paredes frontal/traseira:</b> montadas pelas M-081 e M-086/087 (o v9 ainda dizia que não tinham sido fornecidas).</li>
+<li><span class="t-pe">Não montado.</span> <b>Coletores e tubos do arranjo de pressão (v9):</b> coletores inferiores (17.031 frontal, 16.736, 16.675 laterais, 16.370 divisórias, tubulão inferior 15.723), coletores superiores (49.445, 50.410, 50.640 dos U-beams, 50.860, 51.225, 53.070 e 54.570), descidas e tubos do teto (níveis 1 a 7). Motivos: rótulo e posição dos coletores inferiores traseiros não coincidem (o círculo de 16.736 está em 665 mm de profundidade e o de 16.749 em 7.687 mm), os coletores inferiores são segmentados com ligações de descida que a vista V1 não separa por segmento, e os tubos do teto têm roteamento em planta e elevação sem cota de curva suficiente. Lista dos desenhos faltantes no relatório.</li>
+<li><span class="t-pe">Não montado.</span> <b>Interior dos superaquecedores, coletores e tubos de interligação (M-007, M-008, M-093, M-097):</b> o roteamento das serpentinas (o primário tem 20 pernas por serpentina, pela largura de 2.052 e passo de 108; o secundário tem três tipos de serpentina com passos de 816 e 102 mm), o comprimento dos coletores (no primário a linha de topo vai de 11.442 a 25.318,7 na vista frontal, ou seja, não é simétrica em relação à linha de centro) e os tubos de interligação com curvas. Falta cota de cada curva e a posição em planta. A linha de sacrifício (M-093, 2.460 kg, tubo Ø406,4 × 40,5) é uma peça de montagem e não foi posicionada.</li>
 </ul>
 </details>
 
@@ -290,10 +376,18 @@ details{border-radius:14px}
 <li><b>D0-D-50-57-M-00096, M-00095, M-00094, M-00011, M-00023, M-00001 e M-00002</b> (PDF) — folha 2 e folha 1 de detalhes, cortes C1-C1/C2-C2, conjunto, plantas H-H/J-J/K-K e arranjo geral (elevação e planta): usados para conferir as divisórias, as emendas e a numeração.</li>
 <li><b>Arranjo das partes de pressão — conjunto</b> (DXF, folha 1): largura de 12.902,4 mm entre paredes laterais, posições das divisórias, elevações de emendas e coletores, lista de conjuntos.</li>
 <li><b>Arranjo geral — vista elevação</b> (DXF): cotas dos níveis dos buckstays e dos coletores (10-0-1533; usado para conferir elevações e a posição da fornalha nas colunas; traz 22.900, 4.600 e os buckstays inferiores divergentes, ver conferência).</li>
+<li><b>D1-D-50-57-M-00020, 00021 e 00022</b> (PDF, 10-1-5814, 5815 e 5816, rev. 1) — arranjo geral da caldeira CFB: vista frontal "A-A" com os buckstays, plantas D-D/E-E e F-F/G-G. Usadas para conferir níveis, larguras, tubos e posições de divisórias e wingwalls.</li>
+<li><b>D1-D-50-57-M-00019</b> (PDF, arquivo nomeado M-00012; 10-1-5813, rev. 1) — corte lateral S-S, em nível base 11.550. Conferida, com divergências nas cotas dos eixos e dos dois buckstays inferiores.</li>
+<li><b>D0-D-50-57-M-00003 e M-00105</b> (PDF, 10-0-1535 e 10-0-1969) — layout geral da instalação e sistema de alimentação de carvão: lidos, sem medidas que entrem neste modelo por enquanto.</li>
 <li><b>Suporte e reforços — conjunto</b> (DXF, 10-1-6871 e correlatos): níveis dos nove reforços da fornalha (20.795 a 47.930), eixos de colunas B–F e posição da fornalha (3.756 mm do eixo B).</li>
 <li><b>Arranjo geral — vista em planta e lay-out</b> (DXF): cadeias longitudinais e posições em planta; conferidos, mas sem montagem por divergência com a elevação.</li>
 <li><b>D1-D5057-M-081, M-082 a M-087</b> (DXF) — parede lateral esquerda, cinco divisórias e paredes frontal e traseira (126 tubos, 125 × 102 = 12.750 mm; curva de 18°).</li>
 <li><b>D1-D5057-M-060, M-147, D2-D5057-M-032 e M-092</b> (DXF) — wingwalls: 18 tubos Ø50,8, passo 63,5, comprimentos 15.868 e 16.408, tubo com sobremetal e tubos de interligação.</li>
+<li><b>D1-D5057-M-007 e M-008</b> (DXF) — superaquecedor primário (99.510 kg, 2.538 m², 380 °C) e secundário (118.579 kg, 2.956 m², 487 °C): 124 serpentinas, passo 102, cotas de coletores e envelope conferidos. Serpentinas internas não montadas.</li>
+<li><b>D1-D5057-M-093</b> (DXF) — linha de sacrifício do superaquecedor (2.460 kg): lida, sem posição em planta, não montada.</li>
+<li><b>D1-D5057-M-097</b> (DXF) — tubos de interligação tubulão/passe de convecção/superaquecedores/wingwalls (272.321 kg): elevações dos coletores conferidas; rotas não montadas.</li>
+<li><b>D1-D5057-M-006</b> (DXF) — tubulão de vapor (83.733 kg): diâmetros, 15.004 mm entre tangentes, tampos e tabela de bocais. Casco e tampos montados; bocais não.</li>
+<li><b>Arranjo das partes de pressão — conjunto e vista V1</b> (DXF): elevações dos coletores, tubulão e emendas; usado para o tubulão e os níveis dos reforços.</li>
 <li><b>D0-D5057-M-125</b> (DXF, 10-0-2030) e M-126 a M-129, M-131, M-132 — refratário e isolamento: calibração da elevação pelo tubulão, quantidades e espessuras (não montado no 3D).</li>
 <li><b>D0-D5057-M-130, M-136 e M-137</b> (DXF) — arranjo geral com cotas (solo 11,850; tubulão 52,620) e câmara de ar (folhas 2 e 3).</li>
 <li><b>Fichas de fabricação das paredes</b> (DXF) — frontal, frontal-traseira, laterais, traseira e três partes da divisória: tubo Ø76,2 × 5,59, passo 102, comprimentos e pesos; confirmam 126 tubos e 30 tubos por divisória (2.958 mm).</li>
@@ -301,6 +395,12 @@ details{border-radius:14px}
 <li><b>D0-D5057-M-135</b> (DXF) — Sistema de ar e gases, câmara de ar, folha 1/3 (10-0-2059): largura de 12.902 mm, cabeçotes e cota 16.675 mm (usado só para conferir).</li>
 <li><b>D0-D5057-M-140</b> (DXF) — Duto de ar primário, tubulação de ar de selagem da reinjeção de cinzas do multiciclone (10-1-7243) e <b>D1-D5057-M-152</b> (DXF) — chaves de nível para sólidos na câmara de ar (10-1-7338): lidos, sem medidas que entrem neste modelo.</li>
 <li><b>D1-D5057-M-019</b> (DXF, GA em corte lateral): conferida, mas não usada no modelo (cotas 0,300 m abaixo dos outros desenhos).</li>
+<li><b>Base de fundação – calços metálicos</b> (10-0-1840, v10): grade completa de eixos A–J e 1–8, linhas de centro da caldeira, tubulão, economizador e filtro, círculo da chaminé e do silo de calcário.</li>
+<li><b>D1-D5057-M-015</b> (10-1-6320, v10): chaminé, Ø3.429, 12.150 a 82.152, juntas de campo e plataformas.</li>
+<li><b>D0-D5057-M-170</b> (10-0-2062, v10): invólucro do teto, arranjo geral; 8.250 / 5.800 / 9.150, 17.000 entre colunas, 3.756 do eixo B à parede frontal, profundidades dos coletores e topo da estrutura 58.350.</li>
+<li><b>D2-D5057-M-025 e M-026</b> (10-2-4662 e 10-2-4637, v10): tampos e corpo do tubulão.</li>
+<li><b>D2-3500-57-M-014 a M-019</b> (PDF, v10): bubble caps de 16 e 9 furos, desenho de fabricação Hydro (materiais).</li>
+<li><b>Lidos sem uso no 3D (v10):</b> M-072 a M-078 (dutos de gás), M-138, M-139, M-155, M-156 (dutos e ar de selagem), M-148 a M-150 (bases dos ventiladores), M-109/M-110 (fechamento de campo frente-teto), M-058, M-033, M-116 (U-beams), M-160/M-161 (fechamento traseiro), T-00072 a T-00077 (plantas de tubulação), LISTA DE LINHAS, D3-3570-57-M-003, D4-3500-57-M-005 e M-XX1/XX2.</li>
 </ul>
 </section>
 <!--ADMIN_END-->
@@ -423,7 +523,7 @@ try{
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
 wrap.insertBefore(renderer.domElement,wrap.firstChild);
 scene=new THREE.Scene();
-cam=new THREE.PerspectiveCamera(40,1,0.05,200);
+cam=new THREE.PerspectiveCamera(40,1,0.05,600);
 scene.add(new THREE.HemisphereLight(0xffffff,0x707070,0.95));
 var dl=new THREE.DirectionalLight(0xffffff,0.85);dl.position.set(-6,10,8);scene.add(dl);
 var dl2=new THREE.DirectionalLight(0xffffff,0.3);dl2.position.set(7,4,-6);scene.add(dl2);
@@ -481,17 +581,18 @@ var tcm=inst(gTC,matTC,listT.length);
 
 var BASE16=new THREE.Color(0x4f7fa8),BASE9=new THREE.Color(0xe0a030),FIELDC=new THREE.Color(0x8e5bd1);
 var vs=1;
+function capDy(r){return r===77?0.017:(r===78?0.042:0)}
 function layoutCaps(){
   var i;
   for(i=0;i<list16.length;i++){var p=list16[i];
-    dummy.rotation.set(0,0,0);dummy.position.set(X(p.x),(ST_BOT+ST_L/2)*vs,Z(p.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem16.setMatrixAt(i,dummy.matrix);
-    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head16.setMatrixAt(i,dummy.matrix);
-    dummy.position.y=LV_BOT*vs;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva16.setMatrixAt(i,dummy.matrix);}
+    var dy=capDy(p.r);dummy.rotation.set(0,0,0);dummy.position.set(X(p.x),(ST_BOT+ST_L/2)*vs+dy,Z(p.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem16.setMatrixAt(i,dummy.matrix);
+    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs+dy;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head16.setMatrixAt(i,dummy.matrix);
+    dummy.position.y=LV_BOT*vs+dy;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva16.setMatrixAt(i,dummy.matrix);}
   for(i=0;i<list9.length;i++){var q=list9[i];
-    dummy.rotation.set(0,0,0);dummy.position.set(X(q.x),(ST_BOT+ST_L/2)*vs,Z(q.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem9.setMatrixAt(i,dummy.matrix);
-    dummy.position.y=LV_BOT*vs;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva9.setMatrixAt(i,dummy.matrix);
+    var dy9=capDy(q.r);dummy.rotation.set(0,0,0);dummy.position.set(X(q.x),(ST_BOT+ST_L/2)*vs+dy9,Z(q.y));dummy.scale.set(1,ST_L*vs,1);dummy.updateMatrix();stem9.setMatrixAt(i,dummy.matrix);
+    dummy.position.y=LV_BOT*vs+dy9;dummy.scale.set(1,LV_L*vs,1);dummy.updateMatrix();luva9.setMatrixAt(i,dummy.matrix);
     var dx=q.dir[0],dz=-q.dir[1];dummy.rotation.set(0,Math.atan2(dx,dz),0);
-    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head9.setMatrixAt(i,dummy.matrix);}
+    dummy.position.y=(ST_BOT+ST_L+HD_L/2)*vs+dy9;dummy.scale.set(1,HD_L*vs,1);dummy.updateMatrix();head9.setMatrixAt(i,dummy.matrix);}
   for(i=0;i<listT.length;i++){var t=listT[i];
     dummy.rotation.set(0,0,0);dummy.position.set(X(t.x),0.181*vs,Z(t.y));dummy.scale.set(1,0.558*vs,1);dummy.updateMatrix();tcm.setMatrixAt(i,dummy.matrix);}
   [head16,stem16,luva16,head9,stem9,luva9,tcm].forEach(function(m){m.instanceMatrix.needsUpdate=true;m.computeBoundingSphere&&m.computeBoundingSphere()});
@@ -504,12 +605,31 @@ function colorCaps(){
   head16.instanceColor.needsUpdate=true;head9.instanceColor.needsUpdate=true;dirty=true;
 }
 
-var tubeGeo=new THREE.CylinderGeometry(0.0381,0.0381,1,16);tubeGeo.rotateX(Math.PI/2);
+/* v13: tubos do piso com o trajeto da vista V1-V1 da M-119 (O50,8 x 4,57).
+   Coordenadas da vista: y = mesma profundidade da planta; "desce" = mm abaixo do eixo do piso (17.337).
+   Frente: coletor O219,1 em y 9.644,7 e 600,8 abaixo (El. 16.736, 253 a frente da CL da parede frontal);
+   reta inclinada 70 graus ate (9.790,4; 200,5); curva R304,8 ate o trecho reto em y 10.076,8;
+   reto de 4.412 ate y 14.488,8; curva R304,8 de 90 graus subindo para a parede traseira (CL em y 14.793,6, topo da curva El. 17.641,8). */
+var FLOOR_PATH=(function(){
+  var pts=[],R=304.8,k;
+  function P(y,dn){pts.push(new THREE.Vector3(0,-dn/1000,Z(y)))}
+  P(9644.7,600.8);P(9790.4,200.5);
+  for(k=1;k<=10;k++){var t=(250-7*k)*Math.PI/180;P(10076.8+R*Math.sin(t),304.8+R*Math.cos(t))}
+  P(14488.8,0);
+  for(k=1;k<=12;k++){var t=7.5*k*Math.PI/180;P(14488.8+R*Math.sin(t),-(R-R*Math.cos(t))*1)}
+  return pts})();
+var floorCurve=new THREE.CurvePath();for(var fp=0;fp<FLOOR_PATH.length-1;fp++)floorCurve.add(new THREE.LineCurve3(FLOOR_PATH[fp],FLOOR_PATH[fp+1]));
+var tubeGeo=new THREE.TubeGeometry(floorCurve,160,0.0254,10,false);
 var tubes=inst(tubeGeo,matTube,M.tubes.length);
-M.tubes.forEach(function(t,i){
-  dummy.rotation.set(0,0,0);dummy.position.set(X(t[0]),0,Z((t[1]+t[2])/2));dummy.scale.set(1,1,(t[2]-t[1])/1000);dummy.updateMatrix();tubes.setMatrixAt(i,dummy.matrix);
-});
+M.tubes.forEach(function(t,i){dummy.rotation.set(0,0,0);dummy.position.set(X(t[0]),0,0);dummy.scale.set(1,1,1);dummy.updateMatrix();tubes.setMatrixAt(i,dummy.matrix)});
 tubes.instanceMatrix.needsUpdate=true;scene.add(tubes);
+/* coletor frontal inferior do circuito da parede traseira: O219,1 em El. 16.736 (arranjo de pressao chama de "coletor inferior traseiro").
+   Comprimento nao cotado: desenhado so na largura dos 126 tubos. */
+(function(){var x0=M.tubes[0][0]-110,x1=M.tubes[M.tubes.length-1][0]+110;
+  var g=new THREE.CylinderGeometry(0.10955,0.10955,(x1-x0)/1000,32,1);g.rotateZ(Math.PI/2);
+  var m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x6f7f90,roughness:0.5,metalness:0.5}));
+  m.position.set(X((x0+x1)/2),-0.6008,Z(9644.7));tubes.userData.col=m;scene.add(m);
+  setTimeout(function(){addLabel("Coletor inferior Ø219,1 · El. 16.736",x1+600,9644.7,-0.6008,"wall");dirty=true},0)})();
 
 var wallGroup=new THREE.Group();scene.add(wallGroup);
 function discs(pts,r,mat,h){
@@ -538,7 +658,7 @@ function ezz(e){return (e-EL.base)/1000+RH-FUP}
 function cm(c,o){o=o||{};o.color=c;o.roughness=0.5;o.metalness=0.5;o.clippingPlanes=[clipPl];return new THREE.MeshStandardMaterial(o)}
 var mDT=cm(0xa9b6c4),mDH=cm(0x6f7f90),mDF=cm(0x8794a3,{side:THREE.DoubleSide}),mDL=cm(0xc29a3a);
 var mDS=new THREE.MeshBasicMaterial({color:0x8e5bd1,transparent:true,opacity:0.6,clippingPlanes:[clipPl]});
-var NT=31,PASSO=P.passo/1000,DEP=P.prof/1000,DH=ZT-ZB;
+var NT=30,PASSO=P.passo/1000,DEP=P.prof/1000,DH=ZT-ZB;
 var dTubes=inst(new THREE.CylinderGeometry(P.d_tubo/2000,P.d_tubo/2000,1,14),mDT,5*NT);
 dTubes.userData.perWall=NT;divGroup.add(dTubes);divPick.push(dTubes);
 var hg=new THREE.CylinderGeometry(RH,RH,DEP,24);hg.rotateX(Math.PI/2);
@@ -558,7 +678,7 @@ dTubes.instanceMatrix.needsUpdate=true;
 function setClip(){var v=+$("vh").value,full=v>=34;clipPl.constant=full?1e3:v;$("vhv").textContent=full?"completa":v.toLocaleString("pt-BR")+" m";dirty=true}
 function divInfo(k){
   var g=function(n){return n.toLocaleString("pt-BR")};
-  $("info").innerHTML="<b>Divisória Nº "+(k+1)+"</b> — item "+P.itens[k]+" do desenho D1-D5057-M-079, peso "+g(P.peso[k])+" kg<br><span class='small'>31 tubos Ø76,2 (passo 102 mm) · cabeçotes Ø219,1 × 3.148 mm · elevações: base "+g(EL.base)+", emendas "+g(EL.emenda1)+", "+g(EL.emenda3)+" e "+g(EL.emenda2)+", topo "+g(EL.topo)+" mm · eixo em x = "+M.div[k].toFixed(1).replace(".",",")+" mm no desenho do piso</span>";
+  $("info").innerHTML="<b>Divisória Nº "+(k+1)+"</b> — item "+P.itens[k]+" do desenho D1-D5057-M-079, peso "+g(P.peso[k])+" kg<br><span class='small'>30 tubos Ø76,2 (passo 102 mm) · cabeçotes Ø219,1 × 3.148 mm · elevações: base "+g(EL.base)+", emendas "+g(EL.emenda1)+", "+g(EL.emenda3)+" e "+g(EL.emenda2)+", topo "+g(EL.topo)+" mm · eixo em x = "+M.div[k].toFixed(1).replace(".",",")+" mm no desenho do piso</span>";
 }
 
 var pinGeo=new THREE.ConeGeometry(0.03,0.14,10);pinGeo.rotateX(Math.PI);
@@ -600,6 +720,7 @@ function placeLabels(){
     if(L.cls==="dv")vis=show&&$("vDiv").checked&&sph.r>=25;
     else if(sph.r>=25&&L.cls!=="big")vis=false;
     if(L.cls.indexOf("lv")===0)vis=show&&$("vLv").checked&&sph.r>=18;
+    if(L.cls.indexOf("far")===0)vis=show&&!!L.g&&L.g.visible&&sph.r>=16;
     if(w<600&&L.cls==="wall")vis=false;
     if(!vis){L.el.style.display="none";return}
     v.copy(L.v);v.y*=(L.cls==="tc"?vs:1);
@@ -643,7 +764,7 @@ function roofE(d){return 48942+Math.tan(4*Math.PI/180)*(d-786)}
 var t25=Math.tan(25*Math.PI/180),t40=Math.tan(40*Math.PI/180),t4=Math.tan(4*Math.PI/180);
 function hopA(d){return 39464.5+t40*(d-6881.5)}function hopB(d){return 40918+t25*(d-8630.5)}
 var vxx=(39464.5-t40*6881.5-(40918-t25*8630.5))/(t25-t40);
-var FWp=[[918,17031],[918,BRK0],[0,BRK1],[0,roofE(0)]],RWp=[[DF-918,16736],[DF-918,BRK0],[DF,BRK1],[DF,roofE(DF)]];
+var FWp=[[918,17031],[918,BRK0],[0,BRK1],[0,roofE(0)]],RWp=[[DF-918,17641.8],[DF-918,BRK0],[DF,BRK1],[DF,roofE(DF)]];
 var PASSp=[[DF,roofE(DF)],[DF,hopA(DF)],[vxx,hopA(vxx)],[DP,hopB(DP)],[DP,roofE(DP)]];
 var SHb=[[8936,11039],[11598,13701]],SHu0=-9.5+187.7-25.5,SHu1=-9.5+187.7+12546+25.5;
 function shBot(d){return 41687+t25*(d-9044)}function shTop(d){return 49374+t4*(d-9044)}
@@ -690,6 +811,23 @@ var gBK=new THREE.Group();scene.add(gBK);
     var p=[PM(0,a,E),PM(WF,a,E),PM(WF,b,E),PM(0,b,E)],v=[];
     for(var i=0;i<4;i++){v.push(p[i],p[(i+1)%4])}
     qLines(v,0x14b8a6,0.95,gBK)})})();
+/* v9: tubulao de vapor. Ficha do tubulao (D1-D5057-M-006, 83.733 kg) e arranjo das partes de pressao (vista V1): diametro ext. 1876, int. 1676, 15.004 mm entre tangentes, tampos hemisfericos R927, eixo em 52.620, a 1.956 mm a frente do eixo da parede frontal superior, centrado na linha de centro da caldeira. Sem bocais (posicoes na M-006 nao montadas). */
+var gDR=new THREE.Group();scene.add(gDR);
+(function(){
+  var R=938,RH2=927,L=15004,E0=52620,D0=-1956,u0=WF/2-L/2,u1=WF/2+L/2,n=64;
+  function ring(u,r,e){var v=[];for(var i=0;i<n;i++){var a=2*Math.PI*i/n,b=2*Math.PI*(i+1)/n;v.push(PM(u,D0+r*Math.cos(a),E0+r*Math.sin(a)),PM(u,D0+r*Math.cos(b),E0+r*Math.sin(b)))}qLines(v,0x6b7fd7,e,gDR)}
+  var mat=new THREE.MeshBasicMaterial({color:0x6b7fd7,transparent:true,opacity:0.16,side:THREE.DoubleSide,depthWrite:false});
+  var cyl=new THREE.Mesh(new THREE.CylinderGeometry(R/1000,R/1000,L/1000,n,1,true),mat);
+  cyl.rotation.z=Math.PI/2;var c=PM(WF/2,D0,E0);cyl.position.copy(c);cyl.frustumCulled=false;gDR.add(cyl);
+  [[-1,u0],[1,u1]].forEach(function(s){
+    var hm=new THREE.Mesh(new THREE.SphereGeometry(RH2/1000,n,16,0,2*Math.PI,0,Math.PI/2),mat);
+    hm.rotation.z=-s[0]*Math.PI/2;hm.position.copy(PM(s[1],D0,E0));hm.frustumCulled=false;gDR.add(hm);
+    for(var k=1;k<=3;k++){var r=RH2*Math.cos(k*Math.PI/8),off=RH2*Math.sin(k*Math.PI/8);ring(s[1]+s[0]*off,r,0.5)}
+    ring(s[1],R,0.95)});
+  for(var k=0;k<=12;k++)ring(u0+L*k/12,R,k%12===0?0.95:0.35);
+  var v=[];for(var q=0;q<8;q++){var a=2*Math.PI*q/8;v.push(PM(u0,D0+R*Math.cos(a),E0+R*Math.sin(a)),PM(u1,D0+R*Math.cos(a),E0+R*Math.sin(a)))}
+  qLines(v,0x6b7fd7,0.55,gDR);
+})();
 /* passe de conveccao, tremonha e envelope dos feixes do superaquecedor */
 (function(){var u0=-9.5,u1=WP-9.5;
   [u0,u1].forEach(function(u){qOutline(PASSp,u,0x18a999,0.95,gPass)});
@@ -727,6 +865,117 @@ var gWB=new THREE.Group();scene.add(gWB);
     qLines(v,0xe0a100,0.95,gWB)});
 })();
 
+
+/* v10: grade de eixos e colunas (base de fundacao - calcos metalicos 10-0-1840; confere M-130, M-170 e planta do arranjo geral).
+   Profundidade d a partir da CL da parede frontal superior (eixo B = -3756). u = posicao transversal (0 = parede esquerda, +direita).
+   Lado: plantas B&W com a frente a esquerda da folha tem o lado direito embaixo (M-170). */
+var EL_SOLO=11850,EL_BASE=12150,EL_TOPO=58350,UC=WF/2;
+var AXL=[["A",-11396],["B",-3756],["C",4494],["D",10294],["E",19444],["F",29644],["G",34844],["H",42044],["I",49244],["J",53504]];
+var AXT=[["1",20300],["2",15300],["2a",13600],["3",8500],["4",0],["5",-8500],["6",-10500],["7",-14100],["8",-16900]];
+var gST=new THREE.Group(),gCH=new THREE.Group(),gSL=new THREE.Group();[gST,gCH,gSL].forEach(function(g){scene.add(g)});
+function addLabelV(text,vec,cls,g,title){var e=document.createElement("div");e.className="lbl "+cls;e.textContent=text;if(title)e.title=title;wrap.appendChild(e);labels.push({el:e,v:vec,cls:cls,full:text,short:text,g:g})}
+(function(){
+  var uMin=UC-16900,uMax=UC+20300,dMin=-11396,dMax=53504,v=[],c=[];
+  AXL.forEach(function(a){v.push(PM(uMin-1500,a[1],EL_SOLO),PM(uMax+1500,a[1],EL_SOLO));addLabelV(a[0],PM(uMax+2600,a[1],EL_SOLO),"far",gST,"Eixo "+a[0])});
+  AXT.forEach(function(a){var u=UC+a[1];v.push(PM(u,dMin-1500,EL_SOLO),PM(u,dMax+1500,EL_SOLO));addLabelV(a[0],PM(u,dMin-2700,EL_SOLO),"far",gST,"Eixo "+a[0]+" ("+(a[1]===0?"linha de centro da caldeira":(Math.abs(a[1]).toLocaleString("pt-BR")+" mm "+(a[1]>0?"à direita":"à esquerda")))+")")});
+  qLines(v,0x8a8a80,0.55,gST);
+  /* colunas B-E nos eixos 3 e 5 ate o topo da estrutura (58.350) */
+  var col=[];["B","C","D","E"].forEach(function(n){var d=AXL.filter(function(a){return a[0]===n})[0][1];[8500,-8500].forEach(function(o){col.push(PM(UC+o,d,EL_BASE),PM(UC+o,d,EL_TOPO))})});
+  var dB=-3756,dE=19444,uR=UC+8500,uL=UC-8500;
+  col.push(PM(uL,dB,EL_TOPO),PM(uR,dB,EL_TOPO),PM(uR,dB,EL_TOPO),PM(uR,dE,EL_TOPO),PM(uR,dE,EL_TOPO),PM(uL,dE,EL_TOPO),PM(uL,dE,EL_TOPO),PM(uL,dB,EL_TOPO));
+  qLines(col,0x5f6b78,0.9,gST);
+  /* bases (calcos): B..F nos eixos 3 e 5 e B-4 */
+  var bm=new THREE.MeshBasicMaterial({color:0x5f6b78}),bg=new THREE.BoxGeometry(1.0,0.3,1.0);
+  ["B","C","D","E","F"].forEach(function(n){var d=AXL.filter(function(a){return a[0]===n})[0][1];[8500,-8500].forEach(function(o){var m=new THREE.Mesh(bg,bm);m.position.copy(PM(UC+o,d,EL_SOLO+150));gST.add(m)})});
+  var m4=new THREE.Mesh(bg,bm);m4.position.copy(PM(UC,-3756,EL_SOLO+150));gST.add(m4);
+  addLabelV("Topo da estrutura El. 58.350",PM(uR,dE,EL_TOPO+900),"far",gST);
+  addLabelV("Solo El. 11.850",PM(uMax+1500,dMin-1500,EL_SOLO),"far",gST);
+})();
+/* v10: chamine D1-D5057-M-015 (10-1-6320): O ext 3.429, fundo 12.150, topo 82.152; centro no eixo J x eixo 2b (11.500 a direita da CL) */
+(function(){
+  var R=1714.5,u=UC+11500,d=53504,E0=12150,E1=82152,n=64;
+  var mat=new THREE.MeshBasicMaterial({color:0xc2410c,transparent:true,opacity:0.18,side:THREE.DoubleSide,depthWrite:false});
+  var cy=new THREE.Mesh(new THREE.CylinderGeometry(R/1000,R/1000,(E1-E0)/1000,n,1,true),mat);
+  cy.position.copy(PM(u,d,(E0+E1)/2));cy.frustumCulled=false;gCH.add(cy);
+  function ring(E,op){var v=[];for(var i=0;i<n;i++){var a=2*Math.PI*i/n,b=2*Math.PI*(i+1)/n;v.push(PM(u+R*Math.cos(a),d+R*Math.sin(a),E),PM(u+R*Math.cos(b),d+R*Math.sin(b),E))}qLines(v,0xc2410c,op,gCH)}
+  [E0,E1].forEach(function(E){ring(E,0.95)});
+  [24150,36150,48150,60150,72150].forEach(function(E){ring(E,0.5)});
+  ring(20442,0.95);
+  var v=[];for(var q=0;q<8;q++){var a=2*Math.PI*q/8;v.push(PM(u+R*Math.cos(a),d+R*Math.sin(a),E0),PM(u+R*Math.cos(a),d+R*Math.sin(a),E1))}qLines(v,0xc2410c,0.45,gCH);
+  addLabelV("Chaminé · topo El. 82.152",PM(u,d,E1+1500),"far ch",gCH,"D1-D5057-M-015: Ø ext. 3.429, fundo 12.150, 70.000 da chapa de base ao topo");
+  addLabelV("entrada de gases El. 20.442",PM(u+R+600,d,20442),"far",gCH);
+})();
+/* v10: silo de calcario, so a pegada (calcos 10-0-1840 + M-154): O3.000 a 3.820 do eixo A e 3.800 para fora do eixo 5 */
+(function(){
+  var R=1500,u=UC-12300,d=-11396+3820,n=48,v=[];
+  for(var i=0;i<n;i++){var a=2*Math.PI*i/n,b=2*Math.PI*(i+1)/n;v.push(PM(u+R*Math.cos(a),d+R*Math.sin(a),EL_SOLO),PM(u+R*Math.cos(b),d+R*Math.sin(b),EL_SOLO))}
+  v.push(PM(u-R,d,EL_SOLO),PM(u+R,d,EL_SOLO),PM(u,d-R,EL_SOLO),PM(u,d+R,EL_SOLO));
+  qLines(v,0x7c6f9b,0.95,gSL);
+  addLabelV("Silo de calcário (pegada Ø3.000)",PM(u,d,EL_SOLO+1200),"far",gSL,"Corpo do silo no HTML separado (R-185)");
+})();
+
+
+/* v11: fechamento lateral/frontal/traseiro do topo da caldeira (D1-D5057-M-169, 10-1-7340, e folhas M-157 a M-168).
+   Contorno tirado das linhas da vista em planta da cobertura (desenho em escala 1:1 no modelo; eixos 3-4-5 a 8.500 e B-E a 23.200 conferem com os calcos).
+   Conversao: d = -3756 + (45812 - y); deslocamento para a direita = 27432 - x. Base: 48.700 (frontal 46.500); topo mostrado ate 58.350.
+   Telhado (cumeeira e beirais) nao montado: o desenho nao cota. Trecho que desce a 36.850 (vista V2) nao montado: nao da para saber qual painel. */
+var gCL=new THREE.Group();scene.add(gCL);
+(function(){
+  function P(x,y,E){return PM(UC+(27432-x),-3756+(45812-y),E)}
+  var W=[[16154,46690,44729,46690,46500],
+         [16154,32132,16154,46690,48700],[13019,32132,16154,32132,48700],[13019,20969,13019,32132,48700],
+         [13019,20969,16504,20969,48700],[16504,20969,16504,21734,48700],[16504,21734,38710,21734,48700],
+         [38710,21734,38710,37292,48700],[38332,37292,38710,37292,48700],[38332,37292,38332,41084,48700],
+         [38332,41084,44729,41084,48700],[44729,41084,44729,46690,48700]];
+  var E1=58350,lines=[];
+  W.forEach(function(w){var a0=P(w[0],w[1],w[4]),b0=P(w[2],w[3],w[4]),b1=P(w[2],w[3],E1),a1=P(w[0],w[1],E1);
+    qMesh(a0,b0,b1,a1,0x64748b,0.13,gCL);lines.push(a0,b0,b0,b1,b1,a1,a1,a0)});
+  qLines(lines,0x64748b,0.85,gCL);
+  addLabelV("Fechamento do topo (M-169) · base El. 48.700",P(13019,26500,49800),"far",gCL,"Frontal a partir de 46.500; topo mostrado até 58.350 (telhado sem cota)");
+})();
+
+
+
+/* v14: bocais do tubulao (D1-D5057-M-006, 10-1-6151, desenvolvimento pelo diametro externo 5.893,6 a partir da linha II = frente horizontal):
+   A = downcomers 6" x14 a 1.064,1 (65 graus da horizontal frontal = 25 graus da vertical, igual a M-058), transversal +-460 + 920k;
+   B = risers 4" x134 em 7 linhas de III (fundo) a IV (traseira) a cada 15 graus: linha III com +-969, +-2.805 e +5x612; demais com +-357 + 612k (k=0..9);
+   R = saida de vapor 4" x16 no topo (linha I), +-353 + 700k (k=0..7). Bocais desenhados so como marcas curtas (comprimento nao representado). */
+(function(){
+  var Rd=938,E0=52620,D0=-1956,list=[];
+  function add(phi,t,dia){list.push([phi,t,dia])}
+  [460,1380,2300,3220,4140,5060,5980].forEach(function(t){add(65,t,168.3);add(65,-t,168.3)});
+  [969,2805,3417,4029,4641,5253,5865].forEach(function(t){add(90,t,114.3);add(90,-t,114.3)});
+  for(var j=1;j<=6;j++)for(var k=0;k<10;k++){var t=357+612*k;add(90+15*j,t,114.3);add(90+15*j,-t,114.3)}
+  for(var k2=0;k2<8;k2++){var t2=353+700*k2;add(270,t2,114.3);add(270,-t2,114.3)}
+  var geo=new THREE.CylinderGeometry(0.5,0.5,1,12),mat=new THREE.MeshStandardMaterial({color:0x334155,roughness:0.5,metalness:0.5});
+  var im=new THREE.InstancedMesh(geo,mat,list.length),o=new THREE.Object3D(),L=0.18;
+  list.forEach(function(n,i){var f=n[0]*Math.PI/180,cz=Math.cos(f),cy=-Math.sin(f);
+    var c=PM(WF/2+n[1],D0,E0);
+    o.position.set(c.x,c.y+cy*(Rd/1000+L/2),c.z+cz*(Rd/1000+L/2));
+    o.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),new THREE.Vector3(0,cy,cz));
+    o.scale.set(n[2]/1000,L,n[2]/1000);o.updateMatrix();im.setMatrixAt(i,o.matrix)});
+  im.instanceMatrix.needsUpdate=true;im.frustumCulled=false;gDR.add(im);
+})();
+
+/* v14: tubos de ligacao tubulao -> modulo de alimentacao dos U-beams (D1-D5057-M-058, 10-1-6245): 14 tubos O168,3 (1D-7D e 1E-7E),
+   raio medio de curvatura 685,8 (nota 1). Trajeto montado pelas tres vistas do desenho (lateral, frontal e planta), mesmas coordenadas.
+   Pontos: [transversal a partir da CL (mm, D = direita), profundidade d do sistema do mapa, elevacao]. */
+var UB_TUBES=[[[5980,-2352.4,51769.9],[5980.0,-2626.4,51182.4],[5980.0,-2661.8,51089.3],[5980.0,-2683.4,50992.0],[5980.0,-2690.6,50892.6],[5980.0,-2690.6,47605.8],[5985.0,-2690.6,47523.1],[5999.9,-2690.6,47441.7],[6024.6,-2690.6,47362.6],[6058.6,-2690.6,47287.1],[6101.4,-2690.6,47216.2],[6152.5,-2690.6,47151.0],[6211.0,-2690.6,47092.5],[6276.2,-2690.6,47041.4],[6347.1,-2690.6,46998.6],[6422.6,-2690.6,46964.6],[6501.7,-2690.6,46939.9],[6583.1,-2690.6,46925.0],[6665.8,-2690.6,46920.0],[8614.2,-2690.6,46920.0],[8696.9,-2685.6,46920.0],[8778.3,-2670.7,46920.0],[8857.4,-2646.0,46920.0],[8932.9,-2612.0,46920.0],[9003.8,-2569.2,46920.0],[9069.0,-2518.1,46920.0],[9127.5,-2459.6,46920.0],[9178.6,-2394.4,46920.0],[9221.4,-2323.5,46920.0],[9255.4,-2248.0,46920.0],[9280.1,-2168.9,46920.0],[9295.0,-2087.5,46920.0],[9300.0,-2004.8,46920.0],[9300.0,1808.2,46920.0],[9300.0,1890.9,46915.0],[9300.0,1972.3,46900.1],[9300.0,2051.4,46875.4],[9300.0,2126.9,46841.4],[9300.0,2197.8,46798.6],[9300.0,2263.0,46747.5],[9300.0,2321.5,46689.0],[9300.0,2372.6,46623.8],[9300.0,2415.4,46552.9],[9300.0,2449.4,46477.4],[9300.0,2474.1,46398.3],[9300.0,2489.0,46316.9],[9300.0,2494.0,46234.2],[9300.0,2494.0,39240.8],[9300.0,2499.0,39158.1],[9300.0,2513.9,39076.7],[9300.0,2538.6,38997.6],[9300.0,2572.6,38922.1],[9300.0,2615.4,38851.2],[9300.0,2666.5,38786.0],[9300.0,2725.0,38727.5],[9300.0,2790.2,38676.4],[9300.0,2861.1,38633.6],[9300.0,2936.6,38599.6],[9300.0,3015.7,38574.9],[9300.0,3097.1,38560.0],[9300.0,3179.8,38555.0],[9300.0,6033.8,38555.0],[9294.1,6123.4,38555.0],[9276.6,6211.3,38555.0],[9247.8,6296.3,38555.0],[9208.1,6376.7,38555.0],[9158.3,6451.3,38555.0],[9099.1,6518.8,38555.0],[7812.1,7805.9,38555.0],[7744.6,7865.1,38555.0],[7670.0,7914.9,38555.0],[7589.6,7954.6,38555.0],[7504.6,7983.4,38555.0],[7416.6,8000.9,38555.0],[7327.1,8006.8,38555.0],[6727.0,8006.8,38555.0]],[[5060,-2352.4,51769.9],[5060.0,-2626.4,51182.4],[5060.0,-2661.8,51089.3],[5060.0,-2683.4,50992.0],[5060.0,-2690.6,50892.6],[5060.0,-2690.6,47375.8],[5065.0,-2690.6,47293.1],[5079.9,-2690.6,47211.7],[5104.6,-2690.6,47132.6],[5138.6,-2690.6,47057.1],[5181.4,-2690.6,46986.2],[5232.5,-2690.6,46921.0],[5291.0,-2690.6,46862.5],[5356.2,-2690.6,46811.4],[5427.1,-2690.6,46768.6],[5502.6,-2690.6,46734.6],[5581.7,-2690.6,46709.9],[5663.1,-2690.6,46695.0],[5745.8,-2690.6,46690.0],[8614.2,-2690.6,46690.0],[8696.9,-2685.6,46690.0],[8778.3,-2670.7,46690.0],[8857.4,-2646.0,46690.0],[8932.9,-2612.0,46690.0],[9003.8,-2569.2,46690.0],[9069.0,-2518.1,46690.0],[9127.5,-2459.6,46690.0],[9178.6,-2394.4,46690.0],[9221.4,-2323.5,46690.0],[9255.4,-2248.0,46690.0],[9280.1,-2168.9,46690.0],[9295.0,-2087.5,46690.0],[9300.0,-2004.8,46690.0],[9300.0,1578.2,46690.0],[9300.0,1660.9,46685.0],[9300.0,1742.3,46670.1],[9300.0,1821.4,46645.4],[9300.0,1896.9,46611.4],[9300.0,1967.8,46568.6],[9300.0,2033.0,46517.5],[9300.0,2091.5,46459.0],[9300.0,2142.6,46393.8],[9300.0,2185.4,46322.9],[9300.0,2219.4,46247.4],[9300.0,2244.1,46168.3],[9300.0,2259.0,46086.9],[9300.0,2264.0,46004.2],[9300.0,2264.0,38795.8],[9300.0,2269.0,38713.1],[9300.0,2283.9,38631.7],[9300.0,2308.6,38552.6],[9300.0,2342.6,38477.1],[9300.0,2385.4,38406.2],[9300.0,2436.5,38341.0],[9300.0,2495.0,38282.5],[9300.0,2560.2,38231.4],[9300.0,2631.1,38188.6],[9300.0,2706.6,38154.6],[9300.0,2785.7,38129.9],[9300.0,2867.1,38115.0],[9300.0,2949.8,38110.0],[9300.0,8146.0,38110.0],[9295.0,8228.7,38110.0],[9280.1,8310.1,38110.0],[9255.4,8389.2,38110.0],[9221.4,8464.7,38110.0],[9178.6,8535.6,38110.0],[9127.5,8600.8,38110.0],[9069.0,8659.3,38110.0],[9003.8,8710.4,38110.0],[8932.9,8753.2,38110.0],[8857.4,8787.2,38110.0],[8778.3,8811.9,38110.0],[8696.9,8826.8,38110.0],[8614.2,8831.8,38110.0],[5996.6,8831.8,38110.0],[5937.7,8828.3,38109.2],[5879.7,8818.0,38106.7],[5823.4,8800.9,38102.7],[5769.5,8777.3,38097.1],[5719.1,8747.6,38090.1],[5672.6,8712.2,38081.7],[5630.9,8671.6,38072.0],[5594.5,8626.4,38061.3],[5564.0,8577.3,38049.7],[5539.8,8524.9,38037.3],[5522.2,8470.1,38024.3],[5511.6,8413.7,38010.9],[5508.0,8356.4,37997.3],[5508,7861.5,37880.0]],[[4140,-2352.4,51769.9],[4140.0,-2626.4,51182.4],[4140.0,-2661.8,51089.3],[4140.0,-2683.4,50992.0],[4140.0,-2690.6,50892.6],[4140.0,-2690.6,47145.8],[4145.0,-2690.6,47063.1],[4159.9,-2690.6,46981.7],[4184.6,-2690.6,46902.6],[4218.6,-2690.6,46827.1],[4261.4,-2690.6,46756.2],[4312.5,-2690.6,46691.0],[4371.0,-2690.6,46632.5],[4436.2,-2690.6,46581.4],[4507.1,-2690.6,46538.6],[4582.6,-2690.6,46504.6],[4661.7,-2690.6,46479.9],[4743.1,-2690.6,46465.0],[4825.8,-2690.6,46460.0],[8614.2,-2690.6,46460.0],[8696.9,-2685.6,46460.0],[8778.3,-2670.7,46460.0],[8857.4,-2646.0,46460.0],[8932.9,-2612.0,46460.0],[9003.8,-2569.2,46460.0],[9069.0,-2518.1,46460.0],[9127.5,-2459.6,46460.0],[9178.6,-2394.4,46460.0],[9221.4,-2323.5,46460.0],[9255.4,-2248.0,46460.0],[9280.1,-2168.9,46460.0],[9295.0,-2087.5,46460.0],[9300.0,-2004.8,46460.0],[9300.0,1348.2,46460.0],[9300.0,1430.9,46455.0],[9300.0,1512.3,46440.1],[9300.0,1591.4,46415.4],[9300.0,1666.9,46381.4],[9300.0,1737.8,46338.6],[9300.0,1803.0,46287.5],[9300.0,1861.5,46229.0],[9300.0,1912.6,46163.8],[9300.0,1955.4,46092.9],[9300.0,1989.4,46017.4],[9300.0,2014.1,45938.3],[9300.0,2029.0,45856.9],[9300.0,2034.0,45774.2],[9300.0,2034.0,38565.8],[9300.0,2039.0,38483.1],[9300.0,2053.9,38401.7],[9300.0,2078.6,38322.6],[9300.0,2112.6,38247.1],[9300.0,2155.4,38176.2],[9300.0,2206.5,38111.0],[9300.0,2265.0,38052.5],[9300.0,2330.2,38001.4],[9300.0,2401.1,37958.6],[9300.0,2476.6,37924.6],[9300.0,2555.7,37899.9],[9300.0,2637.1,37885.0],[9300.0,2719.8,37880.0],[9300.0,8356.0,37880.0],[9295.0,8438.7,37880.0],[9280.1,8520.1,37880.0],[9255.4,8599.2,37880.0],[9221.4,8674.7,37880.0],[9178.6,8745.6,37880.0],[9127.5,8810.8,37880.0],[9069.0,8869.3,37880.0],[9003.8,8920.4,37880.0],[8932.9,8963.2,37880.0],[8857.4,8997.2,37880.0],[8778.3,9021.9,37880.0],[8696.9,9036.8,37880.0],[8614.2,9041.8,37880.0],[5168.3,9041.8,37880.0],[5098.6,9037.6,37880.0],[5029.9,9025.0,37880.0],[4963.3,9004.2,37880.0],[4899.6,8975.6,37880.0],[4839.8,8939.4,37880.0],[4784.8,8896.4,37880.0],[4735.4,8847.0,37880.0],[4692.4,8792.0,37880.0],[4656.2,8732.2,37880.0],[4627.6,8668.5,37880.0],[4606.8,8601.9,37880.0],[4594.2,8533.2,37880.0],[4590.0,8463.5,37880.0],[4590,7861.5,37880.0]],[[3220,-2352.4,51769.9],[3220.0,-2626.4,51182.4],[3220.0,-2661.8,51089.3],[3220.0,-2683.4,50992.0],[3220.0,-2690.6,50892.6],[3220.0,-2690.6,46915.8],[3225.0,-2690.6,46833.1],[3239.9,-2690.6,46751.7],[3264.6,-2690.6,46672.6],[3298.6,-2690.6,46597.1],[3341.4,-2690.6,46526.2],[3392.5,-2690.6,46461.0],[3451.0,-2690.6,46402.5],[3516.2,-2690.6,46351.4],[3587.1,-2690.6,46308.6],[3662.6,-2690.6,46274.6],[3741.7,-2690.6,46249.9],[3823.1,-2690.6,46235.0],[3905.8,-2690.6,46230.0],[8614.2,-2690.6,46230.0],[8696.9,-2685.6,46230.0],[8778.3,-2670.7,46230.0],[8857.4,-2646.0,46230.0],[8932.9,-2612.0,46230.0],[9003.8,-2569.2,46230.0],[9069.0,-2518.1,46230.0],[9127.5,-2459.6,46230.0],[9178.6,-2394.4,46230.0],[9221.4,-2323.5,46230.0],[9255.4,-2248.0,46230.0],[9280.1,-2168.9,46230.0],[9295.0,-2087.5,46230.0],[9300.0,-2004.8,46230.0],[9300.0,1118.2,46230.0],[9300.0,1200.9,46225.0],[9300.0,1282.3,46210.1],[9300.0,1361.4,46185.4],[9300.0,1436.9,46151.4],[9300.0,1507.8,46108.6],[9300.0,1573.0,46057.5],[9300.0,1631.5,45999.0],[9300.0,1682.6,45933.8],[9300.0,1725.4,45862.9],[9300.0,1759.4,45787.4],[9300.0,1784.1,45708.3],[9300.0,1799.0,45626.9],[9300.0,1804.0,45544.2],[9300.0,1804.0,38430.3],[9303.3,1806.3,38364.0],[9313.1,1813.2,38298.6],[9329.3,1824.5,38235.2],[9351.6,1840.2,38174.6],[9379.8,1859.9,38117.7],[9413.4,1883.4,38065.4],[9451.9,1910.3,38018.4],[9494.7,1940.3,37977.4],[9541.3,1973.0,37943.0],[9590.9,2007.7,37915.8],[9642.9,2044.1,37896.0],[9696.5,2081.6,37884.0],[9750.8,2119.7,37880.0],[9927.6,2243.4,37880.0],[10000.7,2302.5,37880.0],[10065.0,2371.0,37880.0],[10119.4,2447.6,37880.0],[10162.8,2530.9,37880.0],[10194.4,2619.5,37880.0],[10213.6,2711.4,37880.0],[10220.0,2805.2,37880.0],[10220.0,8565.9,37880.0],[10215.0,8648.6,37880.0],[10200.1,8730.0,37880.0],[10175.4,8809.1,37880.0],[10141.4,8884.6,37880.0],[10098.6,8955.5,37880.0],[10047.5,9020.7,37880.0],[9989.0,9079.2,37880.0],[9923.8,9130.3,37880.0],[9852.9,9173.1,37880.0],[9777.4,9207.1,37880.0],[9698.3,9231.8,37880.0],[9616.9,9246.7,37880.0],[9534.2,9251.7,37880.0],[4353.2,9251.7,37880.0],[4271.1,9246.7,37880.0],[4190.2,9231.9,37880.0],[4111.6,9207.4,37880.0],[4036.6,9173.7,37880.0],[3966.2,9131.1,37880.0],[3901.5,9080.4,37880.0],[3843.3,9022.2,37880.0],[3792.6,8957.5,37880.0],[3750.0,8887.1,37880.0],[3716.3,8812.1,37880.0],[3691.8,8733.5,37880.0],[3677.0,8652.6,37880.0],[3672.0,8570.5,37880.0],[3672,7861.5,37880.0]],[[2300,-2352.4,51769.9],[2300.0,-2626.4,51182.4],[2300.0,-2661.8,51089.3],[2300.0,-2683.4,50992.0],[2300.0,-2690.6,50892.6],[2300.0,-2690.6,46685.8],[2305.0,-2690.6,46603.1],[2319.9,-2690.6,46521.7],[2344.6,-2690.6,46442.6],[2378.6,-2690.6,46367.1],[2421.4,-2690.6,46296.2],[2472.5,-2690.6,46231.0],[2531.0,-2690.6,46172.5],[2596.2,-2690.6,46121.4],[2667.1,-2690.6,46078.6],[2742.6,-2690.6,46044.6],[2821.7,-2690.6,46019.9],[2903.1,-2690.6,46005.0],[2985.8,-2690.6,46000.0],[8614.2,-2690.6,46000.0],[8696.9,-2685.6,46000.0],[8778.3,-2670.7,46000.0],[8857.4,-2646.0,46000.0],[8932.9,-2612.0,46000.0],[9003.8,-2569.2,46000.0],[9069.0,-2518.1,46000.0],[9127.5,-2459.6,46000.0],[9178.6,-2394.4,46000.0],[9221.4,-2323.5,46000.0],[9255.4,-2248.0,46000.0],[9280.1,-2168.9,46000.0],[9295.0,-2087.5,46000.0],[9300.0,-2004.8,46000.0],[9300.0,888.2,46000.0],[9300.0,970.9,45995.0],[9300.0,1052.3,45980.1],[9300.0,1131.4,45955.4],[9300.0,1206.9,45921.4],[9300.0,1277.8,45878.6],[9300.0,1343.0,45827.5],[9300.0,1401.5,45769.0],[9300.0,1452.6,45703.8],[9300.0,1495.4,45632.9],[9300.0,1529.4,45557.4],[9300.0,1554.1,45478.3],[9300.0,1569.0,45396.9],[9300.0,1574.0,45314.2],[9300.0,1574.0,38660.3],[9303.3,1576.3,38594.0],[9313.1,1583.2,38528.6],[9329.3,1594.5,38465.2],[9351.6,1610.2,38404.6],[9379.8,1629.9,38347.7],[9413.4,1653.4,38295.4],[9451.9,1680.3,38248.4],[9494.7,1710.3,38207.4],[9541.3,1743.0,38173.0],[9590.9,1777.7,38145.8],[9642.9,1814.1,38126.0],[9696.5,1851.6,38114.0],[9750.8,1889.7,38110.0],[9927.6,2013.4,38110.0],[10000.7,2072.5,38110.0],[10065.0,2141.0,38110.0],[10119.4,2217.6,38110.0],[10162.8,2300.9,38110.0],[10194.4,2389.5,38110.0],[10213.6,2481.4,38110.0],[10220.0,2575.2,38110.0],[10220.0,8565.9,38110.0],[10215.0,8648.6,38110.0],[10200.1,8730.0,38110.0],[10175.4,8809.1,38110.0],[10141.4,8884.6,38110.0],[10098.6,8955.5,38110.0],[10047.5,9020.7,38110.0],[9989.0,9079.2,38110.0],[9923.8,9130.3,38110.0],[9852.9,9173.1,38110.0],[9777.4,9207.1,38110.0],[9698.3,9231.8,38110.0],[9616.9,9246.7,38110.0],[9534.2,9251.7,38110.0],[3439.8,9251.7,38110.0],[3357.1,9246.8,38109.2],[3275.7,9232.0,38106.7],[3196.6,9207.7,38102.7],[3121.1,9174.2,38097.2],[3050.2,9131.9,38090.2],[2985.0,9081.5,38081.8],[2926.5,9023.8,38072.3],[2875.4,8959.5,38061.6],[2832.6,8889.5,38050.1],[2798.6,8815.0,38037.8],[2773.9,8737.0,38024.8],[2759.0,8656.7,38011.6],[2754.0,8575.1,37998.1],[2754,7861.5,37880.0]],[[1380,-2352.4,51769.9],[1380.0,-2626.4,51182.4],[1380.0,-2661.8,51089.3],[1380.0,-2683.4,50992.0],[1380.0,-2690.6,50892.6],[1380.0,-2690.6,46455.8],[1385.0,-2690.6,46373.1],[1399.9,-2690.6,46291.7],[1424.6,-2690.6,46212.6],[1458.6,-2690.6,46137.1],[1501.4,-2690.6,46066.2],[1552.5,-2690.6,46001.0],[1611.0,-2690.6,45942.5],[1676.2,-2690.6,45891.4],[1747.1,-2690.6,45848.6],[1822.6,-2690.6,45814.6],[1901.7,-2690.6,45789.9],[1983.1,-2690.6,45775.0],[2065.8,-2690.6,45770.0],[8614.2,-2690.6,45770.0],[8696.9,-2685.6,45770.0],[8778.3,-2670.7,45770.0],[8857.4,-2646.0,45770.0],[8932.9,-2612.0,45770.0],[9003.8,-2569.2,45770.0],[9069.0,-2518.1,45770.0],[9127.5,-2459.6,45770.0],[9178.6,-2394.4,45770.0],[9221.4,-2323.5,45770.0],[9255.4,-2248.0,45770.0],[9280.1,-2168.9,45770.0],[9295.0,-2087.5,45770.0],[9300.0,-2004.8,45770.0],[9300.0,658.2,45770.0],[9300.0,740.9,45765.0],[9300.0,822.3,45750.1],[9300.0,901.4,45725.4],[9300.0,976.9,45691.4],[9300.0,1047.8,45648.6],[9300.0,1113.0,45597.5],[9300.0,1171.5,45539.0],[9300.0,1222.6,45473.8],[9300.0,1265.4,45402.9],[9300.0,1299.4,45327.4],[9300.0,1324.1,45248.3],[9300.0,1339.0,45166.9],[9300.0,1344.0,45084.2],[9300.0,1344.0,38565.8],[9304.1,1346.9,38483.1],[9316.3,1355.4,38401.7],[9336.5,1369.6,38322.6],[9364.3,1389.1,38247.1],[9399.4,1413.6,38176.2],[9441.3,1442.9,38111.0],[9489.2,1476.5,38052.5],[9542.7,1513.9,38001.4],[9600.7,1554.6,37958.6],[9662.6,1597.9,37924.6],[9727.3,1643.2,37899.9],[9794.1,1689.9,37885.0],[9861.8,1737.4,37880.0],[10157.6,1944.5,37880.0],[10230.7,2003.5,37880.0],[10295.0,2072.0,37880.0],[10349.4,2148.6,37880.0],[10392.8,2232.0,37880.0],[10424.4,2320.5,37880.0],[10443.6,2412.5,37880.0],[10450.0,2506.2,37880.0],[10450.0,8775.9,37880.0],[10445.0,8858.6,37880.0],[10430.1,8940.0,37880.0],[10405.4,9019.1,37880.0],[10371.4,9094.6,37880.0],[10328.6,9165.5,37880.0],[10277.5,9230.7,37880.0],[10219.0,9289.2,37880.0],[10153.8,9340.3,37880.0],[10082.9,9383.1,37880.0],[10007.4,9417.1,37880.0],[9928.3,9441.8,37880.0],[9846.9,9456.7,37880.0],[9764.2,9461.7,37880.0],[2521.8,9461.7,37880.0],[2439.1,9456.7,37880.0],[2357.7,9441.8,37880.0],[2278.6,9417.1,37880.0],[2203.1,9383.1,37880.0],[2132.2,9340.3,37880.0],[2067.0,9289.2,37880.0],[2008.5,9230.7,37880.0],[1957.4,9165.5,37880.0],[1914.6,9094.6,37880.0],[1880.6,9019.1,37880.0],[1855.9,8940.0,37880.0],[1841.0,8858.6,37880.0],[1836.0,8775.9,37880.0],[1836,7861.5,37880.0]],[[460,-2352.4,51769.9],[460.0,-2626.4,51182.4],[460.0,-2661.8,51089.3],[460.0,-2683.4,50992.0],[460.0,-2690.6,50892.6],[460.0,-2690.6,46225.8],[465.0,-2690.6,46143.1],[479.9,-2690.6,46061.7],[504.6,-2690.6,45982.6],[538.6,-2690.6,45907.1],[581.4,-2690.6,45836.2],[632.5,-2690.6,45771.0],[691.0,-2690.6,45712.5],[756.2,-2690.6,45661.4],[827.1,-2690.6,45618.6],[902.6,-2690.6,45584.6],[981.7,-2690.6,45559.9],[1063.1,-2690.6,45545.0],[1145.8,-2690.6,45540.0],[8614.2,-2690.6,45540.0],[8696.9,-2685.6,45540.0],[8778.3,-2670.7,45540.0],[8857.4,-2646.0,45540.0],[8932.9,-2612.0,45540.0],[9003.8,-2569.2,45540.0],[9069.0,-2518.1,45540.0],[9127.5,-2459.6,45540.0],[9178.6,-2394.4,45540.0],[9221.4,-2323.5,45540.0],[9255.4,-2248.0,45540.0],[9280.1,-2168.9,45540.0],[9295.0,-2087.5,45540.0],[9300.0,-2004.8,45540.0],[9300.0,428.2,45540.0],[9300.0,510.9,45535.0],[9300.0,592.3,45520.1],[9300.0,671.4,45495.4],[9300.0,746.9,45461.4],[9300.0,817.8,45418.6],[9300.0,883.0,45367.5],[9300.0,941.5,45309.0],[9300.0,992.6,45243.8],[9300.0,1035.4,45172.9],[9300.0,1069.4,45097.4],[9300.0,1094.1,45018.3],[9300.0,1109.0,44936.9],[9300.0,1114.0,44854.2],[9300.0,1114.0,38795.8],[9304.1,1116.9,38713.1],[9316.3,1125.4,38631.7],[9336.5,1139.6,38552.6],[9364.3,1159.1,38477.1],[9399.4,1183.6,38406.2],[9441.3,1212.9,38341.0],[9489.2,1246.5,38282.5],[9542.7,1283.9,38231.4],[9600.7,1324.6,38188.6],[9662.6,1367.9,38154.6],[9727.3,1413.2,38129.9],[9794.1,1459.9,38115.0],[9861.8,1507.4,38110.0],[10157.6,1714.5,38110.0],[10230.7,1773.5,38110.0],[10295.0,1842.0,38110.0],[10349.4,1918.6,38110.0],[10392.8,2002.0,38110.0],[10424.4,2090.5,38110.0],[10443.6,2182.5,38110.0],[10450.0,2276.2,38110.0],[10450.0,8775.9,38110.0],[10445.0,8858.6,38110.0],[10430.1,8940.0,38110.0],[10405.4,9019.1,38110.0],[10371.4,9094.6,38110.0],[10328.6,9165.5,38110.0],[10277.5,9230.7,38110.0],[10219.0,9289.2,38110.0],[10153.8,9340.3,38110.0],[10082.9,9383.1,38110.0],[10007.4,9417.1,38110.0],[9928.3,9441.8,38110.0],[9846.9,9456.7,38110.0],[9764.2,9461.7,38110.0],[1297.8,9461.7,38110.0],[1215.1,9456.8,38109.3],[1133.7,9442.0,38107.2],[1054.6,9417.6,38103.7],[979.1,9383.9,38098.8],[908.2,9341.5,38092.7],[843.0,9291.0,38085.5],[784.5,9233.0,38077.1],[733.4,9168.5,38067.9],[690.6,9098.3,38057.8],[656.6,9023.6,38047.0],[631.9,8945.3,38035.8],[617.0,8864.7,38024.2],[612.0,8782.9,38012.4],[612,7861.5,37880.0]]];
+var gUB=new THREE.Group();scene.add(gUB);
+(function(){
+  var mat=new THREE.MeshStandardMaterial({color:0x0ea5e9,roughness:0.45,metalness:0.4});
+  UB_TUBES.forEach(function(pts){[1,-1].forEach(function(s){
+    var cp=new THREE.CurvePath();
+    var V=pts.map(function(p){return new THREE.Vector3(s*p[0]/1000,ezz(p[2]),(3365.4-p[1])/1000)});
+    for(var i=0;i<V.length-1;i++)cp.add(new THREE.LineCurve3(V[i],V[i+1]));
+    var m=new THREE.Mesh(new THREE.TubeGeometry(cp,V.length*3,0.08415,10,false),mat);m.frustumCulled=false;gUB.add(m)})});
+  /* coletor do modulo de alimentacao: O219,1, CL a 9.708 atras da CL do tubulao (d = 7.752), El. 37.880, de -6.270 a +6.270 */
+  var g=new THREE.CylinderGeometry(0.10955,0.10955,12.54,32,1);g.rotateZ(Math.PI/2);
+  var c=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x6f7f90,roughness:0.5,metalness:0.5}));c.position.set(0,ezz(37880),(3365.4-7752)/1000);gUB.add(c);
+  addLabelV("Coletor de alimentação Ø219,1 · El. 37.880",new THREE.Vector3(6.9,ezz(37880),(3365.4-7752)/1000),"far",gUB);
+  addLabelV("Tubos de alimentação U-beam Ø168,3 (M-058)",new THREE.Vector3(9.3,ezz(46920),(3365.4+2690)/1000),"far",gUB);
+})();
+
 /* camera */
 var tgt=new THREE.Vector3(0,0,0),sph={r:11.5,th:0,ph:1.0},dirty=true;
 function updCam(){
@@ -750,11 +999,12 @@ function pose(name){
   if(name==="plan")return pt?{r:19.5,ph:0.02,th:Math.PI/2}:{r:11.4*k,ph:0.02,th:0};
   if(name==="whole")return {r:pt?80:62,ph:1.15,th:0.75,y:ezz(33000),z:-4.5,full:1};
   if(name==="front")return {r:13*k,ph:1.35,th:0};
+  if(name==="site")return {r:pt?190:150,ph:1.12,th:0.85,y:ezz(42000),z:-20,full:1};
   if(name==="walls")return {r:pt?72:54,ph:1.3,th:pt?0.55:0.55,y:ZT/2+1.2,full:1};
   return pt?{r:23,ph:0.75,th:Math.PI/2}:{r:11.5*k,ph:1.0,th:0};
 }
 function setView(name){
-  [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"],["bAll","whole"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
+  [["bPersp","persp"],["bPlan","plan"],["bFront","front"],["bWalls","walls"],["bAll","whole"],["bSite","site"]].forEach(function(p){$(p[0]).classList.toggle("on",p[1]===name)});
   var q=pose(name);
   if(q.full&&+$("vh").value<34){$("vh").value=34;setClip()}
   flyTo(new THREE.Vector3(0,q.y||0,q.z||0),q.r,q.ph,q.th);
@@ -779,7 +1029,7 @@ function pan(dx,dy){
   var rx=Math.cos(sph.th),rz=-Math.sin(sph.th);
   var ux=-Math.sin(sph.th),uz=-Math.cos(sph.th);
   tgt.x+=-dx*k*rx+dy*k*ux;tgt.z+=-dx*k*rz+dy*k*uz;
-  tgt.x=Math.max(-9,Math.min(9,tgt.x));tgt.z=Math.max(-12,Math.min(5,tgt.z));
+  tgt.x=Math.max(-30,Math.min(30,tgt.x));tgt.z=Math.max(-58,Math.min(18,tgt.z));
 }
 el.addEventListener("pointermove",function(e){
   var p=ptrs[e.pointerId];if(!p)return;
@@ -796,7 +1046,7 @@ el.addEventListener("pointermove",function(e){
     var mx0=(p.x+o.x)/2,my0=(p.y+o.y)/2;
     p.x=e.clientX;p.y=e.clientY;
     var d1=Math.hypot(p.x-o.x,p.y-o.y),mx1=(p.x+o.x)/2,my1=(p.y+o.y)/2;
-    if(d0>0)sph.r=Math.max(0.25,Math.min(80,sph.r*d0/Math.max(d1,1)));
+    if(d0>0)sph.r=Math.max(0.25,Math.min(190,sph.r*d0/Math.max(d1,1)));
     pan(mx1-mx0,my1-my0);
     if(downAt)downAt.moved+=99;
     updCam();layoutPins();
@@ -808,7 +1058,7 @@ function endPtr(e){
   if(Object.keys(ptrs).length===0)downAt=null;
 }
 el.addEventListener("pointerup",endPtr);el.addEventListener("pointercancel",endPtr);
-el.addEventListener("wheel",function(e){e.preventDefault();anim=null;sph.r=Math.max(0.25,Math.min(80,sph.r*Math.exp(e.deltaY*0.0012)));updCam();layoutPins()},{passive:false});
+el.addEventListener("wheel",function(e){e.preventDefault();anim=null;sph.r=Math.max(0.25,Math.min(190,sph.r*Math.exp(e.deltaY*0.0012)));updCam();layoutPins()},{passive:false});
 
 var ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
 function pick(e){
@@ -850,20 +1100,21 @@ function vis(){
   head16.visible=stem16.visible=luva16.visible=$("v16").checked;
   head9.visible=stem9.visible=luva9.visible=$("v9").checked;
   tcm.visible=$("vT").checked;
-  tubes.visible=$("vTub").checked;
+  tubes.visible=$("vTub").checked;if(tubes.userData.col)tubes.userData.col.visible=tubes.visible;
   wallGroup.visible=$("vWall").checked;
   jGroup.visible=$("vJ").checked;
   divGroup.visible=$("vDiv").checked;
-  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;gWB.visible=$("vWB").checked;gBK.visible=$("vBK").checked;
+  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;gWB.visible=$("vWB").checked;gBK.visible=$("vBK").checked;gDR.visible=$("vDR").checked;gST.visible=$("vST").checked;gCH.visible=$("vCH").checked;gSL.visible=$("vSL").checked;gCL.visible=$("vCL").checked;gUB.visible=$("vUB").checked;
   dirty=true;
 }
-["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass","vWB","vBK"].forEach(function(id){$(id).addEventListener("change",vis)});
+["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass","vWB","vBK","vDR","vST","vCH","vSL","vCL","vUB"].forEach(function(id){$(id).addEventListener("change",vis)});
 $("vF").addEventListener("change",colorCaps);
 $("bPersp").addEventListener("click",function(){setView("persp")});
 $("bPlan").addEventListener("click",function(){setView("plan")});
 $("bFront").addEventListener("click",function(){setView("front")});
 $("bWalls").addEventListener("click",function(){setView("walls")});
 $("bAll").addEventListener("click",function(){setView("whole")});
+$("bSite").addEventListener("click",function(){setView("site")});
 $("vh").addEventListener("input",setClip);
 matchMedia("(prefers-color-scheme: dark)").addEventListener&&matchMedia("(prefers-color-scheme: dark)").addEventListener("change",applyTheme);
 
@@ -873,7 +1124,7 @@ setClip();layoutCaps();colorCaps();vis();applyTheme();resize();(function(){var q
   if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}
   requestAnimationFrame(loop);
 })();
-window.__bc={tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
+window.__bc={v10:{gST:gST,gCH:gCH,gSL:gSL,gCL:gCL,NT:NT},tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
 })();
 </script>
 </body>
