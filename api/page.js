@@ -24,7 +24,14 @@ module.exports = (req, res) => {
   let html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
   const info = infoEmails().includes(email);
   const full = fullEmails().includes(email);
-  const panel = info ? fs.readFileSync(path.join(dir, 'info.html'), 'utf8') : '';
+  let panel = '';
+  if (info) {
+    panel = fs.readFileSync(path.join(dir, 'info.html'), 'utf8');
+    let extra = '';
+    try { extra = fs.readFileSync(path.join(dir, 'full_info.html'), 'utf8').replace(/id="desenhos"/g, 'id="desenhosFull"'); } catch (e) {}
+    const k = panel.lastIndexOf('</section>');
+    if (extra && k >= 0) panel = panel.slice(0, k) + '<style>.t-ok{color:#2e8b57;font-weight:600}.t-dv{color:#d9822b;font-weight:600}.t-pe{color:#d9423a;font-weight:600}</style>' + extra + panel.slice(k);
+  }
   let nav = '';
   if (info || full) {
     nav = '<nav class="tabs"><button class="tab on" id="tViz" aria-current="page" type="button">Visualização</button>' +
