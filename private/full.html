@@ -298,13 +298,15 @@ details{border-radius:14px}
 </div>
 <div style="display:none"><input type="checkbox" id="vSW"><input type="checkbox" id="vSWL"><input type="text" id="marc"><button id="bMarc"></button><button id="bClr"></button><span id="marcMsg"></span></div>
 <main class="grid">
-<div class="stage"><div id="wrap"><div id="conj"><button type="button" id="conjBtn" aria-expanded="false" aria-controls="conjList"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V11h5v10M10 21V6h5v15M17 21V3h2v18"/></svg><span id="conjCur">Conjunto</span><svg class="i chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="conjList" role="menu" hidden><button type="button" id="bSite" role="menuitem">Vista geral (estrutura e chaminé)</button><div class="csep"></div><button type="button" role="menuitem" data-c="ub">U-beam</button><button type="button" role="menuitem" data-c="ww">Wingwall</button><button type="button" role="menuitem" data-c="forn">Fornalha</button><button type="button" role="menuitem" data-c="sp">Superaquecedor primário</button><button type="button" role="menuitem" data-c="ss">Superaquecedor secundário</button><button type="button" role="menuitem" data-c="ph">Penthouse</button><button type="button" role="menuitem" data-c="mc">Multiciclone</button><button type="button" role="menuitem" disabled>Economizador<small>não modelado</small></button></div></div><div id="mInfo"></div><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div></div>
+<div class="stage"><div id="wrap"><div id="conj"><button type="button" id="conjBtn" aria-expanded="false" aria-controls="conjList"><svg class="i" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V11h5v10M10 21V6h5v15M17 21V3h2v18"/></svg><span id="conjCur">Conjunto</span><svg class="i chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="conjList" role="menu" hidden><button type="button" id="bSite" role="menuitem">Vista geral (estrutura e chaminé)</button><div class="csep"></div><button type="button" role="menuitem" data-c="ub">U-beam</button><button type="button" role="menuitem" data-c="ww">Wingwall</button><button type="button" role="menuitem" data-c="forn">Fornalha</button><button type="button" role="menuitem" data-c="sp">Superaquecedor primário</button><button type="button" role="menuitem" data-c="ss">Superaquecedor secundário</button><button type="button" role="menuitem" data-c="ph">Penthouse</button><button type="button" role="menuitem" data-c="mc">Multiciclone</button><button type="button" role="menuitem" data-c="eco">Economizador</button></div></div><div id="mInfo"></div><div id="hint">Arraste: girar · Shift/botão direito: mover · Roda ou pinça: zoom</div></div></div>
 <aside class="side"><button id="fclose" type="button">Fechar ✕</button>
-<section class="card" id="layers"><h3><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Camadas da visualização<label class="allsw" title="Marcar ou desmarcar todas as camadas"><span>Todas</span><input type="checkbox" id="vAll"></label></h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL"></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8b7355"></span>Multiciclone (M-009/M-151)</span><input type="checkbox" id="vMDC" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#2f8f86"></span>Paredes laterais 3D + BV (M-080/081)</span><input type="checkbox" id="vSW3" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#6b7fd7"></span>Tubulão de vapor</span><input type="checkbox" id="vDR" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#14b8a6"></span>Reforços / buckstays (níveis)</span><input type="checkbox" id="vBK" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a100"></span>Câmara de ar (M-135/136/137)</span><input type="checkbox" id="vWB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8a8a80"></span>Eixos e colunas (10-0-1840)</span><input type="checkbox" id="vST" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#c2410c"></span>Chaminé (M-015)</span><input type="checkbox" id="vCH" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0ea5e9"></span>Tubos de alimentação U-beam (M-058)</span><input type="checkbox" id="vUB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#f59e0b"></span>U-beam: tubos suporte e coletores (arranjo de pressão)</span><input type="checkbox" id="vUBS" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#ea580c"></span>Elementos e abraçadeiras U-beam (M-116)</span><input type="checkbox" id="vUE" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#dc2626"></span>Thermowells e amostragem U-beam (M-116)</span><input type="checkbox" id="vTW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#c2410c"></span>Tubos do teto / penthouse (M-059)</span><input type="checkbox" id="vTT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#16a34a"></span>Aberturas da parede traseira (M-087)</span><input type="checkbox" id="vRO" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0e7490"></span>Ar de transporte e selagem (M-156)</span><input type="checkbox" id="vAR" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#57534e"></span>Alimentação de carvão (M-105)</span><input type="checkbox" id="vCF" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0891b2"></span>Parede lateral U-beam (M-033)</span><input type="checkbox" id="vUW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e11d48"></span>Super primário (M-007)</span><input type="checkbox" id="vSP" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8b5cf6"></span>Super secundário (M-008)</span><input type="checkbox" id="vSS" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c3aed"></span>Interligações do super (M-097)</span><input type="checkbox" id="vSH" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#64748b"></span>Fechamento do topo (M-169)</span><input type="checkbox" id="vCL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c6f9b"></span>Silo de calcário (posição)</span><input type="checkbox" id="vSL" checked></label></section>
+<section class="card" id="layers"><h3><svg class="i" viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>Camadas da visualização<label class="allsw" title="Marcar ou desmarcar todas as camadas"><span>Todas</span><input type="checkbox" id="vAll"></label></h3><label class="sw"><span class="l">Tubos</span><input type="checkbox" id="vTub" checked></label><label class="sw"><span class="l">Paredes e divisórias</span><input type="checkbox" id="vWall" checked></label><label class="sw"><span class="l">Emendas de painel</span><input type="checkbox" id="vJ" checked></label><label class="sw"><span class="l">Rótulos</span><input type="checkbox" id="vL"></label><label class="sw"><span class="l">Divisórias 3D (tubos)</span><input type="checkbox" id="vDiv" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8b7355"></span>Multiciclone (M-009/M-151)</span><input type="checkbox" id="vMDC" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#a16207"></span>Multiciclone – corte J-J (M-009 f7)</span><input type="checkbox" id="vMDJ" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#9a8c7a"></span>Duto caldeira → multiciclone (M-074)</span><input type="checkbox" id="vDTM" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c6f62"></span>Duto multiciclone → economizador (M-072)</span><input type="checkbox" id="vDTE" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#2b8a3e"></span>Economizador (M-010)</span><input type="checkbox" id="vECO" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#2f8f86"></span>Paredes laterais 3D + BV (M-080/081)</span><input type="checkbox" id="vSW3" checked></label><label class="sw"><span class="l">Níveis de elevação</span><input type="checkbox" id="vLv"></label><label class="sw"><span class="l"><span class="dot" style="background:#e5484d"></span>Frente, traseira e teto (M-086/087)</span><input type="checkbox" id="vFT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#b04ad8"></span>Wingwalls (M-060)</span><input type="checkbox" id="vWW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#6b7fd7"></span>Tubulão de vapor</span><input type="checkbox" id="vDR" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#14b8a6"></span>Reforços / buckstays (níveis)</span><input type="checkbox" id="vBK" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a100"></span>Câmara de ar (M-135/136/137)</span><input type="checkbox" id="vWB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#18a999"></span>Passe e superaquecedor (envelope)</span><input type="checkbox" id="vPass" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8a8a80"></span>Eixos e colunas (10-0-1840)</span><input type="checkbox" id="vST" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#c2410c"></span>Chaminé (M-015)</span><input type="checkbox" id="vCH" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0ea5e9"></span>Tubos de alimentação U-beam (M-058)</span><input type="checkbox" id="vUB" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#f59e0b"></span>U-beam: tubos suporte e coletores (arranjo de pressão)</span><input type="checkbox" id="vUBS" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#ea580c"></span>Elementos e abraçadeiras U-beam (M-116)</span><input type="checkbox" id="vUE" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#dc2626"></span>Thermowells e amostragem U-beam (M-116)</span><input type="checkbox" id="vTW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#c2410c"></span>Tubos do teto / penthouse (M-059)</span><input type="checkbox" id="vTT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#16a34a"></span>Aberturas da parede traseira (M-087)</span><input type="checkbox" id="vRO" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0e7490"></span>Ar de transporte e selagem (M-156)</span><input type="checkbox" id="vAR" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#57534e"></span>Alimentação de carvão (M-105)</span><input type="checkbox" id="vCF" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#0891b2"></span>Parede lateral U-beam (M-033)</span><input type="checkbox" id="vUW" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e11d48"></span>Super primário (M-007)</span><input type="checkbox" id="vSP" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8b5cf6"></span>Super secundário (M-008)</span><input type="checkbox" id="vSS" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c3aed"></span>Interligações do super (M-097)</span><input type="checkbox" id="vSH" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#64748b"></span>Fechamento do topo (M-169)</span><input type="checkbox" id="vCL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#7c6f9b"></span>Silo de calcário (posição)</span><input type="checkbox" id="vSL" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#d6d3d1"></span>Silos de calcário, areia e cinzas (M-154)</span><input type="checkbox" id="vSIL" checked></label></section>
 <section class="card" id="tipos"><h3><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Tipo de cap</h3><label class="sw"><span class="l"><span class="dot" style="background:#4f7fa8"></span>16 furos <span class="small" id="n16"></span></span><input type="checkbox" id="v16" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#e0a030"></span>9 furos <span class="small" id="n9"></span></span><input type="checkbox" id="v9" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#d9423a"></span>Termopares <span class="small" id="nT"></span></span><input type="checkbox" id="vT" checked></label><label class="sw"><span class="l"><span class="dot" style="background:#8e5bd1"></span>Instalação de campo <span class="small" id="nF"></span></span><input type="checkbox" id="vF"></label></section>
 </aside>
 </main>
 <section class="bottom"><div class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Detalhes da posição</h3><div id="info">Clique em um cap para ver linha, coluna, tipo e posição no desenho. As divisórias aparecem cortadas a 3 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div></div></section>
+
+
 
 </div>
 
@@ -1273,6 +1275,170 @@ var gMDC=new THREE.Group();scene.add(gMDC);
   addLabelV("Vigas de apoio A / B (±3.516) · El. 32.466",V(-7300,15800,32300),"far",gMDC);
 })();
 
+
+/* v30: dutos de gases do multiciclone.
+   D0-D5057-M-074 (10-0-1963) duto de gases ligacao caldeira -> multiciclone. Vista lateral 1:1: d = x + 9.925 (base do duto 6.263 ext = boca do MDC d 12.694-18.962);
+   El = 49.897,5 + (y - 29.451) (cota "face ext. do duto elev. 49.897,5"; altura 12.622 -> base em 37.275,5). Largura (vista frontal): 12.982 interno em cima, 12.658 embaixo, CL = CL da caldeira.
+   Entrada horizontal pela face frontal (d 15.157), 5.965 de altura ext (El 43.932,5 a 49.897,5); canto traseiro superior R 1.967,5; corpo d 15.541-18.341; 3 direcionadores de fluxo (vista V3, R 1.796 / 1.196 / ~700).
+   D0-D5057-M-072 (10-0-1926 rev. 2) duto de gas ligacao multiciclone -> economizador. Vista lateral 1:1: d = x + 15.404 (flange de entrada na face do flange de saida do MDC); El = 35.439 + (y - 20.425) (2.286 interno = saida do MDC).
+   Junta de expansao d 19.348-19.812; transicao ate d 20.714; caixa 13.400 ext x 2.024 ext (El 34.761-36.785) ate d 28.359; abertura para o involucro do economizador (13.400 int) de d 21.479 a 28.359 ate El 32.861; CL do economizador d 24.884. */
+var gDTM=new THREE.Group();scene.add(gDTM);var gDTE=new THREE.Group();scene.add(gDTE);
+(function(){
+  function V(T,d,E){return new THREE.Vector3(T/1000,ezz(E),(3365.4-d)/1000)}
+  var mD=new THREE.MeshStandardMaterial({color:0x9a8c7a,roughness:0.75,metalness:0.25,transparent:true,opacity:0.42,side:THREE.DoubleSide,depthWrite:false}),
+      mE=new THREE.MeshStandardMaterial({color:0x7c6f62,roughness:0.75,metalness:0.25,transparent:true,opacity:0.42,side:THREE.DoubleSide,depthWrite:false}),
+      mJ=new THREE.MeshStandardMaterial({color:0xf59e0b,roughness:0.6,metalness:0.2}),
+      mV=new THREE.MeshStandardMaterial({color:0x5b4636,roughness:0.6,metalness:0.4,side:THREE.DoubleSide}),
+      mL=new THREE.LineBasicMaterial({color:0x3f3326});
+  /* extrusao de um perfil (d,E) na direcao transversal; w(i) = meia largura no vertice i */
+  function prism(prof,hw,m,g){var n=prof.length,pos=[],idx=[];
+    prof.forEach(function(q,i){var w=typeof hw==="function"?hw(q):hw,a=V(-w,q[0],q[1]),b=V(w,q[0],q[1]);pos.push(a.x,a.y,a.z,b.x,b.y,b.z)});
+    for(var i=0;i<n;i++){var j=(i+1)%n;idx.push(2*i,2*j,2*j+1,2*i,2*j+1,2*i+1)}
+    var cap=function(o){for(var i=1;i<n-1;i++)idx.push(o,o+2*i,o+2*i+2)};cap(0);cap(1);
+    var ge=new THREE.BufferGeometry();ge.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));ge.setIndex(idx);ge.computeVertexNormals();
+    var me=new THREE.Mesh(ge,m);me.frustumCulled=false;g.add(me);
+    var lv=[];prof.forEach(function(q,i){var r=prof[(i+1)%n],w1=typeof hw==="function"?hw(q):hw,w2=typeof hw==="function"?hw(r):hw;[-1,1].forEach(function(s){lv.push(V(s*w1,q[0],q[1]),V(s*w2,r[0],r[1]))});lv.push(V(-w1,q[0],q[1]),V(w1,q[0],q[1]))});
+    var ls=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(lv),mL);ls.frustumCulled=false;g.add(ls)}
+  function E74(y){return 49897.5+(y-29451)}function D74(x){return x+9925}
+  /* M-074: perfil lateral (sentido horario), canto superior traseiro arredondado */
+  var P=[[5232,29451],[6449,29451]];for(var k=1;k<=10;k++){var a=Math.PI/2-k/10*Math.PI/2;P.push([6449+1967.5*Math.cos(a),27483.5+1967.5*Math.sin(a)])}
+  P=P.concat([[8416,19818],[9032,17243],[9032,16829],[2769,16829],[2775,17420],[5202,19500],[5616,21000],[5616,23486],[5232,23486]]);
+  var prof=P.map(function(q){return [D74(q[0]),E74(q[1])]});
+  prism(prof,function(q){return q[1]>39500?6491:6329},mD,gDTM);
+  /* flange de entrada (face do passe) */
+  var fl=new THREE.Mesh(new THREE.BoxGeometry(13.37,5.965,0.06),new THREE.MeshStandardMaterial({color:0x4b5563}));fl.position.copy(V(0,D74(5232),(E74(23486)+E74(29451))/2));gDTM.add(fl);
+  /* direcionadores de fluxo (3 chapas curvas na largura toda) */
+  [[[15557, 47546.5], [15945, 47546.5], [16295.4, 47512.0], [16632.3, 47409.8], [16942.8, 47243.8], [17215.0, 47020.5], [17438.3, 46748.3], [17604.3, 46437.8], [17706.5, 46100.9], [17741.0, 45750.5], [17741, 44046.5]], [[15557, 46346.5], [15895, 46346.5], [16128.3, 46323.5], [16352.7, 46255.5], [16559.5, 46144.9], [16740.7, 45996.2], [16889.4, 45815.0], [17000.0, 45608.2], [17068.0, 45383.8], [17091.0, 45150.5], [17091, 43546.5]], [[15557, 45146.5], [15641, 45146.5], [15777.6, 45133.0], [15908.9, 45093.2], [16029.9, 45028.5], [16136.0, 44941.5], [16223.0, 44835.4], [16287.7, 44714.4], [16327.5, 44583.1], [16341.0, 44446.5], [16341, 42996.5]]].forEach(function(vp){var cp=new THREE.CurvePath();for(var i=0;i<vp.length-1;i++)cp.add(new THREE.LineCurve3(V(0,vp[i][0],vp[i][1]),V(0,vp[i+1][0],vp[i+1][1])));
+    var pts=cp.getSpacedPoints(60),pos=[],idx=[];pts.forEach(function(q,i){pos.push(-6.45,q.y,q.z,6.45,q.y,q.z);if(i>0){var b=2*(i-1);idx.push(b,b+2,b+3,b,b+3,b+1)}});
+    var ge=new THREE.BufferGeometry();ge.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));ge.setIndex(idx);ge.computeVertexNormals();gDTM.add(new THREE.Mesh(ge,mV))});
+  /* M-072 */
+  function D72(x){return x+15404}function E72(y){return 35439+(y-20425)}
+  function box(t,dA,dB,e0,e1,m,g){var A=V(-t,dA,e0),B=V(t,dB,e1),ge=new THREE.BoxGeometry(Math.abs(B.x-A.x),Math.abs(B.y-A.y),Math.abs(B.z-A.z)),me=new THREE.Mesh(ge,m);me.position.copy(A).add(B).multiplyScalar(0.5);g.add(me);
+    var ed=new THREE.LineSegments(new THREE.EdgesGeometry(ge),mL);ed.position.copy(me.position);g.add(ed);return me}
+  box(6409,D72(3708),D72(3944),34296-75,36582+75,new THREE.MeshStandardMaterial({color:0x4b5563}),gDTE);
+  box(6334,D72(3944),D72(4408),34296,36582,mJ,gDTE);
+  prism([[D72(4408),E72(21634)],[D72(5310),E72(21771)],[D72(5310),E72(19747)],[D72(4408),E72(19222)]],function(q){return q[0]<D72(4800)?6334:6700},mE,gDTE);
+  box(6700,D72(5310),D72(12955),E72(19747),E72(21771),mE,gDTE);
+  box(6700,D72(6075),D72(12955),E72(17847),E72(19747),mE,gDTE);
+  box(6800,D72(5833),D72(13197),E72(18649),E72(18954),new THREE.MeshStandardMaterial({color:0x6b7280,transparent:true,opacity:0.6}),gDTE);
+  addLabelV("Duto de gases caldeira → multiciclone (M-074) · topo El. 49.897,5 · 12.982 int.",V(7300,16700,47500),"far",gDTM);
+  addLabelV("Direcionadores de fluxo (3) · M-074 vista V3",V(-7300,17500,45500),"far",gDTM);
+  addLabelV("Duto multiciclone → economizador (M-072) · 13.400 ext. × 2.024",V(7300,24000,37300),"far",gDTE);
+  addLabelV("Junta de expansão (M-072)",V(-7300,19580,35439),"far",gDTE);
+  addLabelV("Entrada do envoltório do economizador · CL d 24.884",V(-7300,24884,33300),"far",gDTE);
+})();
+
+
+/* v31: economizador - conjunto, D1-D5057-M-010 (10-1-6506 rev. 0, 1:75).
+   Vista V1-V1 (lateral) em 1:1: d = 24.884 + (x - 13.607); El = 36.785 + (y - 40.046).
+   Conferencia: topo do duto da M-072 (2.024 ext., El 34.761-36.785) = cota "2.024 EXT. DO DUTO"; estrutura de apoio do duto (y 37.216-37.232) = flange 33.955-33.971 da M-072;
+   abertura do duto (d 21.479-28.359) = involucro 6.900 interno (x 10.157-17.057 -> d 21.434-28.334); colunas x 8.207 / 18.407 -> d 19.484 / 29.684 = eixos E (19.444) e F (29.644) + 40;
+   CL do economizador = eixo E + 5.400 (1.700 + 3.700 da folha). Involucro 13.400 interno x 6.900 interno, El 21.856 (fundo) a 32.864 (estrutura).
+   Serpentinas: 176 (passo transversal 76 = 176 x 76 = 13.376), 74 trechos horizontais a cada 102 (passo longitudinal) entre El 22.564 e 32.716 em 5 bancos com folgas para os sopradores;
+   curvas R51; trecho reto d 21.549 a 28.219. Coletor inferior (entrada A, 10") d 20.734 / El 22.156 e superior (saida B) d 22.584 / El 33.266, O273. Suportes (pendurais) a cada 1.370.
+   18 portas de inspecao (3 niveis x 3 x 2 lados) e 2 sopradores por nivel (lado direito, onde a C2-C2 indica). */
+var gECO=new THREE.Group();scene.add(gECO);
+(function(){
+  function V(T,d,E){return new THREE.Vector3(T/1000,ezz(E),(3365.4-d)/1000)}
+  function D(x){return 24884+(x-13607)}function EL(y){return 36785+(y-40046)}
+  var R=[25825, 25927, 26029, 26131, 26233, 26335, 27049, 27151, 27253, 27355, 27457, 27559, 27661, 27763, 28563, 28665, 28767, 28869, 28971, 29073, 29175, 29277, 29379, 29481, 29583, 29685, 29787, 29889, 29991, 30093, 30195, 30297, 30399, 30501, 31301, 31403, 31505, 31607, 31709, 31811, 31913, 32015, 32117, 32219, 32321, 32423, 32525, 32627, 32729, 32831, 32933, 33035, 33137, 33239, 34039, 34141, 34243, 34345, 34447, 34549, 34651, 34753, 34855, 34957, 35059, 35161, 35263, 35365, 35467, 35569, 35671, 35773, 35875, 35977].map(EL),dA=D(10272),dB=D(16942),NT=176,T0=-88*76+38;
+  var mS=new THREE.MeshStandardMaterial({color:0x2b8a3e,roughness:0.5,metalness:0.4}),mC=new THREE.MeshStandardMaterial({color:0x1d4ed8,roughness:0.5,metalness:0.5}),
+      mI=new THREE.MeshStandardMaterial({color:0x8a9aa9,transparent:true,opacity:0.2,side:THREE.DoubleSide,depthWrite:false}),mL=new THREE.LineBasicMaterial({color:0x3b4a57}),
+      mDo=new THREE.MeshStandardMaterial({color:0xf97316,emissive:0xf97316,emissiveIntensity:0.25}),mSB=new THREE.MeshStandardMaterial({color:0x7c3aed}),mE=new THREE.MeshStandardMaterial({color:0x6b7280,roughness:0.6,metalness:0.5});
+  var M4=new THREE.Matrix4(),P3=new THREE.Vector3(),Q=new THREE.Quaternion(),S3=new THREE.Vector3(1,1,1),Xa=new THREE.Vector3(1,0,0);
+  /* trechos retos */
+  var gS=new THREE.CylinderGeometry(0.0222,0.0222,(dB-dA)/1000,6);gS.rotateX(Math.PI/2);
+  var im=new THREE.InstancedMesh(gS,mS,NT*R.length),n=0;
+  for(var i=0;i<NT;i++)R.forEach(function(E){P3.copy(V(T0+76*i,(dA+dB)/2,E));M4.compose(P3,Q,S3);im.setMatrixAt(n++,M4)});im.frustumCulled=false;gECO.add(im);
+  /* curvas: alternando frente/tras entre trechos consecutivos (folgas dos sopradores com raio maior) */
+  var bends={};for(var k=0;k<R.length-1;k++){var r=(R[k+1]-R[k])/2,key=Math.round(r);(bends[key]=bends[key]||[]).push([k,r])}
+  Object.keys(bends).forEach(function(key){var L=bends[key],r=L[0][1]/1000,g=new THREE.TorusGeometry(r,0.0222,5,10,Math.PI);g.rotateY(Math.PI/2);
+    var ib=new THREE.InstancedMesh(g,mS,NT*L.length),m=0,Qb=new THREE.Quaternion(),Qf=new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,0,0),Math.PI);
+    for(var i=0;i<NT;i++)L.forEach(function(b){var k=b[0],front=(k%2===0),Em=(R[k]+R[k+1])/2,dd=front?dB:dA;P3.copy(V(T0+76*i,dd,Em));
+      /* torus no plano (y,z) apos rotateY: arco do lado +z ou -z */
+      M4.compose(P3,front?Qf:Qb,S3);ib.setMatrixAt(m++,M4)});ib.frustumCulled=false;gECO.add(ib)});
+  /* involucro (13.400 x 6.900 interno) e moldura da estrutura */
+  function box(t0,t1,d0,d1,e0,e1,m,ed){var A=V(t0,d0,e0),B=V(t1,d1,e1),g=new THREE.BoxGeometry(Math.abs(B.x-A.x),Math.abs(B.y-A.y),Math.abs(B.z-A.z)),me=new THREE.Mesh(g,m);me.position.copy(A).add(B).multiplyScalar(0.5);gECO.add(me);
+    if(ed!==false){var l=new THREE.LineSegments(new THREE.EdgesGeometry(g),mL);l.position.copy(me.position);gECO.add(l)}return me}
+  box(-6700,6700,D(10157),D(17057),EL(25117),EL(36125),mI);
+  box(-6950,6950,D(9925),D(17289),EL(36125),EL(36150),mE,false);box(-6950,6950,D(9925),D(17289),EL(37216),EL(37232),mE,false);
+  [[-6950,19484],[6950,19484],[-6950,29684],[6950,29684]].forEach(function(c){box(c[0]-150,c[0]+150,c[1]-150,c[1]+150,EL(23217),EL(38025),mE,false)});
+  /* reforcos / suportes das serpentinas a cada 1.370 */
+  [27478,28848,30216,31586,32954,34324].forEach(function(y){box(-6750,6750,D(9501),D(17714),EL(y)-20,EL(y)+20,mE,false)});
+  /* coletores O273 */
+  var gc=new THREE.CylinderGeometry(0.1365,0.1365,13.6,24);gc.rotateZ(Math.PI/2);
+  [[9457,25417],[11307,36527]].forEach(function(c){var me=new THREE.Mesh(gc,mC);me.position.copy(V(0,D(c[0]),EL(c[1])));gECO.add(me)});
+  /* portas de inspecao (18) e sopradores de fuligem */
+  [28429,31167,33906].forEach(function(y){[10812,13140,16402].forEach(function(x){[-1,1].forEach(function(s){box(s*6700,s*6760,D(x)-347,D(x)+347,EL(y)-342,EL(y)+342,mDo,false)})})});
+  [28313,31051,33789].forEach(function(y){[12107,15107].forEach(function(x){var c=new THREE.Mesh(new THREE.CylinderGeometry(0.225,0.225,0.4,20),mSB);c.rotation.z=Math.PI/2;c.position.copy(V(6900,D(x),EL(y)));gECO.add(c)})});
+  addLabelV("Economizador (M-010) · 176 serpentinas × 74 trechos · 15.172 m² · CL = eixo E + 5.400",V(7500,24884,33800),"far",gECO);
+  addLabelV("Coletor inferior Ø273 · entrada de água A (10\") · El. 22.156",V(-7500,D(9457),EL(25417)),"far",gECO);
+  addLabelV("Coletor superior Ø273 · saída de água B (10\") · El. 33.266",V(-7500,D(11307),EL(36527)),"far",gECO);
+  addLabelV("Sopradores de fuligem (2 por nível)",V(7600,D(13607),EL(31051)),"far",gECO);
+  addLabelV("18 portas de inspeção (3 níveis)",V(-7600,D(13140),EL(31167)),"far",gECO);
+})();
+
+
+/* v32: multiciclone - corte J-J, D1-D5057-M-009 folha 7 (10-1-6796, 1:15). Corte transversal (plano em d ~13.250, olhando para tras), CL do MDC simetrico.
+   Elementos: espelho superior dos tubos (T.T.S.), espelho inferior (B.T.S.), paineis superiores em "telhado" (45 graus) sobre o T.T.S., montagem tipica do tubo de coleta,
+   juncao modulo/funil aparafusada (parafusos de ajuste, porca fixada na fabrica) e tubo de apoio a parede no topo.
+   O corte J-J tem quebras de vista (horizontal e vertical); a posicao dos paineis foi tirada da elevacao frontal (f1, 1:1, El = y + 23.546: topo 13.188 -> 36.734,
+   T.T.S. 10.750 -> 34.296, fundo 8.781 -> 32.327): cumeeiras em El 35.001 nas posicoes T 0 / +-1.585 / +-3.170 / +-4.755 e meias-aguas encostadas nas paredes (+-6.326);
+   base dos paineis em El 34.326 (30 acima do T.T.S.). Altura do telhado no J-J: 710 acima do T.T.S. (f1: 705). */
+var gMDJ=new THREE.Group();scene.add(gMDJ);
+(function(){
+  function V(T,d,E){return new THREE.Vector3(T/1000,ezz(E),(3365.4-d)/1000)}
+  var d0=12694,d1=18962,Eb=34326,Ea=35001,hw=675;
+  var mP=new THREE.MeshStandardMaterial({color:0xa16207,roughness:0.6,metalness:0.35,side:THREE.DoubleSide}),mL=new THREE.LineBasicMaterial({color:0x3f2a0c});
+  function roof(Tc,left,right){var pos=[],lv=[];
+    function quad(a,b,c,d){[a,b,c,a,c,d].forEach(function(q){pos.push(q.x,q.y,q.z)});lv.push(a,b,b,c,c,d,d,a)}
+    var A0=V(Tc,d0,Ea),A1=V(Tc,d1,Ea);
+    if(left){var L0=V(Tc-hw,d0,Eb),L1=V(Tc-hw,d1,Eb);quad(L0,A0,A1,L1)}
+    if(right){var R0=V(Tc+hw,d0,Eb),R1=V(Tc+hw,d1,Eb);quad(A0,R0,R1,A1)}
+    var g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(pos,3));g.computeVertexNormals();gMDJ.add(new THREE.Mesh(g,mP));
+    gMDJ.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(lv),mL))}
+  [0,1585,-1585,3170,-3170,4755,-4755].forEach(function(t){roof(t,true,true)});
+  roof(-6326,false,true);roof(6326,true,false);
+  /* juncao aparafusada modulo/funil (anel de cantoneiras) no fundo do modulo */
+  var mF=new THREE.MeshStandardMaterial({color:0x374151,roughness:0.5,metalness:0.6});
+  [[-3230,14198],[3230,14198],[-3230,17458],[3230,17458]].forEach(function(c){
+    var hwf=3104+40,hdf=1504+40,E=32314,t=0.06;
+    [[c[0]-hwf,c[0]+hwf,c[1]-hdf,c[1]-hdf+60],[c[0]-hwf,c[0]+hwf,c[1]+hdf-60,c[1]+hdf],[c[0]-hwf,c[0]-hwf+60,c[1]-hdf,c[1]+hdf],[c[0]+hwf-60,c[0]+hwf,c[1]-hdf,c[1]+hdf]].forEach(function(b){
+      var A=V(b[0],b[2],E-60),B=V(b[1],b[3],E);var g=new THREE.BoxGeometry(Math.abs(B.x-A.x),Math.abs(B.y-A.y),Math.abs(B.z-A.z));var me=new THREE.Mesh(g,mF);me.position.copy(A).add(B).multiplyScalar(0.5);gMDJ.add(me)})});
+  addLabelV("Painéis superiores em telhado (45°) sobre o espelho dos tubos · cumeeira El. 35.001 · corte J-J (M-009 f7)",V(7300,15800,35500),"far",gMDJ);
+  addLabelV("Junção módulo/funil aparafusada (parafusos de ajuste) · El. 32.314",V(-7300,15800,32100),"far",gMDJ);
+})();
+
+
+/* v33: silos de calcario, areia e cinzas - D0-D5057-M-154 (10-0-2251, sistema de calcario, cinzas pesadas e leves - conjunto). Apoio: M-130 (10-0-2161).
+   Planta: eixos C (x 23.800), D (29.600) e E (38.750) -> d = x - 19.306 (iguais a grade do mapa: 4.494 / 10.294 / 19.444); linha 4 (CL caldeira) em y 14.200,
+   linhas 3/5/6/7 a +8.500 / -8.500 / -10.500 / -14.100 -> T = -(y - 14.200) (lado esquerdo negativo, igual ao mapa).
+   Silo de calcario O3.000 em (d -7.633, T -12.298) = pegada do v10 (d -7.576, T -12.300). Silo de areia O2.628 em (d 2.506, T -12.848). Silo de cinzas O5.000 em (d 37.687, T -21.073).
+   Elevacao: El = y - 31.743 (solo 11.850 em y 43.593). Calcario: suporte El 37.050, corpo 9.455 (ate 46.505), cone 3.794 (ate 33.256); torre ate 48.591 (M-130: plataforma do transportador 48.700).
+   Areia: suporte El 38.050, corpo 9.044 (ate 47.094), cone 1.951 (ate 36.099). Cinzas: saia El 38.050, corpo 12.582 (ate 50.632), cone 6.034 (ate 32.016) - a vista do silo de cinzas tem quebra vertical; usadas as cotas escritas. */
+var gSIL=new THREE.Group();scene.add(gSIL);
+(function(){
+  function V(T,d,E){return new THREE.Vector3(T/1000,ezz(E),(3365.4-d)/1000)}
+  function silo(T,d,R,Eb,Et,Ec,col,nm){var m=new THREE.MeshStandardMaterial({color:col,roughness:0.6,metalness:0.3,transparent:true,opacity:0.75}),mL=new THREE.LineBasicMaterial({color:0x334155});
+    var c=new THREE.Mesh(new THREE.CylinderGeometry(R/1000,R/1000,(Et-Eb)/1000,40,1),m);c.position.copy(V(T,d,(Eb+Et)/2));gSIL.add(c);
+    var k=new THREE.Mesh(new THREE.ConeGeometry(R/1000,(Eb-Ec)/1000,40,1),m);k.rotation.x=Math.PI;k.position.copy(V(T,d,(Eb+Ec)/2));gSIL.add(k);
+    var r=new THREE.Mesh(new THREE.ConeGeometry(R/1000,0.35,40,1),m);r.position.copy(V(T,d,Et+175));gSIL.add(r);
+    [Eb,Et].forEach(function(E){var rg=new THREE.Mesh(new THREE.TorusGeometry(R/1000+0.03,0.03,6,48),new THREE.MeshStandardMaterial({color:0x334155}));rg.rotation.x=Math.PI/2;rg.position.copy(V(T,d,E));gSIL.add(rg)});
+    addLabelV(nm,V(T,d,Et+1200),"far",gSIL)}
+  function tower(T,d,w,E1,lev){var mC=new THREE.MeshStandardMaterial({color:0x6b7280,roughness:0.6,metalness:0.5}),hw=w/2;
+    [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(function(s){var c=new THREE.Mesh(new THREE.BoxGeometry(0.25,(E1-11850)/1000,0.25),mC);c.position.copy(V(T+s[0]*hw,d+s[1]*hw,(11850+E1)/2));gSIL.add(c)});
+    lev.forEach(function(E){var v=[];[[-1,-1],[1,-1],[1,1],[-1,1],[-1,-1]].forEach(function(s,i,a){if(i<4){var n=a[i+1];v.push(V(T+s[0]*hw,d+s[1]*hw,E),V(T+n[0]*hw,d+n[1]*hw,E))}});
+      gSIL.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(v),new THREE.LineBasicMaterial({color:0x4b5563})))})}
+  silo(-12298,-7633,1500,37050,46505,33256,0xd6d3d1,"Silo de calcário Ø3.000 · El. 33.256–46.505 (M-154)");
+  tower(-12298,-7633,3400,48591,[16391,21291,26341,32341,36941,45975,48591]);
+  silo(-12848,2506,1314,38050,47094,36099,0xe7d8b0,"Silo de areia Ø2.628 · El. 36.099–47.094 (M-154)");
+  tower(-12848,2506,3400,38050,[32341,36941,38050]);
+  silo(-21073,37687,2500,38050,50632,32016,0x9ca3af,"Silo de cinzas Ø5.000 · El. 32.016–50.632 (M-154)");
+  /* saia e pernas do silo de cinzas ate o solo (8 pernas, anel O5.920) */
+  var mC=new THREE.MeshStandardMaterial({color:0x6b7280,roughness:0.6,metalness:0.5});
+  for(var i=0;i<8;i++){var a=i*Math.PI/4,c=new THREE.Mesh(new THREE.BoxGeometry(0.25,(38050-11850)/1000,0.25),mC);c.position.copy(V(-21073+2960*Math.cos(a),37687+2960*Math.sin(a),(38050+11850)/2));gSIL.add(c)}
+})();
+
 /* camera */
 var tgt=new THREE.Vector3(0,0,0),sph={r:11.5,th:0,ph:1.0},dirty=true;
 function updCam(){
@@ -1405,14 +1571,14 @@ function vis(){
   wallGroup.visible=$("vWall").checked;
   jGroup.visible=$("vJ").checked;
   divGroup.visible=$("vDiv").checked;
-  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;gWB.visible=$("vWB").checked;gBK.visible=$("vBK").checked;gDR.visible=$("vDR").checked;gST.visible=$("vST").checked;gCH.visible=$("vCH").checked;gSL.visible=$("vSL").checked;gCL.visible=$("vCL").checked;gSH.visible=$("vSH").checked;gSS.visible=$("vSS").checked;gSP.visible=$("vSP").checked;gUW.visible=$("vUW").checked;gCF.visible=$("vCF").checked;gAR.visible=$("vAR").checked;gRO.visible=$("vRO").checked;gTT.visible=$("vTT").checked;gTW.visible=$("vTW").checked;gSW3.visible=$("vSW3").checked;gMDC.visible=$("vMDC").checked;gUE.visible=$("vUE").checked;gUB.visible=$("vUB").checked;gUBS.visible=$("vUBS").checked;
+  swGroup.visible=$("vSW").checked;lvGroup.visible=$("vLv").checked;gSWL.visible=$("vSWL").checked;gFT.visible=$("vFT").checked;gWW.visible=$("vWW").checked;gPass.visible=$("vPass").checked;gWB.visible=$("vWB").checked;gBK.visible=$("vBK").checked;gDR.visible=$("vDR").checked;gST.visible=$("vST").checked;gCH.visible=$("vCH").checked;gSL.visible=$("vSL").checked;gSIL.visible=$("vSIL").checked;gCL.visible=$("vCL").checked;gSH.visible=$("vSH").checked;gSS.visible=$("vSS").checked;gSP.visible=$("vSP").checked;gUW.visible=$("vUW").checked;gCF.visible=$("vCF").checked;gAR.visible=$("vAR").checked;gRO.visible=$("vRO").checked;gTT.visible=$("vTT").checked;gTW.visible=$("vTW").checked;gSW3.visible=$("vSW3").checked;gMDC.visible=$("vMDC").checked;gMDJ.visible=$("vMDJ").checked;gDTM.visible=$("vDTM").checked;gDTE.visible=$("vDTE").checked;gECO.visible=$("vECO").checked;gUE.visible=$("vUE").checked;gUB.visible=$("vUB").checked;gUBS.visible=$("vUBS").checked;
   dirty=true;
 }
-["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass","vWB","vBK","vDR","vST","vCH","vSL","vCL","vSH","vSS","vSP","vUW","vCF","vAR","vRO","vTT","vTW","vUE","vSW3","vMDC","vUB","vUBS"].forEach(function(id){$(id).addEventListener("change",vis)});
+["v16","v9","vT","vTub","vWall","vJ","vL","vDiv","vSW","vLv","vSWL","vFT","vWW","vPass","vWB","vBK","vDR","vST","vCH","vSL","vCL","vSH","vSS","vSP","vUW","vCF","vAR","vRO","vTT","vTW","vUE","vSW3","vMDC","vMDJ","vDTM","vSIL","vDTE","vECO","vUB","vUBS"].forEach(function(id){$(id).addEventListener("change",vis)});
 $("vF").addEventListener("change",colorCaps);
 
 /* lista de conjuntos (site) */
-(function(){var CJ={"ub": ["vUB", "vUBS", "vUE", "vTW", "vUW"], "ww": ["vWW"], "forn": ["v16", "v9", "vT", "vTub", "vWall", "vJ", "vDiv", "vSW3", "vFT", "vBK", "vWB", "vRO", "vAR", "vCF"], "sp": ["vSP", "vSH"], "ss": ["vSS", "vSH"], "ph": ["vTT", "vCL", "vDR"], "mc": ["vMDC"]},GM={v16:function(){return [head16]},v9:function(){return [head9]},vAR:function(){return [gAR]},vBK:function(){return [gBK]},vCF:function(){return [gCF]},vCL:function(){return [gCL]},vDR:function(){return [gDR]},vDiv:function(){return [divGroup]},vFT:function(){return [gFT]},vJ:function(){return [jGroup]},vMDC:function(){return [gMDC]},vRO:function(){return [gRO]},vSH:function(){return [gSH]},vSP:function(){return [gSP]},vSS:function(){return [gSS]},vSW3:function(){return [gSW3]},vT:function(){return [tcm]},vTT:function(){return [gTT]},vTW:function(){return [gTW]},vTub:function(){return [tubes]},vUB:function(){return [gUB]},vUBS:function(){return [gUBS]},vUE:function(){return [gUE]},vUW:function(){return [gUW]},vWB:function(){return [gWB]},vWW:function(){return [gWW]},vWall:function(){return [wallGroup]}},NM={};
+(function(){var CJ={"ub": ["vUB", "vUBS", "vUE", "vTW", "vUW"], "ww": ["vWW"], "forn": ["v16", "v9", "vT", "vTub", "vWall", "vJ", "vDiv", "vSW3", "vFT", "vBK", "vWB", "vRO", "vAR", "vCF"], "sp": ["vSP", "vSH"], "ss": ["vSS", "vSH"], "ph": ["vTT", "vCL", "vDR"], "mc": ["vMDC", "vMDJ", "vDTM", "vDTE"], "eco": ["vECO", "vDTE"]},GM={v16:function(){return [head16]},v9:function(){return [head9]},vAR:function(){return [gAR]},vBK:function(){return [gBK]},vCF:function(){return [gCF]},vCL:function(){return [gCL]},vDR:function(){return [gDR]},vDiv:function(){return [divGroup]},vFT:function(){return [gFT]},vJ:function(){return [jGroup]},vMDC:function(){return [gMDC]},vSIL:function(){return [gSIL]},vMDJ:function(){return [gMDJ]},vDTM:function(){return [gDTM]},vDTE:function(){return [gDTE]},vECO:function(){return [gECO]},vRO:function(){return [gRO]},vSH:function(){return [gSH]},vSP:function(){return [gSP]},vSS:function(){return [gSS]},vSW3:function(){return [gSW3]},vT:function(){return [tcm]},vTT:function(){return [gTT]},vTW:function(){return [gTW]},vTub:function(){return [tubes]},vUB:function(){return [gUB]},vUBS:function(){return [gUBS]},vUE:function(){return [gUE]},vUW:function(){return [gUW]},vWB:function(){return [gWB]},vWW:function(){return [gWW]},vWall:function(){return [wallGroup]}},NM={};
 var btn=$("conjBtn"),lst=$("conjList"),cur=$("conjCur");
 [].forEach.call(lst.querySelectorAll("button[data-c]"),function(b){NM[b.getAttribute("data-c")]=b.textContent});
 function open(v){lst.hidden=!v;btn.setAttribute("aria-expanded",v)}
@@ -1460,7 +1626,7 @@ setClip();layoutCaps();colorCaps();vis();applyTheme();resize();(function(){var q
   if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}
   requestAnimationFrame(loop);
 })();
-window.__bc={v27:{gMDC:gMDC},v26:{gSW3:gSW3},setY:function(E){setY(E)},v24:{gUE:gUE},v23:{gTW:gTW},v22:{gTT:gTT},v21:{gWW:gWW},v20:{gAR:gAR,gCF:gCF,gRO:gRO},v19:{gUW:gUW},v18:{gSP:gSP},v17:{gSS:gSS},v16:{gSH:gSH},v10:{gST:gST,gCH:gCH,gSL:gSL,gCL:gCL,NT:NT},tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
+window.__bc={v33:{gSIL:gSIL},v32:{gMDJ:gMDJ},v31:{gECO:gECO},v30:{gDTM:gDTM,gDTE:gDTE},v27:{gMDC:gMDC},v26:{gSW3:gSW3},setY:function(E){setY(E)},v24:{gUE:gUE},v23:{gTW:gTW},v22:{gTT:gTT},v21:{gWW:gWW},v20:{gAR:gAR,gCF:gCF,gRO:gRO},v19:{gUW:gUW},v18:{gSP:gSP},v17:{gSS:gSS},v16:{gSH:gSH},v10:{gST:gST,gCH:gCH,gSL:gSL,gCL:gCL,NT:NT},tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
 })();
 </script>
 </body>
