@@ -1,7 +1,4 @@
 {
   "name": "projeto3d-hpb",
-  "private": true,
-  "dependencies": {
-    "@neondatabase/serverless": "1.0.2"
-  }
+  "private": true
 }
