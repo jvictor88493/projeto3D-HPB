@@ -1,7 +1,9 @@
 # Aplica o padrao do site a um HTML vNN ja no formato v29+ e grava private/full.html e private/full_info.html
 import re,sys
-SC='/tmp/claude-0/-home-claude/a9cf151c-8bb3-5936-89bb-628d4d806cb3/scratchpad/full/'
-R='/home/claude/projeto3d-hpb/private/'
+import os
+HERE=os.path.dirname(os.path.abspath(__file__))
+SC=HERE+'/'
+R=os.path.join(os.path.dirname(HERE),'private')+'/'
 o=open(sys.argv[1],encoding='utf8').read()
 OUT=sys.argv[2] if len(sys.argv)>2 else 'full.html'
 NOINFO=len(sys.argv)>3 and sys.argv[3]=='noinfo'

@@ -1,8 +1,10 @@
 # Gera private/rec.html = private/full.html (modelo atual do 3D HPB Completa) + modulo "Reparos do report"
 # extraido de um arquivo de reparos (vN) por diferenca contra a base 3D que ele usou.
 import difflib,re,sys,json
-SC='/tmp/claude-0/-home-claude/a9cf151c-8bb3-5936-89bb-628d4d806cb3/scratchpad/full/'
-R='/home/claude/projeto3d-hpb/private/'
+import os
+HERE=os.path.dirname(os.path.abspath(__file__))
+SC=HERE+'/'
+R=os.path.join(os.path.dirname(HERE),'private')+'/'
 base=open(sys.argv[1],encoding='utf8').read()   # base 3D usada pelo arquivo de reparos
 rep=open(sys.argv[2],encoding='utf8').read()    # arquivo de reparos
 tgt=open(R+'full.html',encoding='utf8').read()
@@ -52,4 +54,11 @@ print('aplicados',applied);[print(' pulado',x) for x in skipped]
 for k in ('gREP.visible','"vREP"','id="rep"','repShow','GM.vREP','REPDATA'): print(k,out.count(k))
 
 # fotos 'depois' do report e sem botao de anexar
-import subprocess;subprocess.run(['python3','/home/claude/projeto3d-hpb/tools/rep_patch.py'],check=True)
+import subprocess,glob
+# dados das recomendacoes: o report mais recente processado por rep_report.py (tools/out/rep_<N>.json)
+js=sorted(glob.glob(os.path.join(HERE,'out','rep_*.json')),key=lambda f:int(re.search(r'rep_(\d+)',f).group(1)))
+if js:
+    d=open(js[-1],encoding='utf8').read();s2=open(R+'rec.html',encoding='utf8').read()
+    a=s2.index('/*REPDATA*/')+len('/*REPDATA*/');b=s2.index('/*ENDREPDATA*/');open(R+'rec.html','w',encoding='utf8').write(s2[:a]+d+s2[b:])
+    print('dados do report:',os.path.basename(js[-1]))
+subprocess.run(['python3',os.path.join(HERE,'rep_patch.py')],check=True)

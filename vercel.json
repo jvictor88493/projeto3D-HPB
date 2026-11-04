@@ -8,6 +8,9 @@
     },
     "api/rec.js": {
       "includeFiles": "private/rec.html"
+    },
+    "api/repimg.js": {
+      "includeFiles": "private/rep_img/**"
     }
   },
   "rewrites": [

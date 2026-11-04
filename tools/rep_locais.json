@@ -1,0 +1,455 @@
+{
+ "versao": 1,
+ "descricao": "Base de conhecimento de localização das recomendações dos reports da HPB no 3D. Ordem de uso: memória confirmada > texto explícito > memória automática > regras.",
+ "convencoes": {
+  "lados": "Norte = lado esquerdo (w=esq) · Sul = lado direito (w=dir) · Oeste = parede frontal (w=frente) · Leste = parede traseira (w=traseira)",
+  "divisorias": "Divisórias 1 a 5 (k); face N = lado A / Norte, face S = lado B / Sul; tubos numerados a partir do lado Oeste (frente) — a confirmar",
+  "paredes": "Tubos da frente/traseira 1 a 126; laterais numeradas a partir da frente",
+  "elevacao": "em mm (ex.: 25500); solo em 11.850",
+  "loc": {
+   "grp": "centro do conjunto da camada g (ex.: vECO); el opcional limita a altura",
+   "wall": "w, el, tubos",
+   "div": "k, face, el, tubos",
+   "piso": "centro do piso dos bubble caps"
+  }
+ },
+ "regras": [
+  {
+   "id": "civil",
+   "padrao": "base de concreto|estrutura civil|fundacao",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Estrutura civil não está no modelo"
+  },
+  {
+   "id": "ventilador",
+   "padrao": "ventilador|\\bfdf\\b|\\bidf\\b|exaustor",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Ventiladores não estão no modelo"
+  },
+  {
+   "id": "eletrica",
+   "padrao": "eletric|iluminacao|luminaria|calha eletrica|cabos",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Elétrica/iluminação não está no modelo"
+  },
+  {
+   "id": "cooler",
+   "padrao": "cooler",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Fluid bed cooler não está modelado (os bubble caps do cooler também não)"
+  },
+  {
+   "id": "downcomer",
+   "padrao": "downcomer",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Downcomers não estão modelados"
+  },
+  {
+   "id": "instrumento",
+   "padrao": "indicador de pressao|\\bpsv\\b|soprador de fuligem|\\bvisor\\b|manometro",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Instrumentos/acessórios não estão modelados"
+  },
+  {
+   "id": "duto_ar2",
+   "padrao": "duto de ar secundario",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Dutos de ar secundário não estão modelados"
+  },
+  {
+   "id": "tiragem",
+   "padrao": "duto de tiragem",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Duto de tiragem não está no modelo"
+  },
+  {
+   "id": "suporte_tub",
+   "padrao": "suporte da tubulacao",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Tubulação periférica não está modelada"
+  },
+  {
+   "id": "periferica",
+   "padrao": "tubulacao periferica|tubulacao de agua|tubulacao de vapor|^sistema de alimentacao",
+   "texto": false,
+   "loc": null,
+   "zona": null,
+   "conf": null,
+   "conjunto": null,
+   "nota": null,
+   "fora": "Tubulação periférica não está modelada"
+  },
+  {
+   "id": "windbox",
+   "padrao": "wind ?box|camara de ar",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vWB"
+   },
+   "zona": "Wind box (câmara de ar)",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "backstay_n",
+   "padrao": "backstay norte|buckstay norte",
+   "texto": false,
+   "loc": {
+    "t": "wall",
+    "w": "esq",
+    "el": null,
+    "tubos": []
+   },
+   "zona": "Backstay · lado Norte",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição aproximada: centro da parede lateral",
+   "fora": null
+  },
+  {
+   "id": "backstay_s",
+   "padrao": "backstay sul|buckstay sul",
+   "texto": false,
+   "loc": {
+    "t": "wall",
+    "w": "dir",
+    "el": null,
+    "tubos": []
+   },
+   "zona": "Backstay · lado Sul",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição aproximada: centro da parede lateral",
+   "fora": null
+  },
+  {
+   "id": "carvao",
+   "padrao": "distribuidores? de carvao|alimentacao de carvao|\\bbv\\b",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vCF"
+   },
+   "zona": "Alimentação de carvão",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "mc_eco",
+   "padrao": "multiciclone x eco|multiciclone.*economizador",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDTE"
+   },
+   "zona": "Duto multiciclone → economizador",
+   "conf": "baixa",
+   "conjunto": "Multiciclone",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "passe_mc",
+   "padrao": "passe convectivo x multiciclone",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDTM"
+   },
+   "zona": "Duto caldeira → multiciclone",
+   "conf": "baixa",
+   "conjunto": "Multiciclone",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "mc_ciclone",
+   "padrao": "multiciclone.*(ciclone \\d|fileira \\d)",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vMDC"
+   },
+   "zona": "Multiciclone",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "multiciclone",
+   "padrao": "multiciclone",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vMDC"
+   },
+   "zona": "Multiciclone",
+   "conf": "baixa",
+   "conjunto": "Multiciclone",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "passe",
+   "padrao": "passe convectivo",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vPass"
+   },
+   "zona": "Passe convectivo",
+   "conf": "baixa",
+   "conjunto": null,
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "tubulao",
+   "padrao": "tubulao de vapor",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDR"
+   },
+   "zona": "Tubulão de vapor",
+   "conf": "média",
+   "conjunto": "Penthouse",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "ph_ww",
+   "padrao": "(pente|pent)house.*wing ?wall|teto x wing ?wall",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vWW"
+   },
+   "zona": "Wingwall",
+   "conf": "baixa",
+   "conjunto": "Wingwall",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "ph_sh2",
+   "padrao": "(pente|pent)house.*superaquecedor secundario",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vSS"
+   },
+   "zona": "Superaquecedor secundário",
+   "conf": "baixa",
+   "conjunto": "Superaquecedor secundário",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "penthouse",
+   "padrao": "pente?house|penthouse",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vTT"
+   },
+   "zona": "Penthouse (tubos do teto)",
+   "conf": "baixa",
+   "conjunto": "Penthouse",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "termopar",
+   "padrao": "fornalha.*termopar|fornalha.*piso|fornalha baixa.*piso",
+   "texto": false,
+   "loc": {
+    "t": "piso"
+   },
+   "zona": "Piso da fornalha (bubble caps)",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição no piso não informada: marcador no centro do piso",
+   "fora": null
+  },
+  {
+   "id": "envoltorias",
+   "padrao": "paredes envoltorias",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vSW3"
+   },
+   "zona": "Paredes da fornalha",
+   "conf": "baixa",
+   "conjunto": "Fornalha",
+   "nota": "Posição aproximada: paredes da fornalha",
+   "fora": null
+  },
+  {
+   "id": "ubeam",
+   "padrao": "u-?bea[mn]s?",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vUB"
+   },
+   "zona": "U-beam",
+   "conf": "baixa",
+   "conjunto": "U-beam",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "wingwall",
+   "padrao": "wing ?wall",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vWW"
+   },
+   "zona": "Wingwall",
+   "conf": "baixa",
+   "conjunto": "Wingwall",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "eco",
+   "padrao": "economizador",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vECO"
+   },
+   "zona": "Economizador",
+   "conf": "média",
+   "conjunto": "Economizador",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "sh2",
+   "padrao": "superaquecedor secundario|\\bsh ?(2|ii)\\b",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vSS"
+   },
+   "zona": "Superaquecedor secundário",
+   "conf": "baixa",
+   "conjunto": "Superaquecedor secundário",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "sh1",
+   "padrao": "superaquecedor primario|\\bsh ?(1|i)\\b",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vSP"
+   },
+   "zona": "Superaquecedor primário",
+   "conf": "baixa",
+   "conjunto": "Superaquecedor primário",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "desaerador",
+   "padrao": "desaerador",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDEA"
+   },
+   "zona": "Desaerador",
+   "conf": "baixa",
+   "conjunto": "Desaerador",
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "silos",
+   "padrao": "\\bsilo",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vSIL"
+   },
+   "zona": "Silos",
+   "conf": "baixa",
+   "conjunto": null,
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  },
+  {
+   "id": "chamine",
+   "padrao": "chamine",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vCH"
+   },
+   "zona": "Chaminé",
+   "conf": "baixa",
+   "conjunto": null,
+   "nota": "Posição aproximada: centro do conjunto (o report não traz coordenada)",
+   "fora": null
+  }
+ ],
+ "memoria": {},
+ "historico": []
+}

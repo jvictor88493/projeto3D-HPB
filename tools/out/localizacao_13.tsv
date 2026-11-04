@@ -1,0 +1,118 @@
+n	origem	conf	zona/fora	titulo
+1	regra civil	None	Estrutura civil não está no modelo	BASE DE CONCRETO - ESTRUTURA METÁLICA
+2	regra windbox	baixa	Wind box (câmara de ar)	WIND BOX - ISOLAMENTO TÉRMICO
+3	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR TAG F-57D-11X
+4	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR FDF
+5	regra civil	None	Estrutura civil não está no modelo	BASE DE CONCRETO - ESTRUTURA METÁLICA
+6	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR TAG F-57D-12X
+7	regra civil	None	Estrutura civil não está no modelo	BASE DE CONCRETO - ESTRUTURA METÁLICA - filtro manga
+8	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO DE ÁGUA - PERIFÉRICA
+9	regra duto_ar2	None	Dutos de ar secundário não estão modelados	DUTO DE AR SECUNDÁRIO - JUNTA DE EXPANSÃO
+10	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO PERIFÉRICA - ECONOMIZADOR
+11	regra instrumento	None	Instrumentos/acessórios não estão modelados	INDICADOR DE PRESSÃO - QUEIMADORES DE PARTIDA
+12	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	VISOR - FLUID BED COOLER
+13	regra periferica	None	Tubulação periférica não está modelada	SISTEMA DE ALIMENTAÇÃO DA FORNALHA - TUBULAÇÃO PERIFÉRICA
+14	regra downcomer	None	Downcomers não estão modelados	DOWNCOMER SUL
+15	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	FLUID BED COOLER NORTE
+16	regra periferica	None	Tubulação periférica não está modelada	FORNALHA - TUBULAÇÃO PERIFÉRICA - (Região inferior da fornal
+17	regra eletrica	None	Elétrica/iluminação não está no modelo	CALHA ELÉTRICA - ESCADA DE ACESSO LADO SUL
+18	regra eletrica	None	Elétrica/iluminação não está no modelo	CABOS ELÉTRICOS - HOOPER DO MULTICICLONE
+19	regra backstay_n	baixa	Backstay · lado Norte	ISOLAMENTO TÉRMICO - FORNALHA - BACKSTAY NORTE
+20	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO PERIFÉRICA - DISTRIBUIDORES DE CARVÃO
+21	regra carvao	baixa	Alimentação de carvão	BV - DISTRIBUIDORES DE CARVÃO
+22	regra carvao	baixa	Alimentação de carvão	BV - DISTRIBUIDORES DE CARVÃO
+23	regra suporte_tub	None	Tubulação periférica não está modelada	SUPORTE DA TUBULAÇÃO - DISTRIBUIDORES DE CARVÃO
+24	regra mc_eco	baixa	Duto multiciclone → economizador	ISOLAMENTO TÉRMICO - MULTICICLONE X ECO
+25	regra passe	baixa	Passe convectivo	ISOLAMENTO TÉRMICO - COLETOR EXTERNO DO PASSE CONVECTIVO
+26	regra multiciclone	baixa	Multiciclone	ISOLAMENTO TÉRMICO - MULTICICLONE
+27	regra passe_mc	baixa	Duto caldeira → multiciclone	ISOLAMENTO TÉRMICO - PASSE CONVECTIVO X MULTICICLONE
+28	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO DE VAPOR - VÁLVULA
+29	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO PERIFÉRICA - VÁLVULA - TUBULÃO DE VAPOR
+30	regra tubulao	média	Tubulão de vapor	ISOLAMENTO TÉRMICO - TUBULÃO DE VAPOR
+31	regra instrumento	None	Instrumentos/acessórios não estão modelados	TUBULÃO DE VAPOR - PSV (VS-69255)
+32	regra tubulao	média	Tubulão de vapor	TUBULÃO DE VAPOR - VÁLVULA DO QUADRO DE NÍVEL LADO SUL
+33	regra penthouse	baixa	Penthouse (tubos do teto)	ISOLAMENTO TÉRMICO - PENTHOUSE
+34	regra periferica	None	Tubulação periférica não está modelada	TUBULAÇÃO PERIFÉRICA - TUBULÃO DE VAPOR
+35	regra instrumento	None	Instrumentos/acessórios não estão modelados	SOPRADOR DE FULIGEM - ECONOMIZADOR
+36	regra eletrica	None	Elétrica/iluminação não está no modelo	ILUMINAÇÃO CONVENCIONAL - LUMINARIAS
+37	regra tiragem	None	Duto de tiragem não está no modelo	ISOLAMENTO TÉRMICO DO DUTO DE TIRAGEM
+38	regra penthouse	baixa	Penthouse (tubos do teto)	PENTEHOUSE - ESTRUTURA DO FECHAMENTO LATERAL (LADO OESTE)
+39	regra ph_ww	baixa	Wingwall	PENTEHOUSE - COLETORES SUPERIORES DO WING WALL
+40	regra penthouse	baixa	Penthouse (tubos do teto)	PENTEHOUSE - LINK PIPE
+41	regra tubulao	média	Tubulão de vapor	TUBULÃO DE VAPOR - ACESSÓRIOS INTERNOS
+42	regra tubulao	média	Tubulão de vapor	TUBULÃO DE VAPOR - ACESSÓRIOS INTERNOS
+43	regra tubulao	média	Tubulão de vapor	TUBULÃO DE VAPOR - ACESSÓRIOS INTERNOS
+44	regra downcomer	None	Downcomers não estão modelados	TUBULÃO DE VAPOR - DOWNCOMER
+45	regra windbox	baixa	Wind box (câmara de ar)	WIND BOX - TUBULAÇÃO DE INSTRUMENTAÇÃO
+46	regra eco	média	Economizador · El. 31.105	ECONOMIZADOR - ELEV 31105
+47	regra tubulao	média	Tubulão de vapor	TUBULÃO DE VAPOR
+48	regra termopar	baixa	Piso da fornalha (bubble caps)	FORNALHA - TERMOPAR
+49	texto do report	média	Parede lateral direita (Sul) · El. 25.500	FORNALHA - PAREDE LATERAL DIREITA - PLD (Sul) - elevação 255
+50	texto do report	alta	Divisória 2 · lado Sul · El. 25.500 · tubos 16, 17	FORNALHA - PAREDE DIVISÓRIA 2 (LADO B - SUL) - elevação 2550
+51	texto do report	alta	Divisória 3 · lado Sul · El. 25.500 · tubo 28	FORNALHA - PAREDE DIVISÓRIA 3 (LADO B - SUL) - elevação 2550
+52	texto do report	baixa	Divisória 4 · lado Norte · El. 25.500 · tubos 6, 7	FORNALHA - PAREDE DIVISÓRIA 4 (LADO A - NORTE) elevação 2550
+53	texto do report	alta	Divisória 4 · lado Sul · El. 25.500 · tubo 12	FORNALHA - PAREDE DIVISÓRIA 4 (LADO B - SUL) elevação 25500m
+54	regra mc_ciclone	média	Multiciclone	MULTICICLONE - CAPELA 7 - FILEIRA 25
+55	regra multiciclone	baixa	Multiciclone	MULTICICLONE - CAPELA
+56	regra multiciclone	baixa	Multiciclone	MULTICICLONE - CAPELA - ENRIJECEDORES ACIMA DA CAPELA
+57	regra multiciclone	baixa	Multiciclone	MULTICICLONE - CAPELA - INVÓLUCRO
+58	regra multiciclone	baixa	Multiciclone	MULTICICLONE - CAPELA - ENRIJECEDORES DAS CHAPAS DISTRIBUIDO
+59	regra multiciclone	baixa	Multiciclone	MULTICICLONE - CAPELA - ENRIJECEDORES DAS CHAPAS DISTRIBUIDO
+60	regra mc_ciclone	média	Multiciclone	MULTICICLONE - CAPELA - CICLONE 10 - FILEIRA 18
+61	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	COOLER NORTE
+62	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	COOLER NORTE
+63	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	COOLER NORTE
+64	regra termopar	baixa	Piso da fornalha (bubble caps)	FORNALHA - PISO
+65	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - ENRIJECEDORES
+66	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - INVÓLUCRO
+67	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - DUTO DE SUCÇÃO
+68	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - DAMPER - VENTANAS
+69	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - ROTOR - ELEMENTO DE FIXAÇÃO
+70	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR 11X - ROTOR - ELEMENTO DE FIXAÇÃO
+71	regra cooler	None	Fluid bed cooler não está modelado (os bubble caps do cooler também não)	COOLER LESTE
+72	texto do report	alta	Parede traseira (Leste) · El. 25.500 · tubos 15, 21, 55, 56, 66, 67, 83, 85, 87, 88, 91, 92, 93, 98, 99, 104	FORNALHA - PAREDE TRASEIRA - PT (LESTE) - elevação 25500mm (
+73	texto do report	alta	Parede traseira (Leste) · El. 25.500 · tubos 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 45, 47, 53, 77, 79	FORNALHA - PAREDE TRASEIRA - PT (LESTE) - elevação 25500mm (
+74	texto do report	alta	Divisória 1 · lado Norte · El. 25.500 · tubo 30	FORNALHA - PAREDE DIVISÓRIA 1 (NORTE) TUBO 30 - elevação 255
+75	regra ph_ww	baixa	Wingwall	FORNALHA - TETO x WING WALL
+76	texto do report	alta	Parede frontal (Oeste) · El. 25.500 · tubos 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21	FORNALHA - PAREDE FRONTAL ELEV. 25.500
+77	texto do report	alta	Parede lateral direita (Sul) · El. 25.500 · tubo 65	FORNALHA - PAREDE LATERAL DIREITA ELEV. 25.500
+78	regra ubeam	baixa	U-beam	FORNALHA - U-BEAMS
+79	texto do report	alta	Parede frontal (Oeste) · El. 25.500 · tubos 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21	FORNALHA - PAREDE FRONTAL - ELEV 25.500
+80	texto do report	média	Parede frontal (Oeste) · El. 25.500	FORNALHA - PAREDE FRONTAL - ELEV 25.500
+81	texto do report	média	Parede frontal (Oeste) · El. 25.500	FORNALHA - PAREDE FRONTAL - ELEV 25.500
+82	texto do report	média	Divisória 5 · El. 25.500	FORNALHA - PAREDE DIVISÓRIA 05 - ELEV. 25.500
+83	texto do report	média	Divisória 5 · El. 25.500	FORNALHA - PAREDE DIVISÓRIA 05 - ELEV. 25.500
+84	texto do report	média	Divisória 4 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 04 - ELEV. 33.800
+85	texto do report	média	Divisória 4 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 04 - ELEV. 33.800
+86	texto do report	média	Divisória 2 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 02 - ELEV. 33.800
+87	texto do report	alta	Parede lateral direita (Sul) · El. 33.800 · tubo 41	FORNALHA - PAREDE LATERAL DIREITA - ELEV. 33.800
+88	texto do report	média	Parede traseira (Leste) · El. 33.800	FORNALHA - PAREDE TRASEIRA - ELEV. 33.800
+89	texto do report	média	Parede traseira (Leste) · El. 33.800	FORNALHA - PAREDE TRASEIRA - ELEV. 33.800
+90	texto do report	média	Divisória 1 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 01 - ELEV. 33.800
+91	texto do report	média	Divisória 3 · El. 25.500	FORNALHA - PAREDE DIVISÓRIA 03 - ELEV. 25.500
+92	texto do report	alta	Parede lateral direita (Sul) · El. 33.800 · tubo 31	FORNALHA - PAREDE LATERAL DIREITA- ELEV. 33.800
+93	texto do report	média	Divisória 5 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 05 - ELEV. 33.800
+94	texto do report	média	Divisória 5 · El. 33.800	FORNALHA - PAREDE DIVISÓRIA 05 - ELEV. 33.800
+95	regra envoltorias	média	Paredes da fornalha · El. 25.500	FORNALHA - PAREDE DIVISÓRIA - PAREDES ENVOLTÓRIAS DA FORNALH
+96	regra envoltorias	baixa	Paredes da fornalha	FORNALHA BAIXA- PAREDE DIVISÓRIA - PAREDES ENVOLTÓRIAS DA FO
+97	regra termopar	baixa	Piso da fornalha (bubble caps)	FORNALHA BAIXA- PISO
+98	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR INDUZIDO 13X - ENRIJECEDORES
+99	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR INDUZIDO 13X - CHAPARIA
+100	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR INDUZIDO 13X - CONE
+101	regra ventilador	None	Ventiladores não estão no modelo	VENTILADOR INDUZIDO 13X - CONE
+102	regra wingwall	baixa	Wingwall	WING WALL
+103	regra wingwall	baixa	Wingwall	WING WALL - 1, 2, 3, 4, 5, 6, 7
+104	regra eco	média	Economizador · El. 33.000	ECONOMIZADOR - ELEV. 33.000 - CAPELA SUPERIOR
+105	regra eco	média	Economizador · El. 33.000	ECONOMIZADOR - ELEV. 33.000 - BOCAIS 01,03,04,06,07,08,10,11
+106	regra eco	média	Economizador · El. 33.000	ECONOMIZADOR - ELEV. 33.000 - INSTRUMENTOS
+107	regra eco	média	Economizador · El. 33.000	ECONOMIZADOR - ELEV. 33.000 - CAPELA SUPERIOR
+108	regra eco	média	Economizador · El. 33.000	ECONOMIZADOR - ELEV. 33.000 - CAPELA SUPERIOR
+109	regra passe	baixa	Passe convectivo	PASSE CONVECTIVO - PAREDE LATERAL ESQUERDA - LADO NORTE - EN
+110	texto do report	baixa	Parede frontal (Oeste) · tubo 125	FORNALHA - PAREDE FRONTAL
+111	regra eco	média	Economizador	ECONOMIZADOR
+112	regra sh2	baixa	Superaquecedor secundário	SUPERAQUECEDOR SECUNDARIO (SH II)
+113	regra ph_sh2	baixa	Superaquecedor secundário	PENTEHOUSE - SUPERAQUECEDOR SECUNDARIO (SH II)
+114	regra ubeam	média	U-beam · El. 37.000	U-BEANS - 37.000 - (2° e 6° piso do andaime contagem de baix
+115	regra sh2	baixa	Superaquecedor secundário	SUPERAQUECEDOR - SH 2 - SEPENTINA 9 - PONTO G DO CROQUI ME
+116	regra eco	média	Economizador · El. 21.000	ECONOMIZADOR (REGIÃO INFERIOR) - elevação 21.000
+117	regra eco	média	Economizador · El. 21.000	ECONOMIZADOR (REGIÃO INFERIOR) SERPENTINA 176 - elevação 21.

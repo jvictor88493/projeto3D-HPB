@@ -5,11 +5,11 @@ R=os.path.join(HERE,'..','private','rec.html')
 s=open(R,encoding='utf8').read()
 k=s.index('var REP=/*REPDATA*/')+len('var REP=/*REPDATA*/');o,end=json.JSONDecoder().raw_decode(s[k:])
 dep={}
-for f in glob.glob(os.path.join(HERE,'rep_depois','dep_*.jpg')):
-    n=int(re.search(r'dep_(\d+)',f).group(1));dep[n]='data:image/jpeg;base64,'+base64.b64encode(open(f,'rb').read()).decode()
+for f in glob.glob(os.path.join(HERE,'rep_depois','r%s_dep_*.jpg'%o['meta'].get('report',''))):
+    n=int(re.search(r'_dep_(\d+)',f).group(1));rp=o['meta'].get('report','');d=os.path.join(HERE,'..','private','rep_img');os.makedirs(d,exist_ok=True)
+    open(os.path.join(d,'r%s_%d_d.jpg'%(rp,n)),'wb').write(open(f,'rb').read());dep[n]='/api/repimg?f=r%s_%d_d.jpg'%(rp,n)
 for it in o['itens']:
-    if it['n'] in dep: it['depois']=dep[it['n']]
-    else: it.pop('depois',None)
+    if it['n'] in dep: it['depois']=dep[it['n']]   # foto enviada na conversa tem prioridade sobre a do PDF
 s=s[:k]+json.dumps(o,ensure_ascii=False,separators=(',',':'))+s[k+end:]
 def rep(a,b):
     global s
