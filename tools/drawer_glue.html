@@ -1,0 +1,14 @@
+<script>(function(){var b=document.getElementById('bFilt'),c=document.getElementById('fclose'),side=document.querySelector('.side');
+function o(v){document.body.classList.toggle('fopen',v)}
+if(b)b.addEventListener('click',function(e){e.stopPropagation();o(!document.body.classList.contains('fopen'))});
+if(c)c.addEventListener('click',function(){o(false)});
+document.addEventListener('pointerdown',function(e){if(document.body.classList.contains('fopen')&&side&&!side.contains(e.target)&&e.target!==b&&!b.contains(e.target))o(false)},true);
+var wr=document.getElementById('wrap');function pastW(){document.body.classList.toggle('past',wr&&window.scrollY>wr.offsetHeight-140)}window.addEventListener('scroll',pastW,{passive:true});pastW();
+var all=document.getElementById('vAll'),lc=[].slice.call(document.querySelectorAll('#layers .sw input[type=checkbox]'));
+function vis_(){return lc.filter(function(x){var r=x.closest('.sw');return !(r&&r.classList.contains('cjhide'))})}
+function syncAll(){var L=vis_(),n=L.filter(function(x){return x.checked}).length;all.checked=n===L.length;all.indeterminate=n>0&&n<L.length}
+window.__syncAll=syncAll;
+if(all){lc.forEach(function(x){x.addEventListener('change',syncAll)});all.addEventListener('change',function(){var v=all.checked;vis_().forEach(function(x){if(x.checked!==v){x.checked=v;x.dispatchEvent(new Event('change',{bubbles:true}))}});syncAll()});setTimeout(syncAll,0)}
+var inf=document.getElementById('info'),mi=document.getElementById('mInfo');
+if(inf&&mi)new MutationObserver(function(){mi.innerHTML=inf.innerHTML;mi.classList.add('show')}).observe(inf,{childList:true,subtree:true,characterData:true});
+})();</script>
