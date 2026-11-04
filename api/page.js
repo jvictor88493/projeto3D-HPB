@@ -5,10 +5,10 @@ const { readEmail, fullEmails } = require('./_auth');
 function infoEmails() {
   return (process.env.INFO_EMAILS || 'jvictor88493@gmail.com').split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
 }
-const FULL_PANE = `<section id="fullPane" hidden><iframe id="fullFr" title="3D HPB Completa" allow="fullscreen"></iframe></section>`;
-const TAB_JS = `<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),f=document.getElementById("fullPane"),fr=document.getElementById("fullFr"),T={viz:document.getElementById("tViz"),full:document.getElementById("tFull"),info:document.getElementById("tInfo")};
-function show(n){if(v)v.hidden=n!=="viz";if(p)p.hidden=n!=="info";if(f){f.hidden=n!=="full";if(n==="full"&&fr&&!fr.getAttribute("src"))fr.setAttribute("src","/api/full")}
-Object.keys(T).forEach(function(k){var b=T[k];if(!b)return;b.classList.toggle("on",k===n);b.setAttribute("aria-current",k===n?"page":"false")});document.body.classList.remove("fopen");document.body.classList.toggle("tabfull",n==="full");window.scrollTo(0,0)}
+const FULL_PANE = `<section id="fullPane" class="fpane" hidden><iframe id="fullFr" title="3D HPB Completa" allow="fullscreen"></iframe></section><section id="recPane" class="fpane" hidden><iframe id="recFr" title="Recomendações" allow="fullscreen"></iframe></section>`;
+const TAB_JS = `<script>(function(){var v=document.getElementById("vizPane"),p=document.getElementById("infoPanel"),f=document.getElementById("fullPane"),fr=document.getElementById("fullFr"),g=document.getElementById("recPane"),gr=document.getElementById("recFr"),T={viz:document.getElementById("tViz"),full:document.getElementById("tFull"),rec:document.getElementById("tRec"),info:document.getElementById("tInfo")};
+function show(n){if(v)v.hidden=n!=="viz";if(p)p.hidden=n!=="info";if(f){f.hidden=n!=="full";if(n==="full"&&fr&&!fr.getAttribute("src"))fr.setAttribute("src","/api/full")}if(g){g.hidden=n!=="rec";if(n==="rec"&&gr&&!gr.getAttribute("src"))gr.setAttribute("src","/api/rec")}
+Object.keys(T).forEach(function(k){var b=T[k];if(!b)return;b.classList.toggle("on",k===n);b.setAttribute("aria-current",k===n?"page":"false")});document.body.classList.remove("fopen");document.body.classList.toggle("tabfull",n==="full"||n==="rec");window.scrollTo(0,0)}
 Object.keys(T).forEach(function(k){if(T[k])T[k].onclick=function(){show(k)}});window.__showViz=function(){show("viz")}})();</script>`;
 module.exports = (req, res) => {
   res.setHeader('Cache-Control', 'private, no-store');
@@ -30,7 +30,7 @@ module.exports = (req, res) => {
   let nav = '';
   if (info || full) {
     nav = '<nav class="tabs"><button class="tab on" id="tViz" aria-current="page" type="button">Visualização</button>' +
-      (full ? '<button class="tab" id="tFull" type="button">3D HPB Completa</button>' : '') +
+      (full ? '<button class="tab" id="tFull" type="button">3D HPB Completa</button><button class="tab" id="tRec" type="button">Recomendações</button>' : '') +
       (info ? '<button class="tab" id="tInfo" type="button">Informação</button>' : '') + '</nav>';
   }
   html = html.replace('<!--INFO_NAV-->', () => nav).replace('<!--FULL_PANE-->', () => full ? FULL_PANE : '').replace('<!--INFO_PANEL-->', () => panel + TAB_JS);

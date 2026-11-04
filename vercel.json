@@ -5,6 +5,9 @@
     },
     "api/full.js": {
       "includeFiles": "private/**"
+    },
+    "api/rec.js": {
+      "includeFiles": "private/rec.html"
     }
   },
   "rewrites": [

@@ -174,9 +174,11 @@ body:has(#tFull) .seg{top:112px}
 /* aba 3D HPB Completa */
 body.tabfull #bCsv{display:none!important}
 @media (max-width:1500px) and (min-width:821px){.top:has(#tFull) .crumb{display:none}}
+@media (max-width:1700px) and (min-width:821px){.top:has(#tRec) .crumb{display:none}}
 #fullPane{margin:0}
-#fullPane iframe{display:block;width:100%;height:calc(100dvh - 92px);min-height:480px;border:0;border-radius:14px;background:var(--panel)}
-@media (max-width:820px),(max-height:500px) and (orientation:landscape){#fullPane iframe{height:calc(100dvh - 60px);border-radius:0}}
+@media (max-width:820px){.top .tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.top .tabs::-webkit-scrollbar{display:none}.top .tab{white-space:nowrap;flex:none}}
+#fullPane iframe,#recPane iframe{display:block;width:100%;height:calc(100dvh - 92px);min-height:480px;border:0;border-radius:14px;background:var(--panel)}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){#fullPane iframe,#recPane iframe{height:calc(100dvh - 60px);border-radius:0}}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
