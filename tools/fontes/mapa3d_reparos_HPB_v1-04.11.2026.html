@@ -1913,7 +1913,7 @@ function repPos(l){
       c.x=b.min.x+l.box.u*(b.max.x-b.min.x);c.y=b.min.y+l.box.v*(b.max.y-b.min.y);c.z=b.min.z+l.box.w*(b.max.z-b.min.z);return c;
     }
     if(l.ext){/* superfície externa do conjunto (ex.: isolamento térmico): face oeste|leste|norte|sul; u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul); v = 0..1 de baixo para cima */
-      var e=l.ext,u=e.u==null?0.5:e.u,v=e.v==null?0.5:e.v,off=0.05;c.y=b.min.y+v*(b.max.y-b.min.y);
+      var e=l.ext,u=e.u==null?0.5:e.u,v=e.v==null?0.5:e.v,off=0.05;c.y=l.el?Math.max(b.min.y,Math.min(b.max.y,ezz(l.el))):b.min.y+v*(b.max.y-b.min.y);/* el (mm) tem prioridade sobre v */
       if(e.face==="oeste"||e.face==="leste"){c.x=b.min.x+u*(b.max.x-b.min.x);c.z=e.face==="oeste"?b.max.z+off:b.min.z-off}
       else{c.z=b.max.z-u*(b.max.z-b.min.z);c.x=e.face==="norte"?b.min.x-off:b.max.x+off}
       return c;

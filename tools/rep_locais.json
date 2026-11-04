@@ -15,7 +15,8 @@
   "isolamento": "Isolamento térmico fica sempre na parte EXTERNA do equipamento: pin na superfície externa (loc grp com ext {face: oeste|leste|norte|sul, u, v}); nunca no centro do conjunto. Aprendido com o item #2 (wind box, report 13).",
   "loc_ext": "grp + ext: u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul), v = 0..1 de baixo para cima, relativos à caixa do conjunto g",
   "loc_box": "grp + box: u,v,w = 0..1 dentro da caixa do conjunto g, em x (Norte→Sul), y (baixo→cima) e z (Leste→Oeste)",
-  "ventilador_induzido": "Ventilador induzido E-57D-13 (13X) e dutos filtro→exaustor→chaminé entraram no 3D HPB Completa v38 (vIDF, vDTX); FDF/11X/12X continuam fora do modelo"
+  "ventilador_induzido": "Ventilador induzido E-57D-13 (13X) e dutos filtro→exaustor→chaminé entraram no 3D HPB Completa v38 (vIDF, vDTX); FDF/11X/12X continuam fora do modelo",
+  "croqui_do_report": "Quando o report traz croqui/foto com a localização (ex.: #46 'BV central Norte de acesso', elevação e coluna no desenho), usar o croqui como fonte de posição e tratar como confirmado; ext aceita el (mm) para fixar a elevação"
  },
  "regras": [
   {
@@ -577,6 +578,26 @@
    "origem": "confirmado na conversa em 2026-11-04",
    "titulo": "WIND BOX - ISOLAMENTO TÉRMICO",
    "report": "13"
+  },
+  "sap:26493613": {
+   "loc": {
+    "t": "grp",
+    "g": "vECO",
+    "el": 31105,
+    "ext": {
+     "face": "norte",
+     "u": 0.5
+    }
+   },
+   "zona": "Economizador · parede Norte · BV central · El. 31.105",
+   "conf": "alta",
+   "conjunto": "Economizador",
+   "nota": "Local indicado no próprio report (croqui: BV central Norte de acesso, El. 31.105 mm): pin na face Norte do economizador, no centro, na elevação do report",
+   "fora": null,
+   "confirmado": true,
+   "origem": "confirmado na conversa em 2026-11-04",
+   "titulo": "ECONOMIZADOR - ELEV 31105",
+   "report": "13"
   }
  },
  "historico": [
@@ -621,6 +642,34 @@
    "antes": "fora do modelo",
    "depois": "posições aproximadas no ventilador 13X e duto de tiragem (conf baixa/média)",
    "regra": "idf13*, tiragem"
+  },
+  {
+   "data": "2026-11-04T16:44",
+   "report": "13",
+   "n": 46,
+   "chave": "sap:26493613",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vECO",
+     "el": 31105
+    },
+    "conf": "média",
+    "zona": "Economizador · El. 31.105"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vECO",
+     "el": 31105,
+     "ext": {
+      "face": "norte",
+      "u": 0.5
+     }
+    },
+    "zona": "Economizador · parede Norte · BV central · El. 31.105"
+   },
+   "regra": null
   }
  ]
 }
