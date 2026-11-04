@@ -5,3 +5,4 @@
 
 Sempre que o 3D HPB Completa mudar, rode os dois passos: a aba Recomendações usa sempre o mesmo modelo 3D.
 (Os caminhos SC/R dentro dos scripts apontam para o ambiente onde foram usados; ajuste se rodar em outro lugar.)
+3. `rec_build.py` já chama `rep_patch.py`, que coloca as fotos "depois" de `tools/rep_depois/dep_<n>.jpg` (recortadas do PDF do report) e tira o botão "Anexar foto".

@@ -50,3 +50,6 @@ out=re.sub(r'<title>[^<]*','<title>Mapa 3D reparos HPB',out,count=1)
 open(R+'rec.html','w',encoding='utf8').write(out)
 print('aplicados',applied);[print(' pulado',x) for x in skipped]
 for k in ('gREP.visible','"vREP"','id="rep"','repShow','GM.vREP','REPDATA'): print(k,out.count(k))
+
+# fotos 'depois' do report e sem botao de anexar
+import subprocess;subprocess.run(['python3','/home/claude/projeto3d-hpb/tools/rep_patch.py'],check=True)
