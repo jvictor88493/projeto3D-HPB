@@ -1909,6 +1909,12 @@ function repPos(l){
   }
   if(l.t==="grp"){
     var b=gb(l.g);if(b.isEmpty())return null;var c=b.getCenter(new THREE.Vector3());
+    if(l.ext){/* superfície externa do conjunto (ex.: isolamento térmico): face oeste|leste|norte|sul; u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul); v = 0..1 de baixo para cima */
+      var e=l.ext,u=e.u==null?0.5:e.u,v=e.v==null?0.5:e.v,off=0.05;c.y=b.min.y+v*(b.max.y-b.min.y);
+      if(e.face==="oeste"||e.face==="leste"){c.x=b.min.x+u*(b.max.x-b.min.x);c.z=e.face==="oeste"?b.max.z+off:b.min.z-off}
+      else{c.z=b.max.z-u*(b.max.z-b.min.z);c.x=e.face==="norte"?b.min.x-off:b.max.x+off}
+      return c;
+    }
     if(l.el){var ye=ezz(l.el);c.y=Math.max(b.min.y,Math.min(b.max.y,ye))}
     return c;
   }

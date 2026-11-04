@@ -11,9 +11,30 @@
    "wall": "w, el, tubos",
    "div": "k, face, el, tubos",
    "piso": "centro do piso dos bubble caps"
-  }
+  },
+  "isolamento": "Isolamento térmico fica sempre na parte EXTERNA do equipamento: pin na superfície externa (loc grp com ext {face: oeste|leste|norte|sul, u, v}); nunca no centro do conjunto. Aprendido com o item #2 (wind box, report 13).",
+  "loc_ext": "grp + ext: u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul), v = 0..1 de baixo para cima, relativos à caixa do conjunto g"
  },
  "regras": [
+  {
+   "id": "u_wind_box_isolamento_isolamento",
+   "padrao": "wind ?box.*isolamento|isolamento.*wind ?box",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vWB",
+    "ext": {
+     "face": "oeste",
+     "u": 0.88,
+     "v": 0.27
+    }
+   },
+   "zona": "Wind box · superfície externa",
+   "conjunto": "Fornalha",
+   "nota": "Isolamento térmico fica na parte externa: pin na face externa da wind box (marcação enviada pelo usuário)",
+   "fora": null,
+   "conf": "média"
+  },
   {
    "id": "civil",
    "padrao": "base de concreto|estrutura civil|fundacao",
@@ -450,6 +471,55 @@
    "fora": null
   }
  ],
- "memoria": {},
- "historico": []
+ "memoria": {
+  "txt:wind box - isolamento termico|recompor isolamento termico na regiao da wind box lado oeste.": {
+   "loc": {
+    "t": "grp",
+    "g": "vWB",
+    "ext": {
+     "face": "oeste",
+     "u": 0.88,
+     "v": 0.27
+    }
+   },
+   "zona": "Wind box · face externa Oeste · parte baixa, perto da abertura lado Sul",
+   "conf": "alta",
+   "conjunto": "Fornalha",
+   "nota": "Isolamento térmico fica na parte externa: pin na face externa da wind box (marcação enviada pelo usuário)",
+   "fora": null,
+   "confirmado": true,
+   "origem": "confirmado na conversa em 2026-11-04",
+   "titulo": "WIND BOX - ISOLAMENTO TÉRMICO",
+   "report": "13"
+  }
+ },
+ "historico": [
+  {
+   "data": "2026-11-04T11:01",
+   "report": "13",
+   "n": 2,
+   "chave": "txt:wind box - isolamento termico|recompor isolamento termico na regiao da wind box lado oeste.",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vWB"
+    },
+    "conf": "baixa",
+    "zona": "Wind box (câmara de ar)"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vWB",
+     "ext": {
+      "face": "oeste",
+      "u": 0.88,
+      "v": 0.27
+     }
+    },
+    "zona": "Wind box · face externa Oeste · parte baixa, perto da abertura lado Sul"
+   },
+   "regra": "wind ?box.*isolamento|isolamento.*wind ?box"
+  }
+ ]
 }
