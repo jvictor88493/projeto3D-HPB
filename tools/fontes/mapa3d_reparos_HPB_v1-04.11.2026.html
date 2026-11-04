@@ -1886,7 +1886,7 @@ function repBox(objs){
     else{tmp.copy(g.boundingBox).applyMatrix4(n.matrixWorld);box.union(tmp)}})});
   return box;
 }
-var REPG={vMDC:gMDC,vECO:gECO,vDR:gDR,vWW:gWW,vUB:gUB,vSS:gSS,vTT:gTT,vPass:gPass,vWB:gWB,vCF:gCF,vDTM:gDTM,vDTE:gDTE,vBK:gBK,vSW3:gSW3,v16:null};
+var REPG={vMDC:gMDC,vECO:gECO,vDR:gDR,vWW:gWW,vUB:gUB,vSS:gSS,vTT:gTT,vPass:gPass,vWB:gWB,vCF:gCF,vDTM:gDTM,vDTE:gDTE,vBK:gBK,vSW3:gSW3,vIDF:gIDF,vDTX:gDTX,vCH:gCH,vEST:gEST,v16:null};
 var repBoxes={};
 function gb(id){return repBoxes[id]||(repBoxes[id]=repBox([REPG[id]]))}
 function repPos(l){
@@ -1909,6 +1909,9 @@ function repPos(l){
   }
   if(l.t==="grp"){
     var b=gb(l.g);if(b.isEmpty())return null;var c=b.getCenter(new THREE.Vector3());
+    if(l.box){/* ponto dentro da caixa do conjunto: u,v,w = 0..1 em x (Norte→Sul), y (baixo→cima), z (Leste→Oeste) */
+      c.x=b.min.x+l.box.u*(b.max.x-b.min.x);c.y=b.min.y+l.box.v*(b.max.y-b.min.y);c.z=b.min.z+l.box.w*(b.max.z-b.min.z);return c;
+    }
     if(l.ext){/* superfície externa do conjunto (ex.: isolamento térmico): face oeste|leste|norte|sul; u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul); v = 0..1 de baixo para cima */
       var e=l.ext,u=e.u==null?0.5:e.u,v=e.v==null?0.5:e.v,off=0.05;c.y=b.min.y+v*(b.max.y-b.min.y);
       if(e.face==="oeste"||e.face==="leste"){c.x=b.min.x+u*(b.max.x-b.min.x);c.z=e.face==="oeste"?b.max.z+off:b.min.z-off}

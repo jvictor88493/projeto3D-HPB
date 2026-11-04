@@ -13,9 +13,106 @@
    "piso": "centro do piso dos bubble caps"
   },
   "isolamento": "Isolamento térmico fica sempre na parte EXTERNA do equipamento: pin na superfície externa (loc grp com ext {face: oeste|leste|norte|sul, u, v}); nunca no centro do conjunto. Aprendido com o item #2 (wind box, report 13).",
-  "loc_ext": "grp + ext: u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul), v = 0..1 de baixo para cima, relativos à caixa do conjunto g"
+  "loc_ext": "grp + ext: u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul), v = 0..1 de baixo para cima, relativos à caixa do conjunto g",
+  "loc_box": "grp + box: u,v,w = 0..1 dentro da caixa do conjunto g, em x (Norte→Sul), y (baixo→cima) e z (Leste→Oeste)",
+  "ventilador_induzido": "Ventilador induzido E-57D-13 (13X) e dutos filtro→exaustor→chaminé entraram no 3D HPB Completa v38 (vIDF, vDTX); FDF/11X/12X continuam fora do modelo"
  },
  "regras": [
+  {
+   "id": "idf13_cone",
+   "padrao": "ventilador induzido.*cone|13 ?x.*cone",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vIDF",
+    "box": {
+     "u": 0.32,
+     "v": 0.47,
+     "w": 0.87
+    }
+   },
+   "zona": "Ventilador induzido 13X · cone de sucção (lado Oeste)",
+   "conf": "baixa",
+   "conjunto": "Ventilador induzido",
+   "nota": "Há dois cones de sucção e o report não diz qual: #100 e #101 foram distribuídos nos dois; confirmar qual é qual",
+   "fora": null
+  },
+  {
+   "id": "idf13_chaparia",
+   "padrao": "ventilador induzido.*chaparia|13 ?x.*chaparia",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vIDF",
+    "box": {
+     "u": 0.4,
+     "v": 0.73,
+     "w": 0.7
+    }
+   },
+   "zona": "Ventilador induzido 13X · chaparia da carcaça",
+   "conf": "baixa",
+   "conjunto": "Ventilador induzido",
+   "nota": "Chaparia: ponto na parte de cima da carcaça (o report não diz a região)",
+   "fora": null
+  },
+  {
+   "id": "idf13_enrij",
+   "padrao": "ventilador induzido.*enrijecedor|13 ?x.*enrijecedor",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vIDF",
+    "box": {
+     "u": 0.4,
+     "v": 0.4,
+     "w": 0.7
+    }
+   },
+   "zona": "Ventilador induzido 13X · carcaça (interno)",
+   "conf": "baixa",
+   "conjunto": "Ventilador induzido",
+   "nota": "Enrijecedores internos: ponto no centro da carcaça do ventilador (o report não diz a região)",
+   "fora": null
+  },
+  {
+   "id": "idf13",
+   "padrao": "ventilador induzido|\\b13 ?x\\b|e-57d-13",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vIDF",
+    "box": {
+     "u": 0.4,
+     "v": 0.55,
+     "w": 0.7
+    }
+   },
+   "zona": "Ventilador induzido 13X",
+   "conf": "baixa",
+   "conjunto": "Ventilador induzido",
+   "nota": "Posição aproximada: centro da carcaça do ventilador induzido",
+   "fora": null
+  },
+  {
+   "id": "tiragem",
+   "padrao": "duto de tiragem",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDTX",
+    "box": {
+     "u": 0.72,
+     "v": 0.36,
+     "w": 0.45
+    }
+   },
+   "zona": "Duto de tiragem · trecho até a chaminé · superfície externa",
+   "conf": "média",
+   "conjunto": "Duto de tiragem",
+   "nota": "Isolamento fica na parte externa: pin na face externa do trecho horizontal que liga o ventilador à chaminé (posição ao longo do trecho a confirmar)",
+   "fora": null
+  },
   {
    "id": "u_wind_box_isolamento_isolamento",
    "padrao": "wind ?box.*isolamento|isolamento.*wind ?box",
@@ -111,17 +208,6 @@
    "conjunto": null,
    "nota": null,
    "fora": "Dutos de ar secundário não estão modelados"
-  },
-  {
-   "id": "tiragem",
-   "padrao": "duto de tiragem",
-   "texto": false,
-   "loc": null,
-   "zona": null,
-   "conf": null,
-   "conjunto": null,
-   "nota": null,
-   "fora": "Duto de tiragem não está no modelo"
   },
   {
    "id": "suporte_tub",
@@ -520,6 +606,21 @@
     "zona": "Wind box · face externa Oeste · parte baixa, perto da abertura lado Sul"
    },
    "regra": "wind ?box.*isolamento|isolamento.*wind ?box"
+  },
+  {
+   "data": "2026-11-04T13:40",
+   "report": "13",
+   "n": [
+    98,
+    99,
+    100,
+    101,
+    37
+   ],
+   "chave": "3D v38",
+   "antes": "fora do modelo",
+   "depois": "posições aproximadas no ventilador 13X e duto de tiragem (conf baixa/média)",
+   "regra": "idf13*, tiragem"
   }
  ]
 }
