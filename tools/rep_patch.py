@@ -20,6 +20,12 @@ rep('function depGet(n){if(repDep[n])return repDep[n];try{return localStorage.ge
 rep("""(dep?"<img src='"+dep+"' alt='Foto depois do reparo'><div style='margin-top:6px'><button type='button' class='chip' id='rdDel'>Remover foto</button></div>":"<div class='rempty'>Ainda sem foto do depois<label class='chip'>Anexar foto<input type='file' accept='image/*' id='rdFile' hidden></label></div>")""",
     """(dep?"<img src='"+dep+"' alt='Foto depois do reparo'>":"<div class='rempty'>Sem foto do depois no report</div>")""")
 if 'id="rec-ui"' not in s:
-    s=s.replace('</head>','<style id="rec-ui">@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>\n</head>',1)
+    s=s.replace('</head>','<style id="rec-ui">#repMob{display:none}@media (max-width:820px){#repMob{display:block;padding:10px 10px 90px}#repMob #rep{margin:0}#repMob #rep .rl{max-height:none!important;overflow:visible}}@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>\n</head>',1)
+if 'id="rep-mob"' not in s:
+    js='''<script id="rep-mob">(function(){var rep=document.getElementById('rep'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!rep||!side||!st)return;
+var box=document.createElement('div');box.id='repMob';st.parentNode.insertBefore(box,st.nextSibling);var home=rep.nextSibling,mq=matchMedia('(max-width:820px)');
+function place(){if(mq.matches){if(rep.parentNode!==box)box.appendChild(rep)}else if(rep.parentNode!==side){side.insertBefore(rep,home&&home.parentNode===side?home:side.firstChild)}}
+box.addEventListener('click',function(e){if(mq.matches&&e.target.closest('#repRows button,#rdPrev,#rdNext'))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>'''
+    k=s.rindex('</body>');s=s[:k]+js+'\n'+s[k:]
 open(R,'w',encoding='utf8').write(s)
 print('depois aplicados:',sorted(dep))

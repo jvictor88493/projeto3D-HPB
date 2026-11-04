@@ -328,9 +328,9 @@ details{border-radius:14px}
  body.repmode #rep .rl{max-height:calc(100vh - 380px)}
 }
 </style>
-<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}#conjList{max-height:calc(100vh - 240px)!important;overflow-y:auto!important;scrollbar-width:thin;padding:4px!important}#conjList button{padding:6px 10px!important;font-size:13px!important}@media (max-width:820px),(max-height:500px){#conjList{max-height:calc(64dvh - 80px)!important}}.csep{margin:2px!important}
+<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}@media (max-width:820px),(max-height:500px) and (orientation:landscape){#bPlan,#bFront,#bAll,#bWalls{display:none!important}}#conjList{max-height:calc(100vh - 240px)!important;overflow-y:auto!important;scrollbar-width:thin;padding:4px!important}#conjList button{padding:6px 10px!important;font-size:13px!important}@media (max-width:820px),(max-height:500px){#conjList{max-height:calc(64dvh - 80px)!important}}.csep{margin:2px!important}
 @media (min-width:821px) and (min-height:501px){html,body{height:100%;overflow:hidden}.page{padding-bottom:0}#wrap{height:calc(100vh - 92px)!important;min-height:0!important}.side{position:sticky;top:0;max-height:calc(100vh - 92px);overflow:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}</style>
-<style id="rec-ui">@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>
+<style id="rec-ui">#repMob{display:none}@media (max-width:820px){#repMob{display:block;padding:10px 10px 90px}#repMob #rep{margin:0}#repMob #rep .rl{max-height:none!important;overflow:visible}}@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>
 </head>
 <body>
 <div class="page">
@@ -2291,5 +2291,9 @@ setInterval(sync,1500);
 })();
 </script>
 
+<script id="rep-mob">(function(){var rep=document.getElementById('rep'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!rep||!side||!st)return;
+var box=document.createElement('div');box.id='repMob';st.parentNode.insertBefore(box,st.nextSibling);var home=rep.nextSibling,mq=matchMedia('(max-width:820px)');
+function place(){if(mq.matches){if(rep.parentNode!==box)box.appendChild(rep)}else if(rep.parentNode!==side){side.insertBefore(rep,home&&home.parentNode===side?home:side.firstChild)}}
+box.addEventListener('click',function(e){if(mq.matches&&e.target.closest('#repRows button,#rdPrev,#rdNext'))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>
 </body>
 </html>
