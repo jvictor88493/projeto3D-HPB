@@ -328,7 +328,9 @@ details{border-radius:14px}
  body.repmode #rep .rl{max-height:calc(100vh - 380px)}
 }
 </style>
-<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}</style>
+<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}
+@media (min-width:821px) and (min-height:501px){html,body{height:100%;overflow:hidden}.page{padding-bottom:0}#wrap{height:calc(100vh - 92px)!important;min-height:0!important}.side{position:sticky;top:0;max-height:calc(100vh - 92px);overflow:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}</style>
+<style id="rec-ui">@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>
 </head>
 <body>
 <div class="page">

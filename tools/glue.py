@@ -50,7 +50,7 @@ window.__frame=function(mode,instant){var ids=CURK&&CJ[CURK]?CJ[CURK]:allIds(),b
 o=re.sub(r'<button id="bWalls"(?![^>]*display:none)',r'<button id="bWalls" style="display:none"',o)
 # sem bloco "Tipo de cap" e sem "Detalhes da posicao" no visualizador geral
 if 'id="geral-ui"' not in o:
-    o=o.replace('</head>','<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}</style>\n</head>',1)
+    o=o.replace('</head>','<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}\n@media (min-width:821px) and (min-height:501px){html,body{height:100%;overflow:hidden}.page{padding-bottom:0}#wrap{height:calc(100vh - 92px)!important;min-height:0!important}.side{position:sticky;top:0;max-height:calc(100vh - 92px);overflow:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}</style>\n</head>',1)
 # vista inicial: perspectiva da caldeira completa
 m=re.search(r'updCam\(\);layoutPins\(\);\s*\(function loop',o)
 if m and '__frame("persp",true)' not in o:

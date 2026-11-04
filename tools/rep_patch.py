@@ -19,5 +19,7 @@ rep('function depGet(n){if(repDep[n])return repDep[n];try{return localStorage.ge
     'function depGet(n){var it=repItem(n);return it&&it.depois||null}')
 rep("""(dep?"<img src='"+dep+"' alt='Foto depois do reparo'><div style='margin-top:6px'><button type='button' class='chip' id='rdDel'>Remover foto</button></div>":"<div class='rempty'>Ainda sem foto do depois<label class='chip'>Anexar foto<input type='file' accept='image/*' id='rdFile' hidden></label></div>")""",
     """(dep?"<img src='"+dep+"' alt='Foto depois do reparo'>":"<div class='rempty'>Sem foto do depois no report</div>")""")
+if 'id="rec-ui"' not in s:
+    s=s.replace('</head>','<style id="rec-ui">@media (min-width:821px){.repmode .grid{grid-template-columns:minmax(0,1fr) minmax(360px,32%)!important}.repmode .side{order:0!important;top:0;max-height:calc(100vh - 92px)!important}.repmode #wrap{height:calc(100vh - 92px)!important}.repmode #rep .rl{max-height:calc(100vh - 330px)}}</style>\n</head>',1)
 open(R,'w',encoding='utf8').write(s)
 print('depois aplicados:',sorted(dep))
