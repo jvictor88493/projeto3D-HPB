@@ -25,6 +25,7 @@ if 'id="rep-mob"' not in s:
     js='''<script id="rep-mob">(function(){var rep=document.getElementById('rep'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!rep||!side||!st)return;
 var box=document.createElement('div');box.id='repMob';st.parentNode.insertBefore(box,st.nextSibling);var home=rep.nextSibling,mq=matchMedia('(max-width:820px)');
 function place(){if(mq.matches){if(rep.parentNode!==box)box.appendChild(rep)}else if(rep.parentNode!==side){side.insertBefore(rep,home&&home.parentNode===side?home:side.firstChild)}}
+if(mq.matches){var c3=box.querySelector('#repChips [data-f=only3d]')||document.querySelector('#repChips [data-f=only3d]');if(c3&&!c3.classList.contains('on'))c3.click()}
 box.addEventListener('click',function(e){if(mq.matches&&e.target.closest('#repRows button,#rdPrev,#rdNext'))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>'''
     k=s.rindex('</body>');s=s[:k]+js+'\n'+s[k:]
 open(R,'w',encoding='utf8').write(s)

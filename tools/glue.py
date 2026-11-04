@@ -63,5 +63,14 @@ if _a in o and 'window.__CJ=' not in o:
 if 'id="cj-tree-ui"' not in o:
     _t=open(os.path.join(HERE,'cj_tree.html'),encoding='utf8').read()
     _k=o.rindex('</body>');o=o[:_k]+_t+'\n'+o[_k:]
+
+# celular, so na 3D HPB Completa: painel de conjuntos abaixo do 3D (no lugar da gaveta Filtros)
+if 'id="full-mob"' not in o and OUT=='full.html':
+    _m="""<style id="full-mob-css">#layMob{display:none}@media (max-width:820px){#layMob{display:block;padding:10px 10px 90px}#layMob #layers{margin:0}body.laymob #bFilt{display:none!important}}</style>
+<script id="full-mob">(function(){if(document.getElementById('rep'))return;var L=document.getElementById('layers'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!L||!side||!st)return;
+var box=document.createElement('div');box.id='layMob';st.parentNode.insertBefore(box,st.nextSibling);var home=L.nextSibling,mq=matchMedia('(max-width:820px)');
+function place(){if(mq.matches){if(L.parentNode!==box)box.appendChild(L);document.body.classList.add('laymob');document.body.classList.remove('fopen')}else{document.body.classList.remove('laymob');if(L.parentNode!==side)side.insertBefore(L,home&&home.parentNode===side?home:null)}}
+box.addEventListener('click',function(e){if(mq.matches&&(e.target.closest('.cjv')||(e.target.closest('.cjg')&&!e.target.closest('.car')&&e.target.closest('.cjgrp').dataset.k!=='_out')))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>"""
+    _k=o.rindex('</body>');o=o[:_k]+_m+'\n'+o[_k:]
 open(R+OUT,'w',encoding='utf8').write(o)
 print('ok',len(o),'loopinit' ,bool(m))

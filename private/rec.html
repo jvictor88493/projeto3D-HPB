@@ -2291,9 +2291,15 @@ setInterval(sync,1500);
 })();
 </script>
 
+<style id="full-mob-css">#layMob{display:none}@media (max-width:820px){#layMob{display:block;padding:10px 10px 90px}#layMob #layers{margin:0}body.laymob #bFilt{display:none!important}}</style>
+<script id="full-mob">(function(){if(document.getElementById('rep'))return;var L=document.getElementById('layers'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!L||!side||!st)return;
+var box=document.createElement('div');box.id='layMob';st.parentNode.insertBefore(box,st.nextSibling);var home=L.nextSibling,mq=matchMedia('(max-width:820px)');
+function place(){if(mq.matches){if(L.parentNode!==box)box.appendChild(L);document.body.classList.add('laymob');document.body.classList.remove('fopen')}else{document.body.classList.remove('laymob');if(L.parentNode!==side)side.insertBefore(L,home&&home.parentNode===side?home:null)}}
+box.addEventListener('click',function(e){if(mq.matches&&(e.target.closest('.cjv')||(e.target.closest('.cjg')&&!e.target.closest('.car')&&e.target.closest('.cjgrp').dataset.k!=='_out')))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>
 <script id="rep-mob">(function(){var rep=document.getElementById('rep'),side=document.querySelector('.side'),st=document.querySelector('.stage');if(!rep||!side||!st)return;
 var box=document.createElement('div');box.id='repMob';st.parentNode.insertBefore(box,st.nextSibling);var home=rep.nextSibling,mq=matchMedia('(max-width:820px)');
 function place(){if(mq.matches){if(rep.parentNode!==box)box.appendChild(rep)}else if(rep.parentNode!==side){side.insertBefore(rep,home&&home.parentNode===side?home:side.firstChild)}}
+if(mq.matches){var c3=box.querySelector('#repChips [data-f=only3d]')||document.querySelector('#repChips [data-f=only3d]');if(c3&&!c3.classList.contains('on'))c3.click()}
 box.addEventListener('click',function(e){if(mq.matches&&e.target.closest('#repRows button,#rdPrev,#rdNext'))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>
 </body>
 </html>
