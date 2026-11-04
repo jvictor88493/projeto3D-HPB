@@ -50,10 +50,18 @@ window.__frame=function(mode,instant){var ids=CURK&&CJ[CURK]?CJ[CURK]:allIds(),b
 o=re.sub(r'<button id="bWalls"(?![^>]*display:none)',r'<button id="bWalls" style="display:none"',o)
 # sem bloco "Tipo de cap" e sem "Detalhes da posicao" no visualizador geral
 if 'id="geral-ui"' not in o:
-    o=o.replace('</head>','<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}\n@media (min-width:821px) and (min-height:501px){html,body{height:100%;overflow:hidden}.page{padding-bottom:0}#wrap{height:calc(100vh - 92px)!important;min-height:0!important}.side{position:sticky;top:0;max-height:calc(100vh - 92px);overflow:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}</style>\n</head>',1)
+    o=o.replace('</head>','<style id="geral-ui">#tipos{display:none!important}section.bottom{display:none!important}#conjList{max-height:calc(100vh - 240px)!important;overflow-y:auto!important;scrollbar-width:thin;padding:4px!important}#conjList button{padding:6px 10px!important;font-size:13px!important}@media (max-width:820px),(max-height:500px){#conjList{max-height:calc(64dvh - 80px)!important}}.csep{margin:2px!important}\n@media (min-width:821px) and (min-height:501px){html,body{height:100%;overflow:hidden}.page{padding-bottom:0}#wrap{height:calc(100vh - 92px)!important;min-height:0!important}.side{position:sticky;top:0;max-height:calc(100vh - 92px);overflow:auto;scrollbar-width:none}.side::-webkit-scrollbar{display:none}}</style>\n</head>',1)
 # vista inicial: perspectiva da caldeira completa
 m=re.search(r'updCam\(\);layoutPins\(\);\s*\(function loop',o)
 if m and '__frame("persp",true)' not in o:
     o=o[:m.start()]+'updCam();layoutPins();if(window.__frame)window.__frame("persp",true);setTimeout(function(){if(window.__syncAll)window.__syncAll()},300);\n(function loop'+o[m.end():]
+
+# conjuntos na lateral direita (arvore com as camadas indentadas)
+_a='[].forEach.call(lst.querySelectorAll("button[data-c]"),function(b){b.addEventListener("click",function(){show(b.getAttribute("data-c"))})});'
+if _a in o and 'window.__CJ=' not in o:
+    o=o.replace(_a,_a+'window.__CJ=CJ;window.__showCJ=function(k){show(k)};',1)
+if 'id="cj-tree-ui"' not in o:
+    _t=open(os.path.join(HERE,'cj_tree.html'),encoding='utf8').read()
+    _k=o.rindex('</body>');o=o[:_k]+_t+'\n'+o[_k:]
 open(R+OUT,'w',encoding='utf8').write(o)
 print('ok',len(o),'loopinit' ,bool(m))
