@@ -16,7 +16,8 @@
   "loc_ext": "grp + ext: u = 0..1 ao longo da face (Norte→Sul em oeste/leste; Oeste→Leste em norte/sul), v = 0..1 de baixo para cima, relativos à caixa do conjunto g",
   "loc_box": "grp + box: u,v,w = 0..1 dentro da caixa do conjunto g, em x (Norte→Sul), y (baixo→cima) e z (Leste→Oeste)",
   "ventilador_induzido": "Ventilador induzido E-57D-13 (13X) e dutos filtro→exaustor→chaminé entraram no 3D HPB Completa v38 (vIDF, vDTX); FDF/11X/12X continuam fora do modelo",
-  "croqui_do_report": "Quando o report traz croqui/foto com a localização (ex.: #46 'BV central Norte de acesso', elevação e coluna no desenho), usar o croqui como fonte de posição e tratar como confirmado; ext aceita el (mm) para fixar a elevação"
+  "croqui_do_report": "Quando o report traz croqui/foto com a localização (ex.: #46 'BV central Norte de acesso', elevação e coluna no desenho), usar o croqui como fonte de posição e tratar como confirmado; ext aceita el (mm) para fixar a elevação",
+  "croqui_elevacao": "Leitura do croqui (vista lateral): EL.33.800 e EL.25.500 dão a escala vertical (≈14,7 px/m a 170 dpi); parede frontal à esquerda, traseira à direita; elevação do 3D: y = El(m) − 17,337"
  },
  "regras": [
   {
@@ -598,6 +599,266 @@
    "origem": "confirmado na conversa em 2026-11-04",
    "titulo": "ECONOMIZADOR - ELEV 31105",
    "report": "13"
+  },
+  "sap:26493615": {
+   "loc": {
+    "t": "grp",
+    "g": "vDR",
+    "box": {
+     "u": 0.93,
+     "v": 0.5,
+     "w": 0.5
+    }
+   },
+   "zona": "Tubulão de vapor · solda JC10 · tampo Sul x costado",
+   "conf": "média",
+   "conjunto": "Penthouse",
+   "nota": "Croqui do report: trinca na solda circunferencial JC10, junto ao tampo Sul (posição angular na solda a confirmar)",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "TUBULÃO DE VAPOR",
+   "report": "14"
+  },
+  "sap:26496703": {
+   "loc": {
+    "t": "div",
+    "k": 4,
+    "face": "N",
+    "el": 25500,
+    "tubos": [
+     6,
+     7
+    ]
+   },
+   "zona": "Divisória 4 · lado Norte · El. 25.500 · tubos 6, 7",
+   "conf": "alta",
+   "conjunto": "Fornalha",
+   "nota": "Título e croqui dizem lado A (Norte); a condição do report cita lado B (Sul), provável engano",
+   "fora": null,
+   "confirmado": true,
+   "origem": "croqui do report 14 em 2026-11-05 (confirmado)",
+   "titulo": "FORNALHA - PAREDE DIVISÓRIA 4 (LADO A - NORTE) elevação 25500mm (RDZ)",
+   "report": "14"
+  },
+  "sap:26496707": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 36500
+   },
+   "zona": "Multiciclone · capela 7 · fileira 25 · anel superior (El. ~36.500)",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Altura lida do croqui; posição na capela/fileira ainda aproximada",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA 7 - FILEIRA 25",
+   "report": "14"
+  },
+  "sap:26496710": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 35300
+   },
+   "zona": "Multiciclone · capela (corpo todo) · El. ~35.300",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Croqui marca a capela inteira; pin no meio da altura da capela",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA",
+   "report": "14"
+  },
+  "sap:26496724": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 36300
+   },
+   "zona": "Multiciclone · enrijecedores acima da capela · El. ~36.300",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Altura lida do croqui (faixa superior da capela); posição horizontal aproximada",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA - ENRIJECEDORES ACIMA DA CAPELA",
+   "report": "14"
+  },
+  "sap:26496730": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "box": {
+     "u": 0.75,
+     "v": 0.95,
+     "w": 0.5
+    }
+   },
+   "zona": "Multiciclone · invólucro da capela (lado Sul) · El. ~36.300",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Altura lida do croqui (faixa superior da capela); furo perto do ciclone 4 fileira 18 · lado Sul: afastado do centro só para não sobrepor os pins vizinhos",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA - INVÓLUCRO",
+   "report": "14"
+  },
+  "sap:26496743": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "box": {
+     "u": 0.87,
+     "v": 0.95,
+     "w": 0.5
+    }
+   },
+   "zona": "Multiciclone · chapas distribuidoras de fluxo (lado Sul) · El. ~36.300",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Altura lida do croqui (faixa superior da capela); posição horizontal aproximada · lado Sul: afastado do centro só para não sobrepor os pins vizinhos",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA - ENRIJECEDORES DAS CHAPAS DISTRIBUIDORAS DE FLUXO",
+   "report": "14"
+  },
+  "sap:26496744": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 37900
+   },
+   "zona": "Multiciclone · região intermediária das chapas distribuidoras (duto de entrada)",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Croqui marca a região do duto de entrada, acima da capela (topo do modelo do multiciclone)",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA - ENRIJECEDORES DAS CHAPAS DISTRIBUIDORAS DE FLUXO",
+   "report": "14"
+  },
+  "sap:26496745": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 34100
+   },
+   "zona": "Multiciclone · capela 5 · ciclone 10 · fileira 18 · El. ~34.100",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Altura lida do croqui (fileira inferior da capela); posição horizontal aproximada",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "MULTICICLONE - CAPELA - CICLONE 10 - FILEIRA 18",
+   "report": "14"
+  },
+  "txt:fornalha - teto x wing wall|disponibilizar acesso de andaime para inspecao nos tubos do teto e recomposicao de refratario": {
+   "loc": {
+    "t": "grp",
+    "g": "vWW",
+    "box": {
+     "u": 0.205,
+     "v": 0.957,
+     "w": 0.237
+    }
+   },
+   "zona": "Teto × wing wall 2 e 3",
+   "conf": "média",
+   "conjunto": "Wingwall",
+   "nota": "Pin no teto entre os wing walls 2 e 3 (numeração a partir do Norte, assumida)",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "FORNALHA - TETO x WING WALL",
+   "report": "14"
+  },
+  "txt:passe convectivo - parede lateral esquerda - lado norte - entre o sh i e screem|realizar recomposicao de massa por weld overlay nos tubos 43 e 45 parede lateral norte (ple) na regiao mapeada com 2.7mm": {
+   "loc": {
+    "t": "grp",
+    "g": "vPass",
+    "el": 46300,
+    "ext": {
+     "face": "norte",
+     "u": 0.92
+    }
+   },
+   "zona": "Passe convectivo · parede lateral Norte · entre SH I e screen · El. ~46.300",
+   "conf": "média",
+   "conjunto": "Passe convectivo",
+   "nota": "Local lido do croqui (extremo Leste do passe, entre SH I e screen); tubos 43 e 45 da PLE",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "PASSE CONVECTIVO - PAREDE LATERAL ESQUERDA - LADO NORTE - ENTRE O SH I E SCREEM",
+   "report": "14"
+  },
+  "txt:fornalha - parede frontal|realizar recomposicao de massa por weld overlay no tubo 125 da parede frontal com aproximadamente 300mm de area de desga": {
+   "loc": {
+    "t": "wall",
+    "w": "frente",
+    "el": 26100,
+    "tubos": [
+     125
+    ]
+   },
+   "zona": "Parede frontal (Oeste) · tubo 125 · El. ~26.100",
+   "conf": "alta",
+   "conjunto": "Fornalha",
+   "nota": "Elevação lida do croqui (~26.100), logo acima da faixa de 25.500",
+   "fora": null,
+   "confirmado": true,
+   "origem": "croqui do report 14 em 2026-11-05 (confirmado)",
+   "titulo": "FORNALHA - PAREDE FRONTAL",
+   "report": "14"
+  },
+  "txt:superaquecedor - sh 2 - sepentina 9 - ponto g do croqui me|realizar substituicao do trecho de 2240mm de comprimento com baixa espessura no primeiro tubo da serpentina 9 do shii, c": {
+   "loc": {
+    "t": "grp",
+    "g": "vSS",
+    "box": {
+     "u": 0.14,
+     "v": 0.44,
+     "w": 0.95
+    }
+   },
+   "zona": "Superaquecedor secundário · serpentina 9 · tubo 1 · ponto G · El. ~45.700",
+   "conf": "baixa",
+   "conjunto": "Superaquecedor secundário",
+   "nota": "Altura e lado Oeste lidos do croqui; posição da serpentina 9 a partir do Norte com passo assumido (a confirmar)",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "SUPERAQUECEDOR - SH 2 - SEPENTINA 9 - PONTO G DO CROQUI ME",
+   "report": "14"
+  },
+  "txt:economizador (regiao inferior) serpentina 176 - elevacao 21.000|realizar substituicao do trecho de aproximadamente 300mm de comprimento que apresentou baixa espessura (1,56mm / 1,72) n": {
+   "loc": {
+    "t": "grp",
+    "g": "vECO",
+    "box": {
+     "u": 0.5,
+     "v": 0.07,
+     "w": 0.79
+    }
+   },
+   "zona": "Economizador · região inferior · serpentina 176 · El. ~21.000",
+   "conf": "média",
+   "conjunto": "Economizador",
+   "nota": "Croqui: faixa inferior do economizador, lado Oeste; posição ao longo do trecho reto a confirmar",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
+   "titulo": "ECONOMIZADOR (REGIÃO INFERIOR) SERPENTINA 176 - elevação 21.000",
+   "report": "14"
   }
  },
  "historico": [
@@ -670,6 +931,353 @@
     "zona": "Economizador · parede Norte · BV central · El. 31.105"
    },
    "regra": null
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 47,
+   "chave": "sap:26493615",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR"
+    },
+    "conf": "média"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR",
+     "box": {
+      "u": 0.93,
+      "v": 0.5,
+      "w": 0.5
+     }
+    },
+    "zona": "Tubulão de vapor · solda JC10 · tampo Sul x costado"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 52,
+   "chave": "sap:26496703",
+   "antes": {
+    "loc": {
+     "t": "div",
+     "k": 4,
+     "face": "N",
+     "el": 25500,
+     "tubos": [
+      6,
+      7
+     ]
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "div",
+     "k": 4,
+     "face": "N",
+     "el": 25500,
+     "tubos": [
+      6,
+      7
+     ]
+    },
+    "zona": "Divisória 4 · lado Norte · El. 25.500 · tubos 6, 7"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 54,
+   "chave": "sap:26496707",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "média"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 36500
+    },
+    "zona": "Multiciclone · capela 7 · fileira 25 · anel superior (El. ~36.500)"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 55,
+   "chave": "sap:26496710",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 35300
+    },
+    "zona": "Multiciclone · capela (corpo todo) · El. ~35.300"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 56,
+   "chave": "sap:26496724",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 36300
+    },
+    "zona": "Multiciclone · enrijecedores acima da capela · El. ~36.300"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 57,
+   "chave": "sap:26496730",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 36300
+    },
+    "zona": "Multiciclone · invólucro da capela (lado Sul) · El. ~36.300"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 58,
+   "chave": "sap:26496743",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 36300
+    },
+    "zona": "Multiciclone · chapas distribuidoras de fluxo (lado Sul) · El. ~36.300"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 59,
+   "chave": "sap:26496744",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 37900
+    },
+    "zona": "Multiciclone · região intermediária das chapas distribuidoras (duto de entrada)"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 60,
+   "chave": "sap:26496745",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC"
+    },
+    "conf": "média"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vMDC",
+     "el": 34100
+    },
+    "zona": "Multiciclone · capela 5 · ciclone 10 · fileira 18 · El. ~34.100"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 75,
+   "chave": "txt:fornalha - teto x wing wall|disponibilizar acesso de andaime para inspecao nos tubos do teto e recomposicao de refratario",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vWW"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vWW",
+     "box": {
+      "u": 0.205,
+      "v": 0.957,
+      "w": 0.237
+     }
+    },
+    "zona": "Teto × wing wall 2 e 3"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 109,
+   "chave": "txt:passe convectivo - parede lateral esquerda - lado norte - entre o sh i e screem|realizar recomposicao de massa por weld overlay nos tubos 43 e 45 parede lateral norte (ple) na regiao mapeada com 2.7mm",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vPass"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vPass",
+     "el": 46300,
+     "ext": {
+      "face": "norte",
+      "u": 0.92
+     }
+    },
+    "zona": "Passe convectivo · parede lateral Norte · entre SH I e screen · El. ~46.300"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 110,
+   "chave": "txt:fornalha - parede frontal|realizar recomposicao de massa por weld overlay no tubo 125 da parede frontal com aproximadamente 300mm de area de desga",
+   "antes": {
+    "loc": {
+     "t": "wall",
+     "w": "frente",
+     "el": null,
+     "tubos": [
+      125
+     ]
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "wall",
+     "w": "frente",
+     "el": 26100,
+     "tubos": [
+      125
+     ]
+    },
+    "zona": "Parede frontal (Oeste) · tubo 125 · El. ~26.100"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 115,
+   "chave": "txt:superaquecedor - sh 2 - sepentina 9 - ponto g do croqui me|realizar substituicao do trecho de 2240mm de comprimento com baixa espessura no primeiro tubo da serpentina 9 do shii, c",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vSS"
+    },
+    "conf": "baixa"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vSS",
+     "box": {
+      "u": 0.14,
+      "v": 0.44,
+      "w": 0.95
+     }
+    },
+    "zona": "Superaquecedor secundário · serpentina 9 · tubo 1 · ponto G · El. ~45.700"
+   },
+   "regra": "croqui"
+  },
+  {
+   "data": "2026-11-05T10:05",
+   "report": "14",
+   "n": 117,
+   "chave": "txt:economizador (regiao inferior) serpentina 176 - elevacao 21.000|realizar substituicao do trecho de aproximadamente 300mm de comprimento que apresentou baixa espessura (1,56mm / 1,72) n",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vECO",
+     "el": 21000
+    },
+    "conf": "média"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vECO",
+     "box": {
+      "u": 0.5,
+      "v": 0.07,
+      "w": 0.79
+     }
+    },
+    "zona": "Economizador · região inferior · serpentina 176 · El. ~21.000"
+   },
+   "regra": "croqui"
   }
  ]
 }
