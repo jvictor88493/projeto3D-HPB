@@ -179,6 +179,7 @@ body.tabfull #bCsv{display:none!important}
 @media (max-width:820px){.top .tabs{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.top .tabs::-webkit-scrollbar{display:none}.top .tab{white-space:nowrap;flex:none}}
 #fullPane iframe,#recPane iframe{display:block;width:100%;height:calc(100dvh - 92px);min-height:480px;border:0;border-radius:14px;background:var(--panel)}
 @media (max-width:820px),(max-height:500px) and (orientation:landscape){#fullPane iframe,#recPane iframe{height:calc(100dvh - 60px);border-radius:0}}
+#bWalls{display:none!important}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script><script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -186,7 +187,7 @@ body.tabfull #bCsv{display:none!important}
 <div class="app">
 <header class="top">
 <div class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><path class="gp" d="M20.5 3h7l1 5a16 16 0 0 1 4.2 2.4l4.8-1.8 3.5 6-3.9 3.3a16 16 0 0 1 0 4.8l3.9 3.3-3.5 6-4.8-1.8a16 16 0 0 1-4.2 2.4l-1 5h-7l-1-5a16 16 0 0 1-4.2-2.4l-4.8 1.8-3.5-6 3.9-3.3a16 16 0 0 1 0-4.8L7 14.6l3.5-6 4.8 1.8A16 16 0 0 1 19.5 8z"/><circle cx="24" cy="24" r="8.5" fill="#f26a1b"/><circle cx="24" cy="24" r="4" fill="#fff"/></svg><div><div class="bt">Mapa 3D de Caldeiras</div><div class="bs">Planejamento e integridade</div></div></div>
-<div class="crumb"><div class="c2">Lista de Bubble Caps - Teste · Mapa 19.10</div></div>
+
 <!--INFO_NAV--><div class="topr"><button id="bCsv" class="cta" title="Exportar PDF da vista em perspectiva"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></svg>Exportar</button><a class="out" href="/api/logout">Sair</a></div>
 </header>
 <div id="err"></div>
@@ -216,7 +217,7 @@ body.tabfull #bCsv{display:none!important}
 
 <section class="bottom">
 <div class="card"><h3><svg class="i" viewBox="0 0 24 24"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>Detalhes da posição</h3>
-<div id="info">Clique em um cap para ver linha, fileira, tipo, material e câmara. As divisórias aparecem cortadas a 0,5 m para não esconder o piso: use o botão "Divisórias" ou o controle de altura para vê-las inteiras (33,4 m).</div></div>
+<div id="info">Clique em um cap para ver linha, fileira, tipo, material e câmara. As divisórias aparecem cortadas a 0,5 m para não esconder o piso: use o controle "Altura das divisórias" para vê-las inteiras (33,4 m).</div></div>
 <div class="card stats"><h3><svg class="i" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>Estatísticas do mapa</h3>
 <div class="st"><b>4.508</b><span>Total de posições</span></div>
 <div class="st"><b><i style="background:#e0352b"></i>339</b><span>HK30</span></div>
@@ -762,7 +763,7 @@ function capturePdf(){
   function n(id){return $(id).textContent.replace(/[()]/g,"")}
   var leg=[{c:[0.48,0.51,0.55],t:"Padrão "+n("nM0")},{c:[0.88,0.21,0.17],t:"HK30 "+n("nMA")},{c:[0.12,0.47,0.88],t:"TP310H "+n("nMB")},{c:[0.12,0.66,0.31],t:"253MA "+n("nMC")},{c:[1,0.83,0],t:"Especiais (D·E·F) "+n("nSp")}];
   var d=new Date(),p2=function(v){return(v<10?"0":"")+v};
-  var blob=makePdf(jpg,o.width,o.height,leg,"Mapa 3D dos bubble caps","Parede d'água traseira, módulo 6 · Lista de Bubble Caps - Teste · Mapa 19.10 · vista em perspectiva","Gerado em "+p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()+" "+p2(d.getHours())+":"+p2(d.getMinutes())+" · 4.508 posições");
+  var blob=makePdf(jpg,o.width,o.height,leg,"Mapa 3D dos bubble caps","Parede d'água traseira, módulo 6 · vista em perspectiva","Gerado em "+p2(d.getDate())+"/"+p2(d.getMonth()+1)+"/"+d.getFullYear()+" "+p2(d.getHours())+":"+p2(d.getMinutes())+" · 4.508 posições");
   var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mapa3d_bubble_caps_perspectiva.pdf";document.body.appendChild(a);a.click();a.remove();
 }
 $("bCsv").addEventListener("click",function(){

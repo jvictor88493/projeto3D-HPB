@@ -26,10 +26,9 @@ function readEmail(req) {
     return allowed().includes(d.e) ? d.e : null;
   } catch (e) { return null; }
 }
-// Quem ve o botao "3D HPB Completa" (padrao abaixo; pode ser sobrescrito pela variavel FULL_EMAILS).
-const FULL_DEFAULT = 'jvictor88493@gmail.com,hpb@timitecnologia.com,thiago.morais@hydro.com,luana@luanaandrade.com,emanuel.rosario@hydro.com,maviano.silva@hydro.com,mario.mendes.neto@hydro.com,nerio.pereira@hydro.com,edinirson.sarges@hydro.com';
+// Abas 3D HPB Completa e Recomendacoes: liberadas para todos os e-mails autorizados (ALLOWED_EMAILS).
 function fullEmails() {
-  return (process.env.FULL_EMAILS || FULL_DEFAULT).split(/[,;\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
+  return allowed();
 }
 // Quem ve a aba "Informacao" e as notas tecnicas do 3D completo (padrao: so o e-mail principal; variavel INFO_EMAILS).
 function infoEmails() {
