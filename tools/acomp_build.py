@@ -1,5 +1,5 @@
-# Gera private/acomp.html (aba Acompanhamento) = private/full.html (mesma base do 3D HPB Completa)
-# restrito ao conjunto Fornalha + modulo de andamento do overhaul lido do cronograma MS Project (XML).
+# Gera private/acomp.html (aba Acompanhamento) = private/index.html (mesmo 3D da aba Visualizacao)
+# + modulo de andamento do overhaul lido do cronograma MS Project (XML).
 # Uso: python3 tools/acomp_build.py CRONOGRAMA.xml
 #   - le as tarefas da FORNALHA pelo NOME (nao pelo WBS), grava tools/out/acomp_tasks.json
 #   - se o XML nao for passado, reaproveita tools/out/acomp_tasks.json (ex.: apos atualizar o full.html)
@@ -101,26 +101,22 @@ if len(sys.argv) > 1:
     for m in miss: print('  NAO ENCONTRADO:', m)
 data = json.load(open(OUTJ, encoding='utf8'))
 
-o = open(R + 'full.html', encoding='utf8').read()
+# base: a aba Visualizacao (private/index.html), sem o cabecalho/abas do site (a aba abre dentro de um iframe)
+o = open(R + 'index.html', encoding='utf8').read()
 mod = open(os.path.join(HERE, 'acomp_mod.html'), encoding='utf8').read()
 part = dict(re.findall(r'@@(\w+)\n(.*?)(?=\n@@\w+\n|\Z)', mod, re.S))
-# 1) titulo
-o = re.sub(r'<title>[^<]*', '<title>Acompanhamento do overhaul HPB · Fornalha', o, count=1)
-# 2) so o conjunto Fornalha
-a = o.index('var CURK=null,CJ=') + len('var CURK=null,CJ=')
-b = o.index(',GM=', a)
-CJ = json.loads(o[a:b])
-o = o[:a] + json.dumps({'forn': CJ['forn']}) + o[b:]
-# 3) estilos, barra da linha do tempo e cartao lateral
+for ph in ('<!--INFO_NAV-->', '<!--FULL_PANE-->', '<!--INFO_PANEL-->'):
+    o = o.replace(ph, '')
+o = o.replace('<script defer src="/_vercel/insights/script.js"></script>', '')
+o = re.sub(r'<title>[^<]*', '<title>Acompanhamento do overhaul HPB · Bubble caps', o, count=1)
 o = o.replace('</head>', part['CSS'] + '\n</head>', 1)
 k = o.index('<main class="grid">'); o = o[:k] + part['BAR'] + '\n' + o[k:]
-k = o.index('<section class="card" id="layers">'); o = o[:k] + part['CARD'] + '\n' + o[k:]
-# 4) modulo JS dentro do escopo do 3D, antes da inicializacao
+a = '<aside class="side"><button id="fclose" type="button">Fechar ✕</button>'
+assert o.count(a) == 1, 'painel lateral da Visualizacao mudou'
+o = o.replace(a, a + '\n' + part['CARD'], 1)
 init = 'setClip();layoutCaps();colorCaps();vis();'
 assert o.count(init) == 1, 'linha de inicializacao do 3D mudou'
 js = part['JS'].replace('/*ACDATA*/', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
 o = o.replace(init, js + '\n' + init, 1)
-# 5) apos montar a arvore de conjuntos: abrir a Fornalha
-k = o.rindex('</body>'); o = o[:k] + part['TAIL'] + '\n' + o[k:]
 open(R + 'acomp.html', 'w', encoding='utf8').write(o)
 print('ok private/acomp.html', len(o))
