@@ -29,7 +29,7 @@ module.exports = (req, res) => {
   }
   let nav = '';
   if (info || full) {
-    nav = '<nav class="tabs"><button class="tab on" id="tViz" aria-current="page" type="button">Visualização</button>' +
+    nav = '<nav class="tabs"><button class="tab on" id="tViz" aria-current="page" type="button">Mapa bubble caps</button>' +
       (full ? '<button class="tab" id="tFull" type="button">3D HPB Completa</button><button class="tab" id="tRec" type="button">Recomendações</button><button class="tab" id="tAc" type="button">Acompanhamento</button>' : '') +
       (info ? '<button class="tab" id="tInfo" type="button">Informação</button>' : '') + '</nav>';
   }
