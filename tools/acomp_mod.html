@@ -20,7 +20,6 @@
 #acCard h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:12px 0 5px;font-weight:650}
 .acN{display:flex;gap:6px}.acN div{flex:1;background:var(--chip);border-radius:9px;padding:5px 7px}
 .acN b{display:block;font-size:18px;line-height:1.15;font-variant-numeric:tabular-nums}.acN span{font-size:10.5px;color:var(--muted)}
-.acV{display:flex;flex-wrap:wrap;gap:5px}.acV button{font:inherit;font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}.acV button:hover{background:var(--chip)}
 #acTab{width:100%;border-collapse:separate;border-spacing:2px;font-size:11.5px;text-align:center;table-layout:fixed}
 #acTab th{font-weight:600;font-size:10px;color:var(--muted);padding:1px 0;cursor:help}
 #acTab td{padding:4px 0;border-radius:5px;background:var(--chip);font-variant-numeric:tabular-nums}
@@ -31,10 +30,9 @@
 .acRow{margin:4px 0}.acRow .t{display:flex;justify-content:space-between;font-size:12px}.acRow .t small{color:var(--muted)}
 .acBarS{height:8px;border-radius:4px;overflow:hidden;background:var(--chip);margin-top:2px}.acBarS i{display:block;height:100%;background:#0e9f6e}
 .acTask{font-size:11.5px;padding:3px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px}.acTask b{white-space:nowrap}
-.acLeg{display:grid;grid-template-columns:1fr 1fr;gap:3px 8px;font-size:11.5px}
-.acLeg span{display:flex;align-items:center;gap:6px}.acLeg em{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
-.acLeg b{grid-column:1/-1;font-size:10.5px;color:var(--muted);margin-top:4px;font-weight:650;letter-spacing:.04em}
-.acStar{font-size:10.5px;color:var(--muted);margin-top:8px}
+#acLeg{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 18px;margin-top:10px;padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:12.5px}
+#acLeg span{display:flex;align-items:center;gap:7px;white-space:nowrap}#acLeg em{width:13px;height:13px;border-radius:3px;display:inline-block;flex:none}
+.acWrap>.card{margin:0}
 header.top,.bottom,#desenhos,#tipos,#bCsv{display:none!important}
 #acBar{margin-top:10px}
 </style>
@@ -47,21 +45,16 @@ header.top,.bottom,#desenhos,#tipos,#bCsv{display:none!important}
   <div id="acTlw"><div id="acTlbar"><div id="acReal"></div><div id="acFc"></div></div><input type="range" id="acTl" min="0" max="100" step="1" value="0" aria-label="Data"></div>
 </div>
 @@CARD
-<section class="card" id="acCard">
+<div class="acWrap"><section class="card" id="acCard">
   <h3>Acompanhamento do overhaul · Bubble caps</h3>
   <div class="acNote" id="acSrc"></div>
-  <div class="acV"><button type="button" data-v="piso">Piso (caps)</button></div>
   <h4>Resumo na data</h4>
   <div class="acN"><div><b id="acSold">0</b><span>caps soldados</span></div><div><b id="acInsp">0</b><span>caps inspecionados</span></div></div>
   <h4>Bubble caps por câmara</h4>
-  <p class="acNote">% dos caps de cada câmara que já concluíram cada etapa. "Geral" é a média das 6 etapas. Passe o mouse para ver o detalhe.</p>
   <div id="acChs"></div>
   <h4>Tarefas em curso nesta data</h4>
   <div id="acAct"></div>
-  <h4>Legenda</h4>
-  <div class="acLeg" id="acLeg"></div>
-  <div class="acStar">O cronograma informa o avanço por câmara e etapa, não por posição: a ordem dos caps dentro de cada câmara é ilustrativa.</div>
-</section>
+</section></div>
 @@JS
 /* ===== ACOMPANHAMENTO DO OVERHAUL (tools/acomp_build.py) ===== */
 var AC=/*ACDATA*/;
@@ -115,7 +108,8 @@ function $a(id){return document.getElementById(id)}
 var dt=function(t){var d=new Date(t),z=function(n){return String(n).padStart(2,"0")};return z(d.getUTCDate())+"/"+z(d.getUTCMonth()+1)};
 $a("acSrc").textContent="Cronograma: "+(AC.meta.title||"")+" · status em "+dt(ST)+(AC.meta.saved?" · salvo "+dt(pt(AC.meta.saved)):"");
 $a("acHoje").textContent="Hoje ("+dt(ST)+")";
-$a("acLeg").innerHTML=CAPN.map(function(n,i){return '<span><em style="background:#'+CAPC[i].getHexString()+'"></em>'+n+'</span>'}).join("");
+var lg=document.createElement("div");lg.id="acLeg";var stg=document.querySelector(".stage");if(stg)stg.appendChild(lg);
+lg.innerHTML=CAPN.map(function(n,i){return '<span><em style="background:#'+CAPC[i].getHexString()+'"></em>'+n+'</span>'}).join("");
 var STG=[["Corte","Corte de bubble caps"],["Casq.","Retirada de casquilho e limpeza"],["Luva","Montagem de luva"],["Mont.","Montagem de novos bubble caps"],["Solda","Soldagem de bubble caps"],["Insp.","Inspeção dos caps"]];
 $a("acChs").innerHTML='<table id="acTab"><colgroup><col style="width:15%"><col style="width:14%"><col span="6"></colgroup><thead><tr><th></th><th title="Média das 6 etapas">Geral</th>'+STG.map(function(s){return '<th title="'+s[1]+'">'+s[0]+'</th>'}).join("")+'</tr></thead><tbody>'+
   [1,2,3,4,5,6,0].map(function(k){return '<tr'+(k?'':' class="tot"')+'><td class="lb" title="'+fm(k?CHI[k].n:NTOT)+' caps">'+(k?"C"+k:"Total")+'</td><td class="g" id="acg'+k+'"></td>'+STG.map(function(s,i){return '<td id="ac'+k+'_'+(i+1)+'"></td>'}).join("")+'</tr>'}).join("")+'</tbody></table>';
@@ -155,8 +149,6 @@ tl.addEventListener("input",function(){stop();update(T0+(+tl.value)*H)});
 $a("acPlay").addEventListener("click",function(){if(playing){stop();return}playing=true;$a("acPlay").textContent="❚❚ Pausar";update(T0);last=performance.now()});
 $a("acHoje").addEventListener("click",function(){stop();update(ST)});
 (function acLoop(now){if(playing){var d=Math.min(now-last,100);last=now;var t=curT+d/1000*(+$a("acSpd").value)*D;if(t>=ST){update(ST);stop()}else update(t)}requestAnimationFrame(acLoop)})(performance.now());
-/* ---- vistas ---- */
-document.querySelector("#acCard .acV").addEventListener("click",function(e){var b=e.target.closest("button");if(b&&b.dataset.v==="piso"){var p=document.getElementById("bPersp");if(p)p.click()}});
 window.__acUpdate=update;window.__acST=ST;
 setTimeout(function(){update(ST)},0);
 })();
