@@ -160,7 +160,7 @@ def by_rules(it,kb):
             d['regra']=r['id'];return d
     return None
 def locate(it,kb):
-    mem=kb['memoria'].get(sig(it))
+    mem=kb['memoria'].get(sig(it)) or kb['memoria'].get('txt:'+norm(it['titulo'])+'|'+norm(it['rec'])[:120])  # reports novos podem ganhar nota SAP: cai na chave por texto
     if mem and mem.get('confirmado'): d=dict(mem);d['conf']='alta';d['origem']='memória confirmada';return d
     e=explicit(it,kb)
     if e: e['origem']='texto do report';return e

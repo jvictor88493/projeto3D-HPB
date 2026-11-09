@@ -21,6 +21,68 @@
  },
  "regras": [
   {
+   "id": "idf13_parafuso",
+   "padrao": "ventilador induzido.*parafuso|13 ?x.*parafuso",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vIDF",
+    "box": {
+     "u": 0.32,
+     "v": 0.47,
+     "w": 0.93
+    }
+   },
+   "zona": "Ventilador induzido 13X · flange de fixação do cone",
+   "conf": "baixa",
+   "conjunto": "Ventilador induzido",
+   "nota": "Parafusos de fixação do cone: ponto no flange do cone de sucção (lado a confirmar)",
+   "fora": null
+  },
+  {
+   "id": "duto_mc_screen",
+   "padrao": "duto.*multiciclone.*(screen|screem)|(screen|screem).*multiciclone",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vDTM"
+   },
+   "zona": "Duto screen × multiciclone",
+   "conf": "média",
+   "conjunto": "Duto passe × multiciclone",
+   "nota": "Suportes dos enrijecedores do duto: pin no centro do duto (o report não diz quais suportes)",
+   "fora": null
+  },
+  {
+   "id": "mc_inferior",
+   "padrao": "multiciclone.*regiao inferior|multiciclone.*garrafa",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "el": 25500
+   },
+   "zona": "Multiciclone · região inferior (hoppers/garrafas)",
+   "conf": "média",
+   "conjunto": "Multiciclone",
+   "nota": "Região inferior do multiciclone (acesso pelos hoppers); posição horizontal aproximada",
+   "fora": null
+  },
+  {
+   "id": "filtro_manga",
+   "padrao": "filtro (de )?mangas?|bag ?house",
+   "texto": false,
+   "loc": {
+    "t": "grp",
+    "g": "vFM"
+   },
+   "zona": "Filtro de mangas (bag house)",
+   "conf": "baixa",
+   "conjunto": "Filtro de mangas",
+   "nota": "Posição aproximada: centro do filtro de mangas (o report cita os dampers Oeste e Leste)",
+   "fora": null
+  },
+  {
    "id": "idf13_cone",
    "padrao": "ventilador induzido.*cone|13 ?x.*cone",
    "texto": false,
@@ -859,6 +921,46 @@
    "origem": "croqui do report 14 em 2026-11-05 (lido por Claude)",
    "titulo": "ECONOMIZADOR (REGIÃO INFERIOR) SERPENTINA 176 - elevação 21.000",
    "report": "14"
+  },
+  "txt:passe convectivo - acoalho - regiao do superaquecedor x u-beans|realizar reparo na conexao (reducao) do tubo do acoalho da regiao do passe convectivo conforme par (lado externo da cald": {
+   "loc": {
+    "t": "grp",
+    "g": "vPass",
+    "box": {
+     "u": 0.5,
+     "v": 0.13,
+     "w": 0.83
+    }
+   },
+   "zona": "Passe convectivo · açoalho (região SH × U-beams) · El. ~40.750",
+   "conf": "média",
+   "conjunto": "Passe convectivo",
+   "nota": "Croqui: ponto na parte baixa do passe, lado Oeste; posição Norte-Sul não informada (pin no centro)",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui/texto do report 17 (lido por Claude)",
+   "titulo": "PASSE CONVECTIVO - AÇOALHO - REGIÃO DO SUPERAQUECEDOR X U-BEANS",
+   "report": "17"
+  },
+  "txt:multiciclone - regiao inferior - garrafas|substituir suporte 3(multiciclone 04 sul), 4 (multiciclone 02 sul) e 7 (multiciclone 01 norte).": {
+   "loc": {
+    "t": "grp",
+    "g": "vMDC",
+    "box": {
+     "u": 0.65,
+     "v": 0.05,
+     "w": 0.5
+    }
+   },
+   "zona": "Multiciclone · região inferior · suportes 3º, 4º e 7º das garrafas",
+   "conf": "baixa",
+   "conjunto": "Multiciclone",
+   "nota": "Suportes em três multiciclones (04 Sul, 02 Sul, 01 Norte): pin único, mais para o lado Sul, afastado do #120",
+   "fora": null,
+   "confirmado": false,
+   "origem": "croqui/texto do report 17 (lido por Claude)",
+   "titulo": "MULTICICLONE - REGIÃO INFERIOR - GARRAFAS",
+   "report": "17"
   }
  },
  "historico": [
@@ -1278,6 +1380,22 @@
     "zona": "Economizador · região inferior · serpentina 176 · El. ~21.000"
    },
    "regra": "croqui"
+  },
+  {
+   "data": "2026-11-09T06:53",
+   "report": "17",
+   "n": [
+    101,
+    118,
+    119,
+    120,
+    121,
+    122
+   ],
+   "chave": "novos",
+   "antes": "sem regra/baixa",
+   "depois": "regras idf13_parafuso, duto_mc_screen, mc_inferior, filtro_manga + memória #119/#121",
+   "regra": "report 17"
   }
  ]
 }
