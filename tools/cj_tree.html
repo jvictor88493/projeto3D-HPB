@@ -1,5 +1,6 @@
 <style id="cj-tree-ui">
 #conj{display:none!important}
+#layers:not(.cjready){visibility:hidden}
 #layers>label.sw,#layers>.sw{display:none!important}
 #cjTree{display:flex;flex-direction:column}
 .cjv,.cjg{display:flex;align-items:center;gap:8px;width:100%;font:inherit;font-size:13.5px;font-weight:600;text-align:left;color:var(--ink);background:none;border:0;border-top:1px solid var(--line);padding:9px 4px;cursor:pointer}
@@ -58,7 +59,7 @@ function openOnly(k){Object.keys(groups).forEach(function(x){var o=x===k;groups[
 function sel(k){Object.keys(groups).forEach(function(x){groups[x].classList.toggle('sel',x===k)});vg.classList.toggle('on',k==='site')}
 vg.addEventListener('click',function(){openOnly(null);sel('site');var b=document.getElementById('bSite');if(b)b.click()});
 ['bFront','bWalls','bAll'].forEach(function(id){var b=document.getElementById(id);if(b)b.addEventListener('click',function(){sel(null)})});
-card.appendChild(tree);
+card.appendChild(tree);card.classList.add('cjready');
 function sync(){Object.keys(proxies).forEach(function(id){proxies[id].forEach(function(cb){cb.checked=orig[id].checked})})}
 Object.keys(orig).forEach(function(id){orig[id].addEventListener('change',sync)});
 var all=document.getElementById('vAll');if(all)all.addEventListener('change',function(){setTimeout(sync,0)});

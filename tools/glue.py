@@ -72,5 +72,14 @@ var box=document.createElement('div');box.id='layMob';st.parentNode.insertBefore
 function place(){if(mq.matches){if(L.parentNode!==box)box.appendChild(L);document.body.classList.add('laymob');document.body.classList.remove('fopen')}else{document.body.classList.remove('laymob');if(L.parentNode!==side)side.insertBefore(L,home&&home.parentNode===side?home:null)}}
 box.addEventListener('click',function(e){if(mq.matches&&(e.target.closest('.cjv')||(e.target.closest('.cjg')&&!e.target.closest('.car')&&e.target.closest('.cjgrp').dataset.k!=='_out')))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>"""
     _k=o.rindex('</body>');o=o[:_k]+_m+'\n'+o[_k:]
+
+# estilos da arvore de conjuntos no <head> (evita aparecer o painel antigo antes do script montar a arvore)
+_m=re.search(r'<style id="cj-tree-ui">.*?</style>',o,re.S)
+if _m and o.find('</head>')<_m.start():
+    _st=_m.group(0);o=o[:_m.start()]+o[_m.end():]
+    if '#layers:not(.cjready)' not in _st: _st=_st.replace('</style>','#layers:not(.cjready){visibility:hidden}</style>')
+    o=o.replace('</head>',_st+'\n</head>',1)
+if "card.classList.add('cjready')" not in o:
+    o=o.replace("card.appendChild(tree);","card.appendChild(tree);card.classList.add('cjready');",1)
 open(R+OUT,'w',encoding='utf8').write(o)
 print('ok',len(o),'loopinit' ,bool(m))
