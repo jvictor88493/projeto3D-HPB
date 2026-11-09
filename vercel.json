@@ -11,6 +11,9 @@
     },
     "api/repimg.js": {
       "includeFiles": "private/rep_img/**"
+    },
+    "api/acomp.js": {
+      "includeFiles": "private/acomp.html"
     }
   },
   "rewrites": [

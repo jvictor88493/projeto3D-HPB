@@ -3,7 +3,9 @@
 ## Abas 3D
 1. `python3 tools/glue.py tools/fontes/mapa3d_HPB_vNN.html` → `private/full.html` (aba 3D HPB Completa) e `private/full_info.html` (notas para a aba Informação).
 2. `python3 tools/rec_build.py tools/fontes/<base_3D_do_reparos>.html tools/fontes/mapa3d_reparos_HPB_v1-04.11.2026.html` → `private/rec.html` (aba Recomendações) = `full.html` atual + módulo "Reparos do report" + dados do report mais recente (`tools/out/rep_<N>.json`) + fotos "depois".
-   Sempre que o 3D HPB Completa mudar, rode os dois passos (a aba Recomendações usa o mesmo modelo 3D).
+3. `python3 tools/acomp_build.py CRONOGRAMA.xml` → `private/acomp.html` (aba Acompanhamento) = `full.html` atual restrito ao conjunto Fornalha + andamento do overhaul lido do cronograma MS Project (XML). As tarefas são achadas pelo nome (câmaras C1–C6, Fase 02, paredes 25k, divisórias, tubos do piso); o script avisa "NAO ENCONTRADO" se algum nome mudar. Sem o XML, reaproveita `tools/out/acomp_tasks.json`.
+   Sempre que o 3D HPB Completa mudar, rode os três passos (Recomendações e Acompanhamento usam o mesmo modelo 3D).
+   Para atualizar só o andamento: exporte o cronograma do Project em XML e rode apenas o passo 3.
 
 ## Reports de inspeção (aba Recomendações)
 - `python3 tools/rep_report.py REPORT.pdf [--dry-run]` → lê o PDF, localiza cada recomendação no 3D, recorta fotos antes/depois para `private/rep_img/`, grava `tools/out/rep_<N>.json` e `tools/out/localizacao_<N>.tsv` (origem e confiança de cada item) e atualiza `private/rec.html`.

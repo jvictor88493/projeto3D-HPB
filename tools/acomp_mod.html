@@ -1,0 +1,203 @@
+@@CSS
+<style id="acomp-ui">
+#acBar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:0 0 8px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+#acBar button,#acBar select{font:inherit;font-size:12.5px;padding:4px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+#acBar button:hover{background:var(--chip)}
+#acDate{font-weight:650;font-size:14.5px;min-width:150px;font-variant-numeric:tabular-nums}
+#acMode{font-size:10.5px;padding:2px 8px;border-radius:99px;font-weight:650;letter-spacing:.02em}
+#acTlw{position:relative;flex:1 1 380px;min-width:240px;height:36px}
+#acTlbar{position:absolute;left:0;right:0;top:5px;height:10px;border-radius:5px;overflow:hidden;background:var(--chip);border:1px solid var(--line)}
+#acReal{position:absolute;left:0;top:0;bottom:0;background:var(--accent);opacity:.5}
+#acFc{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(45deg,transparent 0 5px,var(--line) 5px 7px)}
+#acTl{position:absolute;left:-7px;width:calc(100% + 14px);top:0;height:20px;margin:0;background:transparent;-webkit-appearance:none;appearance:none}
+#acTl::-webkit-slider-runnable-track{background:transparent;height:20px}
+#acTl::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:20px;border-radius:4px;background:var(--ink);border:2px solid var(--panel)}
+#acTl::-moz-range-track{background:transparent;height:20px}
+#acTl::-moz-range-thumb{width:8px;height:18px;border-radius:4px;background:var(--ink);border:2px solid var(--panel)}
+.acTick{position:absolute;top:19px;font-size:10px;color:var(--muted);transform:translateX(-50%);white-space:nowrap}
+.acTick.hoje{color:var(--accent);font-weight:700;top:24px}
+#acCard h3{margin-bottom:6px}
+#acCard h4{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:12px 0 5px;font-weight:650}
+.acN{display:flex;gap:6px}.acN div{flex:1;background:var(--chip);border-radius:9px;padding:5px 7px}
+.acN b{display:block;font-size:18px;line-height:1.15;font-variant-numeric:tabular-nums}.acN span{font-size:10.5px;color:var(--muted)}
+.acV{display:flex;flex-wrap:wrap;gap:5px}.acV button{font:inherit;font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}.acV button:hover{background:var(--chip)}
+#acTab{width:100%;border-collapse:separate;border-spacing:2px;font-size:11.5px;text-align:center;table-layout:fixed}
+#acTab th{font-weight:600;font-size:10px;color:var(--muted);padding:1px 0;cursor:help}
+#acTab td{padding:4px 0;border-radius:5px;background:var(--chip);font-variant-numeric:tabular-nums}
+#acTab td.lb{background:none;text-align:left;font-weight:650;padding-left:2px}
+#acTab td.g{font-weight:700}
+#acTab tr.tot td{font-weight:700}
+.acNote{font-size:11px;color:var(--muted);margin:0 0 5px}
+.acRow{margin:4px 0}.acRow .t{display:flex;justify-content:space-between;font-size:12px}.acRow .t small{color:var(--muted)}
+.acBarS{height:8px;border-radius:4px;overflow:hidden;background:var(--chip);margin-top:2px}.acBarS i{display:block;height:100%;background:#0e9f6e}
+.acTask{font-size:11.5px;padding:3px 0;border-bottom:1px dashed var(--line);display:flex;justify-content:space-between;gap:8px}.acTask b{white-space:nowrap}
+.acLeg{display:grid;grid-template-columns:1fr 1fr;gap:3px 8px;font-size:11.5px}
+.acLeg span{display:flex;align-items:center;gap:6px}.acLeg em{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.acLeg b{grid-column:1/-1;font-size:10.5px;color:var(--muted);margin-top:4px;font-weight:650;letter-spacing:.04em}
+.acStar{font-size:10.5px;color:var(--muted);margin-top:8px}
+@media (min-width:821px) and (min-height:501px){#wrap{height:calc(100vh - 150px)!important}.side{max-height:calc(100vh - 150px)!important}}
+</style>
+@@BAR
+<div id="acBar">
+  <button id="acPlay" type="button">▶ Reproduzir</button>
+  <select id="acSpd" aria-label="Velocidade"><option value="1">1 dia/s</option><option value="2" selected>2 dias/s</option><option value="4">4 dias/s</option></select>
+  <button id="acHoje" type="button">Hoje</button>
+  <span id="acDate"></span><span id="acMode"></span>
+  <div id="acTlw"><div id="acTlbar"><div id="acReal"></div><div id="acFc"></div></div><input type="range" id="acTl" min="0" max="100" step="1" value="0" aria-label="Data"></div>
+</div>
+@@CARD
+<section class="card" id="acCard">
+  <h3>Acompanhamento do overhaul · Fornalha</h3>
+  <div class="acNote" id="acSrc"></div>
+  <div class="acV"><button type="button" data-v="forn">Fornalha</button><button type="button" data-v="piso">Piso (caps)</button><button type="button" data-v="frente">Parede frontal 25k</button><button type="button" data-v="tras">Parede traseira 25k</button></div>
+  <h4>Resumo na data</h4>
+  <div class="acN"><div><b id="acSold">0</b><span>caps soldados</span></div><div><b id="acInsp">0</b><span>caps inspecionados</span></div><div><b id="acTub">0</b><span>tubos substituídos</span></div></div>
+  <h4>Bubble caps por câmara</h4>
+  <p class="acNote">% dos caps de cada câmara que já concluíram cada etapa. "Geral" é a média das 6 etapas. Passe o mouse para ver o detalhe.</p>
+  <div id="acChs"></div>
+  <h4>Tubos substituídos</h4>
+  <div id="acTubs"></div>
+  <h4>Tarefas em curso nesta data</h4>
+  <div id="acAct"></div>
+  <h4>Legenda</h4>
+  <div class="acLeg" id="acLeg"></div>
+  <div class="acStar">* posição assumida: o cronograma não informa a posição exata.</div>
+</section>
+@@JS
+/* ===== ACOMPANHAMENTO DO OVERHAUL (tools/acomp_build.py) ===== */
+var AC=/*ACDATA*/;
+(function(){
+var D=86400000,H=3600000,pt=function(s){return Date.parse(s+":00Z")},cl=function(v,a,b){return Math.max(a,Math.min(b,v))},fm=function(n){return n.toLocaleString("pt-BR")};
+var T0=pt(AC.meta.start),T1=pt(AC.meta.finish),ST=pt(AC.meta.status);
+T0=Math.floor(T0/D)*D;T1=Math.ceil(T1/D)*D;
+var TK={};Object.keys(AC.tasks).forEach(function(w){var a=AC.tasks[w];TK[w]={w:w,n:a[0],s:pt(a[1]),f:pt(a[2]),p:a[3]/100}});
+/* progresso 0..1 na data t: ate a data de status interpola o % do cronograma; depois e previsao */
+function prog(w,t){var a=typeof w==="string"?TK[w]:w;if(!a)return 0;var dur=Math.max(a.f-a.s,3*H);
+  if(a.p>=1||a.s>=ST)return cl((t-a.s)/dur,0,1);
+  if(t<=a.s)return 0;if(t<=ST)return a.p*(t-a.s)/(ST-a.s);
+  var fe=Math.max(a.f,ST+D);return a.p+(1-a.p)*cl((t-ST)/(fe-ST),0,1)}
+var C=AC.cfg,col=function(h){return new THREE.Color(h)};
+var CAPC=[col(0xb0714a),col(0x5b4a42),col(0x262626),col(0x9aa7b4),col(0x3b82f6),col(0x84cc16),col(0x0e9f6e)];
+var CAPN=["Cap antigo","Cap cortado","Cap removido (limpo)","Luva montada","Bubble cap novo montado","Cap soldado","Cap inspecionado"];
+var LUVC=[col(0x7d8791),col(0x5b4a42),col(0x1a1a1a),col(0xc3ccd6),col(0x7d8791),col(0x7d8791),col(0x7d8791)];
+var STEMC=[col(0x8d96a0),col(0x5b4a42),col(0x8d96a0),col(0x8d96a0),col(0x8d96a0),col(0x8d96a0),col(0x8d96a0)];
+var TUBC=[col(0xb0714a),col(0xf59e0b),col(0x3b82f6),col(0x84cc16),col(0x0e9f6e)];
+var TUBN=["Tubo antigo (a substituir)","Tubo cortado / em intervenção","Tubo novo montado","Tubo novo soldado","Tubo concluído (US + aleta)"];
+var TUBEG=col(0xb4bac2);
+matStem.color.set(0xffffff);matLuva.color.set(0xffffff);matTube.color.set(0xffffff);
+
+/* ---- bubble caps: mesmas malhas e geometria do 3D HPB Completa ---- */
+var IT=[];
+list16.forEach(function(p,i){IT.push({p:p,i:i,h:head16,s:stem16,l:luva16,nine:false,st:0})});
+list9.forEach(function(p,i){IT.push({p:p,i:i,h:head9,s:stem9,l:luva9,nine:true,st:0})});
+var CHL={1:[],2:[],3:[],4:[],5:[],6:[]},CHI={},NTOT=IT.length,F2N=C.f2n||216;
+IT.forEach(function(it){it.k=6-M.div.filter(function(d){return it.p.x>d}).length;CHL[it.k].push(it)});
+for(var k=1;k<=6;k++){var L=CHL[k];L.sort(function(a,b){return a.p.y-b.p.y||a.p.x-b.p.x});
+  var n2=C.f2&&C.f2.length?Math.round(F2N*L.length/NTOT):0,n1=L.length-n2;
+  L.forEach(function(it,i){it.ph=i<n1?1:2;it.ix=i<n1?i:i-n1});CHI[k]={n:L.length,n1:n1,n2:n2}}
+function place(it){var p=it.p,st=it.st,dy=capDy(p.r),x=X(p.x),z=Z(p.y);
+  var sS=(st===0||st>=4)?1:(st===1?0.35:0),hS=(st===0||st>=4)?1:0,lS=st===2?0.12:1;
+  dummy.rotation.set(0,0,0);
+  if(sS>0){dummy.position.set(x,(ST_BOT+ST_L*sS/2)*vs+dy,z);dummy.scale.set(1,ST_L*sS*vs,1)}else dummy.scale.set(0,0,0);
+  dummy.updateMatrix();it.s.setMatrixAt(it.i,dummy.matrix);
+  dummy.position.set(x,LV_BOT*vs+dy,z);dummy.scale.set(1,LV_L*lS*vs,1);dummy.updateMatrix();it.l.setMatrixAt(it.i,dummy.matrix);
+  if(hS){if(it.nine){var dx=p.dir[0],dz=-p.dir[1];dummy.rotation.set(0,Math.atan2(dx,dz),0)}
+    dummy.position.set(x,(ST_BOT+ST_L+HD_L/2)*vs+dy,z);dummy.scale.set(1,HD_L*vs,1)}else dummy.scale.set(0,0,0);
+  dummy.updateMatrix();it.h.setMatrixAt(it.i,dummy.matrix)}
+function paint(it){it.h.setColorAt(it.i,CAPC[it.st]);it.s.setColorAt(it.i,STEMC[it.st]);it.l.setColorAt(it.i,LUVC[it.st])}
+var CM=[head16,stem16,luva16,head9,stem9,luva9];
+function flush(){CM.forEach(function(m){m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true});dirty=true}
+var _lc=layoutCaps;
+layoutCaps=function(){_lc();IT.forEach(place);flush()};
+colorCaps=function(){IT.forEach(paint);flush()};
+
+/* ---- tubos do piso (mesma malha do 3D) ---- */
+for(var q=0;q<tubes.count;q++)tubes.setColorAt(q,TUBEG);
+var FLS=[],fi=60;(C.floor||[]).forEach(function(f){var ix=[];for(var j=0;j<f[1];j++)ix.push(fi+j);fi+=f[1]+3;FLS.push({w:f[0],idx:ix})});
+
+/* ---- tubos de parede trocados (trecho El. 25k) ---- */
+var gAC=new THREE.Group();scene.add(gAC);
+var E0=24300,E1=26600,yA=ezz(E0),yB=ezz(E1);
+var segMat=new THREE.MeshStandardMaterial({color:0xffffff,roughness:.5,metalness:.4});
+function segs(list){var m=inst(new THREE.CylinderGeometry(0.0381,0.0381,1,14),segMat,Math.max(1,list.length));m.count=list.length;list.forEach(function(s,i){s.i=i;m.setColorAt(i,TUBC[0])});gAC.add(m);return m}
+function setSeg(m,s,st){dummy.rotation.set(0,0,0);dummy.position.set(s.x,(yA+yB)/2,s.z);var r=st===1?0.55:1;dummy.scale.set(r,yB-yA,r);dummy.updateMatrix();m.setMatrixAt(s.i,dummy.matrix);m.setColorAt(s.i,TUBC[st])}
+function uX(n){return (n-1-62.5)*0.102}
+var zF=(3365.4-0)/1000,zR=(3365.4-DF)/1000;
+var FR=(C.front.tubes||[]).map(function(t){return {n:t[0],w:t[1],x:uX(t[0]),z:zF}});
+var RR=[];if(C.rear.first)for(var n=0;n<C.rear.n;n++)RR.push({n:C.rear.first+n,x:uX(C.rear.first+n),z:zR});
+var DV=(C.div||[]).map(function(d){return {n:d[0],dv:d[1],w:d[2],star:d[3],x:X(M.div[d[1]-1]),z:(d[0]-1-14.5)*PASSO}});
+var mFR=segs(FR),mRR=segs(RR),mDV=segs(DV);
+function stFront(o,j,t){var r=j/FR.length,s=0,F=C.front;
+  if(prog(F.cut,t)>r)s=1;if(prog(F.mount,t)>r)s=2;if(prog(o.w,t)>=0.999)s=3;
+  if(s>=3&&prog(F.us,t)>=0.999&&prog(F.aleta,t)>=0.999)s=4;return s}
+function stRear(j,t){var r=j/RR.length,s=0,F=C.rear;
+  if(prog(F.cut,t)>r)s=1;if(prog(F.mount,t)>r)s=2;if(prog(F.weld,t)>r)s=3;
+  if(s>=3&&prog(F.us,t)>=0.999&&prog(F.aleta,t)>=0.999)s=4;return s}
+function stOne(w,t){var p=prog(w,t);return p>=0.999?4:(p>0?1:0)}
+
+/* ---- painel ---- */
+function $a(id){return document.getElementById(id)}
+var dt=function(t){var d=new Date(t),z=function(n){return String(n).padStart(2,"0")};return z(d.getUTCDate())+"/"+z(d.getUTCMonth()+1)};
+$a("acSrc").textContent="Cronograma: "+(AC.meta.title||"")+" · status em "+dt(ST)+(AC.meta.saved?" · salvo "+dt(pt(AC.meta.saved)):"");
+$a("acHoje").textContent="Hoje ("+dt(ST)+")";
+$a("acLeg").innerHTML="<b>BUBBLE CAPS</b>"+CAPN.map(function(n,i){return '<span><em style="background:#'+CAPC[i].getHexString()+'"></em>'+n+'</span>'}).join("")+
+  "<b>TUBOS (parede, divisória e piso)</b>"+TUBN.map(function(n,i){return '<span><em style="background:#'+TUBC[i].getHexString()+';border-radius:6px"></em>'+n+'</span>'}).join("");
+var STG=[["Corte","Corte de bubble caps"],["Casq.","Retirada de casquilho e limpeza"],["Luva","Montagem de luva"],["Mont.","Montagem de novos bubble caps"],["Solda","Soldagem de bubble caps"],["Insp.","Inspeção dos caps"]];
+$a("acChs").innerHTML='<table id="acTab"><colgroup><col style="width:15%"><col style="width:14%"><col span="6"></colgroup><thead><tr><th></th><th title="Média das 6 etapas">Geral</th>'+STG.map(function(s){return '<th title="'+s[1]+'">'+s[0]+'</th>'}).join("")+'</tr></thead><tbody>'+
+  [1,2,3,4,5,6,0].map(function(k){return '<tr'+(k?'':' class="tot"')+'><td class="lb" title="'+fm(k?CHI[k].n:NTOT)+' caps">'+(k?"C"+k:"Total")+'</td><td class="g" id="acg'+k+'"></td>'+STG.map(function(s,i){return '<td id="ac'+k+'_'+(i+1)+'"></td>'}).join("")+'</tr>'}).join("")+'</tbody></table>';
+function nameOf(w){var a=TK[w],par=w.replace(/\.\d+$/,""),pn=AC.sumn[par]||"",m=pn.match(/C(\d)\b/),f2=/FASE 02/i.test(pn);
+  var n=a.n.replace(/\s+/g," ").toLowerCase().replace(/^./,function(c){return c.toUpperCase()});return (m?"C"+m[1]+" · ":f2?"Fase 02 · ":"")+n}
+function capEt(steps,t){var e=steps.map(function(w){return prog(w,t)});for(var s=1;s<e.length;s++)e[s]=Math.min(e[s],e[s-1]);return e}
+var curT=ST,playing=false,last=0,tl=$a("acTl");
+function update(t){curT=t;
+  var d=new Date(t),z=function(n){return String(n).padStart(2,"0")},wd=["dom","seg","ter","qua","qui","sex","sáb"][d.getUTCDay()];
+  $a("acDate").textContent=wd+" "+z(d.getUTCDate())+"/"+z(d.getUTCMonth()+1)+" · "+z(d.getUTCHours())+":"+z(d.getUTCMinutes());
+  var md=$a("acMode");if(t<=ST+60000){md.textContent="HISTÓRICO";md.style.background="var(--accent-bg)";md.style.color="var(--accent)"}else{md.textContent="PREVISÃO";md.style.background="#fef3c7";md.style.color="#b45309"}
+  var cnt={},e2=C.f2&&C.f2.length?capEt(C.f2,t):[0,0,0,0,0,0];
+  for(var k=1;k<=6;k++){var e1=capEt(C.caps[k]||[],t);cnt[k]={1:e1.map(function(x){return Math.ceil(x*CHI[k].n1-1e-9)}),2:e2.map(function(x){return Math.ceil(x*CHI[k].n2-1e-9)})}}
+  var stc={1:[0,0,0,0,0,0,0],2:[0,0,0,0,0,0,0],3:[0,0,0,0,0,0,0],4:[0,0,0,0,0,0,0],5:[0,0,0,0,0,0,0],6:[0,0,0,0,0,0,0]},nS=0,nI=0,ch=false;
+  IT.forEach(function(it){var c=cnt[it.k][it.ph],s=0;for(var q=0;q<6;q++)if(it.ix<c[q])s++;
+    if(s!==it.st){it.st=s;place(it);paint(it);ch=true}stc[it.k][s]++;if(s>=5)nS++;if(s===6)nI++});
+  if(ch)flush();
+  var tot=[0,0,0,0,0,0,0];
+  function row(k,done,n){var sum=0;for(var s=1;s<=6;s++){var v=done[s]/n,c=$a("ac"+k+"_"+s);sum+=v;c.textContent=Math.round(v*100)+"%";c.style.background=v>0?"rgba(14,159,110,"+(0.10+0.55*v).toFixed(2)+")":"";c.style.color=v>0.6?"#fff":"";c.title=fm(done[s])+" de "+fm(n)+" caps · "+STG[s-1][1]}
+    var g=$a("acg"+k);g.textContent=Math.round(sum/6*100)+"%"}
+  for(k=1;k<=6;k++){var a=stc[k],dn=[0,0,0,0,0,0,0],acc=0;for(var s=6;s>=1;s--){acc+=a[s];dn[s]=acc;tot[s]+=acc}row(k,dn,CHI[k].n)}
+  row(0,tot,NTOT);
+  /* tubos */
+  var fs=FR.map(function(o,j){return stFront(o,j,t)}),rs=RR.map(function(o,j){return stRear(j,t)}),ds=DV.map(function(o){return stOne(o.w,t)});
+  FR.forEach(function(o,j){setSeg(mFR,o,fs[j])});RR.forEach(function(o,j){setSeg(mRR,o,rs[j])});DV.forEach(function(o,j){setSeg(mDV,o,ds[j])});
+  [mFR,mRR,mDV].forEach(function(m){m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true});
+  var fl=0,flT=0;FLS.forEach(function(S){var st=stOne(S.w,t);S.idx.forEach(function(ix){tubes.setColorAt(ix,TUBC[st]);flT++;if(st===4)fl++})});
+  if(tubes.instanceColor)tubes.instanceColor.needsUpdate=true;
+  var nf=fs.filter(function(s){return s>=3}).length,nr=rs.filter(function(s){return s>=3}).length,nd=ds.filter(function(s){return s===4}).length;
+  $a("acSold").textContent=fm(nS);$a("acInsp").textContent=fm(nI);$a("acTub").textContent=nf+nr+nd+fl;
+  var rows=[["Parede frontal 25k",nf,FR.length],["Parede traseira 25k *",nr,RR.length],["Divisórias 25k *",nd,DV.length],["Tubos do piso *",fl,flT]];
+  $a("acTubs").innerHTML=rows.filter(function(r){return r[2]}).map(function(r){return '<div class="acRow"><div class="t"><span>'+r[0]+'</span><small>'+r[1]+' / '+r[2]+'</small></div><div class="acBarS"><i style="width:'+(r[1]/r[2]*100)+'%"></i></div></div>'}).join("");
+  var act=Object.keys(TK).filter(function(w){var p=prog(w,t);return p>0&&p<0.999}).sort(function(a,b){return TK[a].s-TK[b].s});
+  $a("acAct").innerHTML=act.length?act.slice(0,10).map(function(w){return '<div class="acTask"><span>'+nameOf(w)+'</span><b>'+Math.round(prog(w,t)*100)+'%</b></div>'}).join("")+(act.length>10?'<div class="acTask"><span>+ '+(act.length-10)+' tarefas</span></div>':''):'<div class="acTask"><span>Nenhuma tarefa da fornalha em curso.</span></div>';
+  var hv=Math.round((t-T0)/H);if(+tl.value!==hv)tl.value=hv;
+  dirty=true}
+/* ---- linha do tempo ---- */
+tl.max=Math.round((T1-T0)/H);
+var pc=function(t){return (t-T0)/(T1-T0)*100};
+$a("acReal").style.width=pc(ST)+"%";$a("acFc").style.left=pc(ST)+"%";
+(function(){var w=$a("acTlw"),nd=Math.round((T1-T0)/D),stp=nd>40?4:2;for(var t=T0+D;t<T1;t+=stp*D){var e=document.createElement("div");e.className="acTick";e.style.left=pc(t+12*H)+"%";e.textContent=dt(t);w.appendChild(e)}
+  var h=document.createElement("div");h.className="acTick hoje";h.style.left=pc(ST)+"%";h.textContent="▲ hoje";w.appendChild(h)})();
+function stop(){playing=false;$a("acPlay").textContent="▶ Reproduzir"}
+tl.addEventListener("input",function(){stop();update(T0+(+tl.value)*H)});
+$a("acPlay").addEventListener("click",function(){playing=!playing;$a("acPlay").textContent=playing?"❚❚ Pausar":"▶ Reproduzir";if(playing&&curT>=T1-H)update(T0);last=performance.now()});
+$a("acHoje").addEventListener("click",function(){stop();update(ST)});
+(function acLoop(now){if(playing){var d=Math.min(now-last,100);last=now;var t=curT+d/1000*(+$a("acSpd").value)*D;if(t>=T1){update(T1);stop()}else update(t)}requestAnimationFrame(acLoop)})(performance.now());
+/* ---- vistas ---- */
+var VW={piso:function(){flyTo(new THREE.Vector3(0,0,0),Math.max(11,9/Math.min(1,cam.aspect)),0.85,Math.PI)},
+  frente:function(){flyTo(new THREE.Vector3(0,ezz(25450),zF),15/Math.min(1,cam.aspect),1.4,0)},
+  tras:function(){flyTo(new THREE.Vector3(0,ezz(25450),zR),15/Math.min(1,cam.aspect),1.4,Math.PI)},
+  forn:function(){if(window.__frame)window.__frame("persp")}};
+document.querySelector("#acCard .acV").addEventListener("click",function(e){var b=e.target.closest("button");if(b&&VW[b.dataset.v])VW[b.dataset.v]()});
+window.__acUpdate=update;window.__acST=ST;
+setTimeout(function(){update(ST)},0);
+})();
+@@TAIL
+<style>.cjv,.cjgrp[data-k="_out"],#bAll{display:none!important}</style>
+<script>setTimeout(function(){var h=document.querySelector('.cjgrp[data-k="forn"] .cjg');if(h)h.click()},60)</script>
