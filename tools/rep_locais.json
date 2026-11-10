@@ -961,6 +961,26 @@
    "origem": "croqui/texto do report 17 (lido por Claude)",
    "titulo": "MULTICICLONE - REGIÃO INFERIOR - GARRAFAS",
    "report": "17"
+  },
+  "txt:isolamento termico - tubulao de vapor|reparar isolamento termico dos tampos do tubulao de vapor (lado norte e sul)": {
+   "loc": {
+    "t": "grp",
+    "g": "vDR",
+    "box": {
+     "u": 0.03,
+     "v": 0.5,
+     "w": 0.5
+    }
+   },
+   "zona": "Tubulão de vapor · tampo Norte (o item cobre os tampos Norte e Sul)",
+   "conf": "alta",
+   "conjunto": "Penthouse",
+   "nota": "Isolamento dos tampos do tubulão (Norte e Sul); pin no tampo Norte, o tampo Sul fica simétrico no outro extremo",
+   "fora": null,
+   "confirmado": true,
+   "origem": "confirmado na conversa em 2026-11-10",
+   "titulo": "ISOLAMENTO TÉRMICO - TUBULÃO DE VAPOR",
+   "report": "18"
   }
  },
  "historico": [
@@ -1396,6 +1416,33 @@
    "antes": "sem regra/baixa",
    "depois": "regras idf13_parafuso, duto_mc_screen, mc_inferior, filtro_manga + memória #119/#121",
    "regra": "report 17"
+  },
+  {
+   "data": "2026-11-10T13:25",
+   "report": "18",
+   "n": 30,
+   "chave": "txt:isolamento termico - tubulao de vapor|reparar isolamento termico dos tampos do tubulao de vapor (lado norte e sul)",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR"
+    },
+    "conf": "média",
+    "zona": "Tubulão de vapor"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR",
+     "box": {
+      "u": 0.03,
+      "v": 0.5,
+      "w": 0.5
+     }
+    },
+    "zona": "Tubulão de vapor · tampo Norte (o item cobre os tampos Norte e Sul)"
+   },
+   "regra": null
   }
  ]
 }
