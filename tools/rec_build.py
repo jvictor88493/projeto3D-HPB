@@ -62,3 +62,6 @@ if js:
     a=s2.index('/*REPDATA*/')+len('/*REPDATA*/');b=s2.index('/*ENDREPDATA*/');open(R+'rec.html','w',encoding='utf8').write(s2[:a]+d+s2[b:])
     print('dados do report:',os.path.basename(js[-1]))
 subprocess.run(['python3',os.path.join(HERE,'rep_patch.py')],check=True)
+
+# pontos + agrupamento numerado (substitui os cones)
+subprocess.run([sys.executable,os.path.join(HERE,"rec_cluster_patch.py")],check=True)

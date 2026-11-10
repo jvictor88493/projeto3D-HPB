@@ -13,3 +13,6 @@
 - Foto "depois" enviada fora do PDF: salvar em `tools/rep_depois/r<REPORT>_dep_<N>.jpg` e rodar `python3 tools/rep_patch.py`.
 
 Ordem de localização: memória confirmada > texto explícito do report (divisória/parede, tubos, elevação) > memória automática > regras por palavra-chave > "Local não identificado".
+
+## Marcação no 3D (pontos + agrupamento numerado)
+`rec_cluster.js` + `rec_cluster_patch.py` substituem os cones por pontos e círculos numerados (agrupa por proximidade na tela, raio 30 px). Clique no círculo aproxima e filtra a lista; "Mostrar todos"/Esc limpa. `rec_build.py` reaplica o módulo ao regenerar `rec.html`.
