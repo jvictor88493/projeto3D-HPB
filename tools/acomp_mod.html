@@ -72,7 +72,8 @@ T0=Math.floor(T0/D)*D;T1=Math.ceil(T1/D)*D;
 var TK={};Object.keys(AC.tasks).forEach(function(w){var a=AC.tasks[w];TK[w]={w:w,n:a[0],s:pt(a[1]),f:pt(a[2]),p:a[3]/100}});
 /* progresso 0..1 na data t: ate a data de status interpola o % do cronograma; depois e previsao */
 function prog(w,t){var a=typeof w==="string"?TK[w]:w;if(!a)return 0;var dur=Math.max(a.f-a.s,3*H);
-  if(a.p>=1||a.s>=ST)return cl((t-a.s)/dur,0,1);
+  if(a.p>=1){var e=Math.min(a.f,ST),b=Math.min(a.s,e-dur);return cl((t-b)/(e-b),0,1)} /* 100% no cronograma = concluida ate a data de status, mesmo se planejada para depois */
+  if(a.s>=ST)return cl((t-a.s)/dur,0,1);
   if(t<=a.s)return 0;if(t<=ST)return a.p*(t-a.s)/(ST-a.s);
   var fe=Math.max(a.f,ST+D);return a.p+(1-a.p)*cl((t-ST)/(fe-ST),0,1)}
 var C=AC.cfg,col=function(h){return new THREE.Color(h)};
