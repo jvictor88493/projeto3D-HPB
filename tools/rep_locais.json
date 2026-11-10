@@ -961,6 +961,26 @@
    "origem": "croqui/texto do report 17 (lido por Claude)",
    "titulo": "MULTICICLONE - REGIÃO INFERIOR - GARRAFAS",
    "report": "17"
+  },
+  "txt:base de concreto - estrutura metalica - filtro manga|reconstituir graute das bases de concreto da estrutura metalica de sustentacao do filtro manga.": {
+   "loc": {
+    "t": "grp",
+    "g": "vFM",
+    "box": {
+     "u": 0.991,
+     "v": -0.27,
+     "w": 0.522
+    }
+   },
+   "zona": "Filtro de mangas · bases de concreto das colunas do lado Sul (coluna do meio e a do lado Leste)",
+   "conf": "alta",
+   "conjunto": null,
+   "nota": "Danos no graute das bases das colunas marcadas pelo usuário: coluna do meio e coluna da ponta Leste da fileira Sul; pin na base do meio",
+   "fora": null,
+   "confirmado": true,
+   "origem": "confirmado na conversa em 2026-11-10",
+   "titulo": "BASE DE CONCRETO - ESTRUTURA METÁLICA - filtro manga",
+   "report": "18"
   }
  },
  "historico": [
@@ -1396,6 +1416,33 @@
    "antes": "sem regra/baixa",
    "depois": "regras idf13_parafuso, duto_mc_screen, mc_inferior, filtro_manga + memória #119/#121",
    "regra": "report 17"
+  },
+  {
+   "data": "2026-11-10T13:46",
+   "report": "18",
+   "n": 7,
+   "chave": "txt:base de concreto - estrutura metalica - filtro manga|reconstituir graute das bases de concreto da estrutura metalica de sustentacao do filtro manga.",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vFM"
+    },
+    "conf": "baixa",
+    "zona": "Filtro de mangas (bag house)"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vFM",
+     "box": {
+      "u": 0.991,
+      "v": -0.27,
+      "w": 0.522
+     }
+    },
+    "zona": "Filtro de mangas · bases de concreto das colunas do lado Sul (coluna do meio e a do lado Leste)"
+   },
+   "regra": null
   }
  ]
 }
