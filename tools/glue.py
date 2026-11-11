@@ -81,5 +81,7 @@ if _m and o.find('</head>')<_m.start():
     o=o.replace('</head>',_st+'\n</head>',1)
 if "card.classList.add('cjready')" not in o:
     o=o.replace("card.appendChild(tree);","card.appendChild(tree);card.classList.add('cjready');",1)
+# Three.js r128 pelo CDN (mesmo arquivo da pagina principal, ja em cache no navegador) em vez de 600 KB embutidos
+o=re.sub(r'<script>\s*/\*\*\s*\n \* @license\s*\n \* Copyright 2010-2021 Three\.js Authors.*?</script>',lambda m:'<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>',o,count=1,flags=re.S)
 open(R+OUT,'w',encoding='utf8').write(o)
 print('ok',len(o),'loopinit' ,bool(m))
