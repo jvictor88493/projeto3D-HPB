@@ -2172,10 +2172,10 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener&&matchMedia("(prefer
 setClip();layoutCaps();colorCaps();vis();applyTheme();resize();(function(){var q=pose('persp');sph.r=q.r;sph.ph=q.ph;sph.th=q.th})();updCam();layoutPins();if(window.__frame)window.__frame("persp",true);setTimeout(function(){if(window.__syncAll)window.__syncAll()},300);
 (function loop(now){
   stepAnim(now||performance.now());
-  if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}
+  if(window.__fxTick)window.__fxTick(now||performance.now());if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}
   requestAnimationFrame(loop);
 })();
-window.__bc={v45:{},v44:{},v43:{gECP:gECP,gECE:gECE},v41:{},v40:{gDTF:gDTF},v39:{gFM:gFM,gFME:gFME},v38:{gCH:gCH,gCHE:gCHE},v37:{gDTX:gDTX,gEST:gEST,gDEE:gDEE},v36:{gIDF:gIDF},v35:{gDEA:gDEA},v34:{gBOC:gBOC},v33:{gSIL:gSIL},v32:{gMDJ:gMDJ},v31:{gECO:gECO},v30:{gDTM:gDTM,gDTE:gDTE},v27:{gMDC:gMDC},v26:{gSW3:gSW3},setY:function(E){setY(E)},v24:{gUE:gUE},v23:{gTW:gTW},v22:{gTT:gTT},v21:{gWW:gWW},v20:{gAR:gAR,gCF:gCF,gRO:gRO},v19:{gUW:gUW},v18:{gSP:gSP},v17:{gSS:gSS},v16:{gSH:gSH},v10:{gST:gST,gCH:gCH,gSL:gSL,gCL:gCL,NT:NT},tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
+window.__fx={scene:scene,cam:cam,renderer:renderer,ezz:ezz,THREE:THREE,mark:function(){dirty=true},G:{gSS:gSS,gSP:gSP,gECO:gECO}};window.__bc={v45:{},v44:{},v43:{gECP:gECP,gECE:gECE},v41:{},v40:{gDTF:gDTF},v39:{gFM:gFM,gFME:gFME},v38:{gCH:gCH,gCHE:gCHE},v37:{gDTX:gDTX,gEST:gEST,gDEE:gDEE},v36:{gIDF:gIDF},v35:{gDEA:gDEA},v34:{gBOC:gBOC},v33:{gSIL:gSIL},v32:{gMDJ:gMDJ},v31:{gECO:gECO},v30:{gDTM:gDTM,gDTE:gDTE},v27:{gMDC:gMDC},v26:{gSW3:gSW3},setY:function(E){setY(E)},v24:{gUE:gUE},v23:{gTW:gTW},v22:{gTT:gTT},v21:{gWW:gWW},v20:{gAR:gAR,gCF:gCF,gRO:gRO},v19:{gUW:gUW},v18:{gSP:gSP},v17:{gSS:gSS},v16:{gSH:gSH},v10:{gST:gST,gCH:gCH,gSL:gSL,gCL:gCL,NT:NT},tgt:tgt,updCam:updCam,layoutPins:layoutPins,screen:function(r,c){var it=byCell[r+','+c];if(!it)return null;var v=new THREE.Vector3(X(it.x),(it.t==='T'?0.4:TOP-0.02)*vs,Z(it.y)).project(cam),rc=renderer.domElement.getBoundingClientRect();return {x:rc.left+(v.x*0.5+0.5)*rc.width,y:rc.top+(-v.y*0.5+0.5)*rc.height}},list16:list16.length,list9:list9.length,listT:listT.length,field:nField,tubes:M.tubes.length,select:function(r,c){var it=byCell[r+","+c];if(it)select(it,false);return !!it},pos:function(r,c){var it=byCell[r+","+c];return it?[X(it.x),Z(it.y)]:null},setView:setView,sph:sph,divs:divPick.length,ZT:ZT,pickDiv:divInfo};
 })();
 </script>
 
@@ -2232,5 +2232,389 @@ setInterval(sync,1500);
 var box=document.createElement('div');box.id='layMob';st.parentNode.insertBefore(box,st.nextSibling);var home=L.nextSibling,mq=matchMedia('(max-width:820px)');
 function place(){if(mq.matches){if(L.parentNode!==box)box.appendChild(L);document.body.classList.add('laymob');document.body.classList.remove('fopen')}else{document.body.classList.remove('laymob');if(L.parentNode!==side)side.insertBefore(L,home&&home.parentNode===side?home:null)}}
 box.addEventListener('click',function(e){if(mq.matches&&(e.target.closest('.cjv')||(e.target.closest('.cjg')&&!e.target.closest('.car')&&e.target.closest('.cjgrp').dataset.k!=='_out')))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>
+<style id="fluxos3d-css">
+#fxp{position:absolute;left:12px;bottom:12px;z-index:12;width:min(380px,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 28px rgba(10,20,40,.25);padding:10px 12px;font-size:12.5px;cursor:default}
+#fxp[hidden]{display:none}
+#fxp .fxh{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+#fxp .fxh b{font-size:14px;margin-right:auto;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+#fxp .fxh b::after{content:'▾';font-size:11px;color:var(--muted)}
+#fxp.min .fxh b::after{content:'▸'}
+#fxp.min #fxChips,#fxp.min .fxopt,#fxp.min .fxleg{display:none}
+#fxp.min .fxrow#fxPre{margin-bottom:0}
+#fxp.min .fxh{margin-bottom:6px}
+#fxp button{font:inherit;font-size:12px;display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);cursor:pointer}
+#fxp button:hover{border-color:var(--accent)}
+#fxp button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){#fxp button.on{color:#0e1524}}
+#fxp .fxrow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+#fxp .fxc{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border:1px solid var(--line);border-radius:999px;cursor:pointer;user-select:none;font-size:11.5px;line-height:1.3}
+#fxp .fxc i{width:10px;height:10px;border-radius:50%;flex:none}
+#fxp .fxc.off{opacity:.42}
+#fxp .fxopt{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;color:var(--muted);margin:2px 0 6px}
+#fxp .fxopt label{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+#fxp input[type=range]{width:90px;accent-color:var(--orange)}
+#fxp .fxleg{color:var(--muted);font-size:11.5px;line-height:1.45;border-top:1px solid var(--line);padding-top:6px}
+#fxp .fxleg span.as{display:inline-block;width:22px;height:6px;vertical-align:middle;border-radius:3px;background:repeating-linear-gradient(90deg,#ff9a3c 0 5px,transparent 5px 9px);margin-right:4px}
+#fxInfo{display:none;position:absolute;right:12px;top:12px;z-index:12;width:min(330px,calc(100% - 24px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:12px;padding:9px 12px;font-size:12.5px;line-height:1.45;box-shadow:0 8px 28px rgba(10,20,40,.25)}
+#fxInfo.show{display:block}
+#fxInfo b{display:block;font-size:13.5px;margin-bottom:2px}
+#fxInfo .pm{display:block;margin-top:4px;color:#d98a00;font-size:11.5px}
+#fxInfo .src{display:block;margin-top:4px;color:var(--muted);font-size:11px}
+#fxInfo .x{position:absolute;right:6px;top:4px;border:0;background:none;color:var(--muted);font-size:15px;cursor:pointer}
+@media (max-width:820px),(max-height:500px) and (orientation:landscape){
+#fxp{left:8px;right:68px;bottom:8px;width:auto;max-height:52%;padding:8px 10px}
+#fxp .fxc{font-size:11px;padding:3px 8px}
+#fxInfo{left:8px;right:68px;top:8px;width:auto}
+}
+</style>
+<script id="fluxos3d">
+/* Fluxos da caldeira dentro do 3D HPB Completa (água, vapor, ar, gases, sólidos, calcário/areia e cinzas).
+   Trajetos em coordenadas do mapa: T (lateral), d (profundidade) e El (elevação), em metros.
+   Origem: esboço "Caldeira HPB – fluxos v2" + posições reais medidas no 3D (desaerador R-023/R-039/R-028,
+   silos M-154, ar de transporte M-156, exaustor R-059, chaminé M-015). Trajetos assumidos levam anéis laranja. */
+(function(){
+if(document.getElementById('rep'))return;
+var fx=window.__fx,wrap=document.getElementById('wrap');if(!fx||!wrap)return;
+var THREE=fx.THREE,scene=fx.scene,cam=fx.cam,renderer=fx.renderer;
+var V3=THREE.Vector3;
+function V(T,d,E){return new V3(T,fx.ezz(E*1000),3.3654-d)}
+
+/* ---------------- camadas ---------------- */
+var LAY={
+ cond:{n:'Condensado e vapor ao desaerador',c:'#2ec4b6'},
+ agua:{n:'Água de alimentação',c:'#3b8cff'},
+ evap:{n:'Água → vapor (evaporação)',c:'#7fd0ff'},
+ vapor:{n:'Vapor',c:'#ff5c7a'},
+ purga:{n:'Purga',c:'#a78bfa'},
+ arP:{n:'Ar primário',c:'#22c4e8'},
+ arS:{n:'Ar secundário, transporte e selagem',c:'#2fbf6e'},
+ gas:{n:'Gases de combustão',c:'#ff9a3c'},
+ sol:{n:'Sólidos e carvão',c:'#d9b25c'},
+ adit:{n:'Calcário e areia',c:'#c9bfa3'},
+ cinza:{n:'Cinzas → silo',c:'#9c9488'}
+};
+var PRE={all:Object.keys(LAY),wv:['cond','agua','evap','vapor','purga'],ag:['arP','arS','gas'],bed:['arP','sol','adit','cinza']};
+var on={};Object.keys(LAY).forEach(function(k){on[k]=true});
+
+/* ---------------- informações (clique num tubo) ---------------- */
+var INFO={
+ desc:{n:'Descidas (downcomers)',t:'Água do tubulão desce sem aquecer até o coletor inferior da parede frontal (El. 17,03 m). A diferença de peso entre essa água e a mistura que sobe nas paredes faz o circuito girar (circulação natural). 14 descidas 6″ no tubulão; aqui aparecem 4.',s:'M-006 (bocais)',p:'Traçado das descidas não está no 3D.'},
+ frente:{n:'Parede d’água frontal',t:'A água entra por baixo, recebe o calor da fornalha e começa a ferver: as bolhas crescem e a mistura água + vapor sobe até o tubulão. Aqui aparecem 4 dos tubos (passo real 102 mm).',s:'M-105 / M-086'},
+ tras:{n:'Piso e parede traseira',t:'Os 126 tubos do piso (onde ficam os bubble caps) e a parede traseira também são evaporadores: a água ferve e sobe, passando pelos U-beams, até o tubulão.',s:'Piso / M-087 / M-116',p:'Ligação entre piso, parede traseira e U-beams simplificada.'},
+ lat:{n:'Paredes laterais',t:'As paredes laterais (48 tubos no piso, painéis M-080/081) sobem até os coletores laterais superiores (El. 49,75 m), ligados ao tubulão pelos tubos Ø114,3 da M-059.',s:'M-080 / M-081 / M-059',p:'Alimentação dos coletores inferiores não lida.'},
+ div:{n:'Divisórias',t:'5 painéis de 30 tubos Ø76,2 em T 0, ±2,346 e ±4,488 m, entre El. 16,37 e 49,75 m. Aqui tratadas como evaporador, subindo para o tubulão.',s:'D1-D5057-M-079',p:'Papel no circuito (evaporador × superaquecedor) ainda precisa ser confirmado.'},
+ cole:{n:'Coletor inferior frontal',t:'Coletor Ø219,1 em El. 17,03 m que recebe a água das descidas e distribui para a parede frontal e o piso.',s:'M-105'},
+ aguaA:{n:'Água de alimentação',t:'Sai do desaerador (bocal G 16″), passa pelas bombas, entra no economizador pelo coletor inferior A (El. 22,16 m), sobe pelas serpentinas em contracorrente com os gases, sai pelo coletor B (El. 33,27 m) ainda líquida e vai para o tubulão.',s:'R-023 (bocais) / M-010',p:'Bombas não montadas no 3D; rota até o economizador e do economizador ao tubulão assumidas.'},
+ eco:{n:'Economizador',t:'176 serpentinas com 74 trechos a 102 mm. A água só esquenta, sem ferver. Aqui aparecem 3 serpentinas representativas.',s:'D1-D5057-M-010'},
+ spray:{n:'Água de spray do atemperador',t:'Um pouco de água é injetada no vapor entre o primário (via wingwalls) e o secundário para controlar a temperatura final.',s:'M-097 item 11',p:'Origem da água de spray não lida: aqui sai da linha de alimentação.'},
+ sat:{n:'Vapor saturado → superaquecedor primário',t:'O vapor que sai pelos secadores do tubulão (16 saídas 4″) vai ao coletor de entrada do primário (Ø273, d 13,68).',s:'M-006 / M-007 / M-059',p:'No 3D real o vapor passa pelos tubos do teto (penthouse); aqui a rota está simplificada.'},
+ sp:{n:'Superaquecedor primário',t:'124 serpentinas Ø50,8 com 20 pernas; entrada no coletor Ø273 e saída no Ø355,6. Só passa vapor, que continua esquentando. Aqui aparecem 3 serpentinas.',s:'D1-D5057-M-007'},
+ ww:{n:'Primário → wingwalls → atemperador → secundário',t:'O vapor que sai do primário passa pelos wingwalls (8 painéis na frente da fornalha) e pela linha Ø406,4 com o atemperador até o coletor de entrada do secundário.',s:'M-097 itens 5 e 11 / M-060',p:'Itens 5, 10 e 11 da M-097 lidos mas não montados: rota assumida.'},
+ ss:{n:'Superaquecedor secundário',t:'124 serpentinas Ø50,8 com 20 pernas; entrada no coletor Ø355,6 e saída no Ø406,4. Aqui aparecem 3 serpentinas.',s:'D1-D5057-M-008'},
+ main:{n:'Vapor principal → turbina',t:'Sai do coletor de saída do secundário (Ø406,4) para a turbina.',s:'M-008 / M-097',p:'Traçado até a turbina ilustrativo.'},
+ cond:{n:'Condensado',t:'Volta da usina e entra no pré-desaerador pelo bocal T 8″ (lado +T, El. 33,02 m).',s:'R-023',p:'Origem não lida.'},
+ vaq:{n:'Vapor de aquecimento',t:'Entra no pré-desaerador pelo bocal R 20″ (lado −T): aquece a água e arrasta o oxigênio dissolvido, que sai pelos respiros.',s:'R-023',p:'Origem (extração da turbina / vapor auxiliar) não lida.'},
+ dea:{n:'Desaerador',t:'Tanque pulmão Ø3.832 × 13.000 (121 m³ úteis, 340 m³/h, projeto 3,2 kgf/cm² / 150 °C) com o pré-desaerador Ø2.438 em cima. A água cai do pré-desaerador para o tanque e sai pelo bocal G 16″.',s:'D1-D5057-R-023 / R-039 / R-028'},
+ bomba:{n:'Bomba de água de alimentação',t:'Puxa a água do desaerador e empurra para o economizador. A R-023 tem bocais H 6″ de recirculação das bombas.',s:'R-023 (bocais)',p:'Bomba não montada no 3D: posição e forma ilustrativas.'},
+ drum:{n:'Tubulão',t:'Ø1.676 interno, 15 m entre tangentes, eixo em El. 52,62 m. Recebe a água do economizador e a mistura das paredes; separa vapor e água. O azul é a água até o nível normal.',s:'D1-D5057-M-006',p:'Nível ilustrativo; internos (separadores, secadores) não modelados.'},
+ purga:{n:'Purga contínua',t:'Tira um pouco da água do tubulão para limitar os sólidos dissolvidos. No tanque de flash parte vira vapor e o resto vai para o dreno.',s:'—',p:'Tubulação, tanque e destino assumidos.'},
+ tq:{n:'Tanque de purga (flash)',t:'Recebe a purga contínua do tubulão.',s:'—',p:'Equipamento e posição assumidos.'},
+ atem:{n:'Atemperador',t:'Na linha Ø406,4 entre o primário (via wingwalls) e o secundário.',s:'M-097 item 11',p:'Posição ao longo da linha assumida.'},
+ arP:{n:'Ar primário',t:'Entra na câmara sob o piso (M-135/136/137) e sobe pelo furo central de cada bubble cap, saindo pelos 16 (ou 9) furos Ø5 inclinados 25° para baixo: é o ar que mantém o leito fluidizado.',s:'M-135/136/137 / M-014 a 017',p:'Duto até o ventilador (M-140) sem medidas: entrada ilustrativa.'},
+ arS:{n:'Ar secundário',t:'Entra pela parede traseira: 18 aberturas em El. 22,53 m e 12 em El. 21,83 m, acima do leito.',s:'M-087',p:'Caixa/duto atrás da parede traseira assumido.'},
+ arT:{n:'Ar de transporte e selagem',t:'Sai do duto de ar secundário (Ø508, El. 22,35 m), sobe em T +9,13 / d −4,556 (medidor FE-057D-078 e registro FV-057D-078) e se divide em 3 coletores: El. 30,70 (selagem dos alimentadores, El. 28,60), El. 26,95 (topo das bicas) e El. 20,25 (descidas a 65° na zona das bocas).',s:'M-156 (3D v19/v20)',p:'Ligação do riser com os coletores de El. 26,95 e 20,25 assumida.'},
+ gas:{n:'Gases de combustão',t:'Sobem pela fornalha, passam pelos U-beams, pelo secundário e pelo primário, descem pelo duto M-074 até o multiciclone, seguem pelo M-072, descem pelo economizador, vão ao filtro de mangas (M-076), saem pelo M-077 para o exaustor (rotor Ø2.900, motor 2.000 kW) e pelo M-078 para a chaminé.',s:'M-074 / M-009 / M-072 / M-010 / M-076 / R-092 / M-077 / R-059 / M-078 / M-015',p:'Fluxo interno do filtro ilustrativo.'},
+ leito:{n:'Leito fluidizado',t:'Areia, cinza e carvão borbulhando sobre o piso: os sólidos sobem com o ar e voltam para o leito.',s:'—'},
+ reinj:{n:'Reinjeção de cinzas do multiciclone',t:'Os 4 funis do multiciclone (El. 27,54 m) descarregam e as cinzas voltam ao leito pela parede traseira (4 reinjeções em El. 18,71 m).',s:'M-009 / M-087 / M-154',p:'Tubulação não montada no 3D: traçado ilustrativo.'},
+ carvao:{n:'Carvão',t:'Dos alimentadores gravimétricos (El. ~28,6 m) desce pelas 6 bicas Ø457 a 25° até as bocas na parede frontal (El. 18,89 m).',s:'M-105 / M-156',p:'Alimentadores e silo de carvão não montados.'},
+ calc:{n:'Calcário',t:'Do silo Ø3.000 (cone até El. 33,26 m) para a fornalha, onde reage com o enxofre no leito.',s:'D0-D5057-M-154',p:'Rota até a fornalha assumida (junto com o carvão).'},
+ areia:{n:'Areia',t:'Do silo Ø2.628 (cone até El. 36,10 m) para repor o material inerte do leito.',s:'D0-D5057-M-154',p:'Rota até a fornalha assumida.'},
+ cinza:{n:'Cinzas → silo de cinzas',t:'Cinzas pesadas (dreno do leito) e leves (bica do economizador e 4 tremonhas do filtro) vão por transporte pneumático até o silo Ø5.000 (El. 32,02 a 50,63 m).',s:'D0-D5057-M-154 (equipamentos)',p:'Roscas de extração e transporte pneumático não montados: rota ilustrativa.'},
+ queda:{n:'Descarga de cinzas',t:'Cinza separada caindo nas tremonhas / bica.',s:'M-075 / R-111'}
+};
+
+/* ---------------- trajetos ---------------- */
+var paths=[];
+function L(T,pts){return pts.map(function(p){return [T,p[0],p[1]]})}
+function cat(){var r=[];for(var i=0;i<arguments.length;i++)r=r.concat(arguments[i]);return r}
+function mk(layer,pts,o){o=o||{};paths.push({layer:layer,raw:pts,o:o});}
+
+/* evaporador */
+[-6,-2,2,6].forEach(function(T){mk('evap',L(T,[[-1.96,51.7],[-1.96,50.7],[-1.75,50.3],[-1.75,17.9],[-0.3,17.1],[0.06,17.03]]),{tube:0.2,v:4,dens:0.7,info:'desc'})});
+mk('evap',[[-6.45,0.06,17.03],[6.45,0.06,17.03]],{tube:0.18,v:1,dens:0,info:'cole'});
+[-4.5,-1.5,1.5,4.5].forEach(function(T){mk('evap',L(T,[[0.06,17.03],[0.92,17.5],[0.92,18.6],[0,21.46],[0,49.6],[-0.3,50.9],[-1.25,51.75]]),{tube:0.14,v:3.2,dens:1.6,bub:1,bs:0.14,in1:'#d6efff',ipa:0.14,ipb:0.95,info:'frente'})});
+[-3,3].forEach(function(T){mk('evap',L(T,[[0.06,17.03],[0.9,16.95],[6.5,16.9],[6.73,17.6],[6.73,38.4],[7.2,38.6],[7.75,38.6],[7.75,50.64],[7.75,51.5],[-0.6,51.5],[-1.2,51.72]]),{tube:0.14,v:3.2,dens:1.4,bub:1,bs:0.22,in1:'#d6efff',ipa:0.22,ipb:0.92,assumed:1,info:'tras'})});
+[-6.45,6.45].forEach(function(T){mk('evap',[[T,3.4,17.0],[T,3.4,49.75],[T,3.4,50.48],[T*0.98,-0.8,51.6],[T*0.95,-1.5,51.95]],{tube:0.14,v:3.2,dens:1.2,bub:1,bs:0.1,in1:'#d6efff',ipa:0.1,ipb:0.9,info:'lat'})});
+[0,-2.346,2.346,-4.488,4.488].forEach(function(T){mk('evap',L(T,[[3.7,16.4],[3.7,49.6],[3.2,50.3],[0.2,51.1],[-1.0,51.7]]),{tube:0.13,v:3.2,dens:1.1,bub:1,bs:0.1,in1:'#d6efff',ipa:0.1,ipb:0.9,assumed:1,info:'div'})});
+
+/* desaerador -> bomba -> economizador -> tubulão */
+mk('agua',[[17.8,26.62,27.25],[17.8,26.62,13.3]],{tube:0.22,v:3.4,dens:0.6,assumed:1,info:'aguaA'});
+var ZIG=[];for(var i=0;i<9;i++){var e=22.56+i*1.27;ZIG.push(i%2===0?[[21.6,e],[28.2,e]]:[[28.2,e],[21.6,e]])}
+var econ=[];ZIG.forEach(function(s){econ.push(s[0],s[1])});
+var DIS=[[17.2,26.62,12.75],[9.5,26.62,12.75],[9.5,20.95,12.75],[9.5,20.95,22.16],[7.2,20.95,22.16]];
+var UP=[[7.2,28.7,33.27],[7.6,29.3,33.27],[7.6,29.3,56.5],[7.6,-1.96,56.5],[6.8,-1.96,56.5],[6.8,-1.96,53.4]];
+[0,-4.2,4.2].forEach(function(T,k){
+  var coil=cat([[T,20.95,22.16]],L(T,[[21.2,22.16]].concat(econ).concat([[28.7,33.27]])));
+  var pts=cat(DIS,coil,UP);
+  mk('agua',pts,{tube:k===0?0.2:0.15,tubeFrom:k===0?0:DIS.length,tubeTo:k===0?null:DIS.length+coil.length,v:5,dens:0.45,assumed:k===0,info:k===0?'aguaA':'eco'});
+});
+mk('agua',[[7.2,20.95,22.16],[-6.9,20.95,22.16]],{tube:0.2,v:1,dens:0,info:'eco'});
+mk('agua',[[-6.9,28.7,33.27],[7.2,28.7,33.27]],{tube:0.2,v:1,dens:0,info:'eco'});
+mk('agua',[[7.6,5.6,56.5],[0.25,5.6,56.5],[0.25,5.6,54.85]],{tube:0.1,v:1.8,dens:2.5,assumed:1,info:'spray'});
+
+/* vapor */
+mk('vapor',L(0,[[-1.4,53.52],[-1.4,53.9],[13.69,53.9],[13.69,51.25]]),{tube:0.2,v:5,dens:0.6,assumed:1,in0:'#eaf4ff',in1:'#ffc0cc',info:'sat'});
+mk('vapor',[[-6.3,13.69,51.2],[6.3,13.69,51.2]],{tube:0.18,v:1,dens:0,in0:'#ffc0cc',info:'sp'});
+var SPZ=[[13.69,51.2],[13.6,51.1],[13.6,43.3],[13.28,42.95],[12.95,43.3],[12.95,49.7],[12.62,50.05],[12.3,49.7],[12.3,43.3],[12.0,42.95],[11.7,43.3],[11.7,51.2]];
+[-4,0,4].forEach(function(T){mk('vapor',L(T,SPZ),{tube:0.1,v:3.5,dens:1.2,in0:'#ffc0cc',in1:'#ffa6b8',info:'sp'})});
+mk('vapor',[[-6.3,11.64,51.2],[6.3,11.64,51.2]],{tube:0.18,v:1,dens:0,in0:'#ffa6b8',info:'sp'});
+mk('vapor',L(0,[[11.64,51.2],[11.64,52.7],[1.1,52.7],[1.1,34.5],[-0.9,33.7],[-0.9,54.57],[11.03,54.57],[11.03,51.25]]),{tube:0.2,v:5,dens:0.6,assumed:1,in0:'#ffa6b8',in1:'#ff96ab',info:'ww'});
+mk('vapor',[[-6.3,11.03,51.2],[6.3,11.03,51.2]],{tube:0.18,v:1,dens:0,in0:'#ff96ab',info:'ss'});
+var SSZ=[[11.03,51.2],[10.95,51.1],[10.95,42.0],[10.65,41.75],[10.4,42.0],[10.4,49.6],[10.1,49.9],[9.8,49.6],[9.8,42.0],[9.5,41.75],[9.2,42.0],[9.2,51.2],[8.98,51.2]];
+[-4,0,4].forEach(function(T){mk('vapor',L(T,SSZ),{tube:0.1,v:3.5,dens:1.2,in0:'#ff96ab',in1:'#ff86a0',info:'ss'})});
+mk('vapor',[[-6.3,8.98,51.2],[6.3,8.98,51.2]],{tube:0.18,v:1,dens:0,in0:'#ff86a0',info:'ss'});
+mk('vapor',L(0,[[8.98,51.2],[8.98,55.6],[-14.3,55.6]]),{tube:0.22,v:4.5,dens:0.7,in0:'#ff86a0',in1:'#ff7f99',info:'main'});
+
+/* desaerador: condensado, vapor e gotas */
+mk('cond',[[24.5,22.38,33.02],[19.05,22.38,33.02]],{tube:0.15,v:3,dens:1,assumed:1,info:'cond'});
+mk('cond',[[12.5,22.38,38.0],[12.5,22.38,33.02],[16.55,22.38,33.02]],{tube:0.2,v:4.5,dens:0.8,assumed:1,in0:'#ffd9e1',steam:1,info:'vaq'});
+[21.16,22.24,23.34].forEach(function(d){mk('cond',[[17.8,d,32.6],[17.8,d,31.1],[17.8,d,29.7]],{v:2.4,dens:4,kind:'dot',sz:0.1,col:'#bfe6ff',info:'dea'})});
+
+/* purga */
+mk('purga',[[-6,-2.7,51.95],[-6,-3.4,51.25],[-8.6,-3.4,51.25],[-8.6,-10.5,51.25],[-8.6,-10.5,22.4]],{tube:0.12,v:3,dens:0.5,assumed:1,info:'purga'});
+mk('purga',[[-8.6,-10.5,17.55],[-8.6,-10.5,11.9]],{tube:0.12,v:2.4,dens:0.8,assumed:1,info:'purga'});
+
+/* ar primário: duto (ilustrativo) e subida pelos caps */
+mk('arP',[[0,-6.6,15.2],[0,0.9,15.2],[0,3.4,15.2]],{v:5,dens:4,sz:0.32,sp:1.6,guide:1,assumed:1,info:'arP'});
+[-5,-2.5,0,2.5,5].forEach(function(T){[1.3,1.9,5.5,6.1].forEach(function(d,i){var s=i%2?-1:1;
+  mk('arP',[[T,d,14.6],[T,d,17.05],[T,d+s*0.35,17.45],[T,d+s*0.5,19.5],[T,d+s*0.8,23]],{v:3.2,dens:2,sz:0.26,sp:0.25,wob:0.12,info:'arP'})})});
+/* ar secundário (parede traseira) */
+[-5,-2.5,0,2.5,5].forEach(function(T,i){mk('arS',[[13.05,9.2,22.2],[T,9.2,22.2],[T,6.9,i%2?21.83:22.53],[T,4.6,22.8]],{v:6,dens:0.8,sz:0.32,sp:0.25,guide:i===0,assumed:1,info:'arS'})});
+/* ar de transporte e selagem (M-156) */
+var AT0=[[13.05,-0.276,22.35],[9.13,-0.276,22.35],[9.13,-4.556,22.35]];
+[6.875,4.125,1.375,-1.375,-4.125,-6.875].forEach(function(Tf,i){mk('arS',cat(AT0,[[9.13,-4.556,30.7],[9.13,-6.076,30.7],[Tf,-6.076,30.7],[Tf,-7.37,30.7],[Tf,-7.37,28.8]]),{v:5,dens:0.7,sz:0.24,sp:0.08,guide:1,info:'arT'})});
+[[1.122,1.375],[-3.264,-4.125],[5.406,6.875]].forEach(function(q){mk('arS',cat(AT0,[[9.13,-4.556,26.95],[9.13,-0.556,26.95],[q[1],-0.556,26.95],[q[1],-2.3,26.1]]),{v:5,dens:0.7,sz:0.24,sp:0.08,guide:1,assumed:1,info:'arT'})});
+[[3.264],[-1.122],[-5.406]].forEach(function(q){mk('arS',[[13.05,-0.276,22.35],[9.13,-0.276,22.35],[9.13,-0.776,22.35],[9.13,-0.776,20.25],[q[0],-0.776,20.25],[q[0],-0.1,19.0]],{v:5,dens:0.7,sz:0.24,sp:0.08,guide:1,assumed:1,info:'arT'})});
+
+/* gases */
+var FUR=[[[1.4,19],[1.6,30],[3.3,40],[5.3,44.0],[6.2,44.4]],[[3.7,19],[3.8,34],[5.0,42],[6.4,44.8]],[[5.6,19],[5.6,32],[6.0,40.5],[6.6,44.0]]];
+var COM=[[8.6,44.8],[11.5,45.6],[14.6,46.5],[16.9,47.0],[16.9,38.6],[14.0,36.7],[14.0,33.4],[15.4,32.9],[15.4,35.4],[19.3,35.6],[24.9,35.8],[24.9,22.2],[25.8,19.6],[27.7,18.4],[31.8,18.4],[31.8,32.3],[35.0,32.3]];
+function FIL(d){return [[36.5,31.5],[d-1,30.2],[d,29.2],[d,35.0],[d+0.6,35.6]]}
+[[0,39.5,-4.5],[1,43.5,-2.7],[2,47,-0.9],[0,47,0.9],[1,39.5,2.7],[2,43.5,4.5],[1,45.5,-5.2],[2,41.5,5.2]].forEach(function(q,i){
+  var T=q[2],fan=i%2?55.6:51.4;
+  var pts=cat(L(T,FUR[q[0]].concat(COM).concat(FIL(q[1]))),[[T*0.4,49.6,33.5],[T*0.15,50.6,30.3],[0,53.5,30.3],[0,53.5,25.5],[0,fan,21.5],[0,fan,15.8],[0,53.5,15.4],[2.6,53.5,17.3],[5.2,53.5,19.4],[8.2,53.5,20.4],[10.6,53.5,20.6],[11.5,53.5,22.5],[11.5,53.5,82.0]]);
+  mk('gas',pts,{v:8.5,dens:0.7,sz:0.62,sp:1.0,grad:1,c0:'#ffd35a',c1:'#9aa9bb',info:'gas'});
+});
+
+/* sólidos */
+[[-3.5,[[1.5,18.6],[2.6,22],[3.2,26],[5.9,28],[6.3,24],[6.0,19.8],[3.5,18.7],[1.5,18.6]]],[0,[[2.0,18.6],[3.0,30],[5.0,41],[6.3,43.4],[6.45,36],[6.45,25],[6.0,19.2],[3.0,18.7],[2.0,18.6]]],[3.5,[[3.6,19],[3.9,32],[1.2,37],[0.3,33],[0.3,24],[1.1,19.5],[3.6,19]]]].forEach(function(q){
+  mk('sol',L(q[0],q[1]),{v:3,dens:1.4,sz:0.3,sp:1.2,loop:1,wob:0.12,info:'leito'})});
+[-3.6,3.6].forEach(function(T){
+  mk('sol',L(T,[[14.0,33.2],[14.2,30.5],[14.2,27.6]]),{v:2.5,dens:2,sz:0.26,sp:0.4,info:'reinj'});
+  mk('sol',L(T,[[14.2,27.54],[14.2,18.7],[6.73,18.7],[5.9,18.9]]),{v:4,dens:1,sz:0.26,sp:0.12,guide:1,assumed:1,info:'reinj'});
+  mk('sol',L(T,[[17.46,27.54],[17.46,25.2],[14.2,25.2],[14.2,18.7],[6.73,18.7],[5.9,18.9]]),{v:4,dens:0.8,sz:0.26,sp:0.12,guide:1,assumed:1,info:'reinj'});
+});
+mk('sol',[[0,24.9,21.6],[0,23.9,15.3]],{v:2.5,dens:2,sz:0.26,sp:0.5,info:'queda'});
+[[-4.95,38.3],[4.95,38.3],[-4.95,45.5],[4.95,45.5]].forEach(function(q){mk('sol',[[q[0],q[1],26.4],[q[0],q[1],18.0]],{v:2.5,dens:1.8,sz:0.26,sp:0.4,info:'queda'})});
+var CH=[[6.875,1.122],[4.125,3.264],[1.375,5.406],[-1.375,-1.122],[-4.125,-3.264],[-6.875,-5.406]];
+CH.forEach(function(q){mk('sol',[[q[0],-2.45,28.6],[q[0],-2.45,26.0],[q[1],0.3,19.0],[q[1],1.0,18.6]],{v:2.8,dens:1.6,sz:0.3,sp:0.12,col:'#a8743f',guide:1,info:'carvao'})});
+/* calcário e areia */
+mk('adit',[[-12.3,-7.63,33.26],[-12.3,-7.63,31.3],[-6.9,-7.63,31.3],[-6.9,-2.45,31.3],[-6.875,-2.45,28.6],[-6.875,-2.45,26.0],[-5.406,0.3,19.0],[-5.406,1.0,18.6]],{v:2.6,dens:1.2,sz:0.26,sp:0.08,guide:1,assumed:1,info:'calc'});
+mk('adit',[[-12.85,2.506,36.1],[-12.85,2.506,31.6],[-9.0,2.506,31.6],[-9.0,-2.45,31.6],[-6.875,-2.45,31.3],[-6.875,-2.45,28.6],[-6.875,-2.45,26.0],[-5.406,0.3,19.0],[-5.406,1.0,18.6]],{v:2.6,dens:1.1,sz:0.26,sp:0.08,guide:1,assumed:1,info:'areia'});
+/* cinzas para o silo */
+var TAIL=[[-9.5,37.69,13.75],[-18.0,37.69,13.75],[-18.0,37.69,51.4],[-21.07,37.69,51.4],[-21.07,37.69,51.0]];
+[[[0,6.0,16.85],[0,6.0,13.75],[-9.5,6.0,13.75]],[[0,23.9,15.1],[0,23.9,13.75],[-9.5,23.9,13.75]],[[-4.95,38.34,17.85],[-4.95,38.34,13.75],[-9.5,38.34,13.75]],[[4.95,38.34,17.85],[4.95,38.34,13.75],[-9.5,38.34,13.75]],[[-4.95,45.65,17.85],[-4.95,45.65,13.75],[-9.5,45.65,13.75]],[[4.95,45.65,17.85],[4.95,45.65,13.75],[-9.5,45.65,13.75]]].forEach(function(h,i){
+  mk('cinza',cat(h,TAIL),{v:4.5,dens:0.45,sz:0.28,sp:0.1,guide:1,assumed:1,col:i===0?'#8a6a4a':null,info:'cinza'})});
+
+/* ---------------- geometria ---------------- */
+function rnd(pts,r){if(pts.length<3)return pts;var out=[pts[0]];
+  for(var i=1;i<pts.length-1;i++){var a=pts[i-1],b=pts[i],c=pts[i+1],l1=a.distanceTo(b),l2=b.distanceTo(c),rr=Math.min(r,l1*0.45,l2*0.45);
+    if(rr<0.02){out.push(b);continue}var p0=b.clone().lerp(a,rr/l1),p2=b.clone().lerp(c,rr/l2);
+    for(var k=0;k<=4;k++){var t=k/4;out.push(new V3().addScaledVector(p0,(1-t)*(1-t)).addScaledVector(b,2*(1-t)*t).addScaledVector(p2,t*t))}}
+  out.push(pts[pts.length-1]);return out}
+class PC extends THREE.Curve{constructor(p){super();this.p=p;this.c=[0];for(var i=1;i<p.length;i++)this.c.push(this.c[i-1]+p[i].distanceTo(p[i-1]));this.L=this.c[this.c.length-1]}
+  getPoint(t,o){o=o||new V3();var s=t*this.L,c=this.c,lo=1,hi=c.length-1;while(lo<hi){var m=(lo+hi)>>1;if(c[m]<s)lo=m+1;else hi=m}var i=lo,u=(s-c[i-1])/((c[i]-c[i-1])||1);return o.copy(this.p[i-1]).lerp(this.p[i],Math.max(0,Math.min(1,u)))}}
+function hexC(h){return new THREE.Color(h)}
+function sstep(a,b,x){var t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)}
+var ROOT=new THREE.Group();ROOT.visible=false;ROOT.userData.fx=1;scene.add(ROOT);
+var LG={};Object.keys(LAY).forEach(function(k){var g=new THREE.Group();g.userData.fx=1;ROOT.add(g);LG[k]=g});
+var PICK=[];
+function stripeTex(a0,a1){var c=document.createElement('canvas');c.width=64;c.height=2;var g=c.getContext('2d');var gr=g.createLinearGradient(0,0,64,0);gr.addColorStop(0,'rgb('+a0+','+a0+','+a0+')');gr.addColorStop(0.5,'rgb('+a1+','+a1+','+a1+')');gr.addColorStop(1,'rgb('+a0+','+a0+','+a0+')');g.fillStyle=gr;g.fillRect(0,0,64,2);var t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;return t}
+function dashTex(){var c=document.createElement('canvas');c.width=32;c.height=2;var g=c.getContext('2d');g.fillStyle='#000';g.fillRect(0,0,32,2);g.fillStyle='#fff';g.fillRect(0,0,4,2);var t=new THREE.CanvasTexture(c);t.wrapS=THREE.RepeatWrapping;return t}
+var STRIPE=stripeTex(150,255),DASH=dashTex(),SCROLL=[];
+var INNER={cond:'#169e92',agua:'#1f6fd6',evap:'#1f6fd6',vapor:'#ff8fa6',purga:'#5a4fe0'};
+var TUBE={cond:1,agua:1,evap:1,vapor:1,purga:1};
+function build(){
+  paths.forEach(function(p){
+    var o=p.o,pts=rnd(p.raw.map(function(q){return V(q[0],q[1],q[2])}),o.tube?Math.max(0.25,o.tube*2.2):0.5);
+    p.pts=pts;p.cum=[0];for(var i=1;i<pts.length;i++)p.cum.push(p.cum[i-1]+pts[i].distanceTo(pts[i-1]));p.L=p.cum[p.cum.length-1]||1;
+    p.n1=[];p.n2=[];for(i=1;i<pts.length;i++){var d=pts[i].clone().sub(pts[i-1]).normalize(),up=Math.abs(d.y)>0.9?new V3(1,0,0):new V3(0,1,0),a=new V3().crossVectors(d,up).normalize(),b=new V3().crossVectors(d,a).normalize();p.n1.push(a);p.n2.push(b)}
+    /* tubo com o conteúdo */
+    if(TUBE[p.layer]&&o.tube){
+      var f=o.tubeFrom||0,t=o.tubeTo||p.raw.length,sub=rnd(p.raw.slice(f,t).map(function(q){return V(q[0],q[1],q[2])}),Math.max(0.25,o.tube*2.2));
+      var cur=new PC(sub),seg=Math.min(1600,Math.max(8,Math.ceil(cur.L/0.2))),rs=10,r=o.tube;
+      var g=new THREE.TubeGeometry(cur,seg,r*0.78,rs,false),n=g.attributes.position.count,col=new Float32Array(n*3);
+      var c0=hexC(o.in0||INNER[p.layer]),c1=o.in1?hexC(o.in1):null,tc=new THREE.Color();
+      for(var k=0;k<n;k++){var u=Math.floor(k/(rs+1))/seg;tc.copy(c0);if(c1)tc.lerp(c1,o.ipa!=null?sstep(o.ipa,o.ipb,u):u);col[k*3]=tc.r;col[k*3+1]=tc.g;col[k*3+2]=tc.b}
+      g.setAttribute('color',new THREE.BufferAttribute(col,3));
+      var steam=p.layer==='vapor'||o.steam,am=STRIPE.clone();am.needsUpdate=true;am.repeat.set(Math.max(1,cur.L/1.4),1);
+      var core=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,transparent:true,opacity:steam?0.6:0.95,alphaMap:am,depthWrite:false}));
+      core.userData={fx:1,info:o.info};core.renderOrder=20;LG[p.layer].add(core);PICK.push(core);
+      if(o.v>1.2)SCROLL.push({t:am,k:(o.v||4)/1.4});
+      var sh=new THREE.Mesh(new THREE.TubeGeometry(cur,seg,r,rs,false),new THREE.MeshBasicMaterial({color:o.assumed?0xff8a1f:0xdbe8f8,transparent:true,opacity:o.assumed?0.7:0.22,depthWrite:false,side:THREE.DoubleSide,alphaMap:o.assumed?(function(){var d=DASH.clone();d.needsUpdate=true;d.repeat.set(Math.max(1,cur.L/1.2),1);return d})():null}));
+      sh.userData={fx:1};sh.renderOrder=21;LG[p.layer].add(sh);
+    }else if(o.guide){
+      var lg=new THREE.BufferGeometry().setFromPoints(pts),lm=o.assumed?new THREE.LineDashedMaterial({color:LAY[p.layer].c,dashSize:0.7,gapSize:0.5,transparent:true,opacity:0.75,depthWrite:false}):new THREE.LineBasicMaterial({color:LAY[p.layer].c,transparent:true,opacity:0.7,depthWrite:false});
+      var ln=new THREE.Line(lg,lm);if(o.assumed)ln.computeLineDistances();ln.userData.fx=1;LG[p.layer].add(ln);
+    }
+  });
+  buildParts();buildEquip();
+}
+
+/* ---------------- partículas (tamanho em metros, cor e opacidade por ponto) ---------------- */
+function spriteTex(ring){var c=document.createElement('canvas');c.width=c.height=64;var g=c.getContext('2d');
+  if(ring){g.strokeStyle='#fff';g.lineWidth=7;g.beginPath();g.arc(32,32,24,0,7);g.stroke();g.fillStyle='rgba(255,255,255,.25)';g.fill()}
+  else{var r=g.createRadialGradient(32,32,2,32,32,30);r.addColorStop(0,'rgba(255,255,255,1)');r.addColorStop(.5,'rgba(255,255,255,.85)');r.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=r;g.fillRect(0,0,64,64)}
+  return new THREE.CanvasTexture(c)}
+var UNI={scale:{value:800}};
+function pmat(ring){return new THREE.ShaderMaterial({uniforms:{map:{value:spriteTex(ring)},scale:UNI.scale},transparent:true,depthWrite:false,
+  vertexShader:'attribute float size;attribute vec4 rgba;varying vec4 vC;uniform float scale;void main(){vC=rgba;vec4 mv=modelViewMatrix*vec4(position,1.0);gl_PointSize=clamp(size*scale/-mv.z,1.0,48.0);gl_Position=projectionMatrix*mv;}',
+  fragmentShader:'uniform sampler2D map;varying vec4 vC;void main(){vec4 t=texture2D(map,gl_PointCoord);float a=vC.a*t.a;if(a<0.03)discard;gl_FragColor=vec4(vC.rgb,a);}'})}
+var BK={};
+function buildParts(){
+  paths.forEach(function(p){var o=p.o;var n=Math.round(p.L*(o.dens==null?0.8:o.dens));if(n<1)return;
+    var kind=o.kind||(o.bub?'ring':'dot'),key=p.layer+'|'+kind;var b=BK[key]=BK[key]||{layer:p.layer,ring:kind==='ring',list:[],n:0};
+    p.q=[];for(var k=0;k<n;k++)p.q.push({t:(k+Math.random()*0.8)/n,v:0.85+Math.random()*0.3,a:Math.random()-0.5,b:Math.random()-0.5,ph:Math.random()*6.28});
+    p.off=b.n;b.n+=n;b.list.push(p);
+    p.cA=hexC(o.col||(TUBE[p.layer]?'#e6f4ff':o.c0||LAY[p.layer].c));p.cB=o.c1?hexC(o.c1):null;
+    if(TUBE[p.layer]&&p.layer==='vapor')p.cA=hexC('#ffe3ea');
+  });
+  Object.keys(BK).forEach(function(k){var b=BK[k],g=new THREE.BufferGeometry();
+    b.pos=new Float32Array(b.n*3);b.rgba=new Float32Array(b.n*4);b.size=new Float32Array(b.n);
+    g.setAttribute('position',new THREE.BufferAttribute(b.pos,3));g.setAttribute('rgba',new THREE.BufferAttribute(b.rgba,4));g.setAttribute('size',new THREE.BufferAttribute(b.size,1));
+    var P=new THREE.Points(g,pmat(b.ring));P.frustumCulled=false;P.renderOrder=30;P.userData.fx=1;LG[b.layer].add(P);b.geo=g;b.P=P});
+}
+var tmp=new V3(),tc2=new THREE.Color();
+function stepParts(dt,clock){
+  Object.keys(BK).forEach(function(k){var b=BK[k];if(!on[b.layer])return;
+    b.list.forEach(function(p){var o=p.o,v=(o.v||4)*dt,sp=o.sp!=null?o.sp:(o.tube?o.tube*0.55:0.1),bs=o.bs||0.1;
+      for(var i=0;i<p.q.length;i++){var q=p.q[i];q.t+=v*q.v/p.L;if(q.t>=1)q.t-=1;
+        var s=q.t*p.L,c=p.cum,lo=1,hi=c.length-1;while(lo<hi){var m=(lo+hi)>>1;if(c[m]<s)lo=m+1;else hi=m}
+        var j=lo,u=(s-c[j-1])/((c[j]-c[j-1])||1);tmp.copy(p.pts[j-1]).lerp(p.pts[j],u);
+        var wa=q.a,wb=q.b;if(o.wob){wa+=Math.sin(q.ph+clock*2+q.t*30)*o.wob;wb+=Math.cos(q.ph+clock*1.7+q.t*25)*o.wob}
+        tmp.addScaledVector(p.n1[j-1],wa*sp*2).addScaledVector(p.n2[j-1],wb*sp*2);
+        var x=(p.off+i)*3;b.pos[x]=tmp.x;b.pos[x+1]=tmp.y;b.pos[x+2]=tmp.z;
+        var al=o.loop?0.85:Math.min(1,q.t/0.04,(1-q.t)/0.04),sz=o.sz||0.12;
+        tc2.copy(p.cA);if(p.cB&&o.grad)tc2.lerp(p.cB,sstep(0.08,0.55,q.t));
+        if(o.bub){if(q.t<bs){sz=0.06;al*=0.6}else{var gg=(q.t-bs)/(1-bs);sz=0.05+gg*(o.tube*1.5);al*=0.95}}
+        var y=(p.off+i)*4;b.rgba[y]=tc2.r;b.rgba[y+1]=tc2.g;b.rgba[y+2]=tc2.b;b.rgba[y+3]=al;b.size[p.off+i]=sz}});
+    b.geo.attributes.position.needsUpdate=true;b.geo.attributes.rgba.needsUpdate=true;b.geo.attributes.size.needsUpdate=true});
+}
+
+/* ---------------- água nos vasos e equipamentos assumidos ---------------- */
+var WL=[];
+function water(geo,pos,rot,levelEl,info){var pl=new THREE.Plane(new V3(0,-1,0),fx.ezz(levelEl*1000));
+  var m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x1f6fd6,transparent:true,opacity:0.55,depthWrite:false,clippingPlanes:[pl],side:THREE.DoubleSide}));
+  m.position.copy(pos);if(rot)m.rotation.set(rot[0],rot[1],rot[2]);m.userData={fx:1,info:info};m.renderOrder=19;ROOT.add(m);PICK.push(m);WL.push({p:pl,y:fx.ezz(levelEl*1000)});return m}
+function glass(geo,pos,rot,col,info){var m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col||0xff9a3c,transparent:true,opacity:0.35,depthWrite:false,wireframe:true}));m.position.copy(pos);if(rot)m.rotation.set(rot[0],rot[1],rot[2]);m.userData={fx:1,info:info};ROOT.add(m);PICK.push(m);return m}
+function capsule(R,Lc,axis){var g=new THREE.CylinderGeometry(R,R,Lc,28,1,true),s1=new THREE.SphereGeometry(R,24,12),s2=s1.clone();s1.translate(0,Lc/2,0);s2.translate(0,-Lc/2,0);
+  var mg=THREE.BufferGeometryUtils?THREE.BufferGeometryUtils.mergeBufferGeometries([g.toNonIndexed(),s1.toNonIndexed(),s2.toNonIndexed()]):null;
+  if(!mg){var grp=[g,s1,s2];return grp}
+  if(axis==='x')mg.rotateZ(Math.PI/2);if(axis==='z')mg.rotateX(Math.PI/2);return [mg]}
+function addParts(list,fn){list.forEach(fn)}
+function buildEquip(){
+  /* tubulão: Ø1.676 interno, 15.004 entre tangentes, eixo em El. 52,62 */
+  addParts(capsule(0.80,15.0,'x'),function(g){g=g.clone();if(!THREE.BufferGeometryUtils)g.rotateZ(Math.PI/2);water(g,V(0,-1.956,52.62),null,52.68,'drum')});
+  /* desaerador: tanque pulmão Ø3.832 × 13.000, CL El. 29,22, T 17,8, d 15,744–28,744 */
+  addParts(capsule(1.85,13.0,'z'),function(g){g=g.clone();if(!THREE.BufferGeometryUtils)g.rotateX(Math.PI/2);water(g,V(17.8,22.244,29.22),null,29.75,'dea')});
+  /* tanque de purga (assumido) */
+  var tq=new THREE.Group();tq.userData.fx=1;
+  addParts(capsule(0.8,3.2,'y'),function(g){glass(g.clone(),V(-8.6,-10.5,19.95),null,0xa78bfa,'tq');water(g.clone(),V(-8.6,-10.5,19.95),null,19.4,'tq')});
+  /* bomba de alimentação (ilustrativa) */
+  glass(new THREE.CylinderGeometry(0.55,0.55,0.9,16,1),V(17.8,26.62,12.75),[Math.PI/2,0,0],0x3b8cff,'bomba');
+  glass(new THREE.BoxGeometry(0.9,0.9,1.6),V(17.8,25.3,12.75),null,0x3b8cff,'bomba');
+  /* atemperador (posição assumida na linha) */
+  glass(new THREE.CylinderGeometry(0.32,0.32,1.4,16,1),V(0,5.6,54.57),[Math.PI/2,0,0],0xff5c7a,'atem');
+}
+var lvT=0;
+function stepWater(dt){lvT+=dt;WL.forEach(function(w,i){w.p.constant=w.y+Math.sin(lvT*1.6+i)*0.025})}
+
+/* ---------------- raio-x e modelo leve ---------------- */
+var XM=null,LITE=null;
+function xray(onX){
+  if(onX&&!XM){XM=[];var seen=[];scene.traverse(function(n){if(n.userData.fx||!n.material)return;var p=n.parent;while(p){if(p.userData&&p.userData.fx)return;p=p.parent}
+    (Array.isArray(n.material)?n.material:[n.material]).forEach(function(m){if(seen.indexOf(m)>=0)return;seen.push(m);XM.push([m,m.transparent,m.opacity,m.depthWrite]);m.transparent=true;m.opacity=Math.min(m.opacity,n.isLine||n.isLineSegments?0.25:0.14);m.depthWrite=false;m.needsUpdate=true})})}
+  else if(!onX&&XM){XM.forEach(function(x){x[0].transparent=x[1];x[0].opacity=x[2];x[0].depthWrite=x[3];x[0].needsUpdate=true});XM=null}
+  fx.mark()}
+function lite(onL){var G=fx.G||{};
+  if(onL&&!LITE){LITE=[];['gSS','gSP','gECO'].forEach(function(k){var g=G[k];if(!g)return;g.traverse(function(n){if((n.isMesh||n.isInstancedMesh)&&n.visible){n.visible=false;LITE.push(n)}})})}
+  else if(!onL&&LITE){LITE.forEach(function(n){n.visible=true});LITE=null}
+  fx.mark()}
+
+/* ---------------- interface ---------------- */
+var S={open:false,built:false,play:true,speed:1,xr:true,lite:false};
+var coarse=window.matchMedia&&matchMedia('(pointer:coarse)').matches;S.lite=!!coarse;
+var seg=document.querySelector('.toolbar .seg');
+var bF=document.createElement('button');bF.id='bFlux';bF.type='button';bF.title='Mostrar os fluxos de água, vapor, ar, gases e sólidos dentro do 3D';
+bF.innerHTML='<svg class="i" viewBox="0 0 24 24"><path d="M3 8c3-3 6 3 9 0s6-3 9 0M3 14c3-3 6 3 9 0s6-3 9 0M3 20c3-3 6 3 9 0s6-3 9 0"/></svg>Fluxos';
+if(seg){var ref=document.getElementById('bFilt');seg.insertBefore(bF,ref||null)}
+var pnl=document.createElement('div');pnl.id='fxp';pnl.hidden=true;
+pnl.innerHTML='<div class="fxh"><b id="fxT" title="Mostrar/recolher as camadas" tabindex="0">Fluxos da caldeira</b><button type="button" id="fxPlay">⏸ Pausar</button><button type="button" id="fxX" aria-label="Fechar fluxos">✕</button></div>'+
+ '<div class="fxrow" id="fxPre"><button type="button" data-p="all" class="on">Tudo</button><button type="button" data-p="wv">Água e vapor</button><button type="button" data-p="ag">Ar e gases</button><button type="button" data-p="bed">Leito, sólidos e cinzas</button></div>'+
+ '<div class="fxrow" id="fxChips"></div>'+
+ '<div class="fxopt"><label><input type="checkbox" id="fxXr" checked> Raio‑X</label><label title="Esconde as serpentinas dos superaquecedores e do economizador (24 milhões de triângulos) enquanto os fluxos estão abertos"><input type="checkbox" id="fxLite"> Modelo leve</label><label>Velocidade <input type="range" id="fxSpd" min="0.2" max="3" step="0.1" value="1"></label></div>'+
+ '<div class="fxleg">Dentro dos tubos: <b style="color:#3b8cff">água</b> · <b style="color:#7fd0ff">mistura com bolhas</b> · <b style="color:#ff5c7a">vapor</b>. <span class="as"></span>tubo com anéis laranja ou linha tracejada = trajeto assumido. Toque/clique num tubo ou vaso para ver o que é.</div>';
+wrap.appendChild(pnl);
+if(coarse||(window.matchMedia&&matchMedia('(max-width:820px)').matches))pnl.classList.add('min');
+var fxT=pnl.querySelector('#fxT');fxT.onclick=function(){pnl.classList.toggle('min')};fxT.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();pnl.classList.toggle('min')}};
+var inf=document.createElement('div');inf.id='fxInfo';inf.innerHTML='<button class="x" type="button" aria-label="Fechar">×</button><div></div>';wrap.appendChild(inf);
+inf.querySelector('.x').onclick=function(){inf.classList.remove('show')};
+var chips=pnl.querySelector('#fxChips');
+Object.keys(LAY).forEach(function(k){var l=document.createElement('span');l.className='fxc';l.dataset.k=k;l.setAttribute('role','checkbox');l.setAttribute('aria-checked','true');l.tabIndex=0;l.innerHTML='<i style="background:'+LAY[k].c+'"></i>'+LAY[k].n;
+  function tog(){on[k]=!on[k];sync();[].forEach.call(pnl.querySelectorAll('#fxPre button'),function(b){b.classList.remove('on')})}
+  l.onclick=tog;l.onkeydown=function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();tog()}};chips.appendChild(l)});
+function sync(){[].forEach.call(chips.children,function(l){var k=l.dataset.k;l.classList.toggle('off',!on[k]);l.setAttribute('aria-checked',on[k]?'true':'false');LG[k].visible=on[k]});fx.mark()}
+[].forEach.call(pnl.querySelectorAll('#fxPre button'),function(b){b.onclick=function(){var list=PRE[b.dataset.p];Object.keys(on).forEach(function(k){on[k]=list.indexOf(k)>=0});
+  [].forEach.call(pnl.querySelectorAll('#fxPre button'),function(x){x.classList.toggle('on',x===b)});sync()}});
+var bPlay=pnl.querySelector('#fxPlay');
+bPlay.onclick=function(){S.play=!S.play;bPlay.textContent=S.play?'⏸ Pausar':'▶ Reproduzir'};
+pnl.querySelector('#fxSpd').oninput=function(){S.speed=+this.value};
+var cXr=pnl.querySelector('#fxXr'),cLi=pnl.querySelector('#fxLite');cLi.checked=S.lite;
+cXr.onchange=function(){S.xr=cXr.checked;xray(S.open&&S.xr)};
+cLi.onchange=function(){S.lite=cLi.checked;lite(S.open&&S.lite)};
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){S.play=false;bPlay.textContent='▶ Reproduzir'}
+function setOpen(v){S.open=v;bF.classList.toggle('on',v);bF.setAttribute('aria-pressed',v?'true':'false');pnl.hidden=!v;
+  if(v&&!S.built){build();S.built=true;sync()}
+  ROOT.visible=v;cLi.checked=S.lite;cXr.checked=S.xr;xray(v&&S.xr);lite(v&&S.lite);if(!v)inf.classList.remove('show');
+  if(v){stepParts(0,0);document.body.classList.remove('fopen')}fx.mark()}
+bF.onclick=function(){setOpen(!S.open)};
+pnl.querySelector('#fxX').onclick=function(){setOpen(false)};
+['pointerdown','wheel'].forEach(function(ev){pnl.addEventListener(ev,function(e){e.stopPropagation()},{passive:true})});
+
+/* clique num tubo ou vaso */
+var el=renderer.domElement,dn=null,ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+el.addEventListener('pointerdown',function(e){dn={x:e.clientX,y:e.clientY}});
+el.addEventListener('pointerup',function(e){if(!S.open||!dn)return;var mv=Math.abs(e.clientX-dn.x)+Math.abs(e.clientY-dn.y);dn=null;if(mv>6)return;
+  var rc=el.getBoundingClientRect();ndc.set(((e.clientX-rc.left)/rc.width)*2-1,-((e.clientY-rc.top)/rc.height)*2+1);ray.setFromCamera(ndc,cam);
+  var vis=PICK.filter(function(m){var p=m;while(p){if(!p.visible)return false;p=p.parent}return true});
+  var h=ray.intersectObjects(vis,false);if(!h.length)return;var it=INFO[h[0].object.userData.info];if(!it)return;
+  inf.querySelector('div').innerHTML='<b>'+it.n+'</b>'+it.t+(it.p?'<span class="pm">Premissa: '+it.p+'</span>':'')+'<span class="src">Fonte: '+it.s+'</span>';inf.classList.add('show')});
+
+/* ---------------- laço (chamado pelo laço de desenho do 3D) ---------------- */
+var last=0,acc=0,clock=0;
+window.__fxTick=function(now){
+  if(!S.open||!S.built){last=now;return}
+  var dt=last?Math.min(0.1,(now-last)/1000):0;last=now;acc+=dt;
+  var h=renderer.domElement.height;UNI.scale.value=h/(2*Math.tan(cam.fov*Math.PI/360));
+  if(!S.play){acc=0;return}
+  if(acc<1/30)return;
+  var st=acc*S.speed;acc=0;clock+=st;
+  stepParts(st,clock);stepWater(st);SCROLL.forEach(function(s){s.t.offset.x-=st*s.k});fx.mark();
+};
+document.addEventListener('visibilitychange',function(){last=0});
+window.__fluxos3d={open:setOpen,S:S,paths:paths};
+})();
+</script>
+
 </body>
 </html>
