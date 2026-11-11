@@ -74,6 +74,7 @@ def parse_pdf(path):
             d=re.search(r'\b(\d{1,2}/\d{2})\b',blk);it['data']=d.group(1) if d else ''
             st=re.search(r'(\d{1,3})\s*%',blk);it['stt']=int(st.group(1)) if st else 0
             r=re.search(r'\b(\d{8})\b',blk);it['ref']=r.group(1) if r else ''
+            c=re.search(r'\b([A-Z]\d{4})\b',blk);it['ct']=c.group(1) if c else ''
             a_top=lab['ANTES']['top'] if lab['ANTES'] else pg.height
             it['notas']=words_in(ws,0,W,(notas['bottom'] if notas else t1)+2,a_top-4) if notas else ''
             it['notas']='' if it['notas'] in ('-','') else it['notas']
@@ -177,7 +178,7 @@ def main():
     for it in itens:
         d=locate(it,kb)
         dep=it['depois']
-        x={'n':it['n'],'titulo':it.get('titulo',''),'rec':it.get('rec',''),'condicao':it.get('condicao',''),'ref':it.get('ref',''),'prio':it.get('prio',''),
+        x={'n':it['n'],'titulo':it.get('titulo',''),'rec':it.get('rec',''),'condicao':it.get('condicao',''),'ref':it.get('ref',''),'ct':it.get('ct',''),'prio':it.get('prio',''),
            'stt':it.get('stt',0),'data':it.get('data',''),'pg':it['pg'],'medicoes':it.get('medicoes',[]),'conjunto':d.get('conjunto'),'loc':d.get('loc'),
            'conf':d.get('conf'),'zona':d.get('zona'),'nota':d.get('nota'),'fora':d.get('fora'),'foto':it['foto']}
         rep=meta.get('report','x');os.makedirs(IMG_DIR,exist_ok=True)
@@ -202,4 +203,5 @@ def main():
         s=open(REC,encoding='utf8').read();a=s.index('/*REPDATA*/')+len('/*REPDATA*/');b=s.index('/*ENDREPDATA*/')
         s=s[:a]+json.dumps(data,ensure_ascii=False,separators=(',',':'))+s[b:]
         open(REC,'w',encoding='utf8').write(s);print('rec.html atualizado')
+        import subprocess;subprocess.run(['python3',os.path.join(HERE,'rep_patch.py')],check=True)  # fotos depois, CT por nota SAP e painel
 if __name__=='__main__': main()

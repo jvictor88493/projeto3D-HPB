@@ -1,0 +1,128 @@
+@@CSS
+<style id="rp-ui">
+:root{--rpOk:#0ca30c;--rpAnd:#fab219;--rpPen:#94a3b8}
+@media (prefers-color-scheme:dark){:root{--rpPen:#64748b}}
+#rpTabs{display:flex;gap:6px;padding:10px 12px 0;flex-wrap:wrap}
+#rpTabs button{font:inherit;font-size:13.5px;font-weight:600;padding:7px 16px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);cursor:pointer}
+#rpTabs button:hover{border-color:var(--accent)}
+#rpTabs button.on{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+#rpPane{display:none;padding:12px 12px 40px;max-width:1500px;margin:0 auto}
+body.rpPainel #rpPane{display:block}
+body.rpPainel .page>*:not(#rpTabs):not(#rpPane),body.rpPainel #repMob{display:none!important}
+#rpPane h2{font-size:17px;margin:0 0 2px;font-weight:700}
+#rpPane .rpSub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.rpK{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.rpK div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
+.rpK div.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset}
+.rpK b{display:block;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums;font-weight:700}
+.rpK span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.rpK em,.rpLeg em{width:11px;height:11px;border-radius:3px;display:inline-block;flex:none}
+.rpG{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rpC{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.rpC h3{font-size:13.5px;margin:0 0 8px;font-weight:650}
+.rpLeg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted);margin:0 0 12px}
+.rpLeg span{display:flex;align-items:center;gap:6px}
+.rpR{display:grid;grid-template-columns:minmax(92px,38%) 1fr 30px;align-items:center;gap:8px;padding:3px 0;font-size:12.5px;cursor:pointer;border-radius:6px}
+.rpR:hover .rpL{color:var(--accent)}
+.rpR.on .rpL{font-weight:700;color:var(--accent)}
+.rpL{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rpL small{color:var(--muted);font-weight:400}
+.rpB{display:flex;gap:2px;height:14px}
+.rpB i{display:block;height:100%;min-width:3px}
+.rpB i:first-child{border-radius:4px 0 0 4px}.rpB i:last-child{border-radius:0 4px 4px 0}.rpB i:only-child{border-radius:4px}
+.rpN{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}
+.rpK small{font-size:13px;color:var(--muted);font-weight:500;margin-left:4px}
+#rpTip{position:fixed;z-index:60;pointer-events:none;background:var(--ink);color:var(--panel);font-size:12px;padding:6px 9px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,.25);display:none;max-width:260px}
+#rpF{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:14px 0 8px;font-size:12.5px}
+#rpF .chip{font:inherit;font-size:12px;padding:3px 10px;border:1px solid var(--accent);border-radius:99px;background:var(--panel);color:var(--ink);cursor:pointer}
+#rpF input{font:inherit;font-size:12.5px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);min-width:200px;flex:1 1 200px;max-width:340px}
+.rpT{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.rpT th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:650;padding:8px 8px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap}
+.rpT td{padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.rpT tr:last-child td{border-bottom:0}
+.rpT td.c{text-align:center;white-space:nowrap}
+.rpT .st{display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rpT .st em{width:9px;height:9px;border-radius:99px;display:inline-block}
+.rpT .rc{color:var(--muted);font-size:11.5px;margin-top:2px}
+.rpT button{font:inherit;font-size:11.5px;padding:3px 9px;border:1px solid var(--line);border-radius:8px;background:var(--chip);color:var(--ink);cursor:pointer;white-space:nowrap}
+.rpT button:hover{border-color:var(--accent)}
+.rpNote{font-size:11.5px;color:var(--muted);margin-top:8px}
+@media (max-width:1100px){.rpG{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){.rpK{grid-template-columns:repeat(2,minmax(0,1fr))}.rpK div:first-child{grid-column:1/-1}.rpG{grid-template-columns:1fr}
+  #rpPane{padding:10px 10px 90px}.rpT .hm{display:none}#rpTabs{padding:8px 74px 0 10px}}
+</style>
+@@HTML
+<div id="rpTabs" role="tablist"><button type="button" class="on" data-v="mapa" role="tab">Localização no 3D</button><button type="button" data-v="painel" role="tab">Painel</button></div>
+<div id="rpPane" role="tabpanel">
+  <h2>Painel de recomendações</h2><p class="rpSub" id="rpMeta"></p>
+  <div class="rpK" id="rpK"></div>
+  <div class="rpLeg"><span><em style="background:var(--rpOk)"></em>Concluída (100%)</span><span><em style="background:var(--rpAnd)"></em>Em andamento (1–99%)</span><span><em style="background:var(--rpPen)"></em>Pendente (0%)</span></div>
+  <div class="rpG">
+    <section class="rpC"><h3>Por local</h3><div id="rpLoc"></div></section>
+    <section class="rpC"><h3>Por criticidade</h3><div id="rpPri"></div></section>
+    <section class="rpC"><h3>Por centro de trabalho (CT)</h3><div id="rpCt"></div><div class="rpNote" id="rpCtNote"></div></section>
+  </div>
+  <div id="rpF"></div>
+  <table class="rpT"><thead><tr><th data-s="n">Nº</th><th data-s="titulo">Item / recomendação</th><th data-s="local" class="hm">Local</th><th data-s="prio" class="c">Crit.</th><th data-s="ct" class="c hm">CT</th><th data-s="stt" class="c">Status</th><th></th></tr></thead><tbody id="rpRows"></tbody></table>
+</div>
+<div id="rpTip"></div>
+@@JS
+<script id="rp-js">(function(){
+var REP=window.__REP;if(!REP||!document.getElementById("rpPane"))return;
+var $=function(i){return document.getElementById(i)},IT=REP.itens||[];
+var PRI={A:"A · Imediato",B:"B · Até 30 dias",C:"C · Até 90 dias",D:"D · Até 365 dias"},PRD={A:"Imediato (antes do retorno operacional)",B:"Até 30 dias",C:"Até 90 dias",D:"Até 365 dias"};
+var ST=[["ok","Concluída","var(--rpOk)"],["and","Em andamento","var(--rpAnd)"],["pen","Pendente","var(--rpPen)"]];
+function stOf(x){var v=+x.stt||0;return v>=100?"ok":v>0?"and":"pen"}
+function locOf(x){if(x.conjunto)return x.conjunto;if(x.fora){var f=x.fora.split(/ n[ãa]o /)[0].trim();return /^Local/.test(f)?"Não identificado":f}return "Não identificado"}
+function ctOf(x){return x.ct||"Sem CT"}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+IT.forEach(function(x){x._st=stOf(x);x._loc=locOf(x);x._ct=ctOf(x)});
+$("rpMeta").textContent="Report "+REP.meta.report+" · última atualização "+REP.meta.data+" · "+IT.length+" recomendações";
+var F={st:null,loc:null,prio:null,ct:null,q:""},sortK="n",sortD=1;
+function pass(x,skip){return (skip==="st"||!F.st||x._st===F.st)&&(skip==="loc"||!F.loc||x._loc===F.loc)&&(skip==="prio"||!F.prio||x.prio===F.prio)&&(skip==="ct"||!F.ct||x._ct===F.ct)&&
+  (!F.q||(x.n+" "+x.titulo+" "+x.rec+" "+x._loc+" "+x._ct+" "+(x.ref||"")).toLowerCase().indexOf(F.q)>=0)}
+function count(list){var c={ok:0,and:0,pen:0};list.forEach(function(x){c[x._st]++});return c}
+function kpis(){var L=IT.filter(function(x){return pass(x,"st")}),c=count(L),n=L.length,av=n?Math.round(L.reduce(function(a,x){return a+Math.min(100,+x.stt||0)},0)/n):0;
+  var k=[[null,"Recomendações",n,""],["ok","Concluídas (100%)",c.ok,"var(--rpOk)"],["and","Em andamento",c.and,"var(--rpAnd)"],["pen","Pendentes (0%)",c.pen,"var(--rpPen)"],[null,"Avanço médio",av+"%",""]];
+  $("rpK").innerHTML=k.map(function(a,i){var pc=(i>0&&i<4&&n)?'<small>'+Math.round(a[2]/n*100)+'%</small>':'';
+    return '<div data-k="'+(a[0]||"")+'" class="'+(a[0]&&F.st===a[0]?"on":"")+'" title="'+(a[0]?"Filtrar: "+a[1]:"Limpar filtro de status")+'"><b>'+a[2]+pc+'</b><span>'+(a[3]?'<em style="background:'+a[3]+'"></em>':'')+a[1]+'</span></div>'}).join("")}
+function bars(el,key,lab,order){var L=IT.filter(function(x){return pass(x,key)}),g={};
+  L.forEach(function(x){var v=key==="loc"?x._loc:key==="prio"?x.prio:x._ct;(g[v]=g[v]||[]).push(x)});
+  var ks=Object.keys(g);ks.sort(order||function(a,b){return g[b].length-g[a].length||a.localeCompare(b)});
+  var mx=Math.max.apply(null,ks.map(function(k){return g[k].length}).concat([1]));
+  $(el).innerHTML=ks.length?ks.map(function(k){var c=count(g[k]),t=g[k].length;
+    return '<div class="rpR'+(F[key]===k?" on":"")+'" data-g="'+key+'" data-v="'+esc(k)+'"><span class="rpL" title="'+esc(lab?lab(k,true):k)+'">'+esc(lab?lab(k):k)+'</span><span class="rpB" style="width:'+(t/mx*100)+'%">'+
+      ST.filter(function(s){return c[s[0]]}).map(function(s){return '<i style="flex:'+c[s[0]]+';background:'+s[2]+'" data-tip="'+esc((lab?lab(k):k)+" · "+s[1]+": "+c[s[0]]+" de "+t)+'"></i>'}).join("")+
+      '</span><span class="rpN">'+t+'</span></div>'}).join(""):'<div class="rpNote">Nenhum item com os filtros atuais.</div>'}
+function rows(){var L=IT.filter(function(x){return pass(x)});
+  L.sort(function(a,b){var A=sortK==="local"?a._loc:sortK==="ct"?a._ct:a[sortK],B=sortK==="local"?b._loc:sortK==="ct"?b._ct:b[sortK];
+    if(typeof A==="number"||sortK==="stt"||sortK==="n"){A=+A||0;B=+B||0;return (A-B)*sortD||a.n-b.n}return String(A||"").localeCompare(String(B||""))*sortD||a.n-b.n});
+  $("rpRows").innerHTML=L.map(function(x){var s=ST.filter(function(z){return z[0]===x._st})[0];
+    return '<tr><td>#'+x.n+'</td><td><div>'+esc(x.titulo)+'</div><div class="rc">'+esc(x.rec)+'</div></td><td class="hm">'+esc(x._loc)+'</td><td class="c" title="'+esc(PRD[x.prio]||"")+'">'+esc(x.prio||"–")+'</td><td class="c hm">'+esc(x.ct||"–")+'</td>'+
+      '<td class="c"><span class="st"><em style="background:'+s[2]+'"></em>'+(+x.stt||0)+'%</span></td><td>'+(x.loc?'<button type="button" data-n="'+x.n+'">Ver no 3D</button>':'')+'</td></tr>'}).join("")||'<tr><td colspan="7" class="rpNote">Nenhum item com os filtros atuais.</td></tr>';
+  var ch=[];if(F.st)ch.push(["st",ST.filter(function(z){return z[0]===F.st})[0][1]]);if(F.loc)ch.push(["loc",F.loc]);if(F.prio)ch.push(["prio",PRI[F.prio]||F.prio]);if(F.ct)ch.push(["ct",F.ct]);
+  var fe=$("rpF"),inp=$("rpQ");
+  if(!inp){fe.innerHTML='<b style="margin-right:4px">Itens</b><span id="rpCnt"></span><span id="rpChips" style="display:contents"></span><input id="rpQ" type="search" placeholder="Buscar nº, item, nota SAP…">';
+    $("rpQ").addEventListener("input",function(){F.q=this.value.trim().toLowerCase();draw()})}
+  $("rpCnt").textContent=L.length+" de "+IT.length;
+  $("rpChips").innerHTML=ch.map(function(c){return '<button type="button" class="chip" data-x="'+c[0]+'">'+esc(c[1])+' ✕</button>'}).join("")+(ch.length>1?'<button type="button" class="chip" data-x="all">Limpar tudo</button>':'')}
+function draw(){kpis();bars("rpLoc","loc");bars("rpPri","prio",function(k,full){return full?(PRD[k]?k+" · "+PRD[k]:k):(PRI[k]||k||"Sem criticidade")},function(a,b){return a.localeCompare(b)});
+  bars("rpCt","ct",null,function(a,b){return a==="Sem CT"?1:b==="Sem CT"?-1:a.localeCompare(b)});rows();
+  var semN=IT.filter(function(x){return !x.ct&&x.ref}).length;$("rpCtNote").textContent=semN?semN+" itens têm nota SAP mas o CT não veio no report processado.":""}
+var pane=$("rpPane");
+pane.addEventListener("click",function(e){var r=e.target.closest(".rpR"),k=e.target.closest(".rpK div"),x=e.target.closest("[data-x]"),b=e.target.closest("button[data-n]"),th=e.target.closest("th[data-s]");
+  if(r){var g=r.getAttribute("data-g"),v=r.getAttribute("data-v");F[g]=F[g]===v?null:v;draw()}
+  else if(k){var kk=k.getAttribute("data-k")||null;F.st=kk&&F.st!==kk?kk:null;draw()}
+  else if(x){var w=x.getAttribute("data-x");if(w==="all"){F.st=F.loc=F.prio=F.ct=null}else F[w]=null;draw()}
+  else if(b){var n=+b.getAttribute("data-n");view("mapa");setTimeout(function(){if(window.__repShow)window.__repShow(n,true)},120)}
+  else if(th){var s=th.getAttribute("data-s");if(sortK===s)sortD=-sortD;else{sortK=s;sortD=s==="stt"?-1:1}rows()}});
+var tip=$("rpTip");
+pane.addEventListener("mousemove",function(e){var t=e.target.closest("[data-tip]");if(!t){tip.style.display="none";return}tip.textContent=t.getAttribute("data-tip");tip.style.display="block";
+  var x=Math.min(e.clientX+12,innerWidth-tip.offsetWidth-8),y=e.clientY+14;if(y+tip.offsetHeight>innerHeight-6)y=e.clientY-tip.offsetHeight-10;tip.style.left=x+"px";tip.style.top=y+"px"});
+pane.addEventListener("mouseleave",function(){tip.style.display="none"});
+function view(v){var p=v==="painel";document.body.classList.toggle("rpPainel",p);[].forEach.call(document.querySelectorAll("#rpTabs button"),function(b){var on=b.getAttribute("data-v")===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});
+  tip.style.display="none";try{sessionStorage.setItem("rpView",v)}catch(_){}
+  if(!p)setTimeout(function(){window.dispatchEvent(new Event("resize"))},30);window.scrollTo(0,0)}
+$("rpTabs").addEventListener("click",function(e){var b=e.target.closest("button[data-v]");if(b)view(b.getAttribute("data-v"))});
+draw();var sv=null;try{sv=sessionStorage.getItem("rpView")}catch(_){}if(sv==="painel")view("painel");
+})();</script>

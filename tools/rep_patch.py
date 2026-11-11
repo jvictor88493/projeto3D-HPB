@@ -8,8 +8,10 @@ dep={}
 for f in glob.glob(os.path.join(HERE,'rep_depois','r%s_dep_*.jpg'%o['meta'].get('report',''))):
     n=int(re.search(r'_dep_(\d+)',f).group(1));rp=o['meta'].get('report','');d=os.path.join(HERE,'..','private','rep_img');os.makedirs(d,exist_ok=True)
     open(os.path.join(d,'r%s_%d_d.jpg'%(rp,n)),'wb').write(open(f,'rb').read());dep[n]='/api/repimg?f=r%s_%d_d.jpg'%(rp,n)
+CTK=json.load(open(os.path.join(HERE,'rep_ct.json'),encoding='utf8'))['ct_por_nota'] if os.path.exists(os.path.join(HERE,'rep_ct.json')) else {}
 for it in o['itens']:
     if it['n'] in dep: it['depois']=dep[it['n']]   # foto enviada na conversa tem prioridade sobre a do PDF
+    if not it.get('ct') and it.get('ref') in CTK: it['ct']=CTK[it['ref']]   # CT conhecido pela nota SAP (rep_ct.json)
 s=s[:k]+json.dumps(o,ensure_ascii=False,separators=(',',':'))+s[k+end:]
 def rep(a,b):
     global s
@@ -28,5 +30,18 @@ function place(){if(mq.matches){if(rep.parentNode!==box)box.appendChild(rep)}els
 if(mq.matches){var c3=box.querySelector('#repChips [data-f=only3d]')||document.querySelector('#repChips [data-f=only3d]');if(c3&&!c3.classList.contains('on'))c3.click()}
 box.addEventListener('click',function(e){if(mq.matches&&e.target.closest('#repRows button,#rdPrev,#rdNext'))setTimeout(function(){window.scrollTo(0,0)},60)},true);place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();</script>'''
     k=s.rindex('</body>');s=s[:k]+js+'\n'+s[k:]
+# expoe dados e repShow para o painel (o modulo do 3D roda dentro de uma funcao)
+if 'window.__REP=REP' not in s: s=s.replace('/*ENDREPDATA*/;','/*ENDREPDATA*/;window.__REP=REP;window.__repShow=function(n,f){return repShow(n,f)};',1)
+# painel de recomendacoes (sub-aba "Painel"): tools/rec_painel.html
+P=open(os.path.join(HERE,'rec_painel.html'),encoding='utf8').read()
+part={};cur=None
+for ln in P.split('\n'):
+    if ln.startswith('@@'): cur=ln[2:].strip();part[cur]=[];continue
+    if cur: part[cur].append(ln)
+part={k:'\n'.join(v).strip() for k,v in part.items()}
+s=re.sub(r'<style id="rp-ui">.*?</style>\n?','',s,flags=re.S);s=re.sub(r'<!--rp-html-->.*?<!--/rp-html-->\n?','',s,flags=re.S);s=re.sub(r'<script id="rp-js">.*?</script>\n?','',s,flags=re.S)
+s=s.replace('</head>',part['CSS']+'\n</head>',1)
+s=s.replace('<div class="page">','<div class="page">\n<!--rp-html-->'+part['HTML']+'<!--/rp-html-->',1)
+k=s.rindex('</body>');s=s[:k]+part['JS']+'\n'+s[k:]
 open(R,'w',encoding='utf8').write(s)
 print('depois aplicados:',sorted(dep))
