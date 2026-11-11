@@ -22,6 +22,14 @@
       "destination": "/api/page"
     },
     {
+      "source": "/completa",
+      "destination": "/api/page?v=full"
+    },
+    {
+      "source": "/recomendacoes",
+      "destination": "/api/page?v=rec"
+    },
+    {
       "source": "/login",
       "destination": "/login.html"
     }
