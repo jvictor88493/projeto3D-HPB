@@ -42,6 +42,9 @@ header.top,.bottom,#desenhos,#tipos,#bCsv{display:none!important}
 .seg.acIn{position:absolute!important;top:8px!important;right:8px!important}
 #acLeg{gap:4px 12px;padding:7px 10px;font-size:11.5px;margin-top:8px}
 }
+/* sem botoes de vista (Perspectiva/Planta/Traseira) no Acompanhamento, no computador e no celular */
+#bPersp,#bPlan,#bFront,#bAll,#bWalls,.toolbar label.hs{display:none!important}
+@media (min-width:821px){#vizPane>.toolbar,.page>.toolbar{display:none!important}}
 </style>
 @@BAR
 <div id="acBar">

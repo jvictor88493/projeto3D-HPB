@@ -50,6 +50,9 @@ body.rpPainel .page>*:not(#rpTabs):not(#rpPane),body.rpPainel #repMob{display:no
 @media (max-width:1100px){.rpG{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:820px){.rpK{grid-template-columns:repeat(2,minmax(0,1fr))}.rpK div:first-child{grid-column:1/-1}.rpG{grid-template-columns:1fr}
   #rpPane{padding:10px 10px 90px}.rpT .hm{display:none}#rpTabs{padding:8px 74px 0 10px}}
+/* sem botoes de vista e altura da camera nas Recomendacoes (o "Ver no 3D"/clique no item ja enquadra) */
+#bPersp,#bPlan,#bFront,#bAll,#bWalls,.toolbar label.hs{display:none!important}
+@media (min-width:821px){.page>.toolbar{display:none!important}}
 </style>
 @@HTML
 <div id="rpTabs" role="tablist"><button type="button" class="on" data-v="mapa" role="tab">Localização no 3D</button><button type="button" data-v="painel" role="tab">Painel</button></div>
