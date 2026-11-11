@@ -11,6 +11,10 @@ body.rpPainel #rpPane{display:block}
 html.rpPainel,html.rpPainel body{height:auto!important;min-height:100%;overflow-y:auto!important;overflow-x:hidden!important}
 body.rpPainel .page>*:not(#rpTabs):not(#rpPane),body.rpPainel #repMob{display:none!important}
 #rpPane h2{font-size:17px;margin:0 0 2px;font-weight:700}
+.rpHd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+#rpClr{font:inherit;font-size:13px;font-weight:600;padding:7px 14px;border:1.5px solid var(--accent);border-radius:10px;background:var(--panel);color:var(--accent);cursor:pointer;white-space:nowrap;flex:none}
+#rpClr:hover:not(:disabled){background:var(--accent);color:var(--panel)}
+#rpClr:disabled{opacity:.4;cursor:default;border-color:var(--line);color:var(--muted)}
 #rpPane .rpSub{font-size:12.5px;color:var(--muted);margin:0 0 12px}
 .rpK{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:12px}
 .rpK div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer}
@@ -71,7 +75,7 @@ body.rpPainel .page>*:not(#rpTabs):not(#rpPane),body.rpPainel #repMob{display:no
 @@HTML
 <div id="rpTabs" role="tablist"><button type="button" class="on" data-v="mapa" role="tab">Localização no 3D</button><button type="button" data-v="painel" role="tab">Painel</button></div>
 <div id="rpPane" role="tabpanel">
-  <h2>Painel de recomendações</h2><p class="rpSub" id="rpMeta"></p>
+  <div class="rpHd"><div><h2>Painel de recomendações</h2><p class="rpSub" id="rpMeta"></p></div><button type="button" id="rpClr" disabled>✕ Limpar filtros</button></div>
   <div class="rpK" id="rpK"></div>
   <div class="rpLeg"><span><em style="background:var(--rpOk)"></em>Concluída (100%)</span><span><em style="background:var(--rpAnd)"></em>Em andamento (1–99%)</span><span><em style="background:var(--rpPen)"></em>Pendente (0%)</span></div>
   <div class="rpG">
@@ -138,10 +142,11 @@ function rows(){var L=IT.filter(function(x){return pass(x)});
     $("rpQ").addEventListener("input",function(){F.q=this.value.trim().toLowerCase();draw()})}
   $("rpCnt").textContent=L.length+" de "+IT.length;
   $("rpChips").innerHTML=ch.map(function(c){return '<button type="button" class="chip" data-x="'+c[0]+'">'+esc(c[1])+' ✕</button>'}).join("")+(ch.length>1?'<button type="button" class="chip" data-x="all">Limpar tudo</button>':'')}
-function draw(){kpis();bars("rpLoc","loc");bars("rpPri","prio",function(k,full){return full?(PRD[k]?k+" · "+PRD[k]:k):(PRI[k]||k||"Sem criticidade")},function(a,b){return a.localeCompare(b)});
+function draw(){var cl=$("rpClr");if(cl)cl.disabled=!(F.st||F.loc||F.prio||F.ct||F.dt||F.q);kpis();bars("rpLoc","loc");bars("rpPri","prio",function(k,full){return full?(PRD[k]?k+" · "+PRD[k]:k):(PRI[k]||k||"Sem criticidade")},function(a,b){return a.localeCompare(b)});
   tline();bars("rpCt","ct",null,function(a,b){return a==="Sem CT"?1:b==="Sem CT"?-1:a.localeCompare(b)});rows();
   var semN=IT.filter(function(x){return !x.ct&&x.ref}).length;$("rpCtNote").textContent=semN?semN+" itens têm nota SAP mas o CT não veio no report processado.":""}
 var pane=$("rpPane");
+$("rpClr").addEventListener("click",function(){F.st=F.loc=F.prio=F.ct=F.dt=null;F.q="";var q=$("rpQ");if(q)q.value="";draw()});
 pane.addEventListener("click",function(e){var dd=e.target.closest(".rpD"),r=e.target.closest(".rpR"),k=e.target.closest(".rpK div"),x=e.target.closest("[data-x]"),b=e.target.closest("button[data-n]"),th=e.target.closest("th[data-s]");
   if(dd){var tv=+dd.getAttribute("data-dt");F.dt=F.dt===tv?null:tv;draw()}
   else if(r){var g=r.getAttribute("data-g"),v=r.getAttribute("data-v");F[g]=F[g]===v?null:v;draw()}
