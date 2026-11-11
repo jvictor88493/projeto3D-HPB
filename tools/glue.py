@@ -97,6 +97,10 @@ if OUT=='full.html':
     _k=f.rfind('</body>')
     f=f[:_k]+'<script>window.__fxAuto=1</script>\n'+open(os.path.join(HERE,'fluxos3d.html'),encoding='utf8').read()+'\n'+f[_k:]
     f=re.sub(r'<title>[^<]*</title>','<title>Caldeira HPB – fluxos em 3D</title>',f,count=1)
+    # so o 3D: sem o painel de Conjuntos / Tipo de cap (computador e celular) e com o 3D na largura toda
+    _css='<style id="fluxos-page">.side,#layers,#tipos,#bFilt,#fclose{display:none!important}.grid{grid-template-columns:minmax(0,1fr)!important}#wrap{height:clamp(480px,78vh,900px)!important}@media (max-width:820px),(max-height:500px) and (orientation:landscape){#wrap{height:calc(100dvh - 70px)!important}}</style>\n'
+    _k=f.rfind('</body>')
+    f=f[:_k]+_css+f[_k:]
     open(os.path.join(os.path.dirname(HERE),'public','fluxos.html'),'w',encoding='utf8').write(f)
     print('fluxos.html',len(f))
 print('ok',len(o),'loopinit' ,bool(m))

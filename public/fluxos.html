@@ -2563,7 +2563,7 @@ var pnl=document.createElement('div');pnl.id='fxp';pnl.hidden=true;
 pnl.innerHTML='<div class="fxh"><b id="fxT" title="Mostrar/recolher as camadas" tabindex="0">Fluxos da caldeira</b><button type="button" id="fxPlay">⏸ Pausar</button><button type="button" id="fxX" aria-label="Fechar fluxos">✕</button></div>'+
  '<div class="fxrow" id="fxPre"><button type="button" data-p="all" class="on">Tudo</button><button type="button" data-p="wv">Água e vapor</button><button type="button" data-p="ag">Ar e gases</button><button type="button" data-p="bed">Leito, sólidos e cinzas</button></div>'+
  '<div class="fxrow" id="fxChips"></div>'+
- '<div class="fxopt"><label><input type="checkbox" id="fxXr" checked> Raio‑X</label><label title="Esconde as serpentinas dos superaquecedores e do economizador (24 milhões de triângulos) enquanto os fluxos estão abertos"><input type="checkbox" id="fxLite"> Modelo leve</label><label>Velocidade <input type="range" id="fxSpd" min="0.2" max="3" step="0.1" value="1"></label></div>'+
+ '<div class="fxopt"><label title="Deixa o modelo translúcido. Desligado, o modelo fica sólido e os fluxos aparecem por cima"><input type="checkbox" id="fxXr" checked> Raio‑X</label><label title="Esconde as serpentinas dos superaquecedores e do economizador (24 milhões de triângulos) enquanto os fluxos estão abertos"><input type="checkbox" id="fxLite"> Modelo leve</label><label>Velocidade <input type="range" id="fxSpd" min="0.2" max="3" step="0.1" value="1"></label></div>'+
  '<div class="fxleg">Dentro dos tubos: <b style="color:#3b8cff">água</b> · <b style="color:#7fd0ff">mistura com bolhas</b> · <b style="color:#ff5c7a">vapor</b>. <span class="as"></span>tubo com anéis laranja ou linha tracejada = trajeto assumido. Toque/clique num tubo ou vaso para ver o que é.</div>';
 wrap.appendChild(pnl);
 if(coarse||(window.matchMedia&&matchMedia('(max-width:820px)').matches))pnl.classList.add('min');
@@ -2581,11 +2581,14 @@ var bPlay=pnl.querySelector('#fxPlay');
 bPlay.onclick=function(){S.play=!S.play;bPlay.textContent=S.play?'⏸ Pausar':'▶ Reproduzir'};
 pnl.querySelector('#fxSpd').oninput=function(){S.speed=+this.value};
 var cXr=pnl.querySelector('#fxXr'),cLi=pnl.querySelector('#fxLite');cLi.checked=S.lite;
-cXr.onchange=function(){S.xr=cXr.checked;xray(S.open&&S.xr)};
+/* sem Raio-X os fluxos são desenhados por cima do modelo opaco, para continuarem visíveis */
+function flowDepth(t){ROOT.traverse(function(n){if(!n.material)return;(Array.isArray(n.material)?n.material:[n.material]).forEach(function(m){if(m.depthTest!==t){m.depthTest=t;m.needsUpdate=true}})})}
+cXr.onchange=function(){S.xr=cXr.checked;xray(S.open&&S.xr);flowDepth(S.xr)};
 cLi.onchange=function(){S.lite=cLi.checked;lite(S.open&&S.lite)};
 if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches){S.play=false;bPlay.textContent='▶ Reproduzir'}
 function setOpen(v){S.open=v;bF.classList.toggle('on',v);bF.setAttribute('aria-pressed',v?'true':'false');pnl.hidden=!v;
   if(v&&!S.built){build();S.built=true;sync()}
+  if(v)flowDepth(S.xr);
   ROOT.visible=v;cLi.checked=S.lite;cXr.checked=S.xr;xray(v&&S.xr);lite(v&&S.lite);if(!v)inf.classList.remove('show');
   if(v){stepParts(0,0);document.body.classList.remove('fopen')}fx.mark()}
 bF.onclick=function(){setOpen(!S.open)};
@@ -2618,5 +2621,6 @@ if(window.__fxAuto)setTimeout(function(){setOpen(true)},400);
 })();
 </script>
 
+<style id="fluxos-page">.side,#layers,#tipos,#bFilt,#fclose{display:none!important}.grid{grid-template-columns:minmax(0,1fr)!important}#wrap{height:clamp(480px,78vh,900px)!important}@media (max-width:820px),(max-height:500px) and (orientation:landscape){#wrap{height:calc(100dvh - 70px)!important}}</style>
 </body>
 </html>
