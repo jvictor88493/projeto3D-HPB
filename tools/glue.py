@@ -81,19 +81,22 @@ if _m and o.find('</head>')<_m.start():
     o=o.replace('</head>',_st+'\n</head>',1)
 if "card.classList.add('cjready')" not in o:
     o=o.replace("card.appendChild(tree);","card.appendChild(tree);card.classList.add('cjready');",1)
-# fluxos da caldeira (esboco v2) dentro do 3D: expoe a cena, chama o laco do modulo e injeta tools/fluxos3d.html
-if 'window.__fx=' not in o:
-    _a='window.__bc={v45'
-    assert _a in o, 'gancho window.__bc nao encontrado'
-    o=o.replace(_a,'window.__fx={scene:scene,cam:cam,renderer:renderer,ezz:ezz,THREE:THREE,mark:function(){dirty=true},G:{gSS:gSS,gSP:gSP,gECO:gECO}};'+_a,1)
-_lp='if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}'
-if 'window.__fxTick' not in o:
-    assert _lp in o, 'laco de desenho nao encontrado'
-    o=o.replace(_lp,'if(window.__fxTick)window.__fxTick(now||performance.now());'+_lp,1)
-if 'id="fluxos3d"' not in o:
-    _k=o.rfind('</body>')
-    o=o[:_k]+open(os.path.join(HERE,'fluxos3d.html'),encoding='utf8').read()+'\n'+o[_k:]
 # Three.js r128 pelo CDN (mesmo arquivo da pagina principal, ja em cache no navegador) em vez de 600 KB embutidos
 o=re.sub(r'<script>\s*/\*\*\s*\n \* @license\s*\n \* Copyright 2010-2021 Three\.js Authors.*?</script>',lambda m:'<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>',o,count=1,flags=re.S)
 open(R+OUT,'w',encoding='utf8').write(o)
+# pagina publica /fluxos: so o 3D + fluxos da caldeira (esboco v2), ja ligados; o full.html do site fica sem o modulo
+if OUT=='full.html':
+    f=o
+    if 'window.__fx=' not in f:
+        _a='window.__bc={v45'
+        assert _a in f, 'gancho window.__bc nao encontrado'
+        f=f.replace(_a,'window.__fx={scene:scene,cam:cam,renderer:renderer,ezz:ezz,THREE:THREE,mark:function(){dirty=true},G:{gSS:gSS,gSP:gSP,gECO:gECO}};'+_a,1)
+    _lp='if(dirty){renderer.render(scene,cam);placeLabels();dirty=false}'
+    assert _lp in f, 'laco de desenho nao encontrado'
+    f=f.replace(_lp,'if(window.__fxTick)window.__fxTick(now||performance.now());'+_lp,1)
+    _k=f.rfind('</body>')
+    f=f[:_k]+'<script>window.__fxAuto=1</script>\n'+open(os.path.join(HERE,'fluxos3d.html'),encoding='utf8').read()+'\n'+f[_k:]
+    f=re.sub(r'<title>[^<]*</title>','<title>Caldeira HPB – fluxos em 3D</title>',f,count=1)
+    open(os.path.join(os.path.dirname(HERE),'public','fluxos.html'),'w',encoding='utf8').write(f)
+    print('fluxos.html',len(f))
 print('ok',len(o),'loopinit' ,bool(m))

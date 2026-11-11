@@ -379,5 +379,6 @@ window.__fxTick=function(now){
 };
 document.addEventListener('visibilitychange',function(){last=0});
 window.__fluxos3d={open:setOpen,S:S,paths:paths};
+if(window.__fxAuto)setTimeout(function(){setOpen(true)},400);
 })();
 </script>
