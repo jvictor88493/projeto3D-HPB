@@ -32,6 +32,10 @@
     {
       "source": "/login",
       "destination": "/login.html"
+    },
+    {
+      "source": "/fluxos",
+      "destination": "/fluxos.html"
     }
   ],
   "headers": [
