@@ -981,6 +981,26 @@
    "origem": "confirmado na conversa em 2026-11-10",
    "titulo": "BASE DE CONCRETO - ESTRUTURA METÁLICA - filtro manga",
    "report": "18"
+  },
+  "txt:isolamento termico - tubulao de vapor|reparar isolamento termico dos tampos do tubulao de vapor (lado norte e sul)": {
+   "loc": {
+    "t": "grp",
+    "g": "vDR",
+    "box": {
+     "u": 0.03,
+     "v": 0.5,
+     "w": 0.5
+    }
+   },
+   "zona": "Tubulão de vapor · tampo Norte (o item cobre os tampos Norte e Sul)",
+   "conf": "alta",
+   "conjunto": "Penthouse",
+   "nota": "Isolamento dos tampos do tubulão (Norte e Sul); pin no tampo Norte, o tampo Sul fica simétrico no outro extremo",
+   "fora": null,
+   "confirmado": true,
+   "origem": "confirmado na conversa em 2026-11-13",
+   "titulo": "ISOLAMENTO TÉRMICO - TUBULÃO DE VAPOR",
+   "report": "22"
   }
  },
  "historico": [
@@ -1441,6 +1461,33 @@
      }
     },
     "zona": "Filtro de mangas · bases de concreto das colunas do lado Sul (coluna do meio e a do lado Leste)"
+   },
+   "regra": null
+  },
+  {
+   "data": "2026-11-13T12:09",
+   "report": "22",
+   "n": 30,
+   "chave": "txt:isolamento termico - tubulao de vapor|reparar isolamento termico dos tampos do tubulao de vapor (lado norte e sul)",
+   "antes": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR"
+    },
+    "conf": "média",
+    "zona": "Tubulão de vapor"
+   },
+   "depois": {
+    "loc": {
+     "t": "grp",
+     "g": "vDR",
+     "box": {
+      "u": 0.03,
+      "v": 0.5,
+      "w": 0.5
+     }
+    },
+    "zona": "Tubulão de vapor · tampo Norte (o item cobre os tampos Norte e Sul)"
    },
    "regra": null
   }
